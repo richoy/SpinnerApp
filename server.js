@@ -5,6 +5,15 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const path = require('path');
 
+// Mongoose Database
+const mongoose = require('mongoose');
+const url = 'mongodb://localhost:27017/conFusion';
+const connect = mongoose.connect(url);
+
+connect.then((db) => {
+    console.log('Conected correctly to server');
+  }, (err) => {console.log(err);});
+
 // Create a new express application named 'app'
 const app = express();
 
