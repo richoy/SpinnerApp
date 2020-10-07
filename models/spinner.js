@@ -39,10 +39,18 @@ const SpinnerSchema = new Schema ({
     lastname: {
         type: String,
         default: ''
+    },
+    textFieldTwo: {
+        type: String,
+        default: ''
+    },
+    bgColor: {
+        type: String,
+        default: ''
     }
 }, {
     timestamps: true
-})
+});
 
 var Spinners = mongoose.model('Spinner', SpinnerSchema);
 
