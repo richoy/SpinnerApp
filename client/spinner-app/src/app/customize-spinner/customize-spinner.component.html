@@ -6,33 +6,74 @@
         <div class="col-12">
             <div id="settingNumber">
                 <div>
-                    <div ngbDropdown class="d-inline-block">
-                      <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Number of fields</button>
-                      <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-        
-                        <button ngbDropdownItem>2</button>
-                        <button ngbDropdownItem>3</button>
-                        <button ngbDropdownItem>4</button>
-                        <button ngbDropdownItem>5</button>
-                        <button ngbDropdownItem>6</button>
-                        <button ngbDropdownItem>7</button>
-                        <button ngbDropdownItem>8</button>
-                        <button ngbDropdownItem>9</button>
-                        <button ngbDropdownItem>10</button>
-                        <button ngbDropdownItem>11</button>
-                        <button ngbDropdownItem>12</button>
-                        <button ngbDropdownItem>13</button>
-                        
-                      </div>
-                    </div>
+                    <label for="numberOptions">Number of fields on the spinner </label>
+                    <select matNativeControl name="numberOptions" required (change)="onChange($event.target.value)">
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6" selected>6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                        <option value="12">12</option>
+                    </select>
                 </div>
             </div>
         </div>
 
         <div class="col-12">
-            <div class="row">
-                
-            </div>
+            <table>
+                <tr>
+                    <th><label for="ImageOption">Input type</label></th>
+                    <th><label for="">File Upload / Text Field</label></th>
+                    <th><label for="">Percentage</label></th>
+                    <th><label for="">Result</label></th>
+                    <th><label for="">Text / Email</label></th>
+                    <th><label for="">bg Color</label></th>
+                </tr>
+                <tr class="mb-3" [formGroup]="textBoxFormGroup" *ngFor="let items of items; let i=index">
+                    <td>
+                        <select name="ImageOption" required (change)="onChangeImage($event.target.value, i)">
+                            <option value="image" selected>Image</option>
+                            <option value="text">Text</option>
+                        </select>
+                    </td>
+
+                    <td *ngIf="itIsImageFile[i]">
+                        <input type="file" name="imageFile">
+                    </td>
+
+                    <td *ngIf="itIsTextField[i]">
+                        <input type="text" name="textField">
+                    </td>
+
+                    <td>
+                        <input type="number" name="textField">
+                    </td>
+
+                    <td>
+                        <select name="resultOption" required (change)="onChangeResult($event.target.value, i)">
+                            <option value="text" selected>Text Popup</option>
+                            <option value="email">Email Popup</option>
+                        </select>
+                    </td>
+
+                    <td *ngIf="itIsTextPopUp[i]">
+                        <input type="text" name="imageFile">
+                    </td>
+
+                    <td *ngIf="itIsEmailPopUp[i]">
+                        <input type="email" name="textField">
+                    </td>
+
+                    <td>
+                        <input type="text">
+                    </td>
+                </tr>
+            </table>
         </div>
     </div>
 
