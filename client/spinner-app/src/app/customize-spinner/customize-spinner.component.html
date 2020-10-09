@@ -25,55 +25,65 @@
         </div>
 
         <div class="col-12">
-            <table>
-                <tr>
-                    <th><label for="ImageOption">Input type</label></th>
-                    <th><label for="">File Upload / Text Field</label></th>
-                    <th><label for="">Percentage</label></th>
-                    <th><label for="">Result</label></th>
-                    <th><label for="">Text / Email</label></th>
-                    <th><label for="">bg Color</label></th>
-                </tr>
-                <tr class="mb-3" [formGroup]="textBoxFormGroup" *ngFor="let items of items; let i=index">
-                    <td>
-                        <select name="ImageOption" required (change)="onChangeImage($event.target.value, i)">
-                            <option value="image" selected>Image</option>
-                            <option value="text">Text</option>
-                        </select>
-                    </td>
+            <div [formGroup]="textBoxFormGroup" (ngSubmit)="onSubmit()">
+                <div class="row">
+                    <div class="col-1"><label for="ImageOption">Input type</label></div>
+                    <div class="col-3"><label for="">File Upload / Text Field</label></div>
+                    <div class="col-2"><label for="">Percentage</label></div>
+                    <div class="col-2"><label for="">Result</label></div>
+                    <div class="col-2"><label for="">Text / Email</label></div>
+                    <div class="col-2"><label for="">bg Color</label></div>
+                </div>
+                
+                <div textBoxFormArray="items">
+                    <div class="mb-3" *ngFor="let items of items; let i=index">
+                        <div class="row">
+                            <div class="col-1">
+                                <select name="ImageOption" required (change)="onChangeImage($event.target.value, i)">
+                                    <option value="image" selected>Image</option>
+                                    <option value="text">Text</option>
+                                </select>
+                            </div>
+        
+                            <div class="col-3" *ngIf="itIsImageFile[i]">
+                                <input type="file" name="imageFile">
+                            </div>
+        
+                            <div class="col-3" *ngIf="itIsTextField[i]">
+                                <input type="text" name="textField">
+                            </div>
+        
+                            <div class="col-2">
+                                <input type="number" name="textField">
+                            </div>
+        
+                            <div class="col-2">
+                                <select name="resultOption" required (change)="onChangeResult($event.target.value, i)">
+                                    <option value="text" selected>Text Popup</option>
+                                    <option value="email">Email Popup</option>
+                                </select>
+                            </div>
+        
+                            <div class="col-2" *ngIf="itIsTextPopUp[i]">
+                                <input type="text" name="imageFile">
+                            </div>
+        
+                            <div class="col-2" *ngIf="itIsEmailPopUp[i]">
+                                <input type="email" name="textField">
+                            </div>
+        
+                            <div class="col-2">
+                                <input type="color">
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
 
-                    <td *ngIf="itIsImageFile[i]">
-                        <input type="file" name="imageFile">
-                    </td>
-
-                    <td *ngIf="itIsTextField[i]">
-                        <input type="text" name="textField">
-                    </td>
-
-                    <td>
-                        <input type="number" name="textField">
-                    </td>
-
-                    <td>
-                        <select name="resultOption" required (change)="onChangeResult($event.target.value, i)">
-                            <option value="text" selected>Text Popup</option>
-                            <option value="email">Email Popup</option>
-                        </select>
-                    </td>
-
-                    <td *ngIf="itIsTextPopUp[i]">
-                        <input type="text" name="imageFile">
-                    </td>
-
-                    <td *ngIf="itIsEmailPopUp[i]">
-                        <input type="email" name="textField">
-                    </td>
-
-                    <td>
-                        <input type="text">
-                    </td>
-                </tr>
-            </table>
+                <button type="submit" class="btn btn-danger"
+                >Submit</button>
+                
+            </div>
         </div>
     </div>
 

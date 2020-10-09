@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder,FormArray } from '@angular/forms';
+import { FormBuilder,FormArray, FormGroup, Validator, Validators } from '@angular/forms';
+import { SpinnerCustomizerControllerService } from '../services/spinner-customizer-controller.service';
+import { formSpinnerControl } from '../shared/form-spinner-controller';
+
 
 @Component({
   selector: 'app-customize-spinner',
@@ -11,7 +14,10 @@ export class CustomizeSpinnerComponent implements OnInit {
   // For number of field dropdown
   name = 'Angular';
   items: any[] = [];
-  textBoxFormGroup :FormArray
+  textBoxFormGroup: FormArray;
+  textBoxFormArray: FormArray;
+  controllerForm: formSpinnerControl;
+  controllerFormCopy: formSpinnerControl;
   // For number of field dropdown
 
   // For imageUpload / Text Field
@@ -22,9 +28,39 @@ export class CustomizeSpinnerComponent implements OnInit {
   // For results dropdown
   itIsTextPopUp: boolean[] = [false];
   itIsEmailPopUp: boolean[] = [false];
-    // For results dropdown
+  // For results dropdown
 
-  constructor(public formBuilder:FormBuilder ) {       // For number of field dropdown
+  // Form validations:
+  //controllerForm: FormGroup;
+  errMess: string;
+/*
+  formErrors = {
+    'percentage': '',
+    'resultText': '',
+    'resultEmail': '',
+  };
+
+  validationMessages = {
+    'percentage': {
+      'required': 'Percentage is required.',
+      'pattern': 'Must contain only numbers.',
+      'min': 'Minimun value must be at least 0%.',
+      'max': 'Maximun value can not exceed 100%.'
+    },
+    'resultText': {
+      'required': 'Text field is required.'
+    },
+    'resultEmail': {
+      'required': 'Email is required.',
+      'email': 'Email not in valid format.'
+    }
+  };
+  // Form validations
+*/
+  constructor(
+    public formBuilder:FormBuilder,// For number of field dropdown
+    private spinnerCustomizerControllerService: SpinnerCustomizerControllerService ) // Form validations
+    {       
     // For number of field dropdown
     this.textBoxFormGroup = this.formBuilder.array([]);
     this.addControl(0);
@@ -48,6 +84,48 @@ export class CustomizeSpinnerComponent implements OnInit {
     }
     // For number of field dropdown
   }
+
+  // Form validations:
+  /*
+  createForm(){
+    this.textBoxFormGroup = this.formBuilder.array([{
+      ImageOption: [''],
+      imageFile: [''], //Check later
+      textField: [''],
+      percentage: [0, [Validators.required, Validators.pattern, Validators.min(2), Validators.max(100)]],
+      resultOption: [''],
+      resultText: [''],
+      resultEmail: ['', [Validators.email]],
+      bgColor: ['']
+    }]);
+
+    this.textBoxFormGroup.valueChanges
+      .subscribe(data => this.onValueChanged(data));
+
+    this.onValueChanged();
+  }
+
+  /*
+  onValueChanged(data?: any) {
+    if (!this.textBoxFormGroup) {return;}
+    const form = this.textBoxFormGroup;
+    for( const field in this.formErrors) {
+      if (this.formErrors.hasOwnProperty(field)) {
+        // clear previous error message (if any)
+        this.formErrors[field] = '';
+        const control = form.get(field);
+        if (control && control.dirty && !control.valid) {
+          const messages = this.validationMessages[field];
+          for ( const key in control.errors) {
+            if (control.errors.hasOwnProperty(key)) {
+              this.formErrors[field] += messages[key] + ' ';
+            }
+          }
+        }
+      }
+    }
+  }
+*/
 
   // For number of field dropdown
   onChange(i) {
@@ -83,6 +161,8 @@ export class CustomizeSpinnerComponent implements OnInit {
         this.itIsImageFile[i] = false;
         this.itIsTextField[i] = true;
       }
+      console.log(this.itIsImageFile);
+      console.log(this.itIsTextField)
   }
   //For image text selection
 
@@ -99,4 +179,20 @@ export class CustomizeSpinnerComponent implements OnInit {
 }
   // For number of field dropdown
 
+  onSubmit() {
+    this.controllerFormCopy = this.textBoxFormGroup.value;
+    //this.spinnerVisible = true;
+    this.spinnerCustomizerControllerService.submitForm(this.controllerFormCopy)
+      .subscribe(feedback =>{ setTimeout(() => {
+        this.controllerForm = feedback; 
+        //this.spinnerVisible = false; 
+        console.log(this.controllerForm);
+        setTimeout(() => this.controllerForm = null, 5000);}, 2000);},
+        errmess => this.errMess = <any>errmess);
+    this.textBoxFormGroup.reset();
+  }
+
 }
+
+
+
