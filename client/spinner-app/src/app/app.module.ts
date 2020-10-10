@@ -11,6 +11,7 @@ import { CustomizeSpinnerComponent } from './customize-spinner/customize-spinner
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { EmailListComponent } from './email-list/email-list.component';
 import { CustomScriptComponent } from './custom-script/custom-script.component';
+import { NavbarComponent } from './navbar/navbar.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { CustomScriptComponent } from './custom-script/custom-script.component';
     LoginComponent,
     CustomizeSpinnerComponent,
     EmailListComponent,
-    CustomScriptComponent
+    CustomScriptComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,

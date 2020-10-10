@@ -1,0 +1,11 @@
+$imgSize: 150px;
+
+div.container {
+    padding-top: 20px;
+}
+
+div.image img {
+    width: $imgSize;
+    height: $imgSize;
+    border-radius: 50%;
+    }
