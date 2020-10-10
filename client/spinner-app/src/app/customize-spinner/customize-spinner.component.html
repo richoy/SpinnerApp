@@ -1,17 +1,93 @@
 <div class="container menu1">
 
-    <div id="settingNumber">
-        <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Dropdown button
-            </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <a class="dropdown-item" href="#">Action</a>
-              <a class="dropdown-item" href="#">Another action</a>
-              <a class="dropdown-item" href="#">Something else here</a>
+    <h2>Customize the spinner</h2>
+
+    <div class="row my-5">
+        <div class="col-12">
+            <div id="settingNumber">
+                <div>
+                    <label for="numberOptions">Number of fields on the spinner </label>
+                    <select matNativeControl name="numberOptions" required (change)="onChange($event.target.value)">
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6" selected>6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                        <option value="12">12</option>
+                    </select>
+                </div>
             </div>
-          </div>
+        </div>
+
+        <div class="col-12">
+            <div [formGroup]="textBoxFormGroup" (ngSubmit)="onSubmit()">
+                <div class="row">
+                    <div class="col-1"><label for="ImageOption">Input type</label></div>
+                    <div class="col-3"><label for="">File Upload / Text Field</label></div>
+                    <div class="col-2"><label for="">Percentage</label></div>
+                    <div class="col-2"><label for="">Result</label></div>
+                    <div class="col-2"><label for="">Text / Email</label></div>
+                    <div class="col-2"><label for="">bg Color</label></div>
+                </div>
+                
+                <div textBoxFormArray="items">
+                    <div class="mb-3" *ngFor="let items of items; let i=index">
+                        <div class="row">
+                            <div class="col-1">
+                                <select name="ImageOption" required (change)="onChangeImage($event.target.value, i)">
+                                    <option value="image" selected>Image</option>
+                                    <option value="text">Text</option>
+                                </select>
+                            </div>
+        
+                            <div class="col-3" *ngIf="itIsImageFile[i]">
+                                <input type="file" name="imageFile">
+                            </div>
+        
+                            <div class="col-3" *ngIf="itIsTextField[i]">
+                                <input type="text" name="textField">
+                            </div>
+        
+                            <div class="col-2">
+                                <input type="number" name="textField">
+                            </div>
+        
+                            <div class="col-2">
+                                <select name="resultOption" required (change)="onChangeResult($event.target.value, i)">
+                                    <option value="text" selected>Text Popup</option>
+                                    <option value="email">Email Popup</option>
+                                </select>
+                            </div>
+        
+                            <div class="col-2" *ngIf="itIsTextPopUp[i]">
+                                <input type="text" name="imageFile">
+                            </div>
+        
+                            <div class="col-2" *ngIf="itIsEmailPopUp[i]">
+                                <input type="email" name="textField">
+                            </div>
+        
+                            <div class="col-2">
+                                <input type="color">
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-danger"
+                >Submit</button>
+                
+            </div>
+        </div>
     </div>
+
+    
 
 
 </div>
