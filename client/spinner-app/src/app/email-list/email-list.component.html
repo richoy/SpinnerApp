@@ -1,0 +1,36 @@
+<div class="container">
+    <div id="title">
+        <h2>List of collected Emails</h2>
+    </div>
+
+    <div class="row">
+        <div class="col-12 d-flex justify-content-end mb-5">
+            <button class="btn btn-info">Export results csv/excel</button>
+        </div>
+        <div class="table-responsive" *ngIf="emails">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Email Address</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Date Spin</th>
+                        <th>Result</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let email of emails">
+                        <td>{{email.emailAddress}}</td>
+                        <td>{{email.firstName}}</td>
+                        <td>{{email.lastName}}</td>
+                        <td>{{email.updatedAt | date}}</td>
+                        <td>{{email.result}}</td>
+                    </tr>
+                </tbody>
+
+
+            </table>
+        </div>
+        
+    </div>
+</div>

@@ -43,9 +43,9 @@ app.use(cors());
 // Require Route
 const api = require('./routes/routes');
 // Configure app to use route
-app.use('/api/v1/', api);
-app.use('/spinners', SpinnerRouter);
-app.use('/results', ResultsRouter);
+app.use('/api/v1/', api);    
+app.use('/api/v1/spinner', SpinnerRouter);
+app.use('/api/v1/results', ResultsRouter);
 
 
 // This middleware informs the express application to serve our compiled React files
