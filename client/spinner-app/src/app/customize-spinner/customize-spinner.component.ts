@@ -64,9 +64,12 @@ export class CustomizeSpinnerComponent implements OnInit {
 
 	createSpFormGroup() {
 		return this.formBuilder.group({
-			file: ['', [Validators.required]],
-			percentage: ['', [Validators.required]],
-      text: ['', [Validators.required]],
+      isImage: [true, [Validators.required]],
+      file: [''],
+      textfile:[''],
+      percentage: ['', [Validators.required, Validators.pattern(/^[1-9]\d*$/)]],
+      result: [true, [Validators.required]],
+      text: [''],
       color: ['', [Validators.required]],
 		})
   }
@@ -79,7 +82,7 @@ export class CustomizeSpinnerComponent implements OnInit {
   // For number of field dropdown
   onChange(i) {
     this.items.length = 0;   // eliminates defalut setting before adding other
-    this.resetSpinnerForm()
+    this.spinnerForm.reset();
     while(this.spinnerArray.length > 0) {
       this.items.pop();
       this.deleteSpinnerField(0);
@@ -97,30 +100,26 @@ export class CustomizeSpinnerComponent implements OnInit {
   }
   addControl(i) {
     this.items.push({id: i.toString()})
-    this.addSpinnerField();
-  }
-
-  addSpinnerField() {
 		let fg = this.createSpFormGroup();
 		if(this.spinnerArray) {
       this.spinnerArray.push(fg);
     }
   }
+
   deleteSpinnerField(idx: number) {
 		this.spinnerArray.removeAt(idx);
-	}
-	resetSpinnerForm() {
-		this.spinnerForm.reset();
-	}
+  }
+  
   // For number of field dropdown
 
   //For image text selection
   onChangeImage(option, i) {
-      if ( option === 'image' ) {
+      if ( option === "0: true" ) {
         this.itIsImageFile[i] = true;
         this.itIsTextField[i] = false;
+        
       }
-      else if( option === 'text' ) {
+      else if( option === "1: false") {
         this.itIsImageFile[i] = false;
         this.itIsTextField[i] = true;
       }
@@ -142,7 +141,7 @@ export class CustomizeSpinnerComponent implements OnInit {
 
   onSubmit() {
     //console.log("textbix",this.textBoxFormGroup.value);
-    console.log("spinnerfomr", this.spinnerForm);
+    console.log("spinnerfomr", this.spinnerForm.controls.spinnerArray);
     this.submitPressed = true;
   }
 

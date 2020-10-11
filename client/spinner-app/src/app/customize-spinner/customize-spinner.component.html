@@ -40,9 +40,9 @@
                         <div class="mb-3"  *ngFor="let spinnerfield of spinnerArray.controls; let i = index" [formGroupName]="i">
                             <div class="row">
                                 <div class="col-1">
-                                    <select name="ImageOption" required (change)="onChangeImage($event.target.value, i)">
-                                        <option value="image" selected>Image</option>
-                                        <option value="text">Text</option>
+                                    <select formControlName="isImage" required (change)="onChangeImage($event.target.value, i)">
+                                        <option [ngValue]="true" selected>Image</option>
+                                        <option [ngValue]="false">Text</option>
                                     </select>
                                 </div>
             
@@ -51,7 +51,7 @@
                                 </div>
             
                                 <div class="col-3" *ngIf="itIsTextField[i]">
-                                    <input formControlName="file" type="text" name="textField" [class.invalid]="spinnerfield.controls.file.hasError('required')  && submitPressed">
+                                    <input formControlName="textfile" type="text" name="textField" [class.invalid]="spinnerfield.controls.file.hasError('required')  && submitPressed">
                                 </div>
             
                                 <div class="col-2">
@@ -59,9 +59,9 @@
                                 </div>
             
                                 <div class="col-2">
-                                    <select name="resultOption" required (change)="onChangeResult($event.target.value, i)">
-                                        <option value="text" selected>Text Popup</option>
-                                        <option value="email">Email Popup</option>
+                                    <select formControlName="result" name="resultOption" required (change)="onChangeResult($event.target.value, i)">
+                                        <option [ngValue]="true" value="text" selected>Text Popup</option>
+                                        <option [ngValue]="false" value="email">Email Popup</option>
                                     </select>
                                 </div>
             
