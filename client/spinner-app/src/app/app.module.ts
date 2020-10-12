@@ -10,13 +10,17 @@ import { LoginComponent } from './login/login.component';
 import { CustomizeSpinnerComponent } from './customize-spinner/customize-spinner.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { EmailListComponent } from './email-list/email-list.component';
+import { CustomScriptComponent } from './custom-script/custom-script.component';
+import { NavbarComponent } from './navbar/navbar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     CustomizeSpinnerComponent,
-    EmailListComponent
+    EmailListComponent,
+    CustomScriptComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
