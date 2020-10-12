@@ -32,18 +32,6 @@ const SpinnerSchema = new Schema ({
         type: String,
         default: ''
     },
-    name: {
-        type: String,
-        default: ''
-    },
-    lastname: {
-        type: String,
-        default: ''
-    },
-    textFieldTwo: {
-        type: String,
-        default: ''
-    },
     bgColor: {
         type: String,
         default: ''

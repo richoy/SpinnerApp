@@ -1,10 +1,21 @@
 export class formSpinnerControl {
-    ImageOption: boolean;
-    file: any;
-    textField: string;
+    isItImage: boolean;
+    image: any;
+    textFieldOne: string;
     percentage: number;
-    resultOption: boolean;
-    resultText: string;
-    resultEmail: string;
-    bgColor: any;
+    isItEmail: boolean;
+    textPopUp: string;
+    email: string;
+    bgColor: string;
+
+    constructor(isImage, image, textOne, percentage, isEmail, textPopUp, email, color){
+        this.isItImage = isImage;
+        this.image = image;
+        this.textFieldOne = textOne;
+        this.percentage = percentage;
+        this.isItEmail = isEmail;
+        this.textPopUp = textPopUp;
+        this.email = email;
+        this.bgColor = color;
+    }
 }
