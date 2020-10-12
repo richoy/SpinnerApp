@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder,FormArray, FormGroup, Validator, Validators } from '@angular/forms';
-import { throwError } from 'rxjs';
+import { FormBuilder,FormArray, FormGroup, Validators } from '@angular/forms';
 import { SpinnerCustomizerControllerService } from '../services/spinner-customizer-controller.service';
 import { formSpinnerControl } from '../shared/form-spinner-controller';
 
@@ -167,10 +166,10 @@ export class CustomizeSpinnerComponent implements OnInit {
       this.spinnerService.sendSpinner(spinner).subscribe(() => {
         this.spinnerForm.reset();
       }, err =>{
-        throwError(err);
+        throw new Error('Error Sending the information about the spinner');
       });
     }, err => {
-      throwError(err);
+      throw new Error('Error deleting the information of the previous spineer');
     });
   }
 
