@@ -15,18 +15,18 @@ export class SpinnerCustomizerControllerService {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
 
+
+  URL_API = "/api/v1/spinner";
+
   constructor(
     private http: HttpClient,
     private processHTTPMsgService: ProcessHTTPMsgService) { }
 
-  submitForm( formSpinnerControl: formSpinnerControl): Observable<formSpinnerControl> {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type':  'application/json'
-      })
-    };
-    // Correct afterwards
-    return this.http.post<formSpinnerControl>('localhost:3000/' + 'form', formSpinnerControl, httpOptions)
-      .pipe(catchError(this.processHTTPMsgService.handleError));;
+  sendSpinner( spinnerArray: Array <formSpinnerControl>) {
+    return this.http.post(this.URL_API, spinnerArray);
+  }
+
+  deleteSpinner() {
+    return this.http.delete(this.URL_API);
   }
 }

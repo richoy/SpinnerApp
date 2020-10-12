@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder,FormArray, FormGroup, Validator, Validators } from '@angular/forms';
+import { FormBuilder,FormArray, FormGroup, Validators } from '@angular/forms';
 import { SpinnerCustomizerControllerService } from '../services/spinner-customizer-controller.service';
 import { formSpinnerControl } from '../shared/form-spinner-controller';
 
@@ -12,13 +12,10 @@ import { formSpinnerControl } from '../shared/form-spinner-controller';
 export class CustomizeSpinnerComponent implements OnInit {
 
   // For number of field dropdown
-  name = 'Angular';
   items: any[] = [];
-  textBoxFormGroup: FormArray;
-  textBoxFormArray: FormArray;
-  controllerForm: formSpinnerControl;
-  controllerFormCopy: formSpinnerControl;
-  // For number of field dropdown
+
+  spinnerForm: FormGroup;
+  submitPressed = false;
 
   // For imageUpload / Text Field
   itIsImageFile: boolean[] = [false];
@@ -33,44 +30,24 @@ export class CustomizeSpinnerComponent implements OnInit {
   // Form validations:
   //controllerForm: FormGroup;
   errMess: string;
-/*
-  formErrors = {
-    'percentage': '',
-    'resultText': '',
-    'resultEmail': '',
-  };
 
-  validationMessages = {
-    'percentage': {
-      'required': 'Percentage is required.',
-      'pattern': 'Must contain only numbers.',
-      'min': 'Minimun value must be at least 0%.',
-      'max': 'Maximun value can not exceed 100%.'
-    },
-    'resultText': {
-      'required': 'Text field is required.'
-    },
-    'resultEmail': {
-      'required': 'Email is required.',
-      'email': 'Email not in valid format.'
-    }
-  };
-  // Form validations
-*/
   constructor(
     public formBuilder:FormBuilder,// For number of field dropdown
-    private spinnerCustomizerControllerService: SpinnerCustomizerControllerService ) // Form validations
+    private spinnerService: SpinnerCustomizerControllerService ) // Form validations
     {       
-    // For number of field dropdown
-    this.textBoxFormGroup = this.formBuilder.array([]);
-    this.addControl(0);
-    this.addControl(1);
-    // For number of field dropdown
+    // Setting Form Array
+    this.spinnerForm = this.formBuilder.group({
+			spinnerArray: this.formBuilder.array(
+				[],
+				[Validators.required])
+		});
    }
 
   ngOnInit(): void {
-    this.items.length = 6;  // Sets default 6 boxes
-
+    // Sets default 6 boxes
+    for (let i = 0; i < 6; i++) {
+      this.addControl(i);
+    }
     // For imageUpload / Text Field
     let i = 0;
     for (i=0; i<=this.items.length; i++) {
@@ -85,54 +62,31 @@ export class CustomizeSpinnerComponent implements OnInit {
     // For number of field dropdown
   }
 
-  // Form validations:
-  /*
-  createForm(){
-    this.textBoxFormGroup = this.formBuilder.array([{
-      ImageOption: [''],
-      imageFile: [''], //Check later
-      textField: [''],
-      percentage: [0, [Validators.required, Validators.pattern, Validators.min(2), Validators.max(100)]],
-      resultOption: [''],
-      resultText: [''],
-      resultEmail: ['', [Validators.email]],
-      bgColor: ['']
-    }]);
-
-    this.textBoxFormGroup.valueChanges
-      .subscribe(data => this.onValueChanged(data));
-
-    this.onValueChanged();
+	createSpFormGroup() {
+		return this.formBuilder.group({
+      isItImage: [true, [Validators.required]],
+      file: [''],
+      textFieldOne:[''],
+      percentage: ['', [Validators.required, Validators.pattern(/^[1-9]\d*$/)]],
+      isItEmail: [true, [Validators.required]],
+      textPopUp: [''],
+      emails: [''],
+      color: ['', [Validators.required]],
+		})
   }
-
-  /*
-  onValueChanged(data?: any) {
-    if (!this.textBoxFormGroup) {return;}
-    const form = this.textBoxFormGroup;
-    for( const field in this.formErrors) {
-      if (this.formErrors.hasOwnProperty(field)) {
-        // clear previous error message (if any)
-        this.formErrors[field] = '';
-        const control = form.get(field);
-        if (control && control.dirty && !control.valid) {
-          const messages = this.validationMessages[field];
-          for ( const key in control.errors) {
-            if (control.errors.hasOwnProperty(key)) {
-              this.formErrors[field] += messages[key] + ' ';
-            }
-          }
-        }
-      }
+  
+  get spinnerArray(): FormArray {
+		if ( this.spinnerForm) {
+      return this.spinnerForm.get('spinnerArray') as FormArray;
     }
-  }
-*/
-
+	}
   // For number of field dropdown
   onChange(i) {
     this.items.length = 0;   // eliminates defalut setting before adding other
-    while(this.textBoxFormGroup.length > 0) {
+    this.spinnerForm.reset();
+    while(this.spinnerArray.length > 0) {
       this.items.pop();
-      this.textBoxFormGroup.removeAt(0);
+      this.deleteSpinnerField(0);
     }
     while(i > 0) {
       this.addControl(i);
@@ -147,22 +101,29 @@ export class CustomizeSpinnerComponent implements OnInit {
   }
   addControl(i) {
     this.items.push({id: i.toString()})
-    this.textBoxFormGroup.push(this.formBuilder.control(''));
+		let fg = this.createSpFormGroup();
+		if(this.spinnerArray) {
+      this.spinnerArray.push(fg);
+    }
   }
+
+  deleteSpinnerField(idx: number) {
+		this.spinnerArray.removeAt(idx);
+  }
+  
   // For number of field dropdown
 
   //For image text selection
   onChangeImage(option, i) {
-      if ( option === 'image' ) {
+      if ( option === "0: true" ) {
         this.itIsImageFile[i] = true;
         this.itIsTextField[i] = false;
+        
       }
-      else if( option === 'text' ) {
+      else if( option === "1: false") {
         this.itIsImageFile[i] = false;
         this.itIsTextField[i] = true;
       }
-      console.log(this.itIsImageFile);
-      console.log(this.itIsTextField)
   }
   //For image text selection
 
@@ -180,19 +141,36 @@ export class CustomizeSpinnerComponent implements OnInit {
   // For number of field dropdown
 
   onSubmit() {
-    this.controllerFormCopy = this.textBoxFormGroup.value;
-    //this.spinnerVisible = true;
-    this.spinnerCustomizerControllerService.submitForm(this.controllerFormCopy)
-      .subscribe(feedback =>{ setTimeout(() => {
-        this.controllerForm = feedback; 
-        //this.spinnerVisible = false; 
-        console.log(this.controllerForm);
-        setTimeout(() => this.controllerForm = null, 5000);}, 2000);},
-        errmess => this.errMess = <any>errmess);
-    this.textBoxFormGroup.reset();
+    let spinner: Array<formSpinnerControl> = [];
+    this.submitPressed = true;
+    
+    // if a field outside the array is added, change this to this.spinnerForm.value
+    if (this.spinnerForm.status === "VALID") {
+      this.spinnerArray.value.forEach(element => {
+        let field = new formSpinnerControl(
+          element.isItImage,
+          element.image,
+          element.textFieldOne,
+          element.percentage,
+          element.isItEmail,
+          element.textPopUp,
+          element.email,
+          element.color
+        )
+        spinner.push(field);
+      });
+  
+    }
+
+    this.spinnerService.deleteSpinner().subscribe(() => {
+      this.spinnerService.sendSpinner(spinner).subscribe(() => {
+        this.spinnerForm.reset();
+      }, err =>{
+        throw new Error('Error Sending the information about the spinner');
+      });
+    }, err => {
+      throw new Error('Error deleting the information of the previous spineer');
+    });
   }
 
 }
-
-
-
