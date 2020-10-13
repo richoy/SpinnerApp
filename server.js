@@ -6,13 +6,25 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const path = require('path');
 
+
+//Express session
+var session = require('express-session');
+var FileStore = require('session-file-store')(session);
+
+// Passport
+var passport = require('passport');
+
+//Token
+var config = require('./config');
+
 // Routes
+var usersRouter = require('./routes/users');
 var SpinnerRouter = require('./routes/spinnerRouter');
 var ResultsRouter = require('./routes/resultRouter');
 
 // Mongoose Database
 const mongoose = require('mongoose');
-const url = 'mongodb://localhost:27017/SpinnerApp';
+const url = config.mongoUrl;
 const connect = mongoose.connect(url);
 
 connect.then((db) => {
@@ -42,8 +54,15 @@ app.use(cors());
 
 // Require Route
 const api = require('./routes/routes');
+
+app.use(passport.initialize());
+
+
 // Configure app to use route
 app.use('/api/v1/', api);    
+
+app.use('/users', usersRouter);
+
 app.use('/api/v1/spinner', SpinnerRouter);
 app.use('/api/v1/results', ResultsRouter);
 
