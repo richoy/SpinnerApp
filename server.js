@@ -21,6 +21,7 @@ var config = require('./config');
 var usersRouter = require('./routes/users');
 var SpinnerRouter = require('./routes/spinnerRouter');
 var ResultsRouter = require('./routes/resultRouter');
+var uploadRouter = require('./routes/uploadRouter');
 
 // Mongoose Database
 const mongoose = require('mongoose');
@@ -65,6 +66,7 @@ app.use('/users', usersRouter);
 
 app.use('/api/v1/spinner', SpinnerRouter);
 app.use('/api/v1/results', ResultsRouter);
+app.use('/api/v1/imageUpload', uploadRouter);
 
 
 // This middleware informs the express application to serve our compiled React files
