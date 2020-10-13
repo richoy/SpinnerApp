@@ -9,6 +9,9 @@ const SpinnerRouter = express.Router();
 
 SpinnerRouter.use(bodyParser.json());
 
+// Authentication is ready but within comments so tests 
+// can be performed easily, normalise before finishing
+
 SpinnerRouter.route('/')
     .get((req, res, next) => {
         Spinners.find({})
