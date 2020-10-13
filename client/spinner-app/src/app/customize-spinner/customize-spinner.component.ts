@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder,FormArray, FormGroup, Validators } from '@angular/forms';
 import { SpinnerCustomizerControllerService } from '../services/spinner-customizer-controller.service';
+import { ImageService } from '../services/image.service';
 import { formSpinnerControl } from '../shared/form-spinner-controller';
-
+import { ImageSnippet } from '../shared/ImageSnippet';
 
 @Component({
   selector: 'app-customize-spinner',
@@ -31,10 +32,13 @@ export class CustomizeSpinnerComponent implements OnInit {
   //controllerForm: FormGroup;
   errMess: string;
 
+  // For image Upload
+  selectedFile: ImageSnippet;
+
   constructor(
     public formBuilder:FormBuilder,// For number of field dropdown
-    private spinnerService: SpinnerCustomizerControllerService ) // Form validations
-    {       
+    private spinnerService: SpinnerCustomizerControllerService,// Form validations
+    private imageService: ImageService  ) {       
     // Setting Form Array
     this.spinnerForm = this.formBuilder.group({
 			spinnerArray: this.formBuilder.array(
@@ -61,6 +65,25 @@ export class CustomizeSpinnerComponent implements OnInit {
     }
     // For number of field dropdown
   }
+
+  //Image Upload
+  processFile(imageInput: any) {
+    const file: File = imageInput.files[0];
+    const reader = new FileReader();
+
+    reader.addEventListener('load', (event: any) => {
+      this.selectedFile = new ImageSnippet(event.target.result, file);
+      this.imageService.uploadImage(this.selectedFile.file)
+        .subscribe((res) => {
+
+        },
+        (err) => {
+
+        });
+    });
+    reader.readAsDataURL(file);
+  }
+  //Image Upload
 
 	createSpFormGroup() {
 		return this.formBuilder.group({
