@@ -66,24 +66,7 @@ export class CustomizeSpinnerComponent implements OnInit {
     // For number of field dropdown
   }
 
-  //Image Upload
-  processFile(imageInput: any) {
-    const file: File = imageInput.files[0];
-    const reader = new FileReader();
-
-    reader.addEventListener('load', (event: any) => {
-      this.selectedFile = new ImageSnippet(event.target.result, file);
-      this.imageService.uploadImage(this.selectedFile.file)
-        .subscribe((res) => {
-
-        },
-        (err) => {
-
-        });
-    });
-    reader.readAsDataURL(file);
-  }
-  //Image Upload
+ 
 
 	createSpFormGroup() {
 		return this.formBuilder.group({
@@ -97,6 +80,38 @@ export class CustomizeSpinnerComponent implements OnInit {
       color: ['', [Validators.required]],
 		})
   }
+
+   //Image Upload
+   private onSuccess() {
+    this.selectedFile.pending = false;
+    this.selectedFile.status = 'ok';
+  }
+
+  private onError() {
+    this.selectedFile.pending = false;
+    this.selectedFile.status = 'fail';
+    this.selectedFile.src = '';
+  }
+
+
+  processFile(imageInput: any, i) {
+    imageInput.value.forEach(i=> {
+      let file: File = imageInput.files[i];
+      let reader = new FileReader();
+      reader.addEventListener('load', (event: any) => {
+        this.selectedFile = new ImageSnippet(event.target.result, file);
+        this.imageService.uploadImage(this.selectedFile.file)
+          .subscribe((res) => {
+            this.onSuccess();
+          },
+          (err) => {
+            this.onError();
+          });
+      });
+      reader.readAsDataURL(file);
+    });
+  }
+  //Image Upload
   
   get spinnerArray(): FormArray {
 		if ( this.spinnerForm) {
