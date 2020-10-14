@@ -5,7 +5,7 @@ const multer = require('multer');
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        cb(null, 'client/spinner-app/src/assets/images');
+        cb(null, 'public/images');
     },  
 
     filename: (req, file, cb) => {

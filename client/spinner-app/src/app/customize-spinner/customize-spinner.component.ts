@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormBuilder,FormArray, FormGroup, Validators, FormControl } from '@angular/forms';
 import { SpinnerCustomizerControllerService } from '../services/spinner-customizer-controller.service';
 import { ImageService } from '../services/image.service';
@@ -34,7 +34,8 @@ export class CustomizeSpinnerComponent implements OnInit {
 
   // For image Upload
   selectedFile: ImageSnippet;
-  file: String;
+  Imagevalue: String;
+
 
   constructor(
     public formBuilder:FormBuilder,// For number of field dropdown
@@ -105,8 +106,8 @@ export class CustomizeSpinnerComponent implements OnInit {
         this.imageService.uploadImage(this.selectedFile.file)
           .subscribe((res) => {
             this.onSuccess();
-            console.log(res.path)
-            this.file = res.path;
+            this.Imagevalue = res.path;
+            console.log(this.Imagevalue);
           },
           (err) => {
             console.log(err);

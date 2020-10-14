@@ -54,12 +54,13 @@
             
                                 <div class="col-3" *ngIf="itIsImageFile[i]">
                                     <input #imageInput
-                                            (formControlName)="file" 
+                                            formControlName="file"
                                             type="file" 
                                             accept="image/*"
                                             name="imageFile"
+                                            (ngValue)="Imagevalue"
                                             (change)="processFile($event)">
-
+<!--
                                             <div *ngIf="selectedFile" class="img-preview-container">
 
                                                 <div class="img-preview{{selectedFile.status === 'fail' ? '-error' : ''}}"
@@ -72,7 +73,7 @@
                                               
                                                 <div *ngIf="selectedFile.status === 'ok'" class="alert alert-success"> Image Uploaded Succesfuly!</div>
                                                 <div *ngIf="selectedFile.status === 'fail'" class="alert alert-danger"> Image Upload Failed!</div>
-                                              </div>
+                                              </div>-->
                                             
                                 </div>
             
