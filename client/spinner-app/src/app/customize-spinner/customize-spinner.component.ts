@@ -106,16 +106,14 @@ export class CustomizeSpinnerComponent implements OnInit {
       let reader = new FileReader();
       reader.addEventListener('load', (event: any) => {
         this.selectedFile = new ImageSnippet(event.target.result, file);
-        //console.log(this.selectedFile);
         this.imageService.uploadImage(this.selectedFile.file)
           .subscribe((res) => {
             this.onSuccess();
             this.Imagevalue = res.path;
             this.test.push(new UploadFile(index, this.Imagevalue));
-            //console.log(this.Imagevalue);
           },
           (err) => {
-            //console.log(err);
+            throw new Error(err);
           });
       });
       reader.readAsDataURL(file);
@@ -197,29 +195,22 @@ export class CustomizeSpinnerComponent implements OnInit {
       let contador = 0;
       
       this.spinnerArray.value.forEach(element => {
-        let field: formSpinnerControl
+        let field = new formSpinnerControl(
+          element.isItImage,
+          element.image,
+          element.textFieldOne,
+          element.percentage,
+          element.isItEmail,
+          element.textPopUp,
+          element.email,
+          element.color
+        )
 
         this.test.forEach((image)=>{
-          console.log('unage',image.index);
-          console.log('cont',contador);
-          console.log(typeof(image.index))
-          
           if(image.index == contador){
             field.image = this.test[contador].image;
-          } else{
-            field.image = element.image;
-          }
+          } 
         })
-
-        field.isItImage =element.isItImage,
-        field.textFieldOne =element.textFieldOne,
-        field.percentage =element.percentage,
-        field.isItEmail =element.isItEmail,
-        field.textPopUp =element.textPopUp,
-        field.email =element.email,
-        field.bgColor =element.color
-
-     
         spinner.push(field);
 
         contador++;
@@ -229,8 +220,6 @@ export class CustomizeSpinnerComponent implements OnInit {
 
     this.spinnerService.deleteSpinner().subscribe(() => {
       this.spinnerService.sendSpinner(spinner).subscribe((res) => {
-        console.log(res);
-        
         this.spinnerForm.reset();
       }, err =>{
         throw new Error('Error Sending the information about the spinner');
