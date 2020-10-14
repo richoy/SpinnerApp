@@ -15,6 +15,10 @@ export class CustomizeSpinnerComponent implements OnInit {
   // For number of field dropdown
   items: any[] = [];
 
+  test: UploadFile[] = [];
+
+  
+
   spinnerForm: FormGroup;
   submitPressed = false;
 
@@ -96,21 +100,22 @@ export class CustomizeSpinnerComponent implements OnInit {
   }
 
 
-  processFile(image: any) {
+  processFile(image: any, index) {
       let files = image.srcElement.files;
       let file: File = files[0];
       let reader = new FileReader();
       reader.addEventListener('load', (event: any) => {
         this.selectedFile = new ImageSnippet(event.target.result, file);
-        console.log(this.selectedFile);
+        //console.log(this.selectedFile);
         this.imageService.uploadImage(this.selectedFile.file)
           .subscribe((res) => {
             this.onSuccess();
             this.Imagevalue = res.path;
-            console.log(this.Imagevalue);
+            this.test.push(new UploadFile(index, this.Imagevalue));
+            //console.log(this.Imagevalue);
           },
           (err) => {
-            console.log(err);
+            //console.log(err);
           });
       });
       reader.readAsDataURL(file);
@@ -189,24 +194,43 @@ export class CustomizeSpinnerComponent implements OnInit {
     
     // if a field outside the array is added, change this to this.spinnerForm.value
     if (this.spinnerForm.status === "VALID") {
+      let contador = 0;
+      
       this.spinnerArray.value.forEach(element => {
-        let field = new formSpinnerControl(
-          element.isItImage,
-          element.image,
-          element.textFieldOne,
-          element.percentage,
-          element.isItEmail,
-          element.textPopUp,
-          element.email,
-          element.color
-        )
+        let field: formSpinnerControl
+
+        this.test.forEach((image)=>{
+          console.log('unage',image.index);
+          console.log('cont',contador);
+          console.log(typeof(image.index))
+          
+          if(image.index == contador){
+            field.image = this.test[contador].image;
+          } else{
+            field.image = element.image;
+          }
+        })
+
+        field.isItImage =element.isItImage,
+        field.textFieldOne =element.textFieldOne,
+        field.percentage =element.percentage,
+        field.isItEmail =element.isItEmail,
+        field.textPopUp =element.textPopUp,
+        field.email =element.email,
+        field.bgColor =element.color
+
+     
         spinner.push(field);
+
+        contador++;
       });
-  
+
     }
 
     this.spinnerService.deleteSpinner().subscribe(() => {
-      this.spinnerService.sendSpinner(spinner).subscribe(() => {
+      this.spinnerService.sendSpinner(spinner).subscribe((res) => {
+        console.log(res);
+        
         this.spinnerForm.reset();
       }, err =>{
         throw new Error('Error Sending the information about the spinner');
@@ -216,4 +240,14 @@ export class CustomizeSpinnerComponent implements OnInit {
     });
   }
 
+}
+
+export class UploadFile {
+  index: number;
+  image: any;
+
+  constructor(idx, fil){
+    this.index = idx;
+    this.image = fil;
+  }
 }
