@@ -54,11 +54,11 @@
             
                                 <div class="col-3" *ngIf="itIsImageFile[i]">
                                     <input #imageInput
-                                            formControlName="file" 
+                                            (formControlName)="file" 
                                             type="file" 
                                             accept="image/*"
                                             name="imageFile"
-                                            (change)="processFile(imageInput, i)">
+                                            (change)="processFile($event)">
 
                                             <div *ngIf="selectedFile" class="img-preview-container">
 

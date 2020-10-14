@@ -5,7 +5,7 @@ const multer = require('multer');
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        cb(null, 'public/images');
+        cb(null, 'client/spinner-app/src/assets/images');
     },  
 
     filename: (req, file, cb) => {
@@ -14,7 +14,7 @@ const storage = multer.diskStorage({
 });
 
 const imageFileFilter = (req, file, cb) => {
-    if(!file.originalname.match(/\.(jpg|jpeg|png|gif)$/)) {
+    if(!file.originalname.match(/\.(jpg|jpeg|png|PNG|gif)$/)) {
         return cb(new Error('You can upload only image files!'), false);
     }
     else {

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder,FormArray, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder,FormArray, FormGroup, Validators, FormControl } from '@angular/forms';
 import { SpinnerCustomizerControllerService } from '../services/spinner-customizer-controller.service';
 import { ImageService } from '../services/image.service';
 import { formSpinnerControl } from '../shared/form-spinner-controller';
@@ -34,6 +34,7 @@ export class CustomizeSpinnerComponent implements OnInit {
 
   // For image Upload
   selectedFile: ImageSnippet;
+  file: String;
 
   constructor(
     public formBuilder:FormBuilder,// For number of field dropdown
@@ -94,22 +95,25 @@ export class CustomizeSpinnerComponent implements OnInit {
   }
 
 
-  processFile(imageInput: any, i) {
-    imageInput.value.forEach(i=> {
-      let file: File = imageInput.files[i];
+  processFile(image: any) {
+      let files = image.srcElement.files;
+      let file: File = files[0];
       let reader = new FileReader();
       reader.addEventListener('load', (event: any) => {
         this.selectedFile = new ImageSnippet(event.target.result, file);
+        console.log(this.selectedFile);
         this.imageService.uploadImage(this.selectedFile.file)
           .subscribe((res) => {
             this.onSuccess();
+            console.log(res.path)
+            this.file = res.path;
           },
           (err) => {
-            this.onError();
+            console.log(err);
           });
       });
       reader.readAsDataURL(file);
-    });
+
   }
   //Image Upload
   
