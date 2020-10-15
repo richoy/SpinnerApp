@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder,FormArray, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder,FormArray, FormGroup, Validators, FormControl } from '@angular/forms';
 import { SpinnerCustomizerControllerService } from '../services/spinner-customizer-controller.service';
+import { ImageService } from '../services/image.service';
 import { formSpinnerControl } from '../shared/form-spinner-controller';
-
+import { ImageSnippet } from '../shared/ImageSnippet';
 
 @Component({
   selector: 'app-customize-spinner',
@@ -31,10 +32,16 @@ export class CustomizeSpinnerComponent implements OnInit {
   //controllerForm: FormGroup;
   errMess: string;
 
+  // For image Upload
+  selectedFile: ImageSnippet;
+  StringOfImageUpload: UploadFile[] = [];
+  SuccessfullyUpload: boolean[] = [];
+  UnsuccessfullyUpload: boolean[] = [];
+
   constructor(
     public formBuilder:FormBuilder,// For number of field dropdown
-    private spinnerService: SpinnerCustomizerControllerService ) // Form validations
-    {       
+    private spinnerService: SpinnerCustomizerControllerService,// Form validations
+    private imageService: ImageService  ) {       
     // Setting Form Array
     this.spinnerForm = this.formBuilder.group({
 			spinnerArray: this.formBuilder.array(
@@ -60,7 +67,10 @@ export class CustomizeSpinnerComponent implements OnInit {
       this.itIsTextPopUp[i] = true;
     }
     // For number of field dropdown
+
   }
+
+ 
 
 	createSpFormGroup() {
 		return this.formBuilder.group({
@@ -74,6 +84,43 @@ export class CustomizeSpinnerComponent implements OnInit {
       color: ['', [Validators.required]],
 		})
   }
+
+   //Image Upload
+   private onSuccess(index, path) {
+    this.StringOfImageUpload.push(new UploadFile(index, path));
+    this.SuccessfullyUpload[index] = true;
+    this.UnsuccessfullyUpload[index] = false; 
+    //this.selectedFile.pending = false;
+    //this.selectedFile.status = 'ok';
+  }
+
+  private onError(index) {
+    this.UnsuccessfullyUpload[index] = true; 
+    this.SuccessfullyUpload[index] = false;
+    //this.selectedFile.pending = false;
+    //this.selectedFile.status = 'fail';
+    //this.selectedFile.src = '';
+  }
+
+
+  processFile(image: any, index) {
+      let files = image.srcElement.files;
+      let file: File = files[0];
+      let reader = new FileReader();
+      reader.addEventListener('load', (event: any) => {
+        this.selectedFile = new ImageSnippet(event.target.result, file);
+        this.imageService.uploadImage(this.selectedFile.file)
+          .subscribe((res) => {
+            this.onSuccess(index, res.path);
+          },
+          (err) => {
+            this.onError(index)
+            throw new Error(err);
+          });
+      });
+      reader.readAsDataURL(file);
+  }
+  //Image Upload
   
   get spinnerArray(): FormArray {
 		if ( this.spinnerForm) {
@@ -146,6 +193,8 @@ export class CustomizeSpinnerComponent implements OnInit {
     
     // if a field outside the array is added, change this to this.spinnerForm.value
     if (this.spinnerForm.status === "VALID") {
+      let counter = 0;
+  
       this.spinnerArray.value.forEach(element => {
         let field = new formSpinnerControl(
           element.isItImage,
@@ -157,14 +206,23 @@ export class CustomizeSpinnerComponent implements OnInit {
           element.email,
           element.color
         )
+
+        this.StringOfImageUpload.forEach((image)=>{
+          if(image.index == counter){
+            field.image = this.StringOfImageUpload[counter].image;
+          } 
+        })
         spinner.push(field);
+
+        counter++;
       });
-  
+
     }
 
     this.spinnerService.deleteSpinner().subscribe(() => {
-      this.spinnerService.sendSpinner(spinner).subscribe(() => {
+      this.spinnerService.sendSpinner(spinner).subscribe((res) => {
         this.spinnerForm.reset();
+        this.StringOfImageUpload = []; // Resets the StringOfImageUpload array
       }, err =>{
         throw new Error('Error Sending the information about the spinner');
       });
@@ -173,4 +231,14 @@ export class CustomizeSpinnerComponent implements OnInit {
     });
   }
 
+}
+
+export class UploadFile {
+  index: number;
+  image: any;
+
+  constructor(idx, fil){
+    this.index = idx;
+    this.image = fil;
+  }
 }
