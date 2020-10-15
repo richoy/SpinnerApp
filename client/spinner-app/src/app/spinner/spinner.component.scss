@@ -1,0 +1,61 @@
+#wrapper{ 
+	margin: 40px auto 0;	
+	width:266px; 
+	position:relative;
+}
+
+$Diameter: 250px;
+
+div#wheel{
+	width:$Diameter;
+	height:$Diameter;
+	border-radius:50%;	
+	position:relative;
+	//overflow:hidden;
+	border:8px solid #fff;
+	box-shadow:rgba(0,0,0,0.2) 0px 0px 10px, rgba(0,0,0,0.05) 0px 3px 0px;
+	transform: rotate(0deg);
+}
+
+#wheel:before{
+	content:'';
+	position:absolute;
+	border:4px solid rgba(0,0,0,0.1);
+	width:242px;
+	height:242px;
+	border-radius:50%;
+	z-index:1000;	
+}
+
+#inner-wheel{
+	width:100%;
+	height:100%;
+	-webkit-transition: all 6s cubic-bezier(0,.99,.44,.99);
+	-moz-transition:    all 6 cubic-bezier(0,.99,.44,.99);
+	-o-transition:      all 6s cubic-bezier(0,.99,.44,.99);
+	-ms-transition:     all 6s cubic-bezier(0,.99,.44,.99);
+	transition:         all 6s cubic-bezier(0,.99,.44,.99);	
+}
+
+#inner-wheel div.hold {
+    position:absolute;
+    width: $Diameter;
+    height: $Diameter;
+    clip:rect(0px,$Diameter,$Diameter,$Diameter/2);
+    left: -7px;
+    top: -9px;
+}
+
+#wheel div.sec{
+	position: absolute;
+	width: $Diameter;
+	height: $Diameter;
+	transform-origin: center;
+	//left:$Diameter/4;
+	//top:$Diameter/4;	
+    opacity:1;
+    clip:rect(0px,$Diameter/2,$Diameter,0px);
+    border-radius:$Diameter; 
+}
+
+

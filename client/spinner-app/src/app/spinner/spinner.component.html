@@ -2,24 +2,33 @@
             
     <div *ngIf="SpinnerFields" id="wheel">
 
-        <div *ngFor="let field of SpinnerFields; let i = index" id="inner-wheel">
-            <div [style.background-color]="styleExpr[i]">
-                <div [style.color]="fontColor[i]" *ngIf="field.isItImage">
-                    <div class="sec"> <img src="../../../../../public/images/documentationpage.PNG" alt="">
-                        {{field.image}}</div>
-                </div>
-                <div [style.color]="fontColor[i]" *ngIf="!field.isItImage">
-                    <div class="sec">{{field.textFieldOne}}</div>
-                </div>
-            </div>
+        <div id="inner-wheel">
+            <div *ngFor="let field of SpinnerFields; let i = index">
+                <div>
+                    <div [style]="holder[i]" class="hold">
+                        <div class="sec" [style]="fieldStyleNth[i]" *ngIf="field.isItImage">
+                            <div> <img src="../../../../../public/images/documentationpage.PNG" alt="">
+                                {{field.image}}</div>
+                        </div>
+                    </div>
 
-        </div>       
-       
-        <div id="spin">
-            <div id="inner-spin"></div>
+                    <div [style]="holder[i]" class="hold">
+                        <div class="sec" [style]="fieldStyleNth[i]" *ngIf="!field.isItImage">
+                            <div><span>{{field.textFieldOne}}</span></div>
+                        </div>
+                    </div>
+
+                </div>
+    
+            </div>       
+           
+            <div id="spin">
+                <div id="inner-spin"></div>
+            </div>
+            
+            <div id="shine"></div>
         </div>
         
-        <div id="shine"></div>
     </div>
     
     <div id="txt"></div>
