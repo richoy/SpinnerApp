@@ -11,7 +11,7 @@ div#wheel{
 	height:$Diameter;
 	border-radius:50%;	
 	position:relative;
-	//overflow:hidden;
+	overflow:hidden;
 	border:8px solid #fff;
 	box-shadow:rgba(0,0,0,0.2) 0px 0px 10px, rgba(0,0,0,0.05) 0px 3px 0px;
 	transform: rotate(0deg);
