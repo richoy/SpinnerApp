@@ -8,3 +8,19 @@ div.menu1 {
     border: 1px solid red;
     border-radius: 2px;
 }
+
+div.row input {
+    width: 140px;
+}
+
+div#ImageUploadBox {
+    div#FileUploadMessageBox {
+        height: 15px;
+        div.alert {
+            height: 100%;
+            margin: 0;
+            align-items: center;
+        }
+    }
+
+}

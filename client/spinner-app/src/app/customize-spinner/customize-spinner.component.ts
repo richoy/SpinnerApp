@@ -35,6 +35,8 @@ export class CustomizeSpinnerComponent implements OnInit {
   // For image Upload
   selectedFile: ImageSnippet;
   StringOfImageUpload: UploadFile[] = [];
+  SuccessfullyUpload: boolean[] = [];
+  UnsuccessfullyUpload: boolean[] = [];
 
   constructor(
     public formBuilder:FormBuilder,// For number of field dropdown
@@ -65,6 +67,7 @@ export class CustomizeSpinnerComponent implements OnInit {
       this.itIsTextPopUp[i] = true;
     }
     // For number of field dropdown
+
   }
 
  
@@ -83,15 +86,20 @@ export class CustomizeSpinnerComponent implements OnInit {
   }
 
    //Image Upload
-   private onSuccess() {
-    this.selectedFile.pending = false;
-    this.selectedFile.status = 'ok';
+   private onSuccess(index, path) {
+    this.StringOfImageUpload.push(new UploadFile(index, path));
+    this.SuccessfullyUpload[index] = true;
+    this.UnsuccessfullyUpload[index] = false; 
+    //this.selectedFile.pending = false;
+    //this.selectedFile.status = 'ok';
   }
 
-  private onError() {
-    this.selectedFile.pending = false;
-    this.selectedFile.status = 'fail';
-    this.selectedFile.src = '';
+  private onError(index) {
+    this.UnsuccessfullyUpload[index] = true; 
+    this.SuccessfullyUpload[index] = false;
+    //this.selectedFile.pending = false;
+    //this.selectedFile.status = 'fail';
+    //this.selectedFile.src = '';
   }
 
 
@@ -103,11 +111,10 @@ export class CustomizeSpinnerComponent implements OnInit {
         this.selectedFile = new ImageSnippet(event.target.result, file);
         this.imageService.uploadImage(this.selectedFile.file)
           .subscribe((res) => {
-            this.onSuccess();
-            this.StringOfImageUpload.push(new UploadFile(index, res.path));
+            this.onSuccess(index, res.path);
           },
           (err) => {
-            this.onError()
+            this.onError(index)
             throw new Error(err);
           });
       });

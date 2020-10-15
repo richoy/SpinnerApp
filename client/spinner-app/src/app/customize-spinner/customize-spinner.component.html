@@ -53,27 +53,23 @@
                                 </div>
             
                                 <div class="col-3" *ngIf="itIsImageFile[i]">
-                                    <input #imageInput
+                                    <div class="row" id="ImageUploadBox">
+                                        <div class="col-9" id="FileUploadBox">
+                                            <input #imageInput
                                             formControlName="file"
                                             type="file" 
                                             accept="image/*"
                                             name="imageFile"
-                                            (ngValue)="Imagevalue"
                                             (change)="processFile($event, i)">
-<!--
-                                    <div *ngIf="selectedFile" class="img-preview-container">
+    
+                                        </div>
 
-                                        <div class="img-preview{{selectedFile.status === 'fail' ? '-error' : ''}}"
-                                            [ngStyle]="{'background-image': 'url('+ selectedFile.src + ')'}">
+                                        <div class="col-3" id="FileUploadMessageBox" *ngIf="selectedFile">
+                                            <div *ngIf="SuccessfullyUpload[i]" class="alert alert-success d-flex justify-content-center"> <span>&#10004;</span></div>
+                                            <div *ngIf="UnsuccessfullyUpload[i]" class="alert alert-danger d-flex justify-content-center"> <span>&#x2716;</span></div>
                                         </div>
-                                              
-                                        <div *ngIf="selectedFile.pending" class="img-loading-overlay">
-                                            <div class="img-spinning-circle"></div>
-                                        </div>
-                                              
-                                            <div *ngIf="selectedFile.status === 'ok'" class="alert alert-success"> Image Uploaded Succesfuly!</div>
-                                            <div *ngIf="selectedFile.status === 'fail'" class="alert alert-danger"> Image Upload Failed!</div>
-                                    </div>   -->
+                                    </div>
+
                                             
                                 </div>
             
