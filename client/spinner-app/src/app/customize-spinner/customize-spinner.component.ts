@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder,FormArray, FormGroup, Validators, FormControl } from '@angular/forms';
 import { SpinnerCustomizerControllerService } from '../services/spinner-customizer-controller.service';
 import { ImageService } from '../services/image.service';
@@ -14,10 +14,6 @@ export class CustomizeSpinnerComponent implements OnInit {
 
   // For number of field dropdown
   items: any[] = [];
-
-  test: UploadFile[] = [];
-
-  
 
   spinnerForm: FormGroup;
   submitPressed = false;
@@ -38,8 +34,7 @@ export class CustomizeSpinnerComponent implements OnInit {
 
   // For image Upload
   selectedFile: ImageSnippet;
-  Imagevalue: String;
-
+  StringOfImageUpload: UploadFile[] = [];
 
   constructor(
     public formBuilder:FormBuilder,// For number of field dropdown
@@ -109,15 +104,14 @@ export class CustomizeSpinnerComponent implements OnInit {
         this.imageService.uploadImage(this.selectedFile.file)
           .subscribe((res) => {
             this.onSuccess();
-            this.Imagevalue = res.path;
-            this.test.push(new UploadFile(index, this.Imagevalue));
+            this.StringOfImageUpload.push(new UploadFile(index, res.path));
           },
           (err) => {
+            this.onError()
             throw new Error(err);
           });
       });
       reader.readAsDataURL(file);
-
   }
   //Image Upload
   
@@ -192,8 +186,8 @@ export class CustomizeSpinnerComponent implements OnInit {
     
     // if a field outside the array is added, change this to this.spinnerForm.value
     if (this.spinnerForm.status === "VALID") {
-      let contador = 0;
-      
+      let counter = 0;
+  
       this.spinnerArray.value.forEach(element => {
         let field = new formSpinnerControl(
           element.isItImage,
@@ -206,14 +200,14 @@ export class CustomizeSpinnerComponent implements OnInit {
           element.color
         )
 
-        this.test.forEach((image)=>{
-          if(image.index == contador){
-            field.image = this.test[contador].image;
+        this.StringOfImageUpload.forEach((image)=>{
+          if(image.index == counter){
+            field.image = this.StringOfImageUpload[counter].image;
           } 
         })
         spinner.push(field);
 
-        contador++;
+        counter++;
       });
 
     }
@@ -221,6 +215,7 @@ export class CustomizeSpinnerComponent implements OnInit {
     this.spinnerService.deleteSpinner().subscribe(() => {
       this.spinnerService.sendSpinner(spinner).subscribe((res) => {
         this.spinnerForm.reset();
+        this.StringOfImageUpload = []; // Resets the StringOfImageUpload array
       }, err =>{
         throw new Error('Error Sending the information about the spinner');
       });
