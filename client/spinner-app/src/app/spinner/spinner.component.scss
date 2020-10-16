@@ -1,10 +1,12 @@
+$Diameter: 350px;
+
 #wrapper{ 
 	margin: 40px auto 0;	
-	width:266px; 
+	width:$Diameter*1.064; 
 	position:relative;
 }
 
-$Diameter: 250px;
+
 
 div#wheel{
 	width:$Diameter;
@@ -21,8 +23,8 @@ div#wheel{
 	content:'';
 	position:absolute;
 	border:4px solid rgba(0,0,0,0.1);
-	width:242px;
-	height:242px;
+	width:$Diameter*0.968;
+	height:$Diameter*0.968;
 	border-radius:50%;
 	z-index:1000;	
 }
@@ -58,4 +60,147 @@ div#wheel{
     border-radius:$Diameter; 
 }
 
+#wheel div.sec span{
+	margin-top: 50px;
+	position: relative;
+	z-index: 10000000;
+	display: block;
+	text-align: center;
+	font-size:30px;
+	margin-left:-120px;
+	text-shadow: rgba(255, 255, 255, 0.1) 0px -1px 0px, rgba(0, 0, 0, 0.2) 0px 1px 0px;
+	transform: rotate(-120deg);
+	-webkit-transform: rotate(-120deg);
+	-moz-transform: rotate(-120deg);
+	-ms-transform: rotate(-120deg);
+	-o-transform: rotate(-120deg);
+}
 
+#spin{
+	width:$Diameter/3.6764;  
+	height:$Diameter/3.6764;
+	position:absolute;
+	top:$Diameter*0.45;  
+	left:$Diameter*0.44;
+	margin:-34px 0 0 -34px;
+	border-radius:50%;
+	box-shadow:rgba(0,0,0,0.1) 0px 3px 0px;
+	z-index:1000;
+	background:#fff;
+	cursor:pointer;
+  -webkit-user-select: none; 
+  -moz-user-select: none;    
+  -ms-user-select: none;     
+  -o-user-select: none;
+  user-select: none;   
+}
+
+#spin:after{
+	content:'';	
+	text-align:center;
+	line-height:$Diameter/3.6764;
+	color:#CCC;
+	text-shadow: 0 2px 0 #fff, 0 -2px 0 rgba(0,0,0,0.3) ;
+	position: relative;
+	z-index: 100000;
+	width:$Diameter/3.6764;
+	height:$Diameter/3.6764;
+	display:block;
+}
+
+#spin:before{
+	content:"";
+	position:absolute;
+	width: 0;
+	height: 0;
+	border-style: solid;
+	border-width: 0 20px 28px 20px;
+	border-color: transparent transparent #ffffff transparent;
+	top:-$Diameter/17.5;  //-20px
+	left:$Diameter/12.5;   //28px
+}
+
+
+#inner-spin{
+	width:$Diameter/4.62;  //54px
+	height:$Diameter/4.62;//54px
+	position:absolute;
+	top: $Diameter/9.5;   //50%
+	left:$Diameter/9.5;   //50%
+	margin:-27px 0 0 -27px;
+	border-radius:50%;
+	background:red;
+	z-index:999;
+	box-shadow:rgba(255,255,255,1) 0px -2px 0px inset, rgba(255,255,255,1) 0px 2px 0px inset,  rgba(0,0,0,0.4) 0px 0px 5px ;
+	
+	background: rgb(255,255,255); /* Old browsers */
+	background: -moz-radial-gradient(center, ellipse cover,  rgba(255,255,255,1) 0%, rgba(234,234,234,1) 100%); /* FF3.6+ */
+	background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,rgba(255,255,255,1)), color-stop(100%,rgba(234,234,234,1))); /* Chrome,Safari4+ */
+	background: -webkit-radial-gradient(center, ellipse cover,  rgba(255,255,255,1) 0%,rgba(234,234,234,1) 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-radial-gradient(center, ellipse cover,  rgba(255,255,255,1) 0%,rgba(234,234,234,1) 100%); /* Opera 12+ */
+	background: -ms-radial-gradient(center, ellipse cover,  rgba(255,255,255,1) 0%,rgba(234,234,234,1) 100%); /* IE10+ */
+	background: radial-gradient(ellipse at center,  rgba(255,255,255,1) 0%,rgba(234,234,234,1) 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#eaeaea',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */	
+}
+
+#spin:active #inner-spin{
+	box-shadow:rgba(0,0,0,0.4) 0px 0px 5px inset;
+}
+
+#spin:active:after{
+	font-size:15px;	
+}
+
+
+#shine{
+	width:250px;
+	height:250px;
+	position:absolute;
+	top:0;
+	left:0;
+	background: -moz-radial-gradient(center, ellipse cover,  rgba(255,255,255,1) 0%, rgba(255,255,255,0.99) 1%, rgba(255,255,255,0.91) 9%, rgba(255,255,255,0) 100%); /* FF3.6+ */
+background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,rgba(255,255,255,1)), color-stop(1%,rgba(255,255,255,0.99)), color-stop(9%,rgba(255,255,255,0.91)), color-stop(100%,rgba(255,255,255,0))); /* Chrome,Safari4+ */
+background: -webkit-radial-gradient(center, ellipse cover,  rgba(255,255,255,1) 0%,rgba(255,255,255,0.99) 1%,rgba(255,255,255,0.91) 9%,rgba(255,255,255,0) 100%); /* Chrome10+,Safari5.1+ */
+background: -o-radial-gradient(center, ellipse cover,  rgba(255,255,255,1) 0%,rgba(255,255,255,0.99) 1%,rgba(255,255,255,0.91) 9%,rgba(255,255,255,0) 100%); /* Opera 12+ */
+background: -ms-radial-gradient(center, ellipse cover,  rgba(255,255,255,1) 0%,rgba(255,255,255,0.99) 1%,rgba(255,255,255,0.91) 9%,rgba(255,255,255,0) 100%); /* IE10+ */
+background: radial-gradient(ellipse at center,  rgba(255,255,255,1) 0%,rgba(255,255,255,0.99) 1%,rgba(255,255,255,0.91) 9%,rgba(255,255,255,0) 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#00ffffff',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+
+
+opacity:0.1;
+	
+}
+
+// animations
+@-webkit-keyframes hh {
+	0%, 100%{
+	  transform: rotate(0deg);
+	  -webkit-transform: rotate(0deg);
+	}
+  
+	50%{
+	  transform: rotate(7deg);
+	  -webkit-transform: rotate(7deg);
+	}
+  }
+  
+  @keyframes hh {
+	 0%, 100%{
+	  transform: rotate(0deg);
+	  -webkit-transform: rotate(0deg);
+	}
+  
+	50%{
+	  transform: rotate(7deg);
+	  -webkit-transform: rotate(7deg);
+	}
+  }
+  
+  .spin {
+	-webkit-animation: hh 0.1s; /* Chrome, Safari, Opera */
+	  animation: hh 0.1s;
+  }
+  
+  
+  
+  
