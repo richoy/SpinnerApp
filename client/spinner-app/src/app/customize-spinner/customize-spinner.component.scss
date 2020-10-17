@@ -1,7 +1,25 @@
+.bgColor {
+    background-color: rgb(92, 92, 92);
+    table {
+        color: white;
+        input, select {
+            background-color: rgb(55, 190, 95);
+            color: white;
+        }
+    }
+    select {
+        background-color: rgb(55, 190, 95);
+        color: white;
+    }
+}
+
+#navbarSupportedContent {
+    height: 100%;
+}
+
 div.menu1 {
-    padding-top: 50px;
-    padding-bottom: 100px;
-    padding-right: 20px;
+    padding: 50px 20px 30px 20px;
+    color: white;
 }
 
 .invalid {

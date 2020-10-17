@@ -1,9 +1,12 @@
-#navbarSupportedContent {
-    height: 100vh;
+div.container {
+    padding: 50px 20px 20px 40px;
+    color: white;
 }
 
-div.container {
-    padding-top: 50px;
-    padding-right: 20px;
-    padding-left: 30px;
+#navbarSupportedContent {
+    height: 100%;
+}
+
+.bgColor {
+    background-color: rgb(92, 92, 92);
 }
