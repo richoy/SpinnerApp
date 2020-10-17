@@ -32,6 +32,12 @@ export class SpinnerComponent implements OnInit {
 
   spinMovemente: any;
 
+  //Results
+  initialDegreesStart: any[] = [''];
+  initialDegreesEnd: any[] = [''];
+  degreesRotated: number = 0;
+  ///
+
   constructor( private spinnerService: SpinnerService) { }
 
   ngOnInit(): void {
@@ -61,7 +67,13 @@ export class SpinnerComponent implements OnInit {
                                   '-ms-transform': 'rotate(' + angle + 'deg)',
                                   'background-color': this.bgColorStyle[i],
                                   'color': this.fontColor[i]	}
+
+          this.initialDegreesStart[i] = angle*i
+          this.initialDegreesEnd[i] = this.initialDegreesStart[i] + angle;
         }
+
+        console.log(this.initialDegreesStart);
+        console.log(this.initialDegreesEnd);
       })
   }
 
@@ -74,16 +86,15 @@ export class SpinnerComponent implements OnInit {
 
     let numberOfSpins = this.totalDegree/360;
     let fraction = numberOfSpins % 1
-    let degreesRotated = fraction*360;
-    console.log(numberOfSpins);
-    console.log(fraction);
-    console.log(degreesRotated);
+    this.degreesRotated = fraction*360;
+    console.log(this.degreesRotated);
     
     this.tilting();
+    this.DeterminResult()
   }
 
   spining() {
-    this.spiningRotate = { 'transform': 'rotate(' + this.totalDegree + 'deg)'};
+    this.spiningRotate = { 'transform': 'rotate(-' + this.totalDegree + 'deg)'};
   }
 
   tilting() {
@@ -116,7 +127,23 @@ export class SpinnerComponent implements OnInit {
 
       var rectTwo = t.getBoundingClientRect();
       noY = rectTwo.top + document.body.scrollTop;
-      console.log(noY);
     });
+  }
+
+
+  DeterminResult() {
+    for( let i=0; i<this.initialDegreesEnd.length; i++) {
+      //console.log(this.initialDegreesEnd[0]);
+      if (this.degreesRotated <= this.initialDegreesEnd[0]) {
+        console.log(1);
+        break
+      }
+      else if ( this.degreesRotated > this.initialDegreesEnd[0] 
+        && this.degreesRotated <= this.initialDegreesEnd[i] 
+        && this.degreesRotated > this.initialDegreesEnd[i-1]) {
+        console.log(i+1);
+      }
+    }
+
   }
 }
