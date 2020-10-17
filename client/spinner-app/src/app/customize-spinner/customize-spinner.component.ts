@@ -208,8 +208,6 @@ export class CustomizeSpinnerComponent implements OnInit {
         )
 
         this.StringOfImageUpload.forEach((file)=>{
-          console.log(file);
-          
           if(file.index == counter){
             field.image = file.image;
           } 
