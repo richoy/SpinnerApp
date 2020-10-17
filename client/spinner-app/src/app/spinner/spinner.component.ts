@@ -36,6 +36,7 @@ export class SpinnerComponent implements OnInit {
   initialDegreesStart: any[] = [''];
   initialDegreesEnd: any[] = [''];
   degreesRotated: number = 0;
+  resultingField: number = 0;
   ///
 
   constructor( private spinnerService: SpinnerService) { }
@@ -71,9 +72,6 @@ export class SpinnerComponent implements OnInit {
           this.initialDegreesStart[i] = angle*i
           this.initialDegreesEnd[i] = this.initialDegreesStart[i] + angle;
         }
-
-        console.log(this.initialDegreesStart);
-        console.log(this.initialDegreesEnd);
       })
   }
 
@@ -87,7 +85,6 @@ export class SpinnerComponent implements OnInit {
     let numberOfSpins = this.totalDegree/360;
     let fraction = numberOfSpins % 1
     this.degreesRotated = fraction*360;
-    console.log(this.degreesRotated);
     
     this.tilting();
     this.DeterminResult()
@@ -135,15 +132,24 @@ export class SpinnerComponent implements OnInit {
     for( let i=0; i<this.initialDegreesEnd.length; i++) {
       //console.log(this.initialDegreesEnd[0]);
       if (this.degreesRotated <= this.initialDegreesEnd[0]) {
-        console.log(1);
+        this.resultingField = i;
         break
       }
       else if ( this.degreesRotated > this.initialDegreesEnd[0] 
         && this.degreesRotated <= this.initialDegreesEnd[i] 
         && this.degreesRotated > this.initialDegreesEnd[i-1]) {
-        console.log(i+1);
+          this.resultingField = i;
       }
     }
+    
+    if (this.SpinnerFields[this.resultingField].isItEmail === true) {
+        ///Code to result
+    }
+    else if (this.SpinnerFields[this.resultingField].isItEmail === false) {
+        ///Code to result
+    }
 
+    console.log(this.resultingField);
+    console.log(this.SpinnerFields[this.resultingField]);
   }
 }
