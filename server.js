@@ -75,6 +75,11 @@ if (process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'staging')
     const cloudUrl = config.mongoCloudUrl;
     const connect = mongoose.connect(cloudUrl);
 
+    connect.then((db) => {
+        console.log('Conected correctly to server');
+      }, (err) => {console.log(err);});
+    
+
     app.use(express.static(path.join(__dirname, 'client/spinner-app/dist/spinner-app')));
 
     app.get('*', function (req, res) {
