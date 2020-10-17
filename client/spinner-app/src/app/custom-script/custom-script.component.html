@@ -1,24 +1,28 @@
-<div class="row">
-    <div class="col-2">
-        <app-navbar></app-navbar>
+<div class="row bgColor">
+    
+    <div class="col-12 col-lg-2 navbar navbar-expand-lg p-0 bg-dark">
+        <button class="navbar-toggler pl-4" type="button" (click)="isMenuCollapsed = !isMenuCollapsed">
+            <span class="btn btn-secondary">&#9776;</span> 
+        </button>
+        <app-navbar class="collapse navbar-collapse" id="navbarSupportedContent" [ngbCollapse]="isMenuCollapsed"></app-navbar>
     </div>
 
-    <div class="container col-10">
+    <div class="container col-12 col-lg-10">
         <div class="title">
             <h2>Insert Custom Script</h2>
         </div>
     
         <div class="row">
-            <div class="col-12">
+            <div class="col-10 mr-auto">
                 <form action="">
                     <div class="mb-3">
                         <label for="header">HEADER:</label>
-                        <textarea class="form-control" id="header" name="header" rows="6"></textarea>    
+                        <textarea class="form-control" id="header" name="header" rows="3"></textarea>    
                     </div>
     
                     <div class="mb-3">
                         <label for="footer">Footer:</label>
-                        <textarea class="form-control" id="footer" name="footer" rows="6"></textarea>    
+                        <textarea class="form-control" id="footer" name="footer" rows="3"></textarea>    
                     </div>
     
                     <div class="mb-3">
@@ -28,7 +32,7 @@
     
                     <div class="mb-3">
                         <label for="description">Page description:</label>
-                        <textarea class="form-control" id="description" name="description" rows="4"></textarea>    
+                        <textarea class="form-control" id="description" name="description" rows="3"></textarea>    
                     </div>
     
                     <div class="mb-3">

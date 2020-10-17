@@ -12,6 +12,9 @@ import { ImageSnippet } from '../shared/ImageSnippet';
 })
 export class CustomizeSpinnerComponent implements OnInit {
 
+  //Collapse menu
+  public isMenuCollapsed = true;
+
   // For number of field dropdown
   items: any[] = [];
 
