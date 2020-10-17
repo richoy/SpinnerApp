@@ -71,6 +71,10 @@ app.use('/api/v1/imageUpload', uploadRouter);
 
 // This middleware informs the express application to serve our compiled React files
 if (process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'staging') {
+
+    const cloudUrl = config.mongoCloudUrl;
+    const connect = mongoose.connect(cloudUrl);
+
     app.use(express.static(path.join(__dirname, 'client/spinner-app/dist/spinner-app')));
 
     app.get('*', function (req, res) {
