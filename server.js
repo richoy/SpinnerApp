@@ -25,12 +25,6 @@ var uploadRouter = require('./routes/uploadRouter');
 
 // Mongoose Database
 const mongoose = require('mongoose');
-const url = config.mongoUrl;
-const connect = mongoose.connect(url);
-
-connect.then((db) => {
-    console.log('Conected correctly to server');
-  }, (err) => {console.log(err);});
 
 // Create a new express application named 'app'
 const app = express();
@@ -85,6 +79,14 @@ if (process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'staging')
     app.get('*', function (req, res) {
         res.sendFile(path.join(__dirname, 'client/spinner-app/dist/spinner-app', 'index.html'));
     });
+} else {
+    const url = config.mongoUrl;
+    const connect = mongoose.connect(url);
+
+    connect.then((db) => {
+    console.log('Conected correctly to server');
+    }, (err) => {console.log(err);});
+
 };
 
 // Catch any bad requests
