@@ -2,6 +2,8 @@ $imgSize: 150px;
 
 div.container {
     padding-top: 20px;
+    background-color: black;
+    height: 100vh;
 }
 
 div.image img {
@@ -9,3 +11,15 @@ div.image img {
     height: $imgSize;
     border-radius: 50%;
     }
+
+.nav .nav-item{
+    .nav-link {
+        padding: 3px 0;
+        color: white;
+    }
+} 
+
+
+.nav .nav-item .nav-link:hover {
+    color: yellow;
+}

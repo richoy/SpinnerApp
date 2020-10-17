@@ -1,14 +1,19 @@
 <div class="row">
-    <div class="col-2">
-        <app-navbar></app-navbar>
+
+    <div class="col-12 col-lg-2 navbar navbar-expand-lg">
+        <button class="navbar-toggler" type="button" (click)="isMenuCollapsed = !isMenuCollapsed">
+            <span class="btn btn-secondary">&#9776;</span> 
+        </button>
+        <app-navbar class="collapse navbar-collapse" id="navbarSupportedContent" [ngbCollapse]="isMenuCollapsed"></app-navbar>
     </div>
     
-    <div class="container menu1 col-10">
+    <div class="container menu1 col-12 col-lg-10">
     
         <h2>Customize the spinner</h2>
     
         <div class="row my-5">
             <div class="col-12">
+                
                 <div id="settingNumber">
                     <div>
                         <label for="numberOptions">Number of fields on the spinner </label>

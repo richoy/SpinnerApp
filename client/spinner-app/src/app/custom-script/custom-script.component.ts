@@ -6,6 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./custom-script.component.scss']
 })
 export class CustomScriptComponent implements OnInit {
+  
+  public isMenuCollapsed = true;
 
   constructor() { }
 

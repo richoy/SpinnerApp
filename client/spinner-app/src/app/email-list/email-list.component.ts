@@ -9,6 +9,8 @@ import { EmailsService } from '../services/emails.service';
 })
 export class EmailListComponent implements OnInit {
 
+  public isMenuCollapsed = true;
+
   emails: any;
 
   constructor( private emailService: EmailsService) { }
