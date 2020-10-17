@@ -32,11 +32,17 @@ export class SpinnerComponent implements OnInit {
 
   spinMovemente: any;
 
+  //Results
+  initialDegreesStart: any[] = [''];
+  initialDegreesEnd: any[] = [''];
+  degreesRotated: number = 0;
+  resultingField: number = 0;
+  ///
+
   constructor( private spinnerService: SpinnerService) { }
 
   ngOnInit(): void {
     this.getSpinner();
-
   }
 
   getSpinner(): void {
@@ -62,6 +68,9 @@ export class SpinnerComponent implements OnInit {
                                   '-ms-transform': 'rotate(' + angle + 'deg)',
                                   'background-color': this.bgColorStyle[i],
                                   'color': this.fontColor[i]	}
+
+          this.initialDegreesStart[i] = angle*i
+          this.initialDegreesEnd[i] = this.initialDegreesStart[i] + angle;
         }
       })
   }
@@ -73,56 +82,16 @@ export class SpinnerComponent implements OnInit {
     this.extraDegree = Math.floor(Math.random() * (360)) + 1;
     this.totalDegree = this.newDegree + this.extraDegree;
 
-
-
+    let numberOfSpins = this.totalDegree/360;
+    let fraction = numberOfSpins % 1
+    this.degreesRotated = fraction*360;
+    
     this.tilting();
+    this.DeterminResult()
   }
 
   spining() {
-    this.spiningRotate = { 'transform': 'rotate(' + this.totalDegree + 'deg)'};
-  
-  /*
-    $('#wheel .sec').each(function(){
-			var t = $(this);
-			var noY = 0;
-			
-			var c = 0;
-			var n = 700;	
-			var interval = setInterval(function () {
-				c++;				
-				if (c === n) { 
-					clearInterval(interval);				
-				}	
-					
-				var aoY = t.offset().top;
-				$("#txt").html(aoY);
-				console.log(aoY);
-				
-				/*23.7 is the minumum offset number that 
-				each section can get, in a 30 angle degree.
-				So, if the offset reaches 23.7, then we know
-				that it has a 30 degree angle and therefore, 
-				exactly aligned with the spin btn
-				if(aoY < 23.89){
-					console.log('<<<<<<<<');
-					$('#spin').addClass('spin');
-					setTimeout(function () { 
-						$('#spin').removeClass('spin');
-					}, 100);	
-				}
-			}, 10);
-			
-			$('#inner-wheel').css({
-				'transform' : 'rotate(' + totalDegree + 'deg)'			
-			});
-		 
-			noY = t.offset().top;
-			
-		});
-	*/
-  
-  
-  
+    this.spiningRotate = { 'transform': 'rotate(-' + this.totalDegree + 'deg)'};
   }
 
   tilting() {
@@ -155,30 +124,32 @@ export class SpinnerComponent implements OnInit {
 
       var rectTwo = t.getBoundingClientRect();
       noY = rectTwo.top + document.body.scrollTop;
-      console.log(noY);
     });
   }
 
-  hasClass(el, className) {
-    if (el.classList)
-      return el.classList.contains(className)
-    else
-      return !!el.className.match(new RegExp('(\\s|^)' + className + '(\\s|$)'))
-  }
 
-  addClass(el, className) {
-    if (el.classList)
-      el.classList.add(className)
-    else if (!this.hasClass(el, className)) el.className += " " + className
-  }
-
-  removeClass(el, className) {
-    if (el.classList)
-      el.classList.remove(className)
-    else if (this.hasClass(el, className)) {
-      var reg = new RegExp('(\\s|^)' + className + '(\\s|$)')
-      el.className=el.className.replace(reg, ' ')
+  DeterminResult() {
+    for( let i=0; i<this.initialDegreesEnd.length; i++) {
+      //console.log(this.initialDegreesEnd[0]);
+      if (this.degreesRotated <= this.initialDegreesEnd[0]) {
+        this.resultingField = i;
+        break
+      }
+      else if ( this.degreesRotated > this.initialDegreesEnd[0] 
+        && this.degreesRotated <= this.initialDegreesEnd[i] 
+        && this.degreesRotated > this.initialDegreesEnd[i-1]) {
+          this.resultingField = i;
+      }
     }
-  }
+    
+    if (this.SpinnerFields[this.resultingField].isItEmail === true) {
+        ///Code to result
+    }
+    else if (this.SpinnerFields[this.resultingField].isItEmail === false) {
+        ///Code to result
+    }
 
+    console.log(this.resultingField);
+    console.log(this.SpinnerFields[this.resultingField]);
+  }
 }
