@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, QueryList, ViewChildren, ElementRef } from '@angular/core';
 
 import { SpinnerService } from '../services/spinner.service';
 
@@ -16,10 +16,25 @@ export class SpinnerComponent implements OnInit {
   fieldStyleNth: any[] = [''] //Individual field style
   holder: any[] = ['']
 
+  state: string = 'default';
+
+  //Animations
+  clicks: number = 1;
+  degree: number;
+  newDegree: number;
+  extraDegree: number; 
+  totalDegree: number;
+  spiningRotate: any;
+  @ViewChildren('wheelSec') wheelSecs: QueryList<any>;
+  @ViewChild('txt') Text;
+  @ViewChild('spin') spin;
+
+
   constructor( private spinnerService: SpinnerService) { }
 
   ngOnInit(): void {
     this.getSpinner();
+
   }
 
   getSpinner(): void {
@@ -46,8 +61,91 @@ export class SpinnerComponent implements OnInit {
                                   'background-color': this.bgColorStyle[i],
                                   'color': this.fontColor[i]	}
         }
-        console.log(this.fieldStyleNth);
       })
+  }
+
+  rotate() {
+    this.degree = 360*8;
+    this.clicks = ++this.clicks;
+    this.newDegree = this.degree * this.clicks;
+    this.extraDegree = Math.floor(Math.random() * (360)) + 1;
+    this.totalDegree = this.newDegree + this.extraDegree;
+
+
+    this.spining();
+    this.tilting();
+  }
+
+  spining() {
+    this.spiningRotate = { 'transform': 'rotate(' + this.totalDegree + 'deg)'};
+  
+  /*
+    $('#wheel .sec').each(function(){
+			var t = $(this);
+			var noY = 0;
+			
+			var c = 0;
+			var n = 700;	
+			var interval = setInterval(function () {
+				c++;				
+				if (c === n) { 
+					clearInterval(interval);				
+				}	
+					
+				var aoY = t.offset().top;
+				$("#txt").html(aoY);
+				console.log(aoY);
+				
+				/*23.7 is the minumum offset number that 
+				each section can get, in a 30 angle degree.
+				So, if the offset reaches 23.7, then we know
+				that it has a 30 degree angle and therefore, 
+				exactly aligned with the spin btn
+				if(aoY < 23.89){
+					console.log('<<<<<<<<');
+					$('#spin').addClass('spin');
+					setTimeout(function () { 
+						$('#spin').removeClass('spin');
+					}, 100);	
+				}
+			}, 10);
+			
+			$('#inner-wheel').css({
+				'transform' : 'rotate(' + totalDegree + 'deg)'			
+			});
+		 
+			noY = t.offset().top;
+			
+		});
+	*/
+  
+  
+  
+  }
+
+  tilting() {
+    this.wheelSecs.forEach( (wheelSec) => {
+      console.log(wheelSec);
+      var t = wheelSec.nativeElement.offsetHeight;
+      console.log(t);
+      var noY = 0;
+      var c = 0;
+      var n = 700;
+      var interval = setInterval(() => {
+        c = c++;
+        if (c === n) { 
+          clearInterval(interval);				
+        }	
+        let i = 0;
+        var rect = t.getBoundingClientRect();
+        i = i+1;
+        console.log(rect);/*
+        var aoY = {
+          top: rect.top + document.body.scrollTop
+        }
+        this.Text.innerHTML = aoY;*/
+      })
+    });
   }
 
 }
