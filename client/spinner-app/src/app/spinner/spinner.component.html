@@ -7,7 +7,7 @@
                 <div #wheelSec>
                     <div [style]="holder[i]" class="hold" *ngIf="field.isItImage">
                         <div  class="sec" id="wheelSec" [style]="fieldStyleNth[i]">
-                            <div> <span> <img src="../../../../../public/images/documentationpage.PNG" alt="">
+                            <div> <span> <img [src]="field.image" alt="">
                                 {{field.image}} </span></div>
                         </div>
                     </div>
