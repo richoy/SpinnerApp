@@ -1,0 +1,35 @@
+<div id="wrapper">
+            
+    <div *ngIf="SpinnerFields" id="wheel">
+
+        <div id="inner-wheel" [style]="spiningRotate">
+            <div *ngFor="let field of SpinnerFields; let i = index">
+                <div #wheelSec>
+                    <div [style]="holder[i]" class="hold" *ngIf="field.isItImage">
+                        <div  class="sec" id="wheelSec" [style]="fieldStyleNth[i]">
+                            <div> <span> <img src="../../../../../public/images/documentationpage.PNG" alt="">
+                                {{field.image}} </span></div>
+                        </div>
+                    </div>
+
+                    <div [style]="holder[i]" class="hold" *ngIf="!field.isItImage">
+                        <div class="sec" [style]="fieldStyleNth[i]">
+                            <div><span>{{field.textFieldOne}}</span></div>
+                        </div>
+                    </div>
+                </div>
+    
+            </div>       
+           
+
+        </div>
+        <div id="spin" (click)="rotate()" #spin [style]="spinMovemente">
+            <div id="inner-spin"></div>
+        </div>
+        
+        <div id="shine"></div>
+        
+    </div>
+    
+    <div id="txt" #txt></div>
+</div>
