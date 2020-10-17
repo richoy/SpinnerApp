@@ -13,7 +13,7 @@
     
         <div class="row my-5">
             <div class="col-12">
-                
+      
                 <div id="settingNumber">
                     <div>
                         <label for="numberOptions">Number of fields on the spinner </label>
@@ -38,78 +38,82 @@
         <div class="col-12">
             <form [formGroup]="spinnerForm" (ngSubmit)="onSubmit()">
                 <div>
-                    <div class="row">
-                        <div class="col-1"><label for="ImageOption">Input type</label></div>
-                        <div class="col-3"><label for="">File Upload / Text Field</label></div>
-                        <div class="col-2"><label for="">Percentage</label></div>
-                        <div class="col-2"><label for="">Result</label></div>
-                        <div class="col-2"><label for="">Text / Email</label></div>
-                        <div class="col-2"><label for="">bg Color</label></div>
-                    </div>
-                    
-                    <div formArrayName="spinnerArray">
-                        <div class="mb-3"  *ngFor="let spinnerfield of spinnerArray.controls; let i = index" [formGroupName]="i">
-                            <div class="row">
-                                <div class="col-1">
-                                    <select formControlName="isItImage" required (change)="onChangeImage($event.target.value, i)">
-                                        <option [ngValue]="true" selected>Image</option>
-                                        <option [ngValue]="false">Text</option>
-                                    </select>
-                                </div>
-            
-                                <div class="col-3" *ngIf="itIsImageFile[i]">
-                                    <div class="row" id="ImageUploadBox">
-                                        <div class="col-9" id="FileUploadBox">
-                                            <input #imageInput
-                                            formControlName="file"
-                                            type="file" 
-                                            accept="image/*"
-                                            name="imageFile"
-                                            (change)="processFile($event, i)">
+
+                    <div class="table-responsive">
+                        <table class="table">
+                            <div formArrayName="spinnerArray">
+                                <tr>
+                                    <th><label for="ImageOption">Input type</label></th>
+                                    <th><label for="">File / Text</label></th>
+                                    <th><label for="">Percentage</label></th>
+                                    <th><label for="">Result</label></th>
+                                    <th><label for="">Text / Email</label></th>
+                                    <th><label for="">bg Color</label></th>
+                                </tr>
+                                <tr *ngFor="let spinnerfield of spinnerArray.controls; let i = index" [formGroupName]="i">
+
+                                    <td>
+                                        <select formControlName="isItImage" required (change)="onChangeImage($event.target.value, i)">
+                                            <option [ngValue]="true" selected>Image</option>
+                                            <option [ngValue]="false">Text</option>
+                                        </select>
+                                    </td>
+
+                                    <td *ngIf="itIsImageFile[i]">
+                                        <div id="ImageUploadBox">
+                                            <div class="col-9" id="FileUploadBox">
+                                                <input #imageInput
+                                                formControlName="file"
+                                                type="file" 
+                                                accept="image/*"
+                                                name="imageFile"
+                                                (change)="processFile($event, i)">
+        
+                                            </div>
     
+                                            <div class="col-3" id="FileUploadMessageBox" *ngIf="selectedFile">
+                                                <div *ngIf="SuccessfullyUpload[i]" class="alert alert-success d-flex justify-content-center"> <span>&#10004;</span></div>
+                                                <div *ngIf="UnsuccessfullyUpload[i]" class="alert alert-danger d-flex justify-content-center"> <span>&#x2716;</span></div>
+                                            </div>
                                         </div>
+                                    </td>
 
-                                        <div class="col-3" id="FileUploadMessageBox" *ngIf="selectedFile">
-                                            <div *ngIf="SuccessfullyUpload[i]" class="alert alert-success d-flex justify-content-center"> <span>&#10004;</span></div>
-                                            <div *ngIf="UnsuccessfullyUpload[i]" class="alert alert-danger d-flex justify-content-center"> <span>&#x2716;</span></div>
-                                        </div>
-                                    </div>
+                                    <td *ngIf="itIsTextField[i]">
+                                        <input formControlName="textFieldOne" type="text" name="textField">
+                                    </td>
 
-                                            
-                                </div>
-            
-                                <div class="col-3" *ngIf="itIsTextField[i]">
-                                    <input formControlName="textFieldOne" type="text" name="textField">
-                                </div>
-            
-                                <div class="col-2">
-                                    <input formControlName="percentage" type="number" name="textField" [class.invalid]="spinnerfield.controls.percentage.hasError('required')  && submitPressed">
-                                </div>
-            
-                                <div class="col-2">
-                                    <select formControlName="isItEmail" name="resultOption" required (change)="onChangeResult($event.target.value, i)">
-                                        <option [ngValue]="true" selected>Text Popup</option>
-                                        <option [ngValue]="false">Email Popup</option>
-                                    </select>
-                                </div>
-            
-                                <div class="col-2" *ngIf="itIsTextPopUp[i]">
-                                    <input formControlName="textPopUp"  type="text" name="imageFile">
-                                </div>
-            
-                                <div class="col-2" *ngIf="itIsEmailPopUp[i]">
-                                    <input formControlName="emails" type="email" name="textField">
-                                </div>
-            
-                                <div class="col-2">
-                                    <input formControlName="color" type="color" [class.invalid]="spinnerfield.controls.color.hasError('required')  && submitPressed">
-                                </div>
+                                    <td>
+                                        <input formControlName="percentage" type="number" name="textField" [class.invalid]="spinnerfield.controls.percentage.hasError('required')  && submitPressed">
+                                    </td>
+
+                                    <td>
+                                        <select formControlName="isItEmail" name="resultOption" required (change)="onChangeResult($event.target.value, i)">
+                                            <option [ngValue]="true" selected>Text Popup</option>
+                                            <option [ngValue]="false">Email Popup</option>
+                                        </select>
+                                    </td>
+
+                                    <td *ngIf="itIsTextPopUp[i]">
+                                        <input formControlName="textPopUp"  type="text" name="imageFile">
+                                    </td>
+                
+                                    <td *ngIf="itIsEmailPopUp[i]">
+                                        <input formControlName="emails" type="email" name="textField">
+                                    </td>
+
+                                    <td class="col-2">
+                                        <input formControlName="color" type="color" [class.invalid]="spinnerfield.controls.color.hasError('required')  && submitPressed">
+                                    </td>
+
+                                </tr>
                             </div>
-                            
-                        </div>
+
+                        </table>
                     </div>
+
+                    
     
-                    <button type="submit" class="btn btn-danger"
+                    <button type="submit" class="btn btn-danger ml-auto"
                     >Submit</button>
                     
                 </div>
