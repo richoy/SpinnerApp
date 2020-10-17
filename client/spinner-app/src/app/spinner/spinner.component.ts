@@ -25,10 +25,12 @@ export class SpinnerComponent implements OnInit {
   extraDegree: number; 
   totalDegree: number;
   spiningRotate: any;
+
   @ViewChildren('wheelSec') wheelSecs: QueryList<any>;
   @ViewChild('txt') Text;
   @ViewChild('spin') spin;
 
+  spinMovemente: any;
 
   constructor( private spinnerService: SpinnerService) { }
 
@@ -72,7 +74,7 @@ export class SpinnerComponent implements OnInit {
     this.totalDegree = this.newDegree + this.extraDegree;
 
 
-    this.spining();
+
     this.tilting();
   }
 
@@ -124,10 +126,9 @@ export class SpinnerComponent implements OnInit {
   }
 
   tilting() {
+    
     this.wheelSecs.forEach( (wheelSec) => {
-      console.log(wheelSec);
-      var t = wheelSec.nativeElement.offsetHeight;
-      console.log(t);
+      var t = wheelSec.nativeElement;
       var noY = 0;
       var c = 0;
       var n = 700;
@@ -136,16 +137,48 @@ export class SpinnerComponent implements OnInit {
         if (c === n) { 
           clearInterval(interval);				
         }	
-        let i = 0;
         var rect = t.getBoundingClientRect();
-        i = i+1;
-        console.log(rect);/*
         var aoY = {
           top: rect.top + document.body.scrollTop
         }
-        this.Text.innerHTML = aoY;*/
-      })
+        this.Text.innerHTML = aoY;
+				if(aoY.top < 23.89){
+          this.spinMovemente = {'-webkit-animation': 'hh 0.1s',
+                                'animation': 'hh 0.1s'}
+					setTimeout(() => { 
+            this.spinMovemente = ''
+					}, 100);	
+				}
+      }, 10);
+
+      this.spining();
+
+      var rectTwo = t.getBoundingClientRect();
+      noY = rectTwo.top + document.body.scrollTop;
+      console.log(noY);
     });
+  }
+
+  hasClass(el, className) {
+    if (el.classList)
+      return el.classList.contains(className)
+    else
+      return !!el.className.match(new RegExp('(\\s|^)' + className + '(\\s|$)'))
+  }
+
+  addClass(el, className) {
+    if (el.classList)
+      el.classList.add(className)
+    else if (!this.hasClass(el, className)) el.className += " " + className
+  }
+
+  removeClass(el, className) {
+    if (el.classList)
+      el.classList.remove(className)
+    else if (this.hasClass(el, className)) {
+      var reg = new RegExp('(\\s|^)' + className + '(\\s|$)')
+      el.className=el.className.replace(reg, ' ')
+    }
   }
 
 }
