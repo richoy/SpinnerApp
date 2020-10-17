@@ -207,9 +207,9 @@ export class CustomizeSpinnerComponent implements OnInit {
           element.color
         )
 
-        this.StringOfImageUpload.forEach((image)=>{
-          if(image.index == counter){
-            field.image = this.StringOfImageUpload[counter].image;
+        this.StringOfImageUpload.forEach((file)=>{
+          if(file.index == counter){
+            field.image = file.image;
           } 
         })
         spinner.push(field);
