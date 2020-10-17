@@ -89,20 +89,15 @@ export class CustomizeSpinnerComponent implements OnInit {
   }
 
    //Image Upload
-   private onSuccess(index, path) {
+  private onSuccess(index, path) {
     this.StringOfImageUpload.push(new UploadFile(index, path));
     this.SuccessfullyUpload[index] = true;
     this.UnsuccessfullyUpload[index] = false; 
-    //this.selectedFile.pending = false;
-    //this.selectedFile.status = 'ok';
   }
 
   private onError(index) {
     this.UnsuccessfullyUpload[index] = true; 
     this.SuccessfullyUpload[index] = false;
-    //this.selectedFile.pending = false;
-    //this.selectedFile.status = 'fail';
-    //this.selectedFile.src = '';
   }
 
 
