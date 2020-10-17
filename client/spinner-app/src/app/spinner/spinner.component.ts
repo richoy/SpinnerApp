@@ -9,6 +9,7 @@ import { SpinnerService } from '../services/spinner.service';
 })
 export class SpinnerComponent implements OnInit {
 
+  API_IMAGE_URL = '/api/v1/imageUpload/';
   SpinnerFields: any;
   bgColorStyle: any[] = ['']; // Backgorund color
   fontColor: any[] = ['']; // Font Color
@@ -47,6 +48,7 @@ export class SpinnerComponent implements OnInit {
         let angle = 360/this.SpinnerFields.length;
         for(let i=0; i<this.SpinnerFields.length; i++) { //Substitute backslashes for slashes
           this.SpinnerFields[i].image = this.SpinnerFields[i].image.replace(/\\/g, "/");
+          this.SpinnerFields[i].image = this.API_IMAGE_URL + this.SpinnerFields[i].image.slice(14);
           this.bgColorStyle[i] = this.SpinnerFields[i].bgColor; // Backgorund color
           this.fontColor[i] = this.spinnerService.invertColor(this.bgColorStyle[i]); //Font Color
           this.holder[i] = {'transform': 'rotate(' + angle*(i) + 'deg)',
