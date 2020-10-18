@@ -11,6 +11,7 @@ export class SpinnerComponent implements OnInit {
 
   API_IMAGE_URL = '/api/v1/imageUpload/';
   SpinnerFields: any;
+  HeaderFooter: any;
   bgColorStyle: any[] = ['']; // Backgorund color
   fontColor: any[] = ['']; // Font Color
 
@@ -43,6 +44,7 @@ export class SpinnerComponent implements OnInit {
   constructor( private spinnerService: SpinnerService) { }
 
   ngOnInit(): void {
+    this.getHeaderFooter();
     this.getSpinner();
   }
 
@@ -75,6 +77,14 @@ export class SpinnerComponent implements OnInit {
           this.initialDegreesEnd[i] = this.initialDegreesStart[i] + angle;
         }
       })
+  }
+
+  getHeaderFooter() {
+    this.spinnerService.getHeaderFooter()
+      .subscribe( headerFooter => {
+        this.HeaderFooter = headerFooter;
+        console.log(headerFooter);
+      });
   }
 
   rotate() {

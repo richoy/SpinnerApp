@@ -11,7 +11,8 @@ import { ProcessHTTPMsgService } from './process-httpmsg.service';
 })
 export class SpinnerService {
 
-  URL_API = "/api/v1/spinner";
+  URL_API_SPINNER = "/api/v1/spinner";
+  URL_API_HEADER = "/api/v1/headerFooter";
 
   constructor(
     private http: HttpClient,
@@ -19,11 +20,16 @@ export class SpinnerService {
   ) { }
 
   getSpinner(): Observable<any> {
-    return this.http.get<any>(this.URL_API) //Check and test later
+    return this.http.get<any>(this.URL_API_SPINNER) //Check and test later
       .pipe(map((data:any) => data),
       catchError(this.processHTTPMsgService.handleError));
   }
 
+  getHeaderFooter(): Observable<any> {
+    return this.http.get<any>(this.URL_API_HEADER)
+    .pipe(map((data:any) => data),
+    catchError(this.processHTTPMsgService.handleError));
+}
 
   //Inverter color function
   invertColor(hex): any {

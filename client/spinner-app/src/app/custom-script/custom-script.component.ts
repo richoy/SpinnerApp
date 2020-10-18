@@ -89,7 +89,7 @@ export class CustomScriptComponent implements OnInit {
   onSubmit() {
     this.customScriptService.deleteHeaderFooter().subscribe(()=> {
       this.formCopy = this.HeaderFooterForm.value;
-      this.formCopy.favicon = this.StringOfImageUpload;
+      this.formCopy.favicon = this.StringOfImageUpload.replace(/\\/g, "/");
       console.log(this.formCopy);
       this.customScriptService.sendHeaderFooter(this.formCopy)
         .subscribe(HFform => {
