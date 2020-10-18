@@ -1,4 +1,4 @@
-import { BrowserModule, Meta } from '@angular/platform-browser';
+import { BrowserModule, Meta, Title } from '@angular/platform-browser';
 import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
@@ -35,7 +35,7 @@ import { SpinnerComponent } from './spinner/spinner.component';
     ReactiveFormsModule,
     NgbModule
   ],
-  providers: [Meta],
+  providers: [Meta, Title],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
