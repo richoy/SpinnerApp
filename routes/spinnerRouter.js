@@ -25,7 +25,7 @@ SpinnerRouter.route('/')
         }, (err) => next(err))
         .catch((err) => next(err));
     })
-    .post(/*authenticate.verifyOrdinaryUser, authenticate.verifyAdmin,*/ (req, res, next) => {
+    .post(authenticate.verifyOrdinaryUser, authenticate.verifyAdmin, (req, res, next) => {
         Spinners.create(req.body)
         .then((spinner) => {
             console.log('Spinners Created ', spinner);
@@ -37,11 +37,11 @@ SpinnerRouter.route('/')
         }, (err) => next(err))
         .catch((err) => next(err))
     })
-    .put(/*authenticate.verifyOrdinaryUser, authenticate.verifyAdmin,*/ (req, res, next) => {
+    .put(authenticate.verifyOrdinaryUser, authenticate.verifyAdmin, (req, res, next) => {
         res.statusCode = 403;
         res.end('PUT operation not supported on /spinners');
     })
-    .delete(/*authenticate.verifyOrdinaryUser, authenticate.verifyAdmin,*/ (req, res, next) => {
+    .delete(authenticate.verifyOrdinaryUser, authenticate.verifyAdmin, (req, res, next) => {
         Spinners.remove({})
         .then((resp) => {
             res.statusCode = 200;
@@ -63,12 +63,12 @@ SpinnerRouter.route('/:spinnerId')
         }, (err) => next(err))
         .catch((err) => next(err))
     })
-    .post(/*authenticate.verifyOrdinaryUser, authenticate.verifyAdmin,*/ (req, res, next) => {
+    .post(authenticate.verifyOrdinaryUser, authenticate.verifyAdmin, (req, res, next) => {
         res.statusCode = 403;
         res.end('POST operation not supported on /spinners/'
             + req.params.spinnerId);
     })
-    .put(/*authenticate.verifyOrdinaryUser, authenticate.verifyAdmin,*/ (req, res, next) => {
+    .put(authenticate.verifyOrdinaryUser, authenticate.verifyAdmin, (req, res, next) => {
         Spinners.findByIdAndUpdate(req.params.spinnerId, {
             $set: req.body
         }, { new:true })
@@ -79,7 +79,7 @@ SpinnerRouter.route('/:spinnerId')
         }, (err) => next(err))
         .catch((err) => next(err))
     })
-    .delete(/*authenticate.verifyOrdinaryUser, authenticate.verifyAdmin,*/ (req, res, next) => {
+    .delete(authenticate.verifyOrdinaryUser, authenticate.verifyAdmin, (req, res, next) => {
         Spinners.findByIdAndRemove(req.params.spinnerId)
         .then((resp) => {
             res.statusCode = 200;
@@ -125,7 +125,7 @@ function removeUnusedImages() {
                     }
                 })
     
-                if ( !isCurrent ){
+                if ( !isCurrent && !(file === '.gitkeep')){
                     fs.unlink(path.join(directory, file), err => {
                         if (err) throw err;
                     });
