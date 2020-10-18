@@ -13,7 +13,7 @@ ResultsRouter.use(bodyParser.json());
 // can be performed easily, normalise before finishing
 
 ResultsRouter.route('/')
-    .get(/*authenticate.verifyOrdinaryUser, authenticate.verifyAdmin,*/ (req, res, next) => {
+    .get(authenticate.verifyOrdinaryUser, authenticate.verifyAdmin, (req, res, next) => {
         Results.find({})
         .then((results) => {
             res.statusCode = 200;
@@ -22,7 +22,7 @@ ResultsRouter.route('/')
         }, (err) => next(err))
         .catch((err) => next(err));
     })
-    .post(/*authenticate.verifyOrdinaryUser, authenticate.verifyAdmin,*/ (req, res, next) => {
+    .post(authenticate.verifyOrdinaryUser, authenticate.verifyAdmin, (req, res, next) => {
         Results.create(req.body)
         .then((result) => {
             console.log('Result Created ', result);
@@ -32,11 +32,11 @@ ResultsRouter.route('/')
         }, (err) => next(err))
         .catch((err) => next(err))
     })
-    .put(/*authenticate.verifyOrdinaryUser, authenticate.verifyAdmin,*/ (req, res, next) => {
+    .put(authenticate.verifyOrdinaryUser, authenticate.verifyAdmin, (req, res, next) => {
         res.statusCode = 403;
         res.end('PUT operation not supported on /results');
     })
-    .delete(/*authenticate.verifyOrdinaryUser, authenticate.verifyAdmin,*/ (req, res, next) => {
+    .delete(authenticate.verifyOrdinaryUser, authenticate.verifyAdmin, (req, res, next) => {
         Results.remove({})
         .then((resp) => {
             res.statusCode = 200;
@@ -49,7 +49,7 @@ ResultsRouter.route('/')
 
 // By id
 ResultsRouter.route('/:resultId')
-.get(/*authenticate.verifyOrdinaryUser, authenticate.verifyAdmin,*/ (req, res, next) => {
+.get(authenticate.verifyOrdinaryUser, authenticate.verifyAdmin, (req, res, next) => {
     Results.findById(req.params.resultId)
     .then((result) => {
         res.statusCode = 200;
@@ -58,12 +58,12 @@ ResultsRouter.route('/:resultId')
     }, (err) => next(err))
     .catch((err) => next(err))
 })
-.post(/*authenticate.verifyOrdinaryUser, authenticate.verifyAdmin,*/ (req, res, next) => {
+.post(authenticate.verifyOrdinaryUser, authenticate.verifyAdmin, (req, res, next) => {
     res.statusCode = 403;
     res.end('POST operation not supported on /results/'
         + req.params.resultId);
 })
-.put(/*authenticate.verifyOrdinaryUser, authenticate.verifyAdmin,*/ (req, res, next) => {
+.put(authenticate.verifyOrdinaryUser, authenticate.verifyAdmin, (req, res, next) => {
     Results.findByIdAndUpdate(req.params.resultId, {
         $set: req.body
     }, { new:true })
@@ -74,7 +74,7 @@ ResultsRouter.route('/:resultId')
     }, (err) => next(err))
     .catch((err) => next(err))
 })
-.delete(/*authenticate.verifyOrdinaryUser, authenticate.verifyAdmin,*/ (req, res, next) => {
+.delete(authenticate.verifyOrdinaryUser, authenticate.verifyAdmin, (req, res, next) => {
     Results.findByIdAndRemove(req.params.resultId)
     .then((resp) => {
         res.statusCode = 200;
