@@ -11,10 +11,11 @@ import { ProcessHTTPMsgService } from './process-httpmsg.service';
 })
 export class SpinnerCustomizerControllerService {
 
+  TOKEN = localStorage.getItem('userToken');
+  
   httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    headers: new HttpHeaders({ 'Authorization': `Bearer ${this.TOKEN}` })
   };
-
 
   URL_API = "/api/v1/spinner";
 
@@ -23,10 +24,10 @@ export class SpinnerCustomizerControllerService {
     private processHTTPMsgService: ProcessHTTPMsgService) { }
 
   sendSpinner( spinnerArray: Array <formSpinnerControl>) {
-    return this.http.post(this.URL_API, spinnerArray);
+    return this.http.post(this.URL_API, spinnerArray, this.httpOptions);
   }
 
   deleteSpinner() {
-    return this.http.delete(this.URL_API);
+    return this.http.delete(this.URL_API, this.httpOptions);
   }
 }
