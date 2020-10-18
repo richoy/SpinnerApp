@@ -84,7 +84,7 @@ export class CustomScriptComponent implements OnInit {
         });
     });
     reader.readAsDataURL(file);
-}
+  }
 
   onSubmit() {
     this.customScriptService.deleteHeaderFooter().subscribe(()=> {

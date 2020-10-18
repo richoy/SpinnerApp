@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder,FormArray, FormGroup, Validators, FormControl } from '@angular/forms';
 import { SpinnerCustomizerControllerService } from '../services/spinner-customizer-controller.service';
 import { ImageService } from '../services/image.service';
+import { CenterImageService } from '../services/center-image.service';
 import { formSpinnerControl } from '../shared/form-spinner-controller';
 import { ImageSnippet } from '../shared/ImageSnippet';
 
@@ -41,16 +42,29 @@ export class CustomizeSpinnerComponent implements OnInit {
   SuccessfullyUpload: boolean[] = [];
   UnsuccessfullyUpload: boolean[] = [];
 
+  StringOfSpinnerCenter: String;
+  SuccessSpinnerCenter: boolean;
+  UnsuccessSpinnerCenter: boolean;
+  CenterImageForm: FormGroup;
+  selectedCenterFile: ImageSnippet;
+  centerCopy: any;
+  centerform: any;
+
+
   constructor(
     public formBuilder:FormBuilder,// For number of field dropdown
     private spinnerService: SpinnerCustomizerControllerService,// Form validations
-    private imageService: ImageService  ) {       
+    private imageService: ImageService,
+    private centerImageService: CenterImageService
+     ) {       
     // Setting Form Array
     this.spinnerForm = this.formBuilder.group({
 			spinnerArray: this.formBuilder.array(
 				[],
 				[Validators.required])
-		});
+    });
+    
+    this.createFormFieldForCenterSpinnerImage();
    }
 
   ngOnInit(): void {
@@ -88,6 +102,16 @@ export class CustomizeSpinnerComponent implements OnInit {
 		})
   }
 
+  createFormFieldForCenterSpinnerImage() {
+    this.CenterImageForm = this.formBuilder.group({
+      centerImage: ['']
+    });
+  }
+
+  submitCenterImage() {
+
+  }
+
    //Image Upload
   private onSuccess(index, path) {
     this.StringOfImageUpload.push(new UploadFile(index, path));
@@ -118,7 +142,40 @@ export class CustomizeSpinnerComponent implements OnInit {
       });
       reader.readAsDataURL(file);
   }
-  //Image Upload
+
+
+  //Center spinner image
+
+  private onSuccessCenter(path) {
+    this.StringOfSpinnerCenter = path;
+    this.SuccessSpinnerCenter = true;
+    this.UnsuccessSpinnerCenter = false; 
+  }
+
+  private onErrorCenter() {
+    this.UnsuccessSpinnerCenter = true; 
+    this.SuccessSpinnerCenter = false;
+  }
+
+  ProcessCenterImage(image: any) {
+    let files = image.srcElement.files;
+    let file: File = files[0];
+    let reader = new FileReader();
+    reader.addEventListener('load', (event: any) => {
+      this.selectedCenterFile = new ImageSnippet(event.target.result, file);
+      this.imageService.uploadImage(this.selectedCenterFile.file)
+        .subscribe((res) => {
+          this.onSuccessCenter(res.path);
+        },
+        (err) => {
+          this.onErrorCenter()
+          throw new Error(err);
+        });
+    });
+    reader.readAsDataURL(file);
+  }
+
+  /////
   
   get spinnerArray(): FormArray {
 		if ( this.spinnerForm) {
@@ -227,6 +284,25 @@ export class CustomizeSpinnerComponent implements OnInit {
     }, err => {
       throw new Error('Error deleting the information of the previous spineer');
     });
+  }
+
+  onSubmitCenterImage() {
+    this.centerImageService.deleteImageCenter()
+      .subscribe(() => {
+        this.centerCopy = this.CenterImageForm.value;
+        this.centerCopy.centerImage = this.StringOfSpinnerCenter.replace(/\\/g, "/");
+        console.log(this.centerCopy);
+        this.centerImageService.sendImageCenter(this.centerCopy)
+        .subscribe(HFform => {
+          this.centerform = HFform;
+          console.log(this.centerform);
+        }, err =>{
+          throw new Error('Error Sending the information about the spinner');
+        });
+      this.CenterImageForm.reset();
+      }, err => {
+        throw new Error('Error deleting the information of the previous spineer');
+      });
   }
 
 }
