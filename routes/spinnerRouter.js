@@ -2,11 +2,9 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const authenticate = require('../authenticate');
-const path = require('path');
-const fs = require('fs');
 
 const Spinners = require('../models/spinner');
-const directory = './public/images/';
+const removeUnusedImages = require('../controllers/removeImages');
 
 const SpinnerRouter = express.Router();
 
@@ -90,48 +88,4 @@ SpinnerRouter.route('/:spinnerId')
     });
 
 
-/**
- * Method to remove the images that are not being used.
- */
-function removeUnusedImages() {
-
-    let spinnersCurrentImages = [];
-
-    // Check on Database for the current images
-    Spinners.find({}).then((fields) =>{
-        fields.forEach((element) =>{
-            if( element.image.length > 0 ) {
-                
-                /**
-                 * If spinner field has image, it adds it to the array
-                 * and remove the path at the beginning
-                 */
-                spinnersCurrentImages.push(element.image.slice(14));
-            }
-        })
-
-        /**
-         * Verify if which images are currently being used
-         * and remove the others
-         */
-        fs.readdir(directory, (err, files) => {
-            if (err) throw err;
-            files.forEach( (file) => {
-                let isCurrent = false;
-    
-                spinnersCurrentImages.forEach((image) =>{
-                    if( image === file ){
-                        isCurrent = true;
-                    }
-                })
-    
-                if ( !isCurrent && !(file === '.gitkeep')){
-                    fs.unlink(path.join(directory, file), err => {
-                        if (err) throw err;
-                    });
-                }
-            })
-        });
-    });
-}
 module.exports = SpinnerRouter;
