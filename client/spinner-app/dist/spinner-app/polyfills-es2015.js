@@ -3248,7 +3248,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\juanc\OneDrive\Documents\Juan Miguel\CURSO HTML\upwork\Spinner-with-backend-control\SpinnerApp\client\spinner-app\src\polyfills.ts */"./src/polyfills.ts");
+module.exports = __webpack_require__(/*! C:\Users\USUARIO\Documents\Ricardo\Proyectos\SpinnerApp\SpinnerApp\client\spinner-app\src\polyfills.ts */"./src/polyfills.ts");
 
 
 /***/ })

@@ -55,11 +55,18 @@ uploadRouter.route('/:imageName')
     .get((req, res, next) => {
         var fileUrl = req.params.imageName;
         var filePath = path.resolve('./public/images/' + fileUrl);
-        console.log(filePath);
-        res.statusCode = 200;
-        res.setHeader('Content-Type', 'image');
-        fs.createReadStream(filePath).pipe(res);
 
+        fs.exists(filePath, (exist) => {
+            if (!exist) {
+                res.statusCode = 404;
+                res.setHeader('Content-Type', 'application/json');
+                res.end('file ' + fileUrl + ' not found')
+                return
+            }
+            res.statusCode = 200;
+            res.setHeader('Content-Type', 'image');
+            fs.createReadStream(filePath).pipe(res);
+        })
     })
     .post(
         upload.single('imageFile'), (req, res) => {
