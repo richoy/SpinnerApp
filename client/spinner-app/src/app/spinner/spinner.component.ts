@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, QueryList, ViewChildren, ElementRef } from '@angular/core';
-import { Meta, Title } from '@angular/platform-browser';
  
 import { SpinnerService } from '../services/spinner.service';
+import { HeaderFooterService } from '../services/header-footer.service';
 
 @Component({
   selector: 'app-spinner',
@@ -43,15 +43,9 @@ export class SpinnerComponent implements OnInit {
   resultingField: number = 0;
   ///
 
-    //META TAGS
-    title = 'Home Component Title'
-    favIcon: HTMLLinkElement = document.querySelector('#favIcon');
-
-
   constructor( 
     private spinnerService: SpinnerService,
-    private metaService: Meta,
-    private Pagetitle: Title) { 
+    private headerFooterService: HeaderFooterService ) { 
     }
 
   ngOnInit(): void {
@@ -91,13 +85,9 @@ export class SpinnerComponent implements OnInit {
   }
 
   getHeaderFooter() {
-    this.spinnerService.getHeaderFooter()
+    this.headerFooterService.getHeaderFooter()
       .subscribe( headerFooter => {
         this.HeaderFooter = headerFooter[0];
-        this.favIcon.href = this.API_IMAGE_URL + this.HeaderFooter.favicon.slice(14);
-        this.Pagetitle.setTitle( this.HeaderFooter.pageTitle );
-        this.metaService.addTag({ name: 'description', content: this.HeaderFooter.pageDescription }); //Description
-        console.log(this.HeaderFooter);
       });
   }
 

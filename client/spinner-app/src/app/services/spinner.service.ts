@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 
@@ -24,12 +24,6 @@ export class SpinnerService {
       .pipe(map((data:any) => data),
       catchError(this.processHTTPMsgService.handleError));
   }
-
-  getHeaderFooter(): Observable<any> {
-    return this.http.get<any>(this.URL_API_HEADER)
-    .pipe(map((data:any) => data),
-    catchError(this.processHTTPMsgService.handleError));
-}
 
   //Inverter color function
   invertColor(hex): any {
