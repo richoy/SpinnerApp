@@ -1,3 +1,9 @@
+
+<header *ngIf="HeaderFooter">
+    <div [innerHTML]="HeaderFooter.header"></div>
+</header>
+
+
 <div id="wrapper">
             
     <div *ngIf="SpinnerFields" id="wheel">
@@ -33,3 +39,7 @@
     
     <div id="txt" #txt></div>
 </div>
+
+<footer *ngIf="HeaderFooter">
+    <div [innerHTML]="HeaderFooter.footer"></div>
+</footer>
