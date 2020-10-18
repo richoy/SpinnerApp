@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { LoginService, userLogin } from '../services/login.service';
 
 @Component({
@@ -14,7 +15,8 @@ export class LoginComponent implements OnInit {
 
   constructor( 
     private fb: FormBuilder,
-    private loginservice: LoginService) {
+    private loginservice: LoginService,
+    private router: Router) {
       this.createForm();
      }
 
@@ -38,6 +40,7 @@ export class LoginComponent implements OnInit {
          if(resp.success === true) {
            this.LoginError = false;
            localStorage.setItem("userToken", resp.token);
+           this.router.navigate(['/customize-spinner']);
          }
       }, err => {
         this.LoginError = true;

@@ -125,7 +125,7 @@ function removeUnusedImages() {
                     }
                 })
     
-                if ( !isCurrent ){
+                if ( !isCurrent && !(file === '.gitkeep')){
                     fs.unlink(path.join(directory, file), err => {
                         if (err) throw err;
                     });
