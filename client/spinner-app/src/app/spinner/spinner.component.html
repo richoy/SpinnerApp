@@ -1,7 +1,6 @@
+
 <header *ngIf="HeaderFooter">
-    <div *ngFor="let header of HeaderFooter">
-        {{header.header}}
-    </div>
+    <div [innerHTML]="HeaderFooter.header"></div>
 </header>
 
 
@@ -42,7 +41,5 @@
 </div>
 
 <footer *ngIf="HeaderFooter">
-    <div *ngFor="let footer of HeaderFooter">
-        {{footer.header}}
-    </div>
+    <div [innerHTML]="HeaderFooter.footer"></div>
 </footer>

@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild, QueryList, ViewChildren, ElementRef } from '@angular/core';
-
+import { Meta, MetaDefinition } from '@angular/platform-browser';
+ 
 import { SpinnerService } from '../services/spinner.service';
 
 @Component({
@@ -8,6 +9,7 @@ import { SpinnerService } from '../services/spinner.service';
   styleUrls: ['./spinner.component.scss']
 })
 export class SpinnerComponent implements OnInit {
+
 
   API_IMAGE_URL = '/api/v1/imageUpload/';
   SpinnerFields: any;
@@ -41,7 +43,14 @@ export class SpinnerComponent implements OnInit {
   resultingField: number = 0;
   ///
 
-  constructor( private spinnerService: SpinnerService) { }
+    //META TAGS
+    title = 'Home Component Title'
+
+
+  constructor( 
+    private spinnerService: SpinnerService,
+    private metaService:Meta) { 
+    }
 
   ngOnInit(): void {
     this.getHeaderFooter();
@@ -82,8 +91,9 @@ export class SpinnerComponent implements OnInit {
   getHeaderFooter() {
     this.spinnerService.getHeaderFooter()
       .subscribe( headerFooter => {
-        this.HeaderFooter = headerFooter;
-        console.log(headerFooter);
+        this.HeaderFooter = headerFooter[0];
+        this.metaService.addTag({ name: 'description', content: this.HeaderFooter.pageDescription }); //Description
+        console.log(this.HeaderFooter);
       });
   }
 
