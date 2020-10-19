@@ -3,44 +3,44 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const authenticate = require('../authenticate');
 
-const Spinners = require('../models/spinner');
+const CenterImage = require('../models/centerImage');
 const removeUnusedImages = require('../controllers/removeImages');
 
-const SpinnerRouter = express.Router();
+const CenterImageRouter = express.Router();
 
-SpinnerRouter.use(bodyParser.json());
+CenterImageRouter.use(bodyParser.json());
 
 // Authentication is ready but within comments so tests 
 // can be performed easily, normalise before finishing
 
-SpinnerRouter.route('/')
+CenterImageRouter.route('/')
     .get((req, res, next) => {
-        Spinners.find({})
-        .then((spinners) => {
+        CenterImage.find({})
+        .then((centerImage) => {
             res.statusCode = 200;
             res.setHeader('Content-Type', 'application/json');
-            res.json(spinners);
+            res.json(centerImage);
         }, (err) => next(err))
         .catch((err) => next(err));
     })
-    .post(authenticate.verifyOrdinaryUser, authenticate.verifyAdmin, (req, res, next) => {
-        Spinners.create(req.body)
-        .then((spinner) => {
-            console.log('Spinners Created ', spinner);
+    .post(/*authenticate.verifyOrdinaryUser, authenticate.verifyAdmin,*/ (req, res, next) => {
+        CenterImage.create(req.body)
+        .then((centerImage) => {
+            console.log('centerImage Created ', centerImage);
             res.statusCode = 200;
             res.setHeader('Content-Type', 'application/json');
-            res.json(spinner);
+            res.json(centerImage);
 
             removeUnusedImages();
         }, (err) => next(err))
         .catch((err) => next(err))
     })
-    .put(authenticate.verifyOrdinaryUser, authenticate.verifyAdmin, (req, res, next) => {
+    .put(/*authenticate.verifyOrdinaryUser, authenticate.verifyAdmin,*/ (req, res, next) => {
         res.statusCode = 403;
-        res.end('PUT operation not supported on /spinners');
+        res.end('PUT operation not supported on /centerImage');
     })
-    .delete(authenticate.verifyOrdinaryUser, authenticate.verifyAdmin, (req, res, next) => {
-        Spinners.remove({})
+    .delete(/*authenticate.verifyOrdinaryUser, authenticate.verifyAdmin,*/ (req, res, next) => {
+        CenterImage.remove({})
         .then((resp) => {
             res.statusCode = 200;
             res.setHeader('Content-Type', 'application/json');
@@ -49,36 +49,35 @@ SpinnerRouter.route('/')
         .catch((err) => next(err));
     });
 
-
-// By id
-SpinnerRouter.route('/:spinnerId')
+    // By id
+CenterImageRouter.route('/:centerImageId')
     .get((req, res, next) => {
-        Spinners.findById(req.params.spinnerId)
-        .then((spinner) => {
+        CenterImage.findById(req.params.centerImageId)
+        .then((centerImage) => {
             res.statusCode = 200;
             res.setHeader('Content-Type', 'application/json');
-            res.json(spinner);
+            res.json(centerImage);
         }, (err) => next(err))
         .catch((err) => next(err))
     })
-    .post(authenticate.verifyOrdinaryUser, authenticate.verifyAdmin, (req, res, next) => {
+    .post(/*authenticate.verifyOrdinaryUser, authenticate.verifyAdmin,*/ (req, res, next) => {
         res.statusCode = 403;
-        res.end('POST operation not supported on /spinners/'
-            + req.params.spinnerId);
+        res.end('POST operation not supported on /centerImage/'
+            + req.params.centerImageId);
     })
-    .put(authenticate.verifyOrdinaryUser, authenticate.verifyAdmin, (req, res, next) => {
-        Spinners.findByIdAndUpdate(req.params.spinnerId, {
+    .put(/*authenticate.verifyOrdinaryUser, authenticate.verifyAdmin,*/ (req, res, next) => {
+        CenterImage.findByIdAndUpdate(req.params.centerImageId, {
             $set: req.body
         }, { new:true })
-        .then((spinner) => {
+        .then((centerImage) => {
             res.statusCode = 200;
             res.setHeader('Content-Type', 'application/json');
-            res.json(spinner);
+            res.json(centerImage);
         }, (err) => next(err))
         .catch((err) => next(err))
     })
-    .delete(authenticate.verifyOrdinaryUser, authenticate.verifyAdmin, (req, res, next) => {
-        Spinners.findByIdAndRemove(req.params.spinnerId)
+    .delete(/*authenticate.verifyOrdinaryUser, authenticate.verifyAdmin,*/ (req, res, next) => {
+        CenterImage.findByIdAndRemove(req.params.centerImageId)
         .then((resp) => {
             res.statusCode = 200;
             res.setHeader('Content-Type', 'application/json');
@@ -87,5 +86,4 @@ SpinnerRouter.route('/:spinnerId')
         .catch((err) => next(err));
     });
 
-
-module.exports = SpinnerRouter;
+module.exports = CenterImageRouter;
