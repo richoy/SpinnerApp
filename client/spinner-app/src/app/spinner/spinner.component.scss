@@ -205,4 +205,11 @@ opacity:0.1;
   
   
   
-  
+.modal-header, .modal-body {
+	background-color: black;
+	color: white;
+}
+
+input {
+	border-radius: 5px;
+}

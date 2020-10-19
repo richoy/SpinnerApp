@@ -88,8 +88,8 @@
 
                                     <td>
                                         <select formControlName="isItEmail" name="resultOption" required (change)="onChangeResult($event.target.value, i)">
-                                            <option [ngValue]="true" selected>Text Popup</option>
-                                            <option [ngValue]="false">Email Popup</option>
+                                            <option [ngValue]="false" selected>Text Popup</option>
+                                            <option [ngValue]="true">Email Popup</option>
                                         </select>
                                     </td>
 
@@ -106,6 +106,7 @@
                                     </td>
 
                                 </tr>
+
                             </div>
 
                         </table>

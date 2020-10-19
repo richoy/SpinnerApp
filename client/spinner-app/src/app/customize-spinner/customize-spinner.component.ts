@@ -41,6 +41,10 @@ export class CustomizeSpinnerComponent implements OnInit {
   SuccessfullyUpload: boolean[] = [];
   UnsuccessfullyUpload: boolean[] = [];
 
+  //For percentage 100%
+  totalPercentage: any[] = [];
+  percentageSum: number;
+
   constructor(
     public formBuilder:FormBuilder,// For number of field dropdown
     private spinnerService: SpinnerCustomizerControllerService,// Form validations
@@ -205,6 +209,8 @@ export class CustomizeSpinnerComponent implements OnInit {
           element.color
         )
 
+        this.totalPercentage[counter] = element.percentage;
+
         this.StringOfImageUpload.forEach((file)=>{
           if(file.index == counter){
             field.image = file.image;
@@ -215,18 +221,29 @@ export class CustomizeSpinnerComponent implements OnInit {
         counter++;
       });
 
+      this.percentageSum = this.totalPercentage.reduce(function(a, b){
+        return a + b;
+      }, 0);
+
+      console.log(this.percentageSum)
     }
 
-    this.spinnerService.deleteSpinner().subscribe(() => {
-      this.spinnerService.sendSpinner(spinner).subscribe((res) => {
-        this.spinnerForm.reset();
-        this.StringOfImageUpload = []; // Resets the StringOfImageUpload array
-      }, err =>{
-        throw new Error('Error Sending the information about the spinner');
+    if (this.percentageSum === 100) {
+      this.spinnerService.deleteSpinner().subscribe(() => {
+        this.spinnerService.sendSpinner(spinner).subscribe((res) => {
+          this.spinnerForm.reset();
+          this.StringOfImageUpload = []; // Resets the StringOfImageUpload array
+        }, err =>{
+          throw new Error('Error Sending the information about the spinner');
+        });
+      }, err => {
+        throw new Error('Error deleting the information of the previous spineer');
       });
-    }, err => {
-      throw new Error('Error deleting the information of the previous spineer');
-    });
+    } else {
+      throw new Error('Error Percentage must add up 100%');
+    }
+
+    
   }
 
 }

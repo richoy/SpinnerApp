@@ -22,7 +22,7 @@ ResultsRouter.route('/')
         }, (err) => next(err))
         .catch((err) => next(err));
     })
-    .post(authenticate.verifyOrdinaryUser, authenticate.verifyAdmin, (req, res, next) => {
+    .post((req, res, next) => {
         Results.create(req.body)
         .then((result) => {
             console.log('Result Created ', result);
