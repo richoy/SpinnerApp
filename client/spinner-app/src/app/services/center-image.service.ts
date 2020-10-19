@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { map, catchError } from 'rxjs/operators';
 
 import { ProcessHTTPMsgService } from './process-httpmsg.service';
 
@@ -16,6 +16,12 @@ export class CenterImageService {
     private http: HttpClient,
     private processHTTPMsgService: ProcessHTTPMsgService
   ) { }
+
+  getImageCenter(): Observable<any> {
+    return this.http.get<any>(this.URL_API)
+      .pipe(map((data:any) => data),
+      catchError(this.processHTTPMsgService.handleError));
+  }
 
   sendImageCenter(Form:any): Observable<any> {
     const httpOptions = {

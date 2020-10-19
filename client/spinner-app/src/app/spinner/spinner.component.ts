@@ -5,6 +5,7 @@ import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import { SpinnerService } from '../services/spinner.service';
 import { HeaderFooterService } from '../services/header-footer.service';
 import { EmailsService } from '../services/emails.service';
+import { CenterImageService } from '../services/center-image.service';
 
 @Component({
   selector: 'app-spinner',
@@ -52,6 +53,9 @@ export class SpinnerComponent implements OnInit {
   errMess: string;
   ///
 
+  //Center image
+  centerImage: any;
+
   /// Modal results
   closeResult = ''; 
   @ViewChild('ResultEmail') ResultEmail;
@@ -62,6 +66,7 @@ export class SpinnerComponent implements OnInit {
     private headerFooterService: HeaderFooterService,
     private emailSevice: EmailsService,
     private modalService: NgbModal,
+    private centerImageService: CenterImageService,
     private fb: FormBuilder ) { 
       this.createForm();
     }
@@ -69,6 +74,7 @@ export class SpinnerComponent implements OnInit {
   ngOnInit(): void {
     this.getHeaderFooter();
     this.getSpinner();
+    this.getImageCenter();
   }
 
   getSpinner(): void {
@@ -105,6 +111,15 @@ export class SpinnerComponent implements OnInit {
     this.headerFooterService.getHeaderFooter()
       .subscribe( headerFooter => {
         this.HeaderFooter = headerFooter[0];
+      });
+  }
+
+  getImageCenter() {
+    this.centerImageService.getImageCenter()
+      .subscribe(centerImage => {
+        this.centerImage = centerImage[0];
+        this.centerImage.centerImage = this.API_IMAGE_URL + this.centerImage.centerImage.slice(14);
+        console.log(centerImage);
       });
   }
 
