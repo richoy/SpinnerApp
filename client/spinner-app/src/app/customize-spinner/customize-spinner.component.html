@@ -61,7 +61,7 @@
 
                                     <td *ngIf="itIsImageFile[i]">
                                         <div id="ImageUploadBox">
-                                            <div class="col-9" id="FileUploadBox">
+                                            <div id="FileUploadBox">
                                                 <input #imageInput
                                                 formControlName="file"
                                                 type="file" 
@@ -71,7 +71,7 @@
         
                                             </div>
     
-                                            <div class="col-3" id="FileUploadMessageBox" *ngIf="selectedFile">
+                                            <div id="FileUploadMessageBox" *ngIf="selectedFile">
                                                 <div *ngIf="SuccessfullyUpload[i]" class="alert alert-success d-flex justify-content-center"> <span>&#10004;</span></div>
                                                 <div *ngIf="UnsuccessfullyUpload[i]" class="alert alert-danger d-flex justify-content-center"> <span>&#x2716;</span></div>
                                             </div>
@@ -114,11 +114,20 @@
 
                     
     
-                    <button type="submit" class="btn btn-success ml-auto"
+                    <button type="submit" class="btn btn-success ml-auto" 
                     >Submit</button>
                     
                 </div>
             </form>
+
+            <h3 class="mt-3">Image for middle of spinner</h3>
+
+            <form [formGroup]="CenterImageForm" (ngSubmit)="onSubmitCenterImage()">
+                <input class="mr-5" formControlName="centerImage" type="file" (change)="ProcessCenterImage($event)">
+                <button class="ml-5" type="submit" class="btn btn-success ml-auto" 
+                    >Submit</button>
+            </form>
+
 
         </div>
     
