@@ -23,11 +23,10 @@ export class SpinnerComponent implements OnInit {
   state: string = 'default';
 
   //Animations
-  clicks: number = 1;
-  degree: number;
+  clicks: number = 0;
   newDegree: number;
   extraDegree: number; 
-  totalDegree: number;
+  totalDegree: number = 0;
   spiningRotate: any;
 
   @ViewChildren('wheelSec') wheelSecs: QueryList<any>;
@@ -37,6 +36,7 @@ export class SpinnerComponent implements OnInit {
   spinMovemente: any;
 
   //Results
+  angle: number;
   initialDegreesStart: any[] = [''];
   initialDegreesEnd: any[] = [''];
   degreesRotated: number = 0;
@@ -58,28 +58,28 @@ export class SpinnerComponent implements OnInit {
       .subscribe( spinnerFields => {
         //spinnerFields.image = spinnerFields.image.replace("\", "/");
         this.SpinnerFields = spinnerFields;
-        let angle = 360/this.SpinnerFields.length;
+        this.angle = 360/this.SpinnerFields.length;
         for(let i=0; i<this.SpinnerFields.length; i++) { //Substitute backslashes for slashes
           this.SpinnerFields[i].image = this.SpinnerFields[i].image.replace(/\\/g, "/");
           this.SpinnerFields[i].image = this.API_IMAGE_URL + this.SpinnerFields[i].image.slice(14);
           this.bgColorStyle[i] = this.SpinnerFields[i].bgColor; // Backgorund color
           this.fontColor[i] = this.spinnerService.invertColor(this.bgColorStyle[i]); //Font Color
-          this.holder[i] = {'transform': 'rotate(' + angle*(i) + 'deg)',
-                            '-webkit-transform': 'rotate(' + angle*(i) + 'deg)',
-                            '-moz-transform': 'rotate(' + angle*(i) + 'deg)',
-                            '-o-transform': 'rotate(' + angle*(i) + 'deg)',
-                            '-ms-transform': 'rotate(' + angle*(i) + 'deg)',}
+          this.holder[i] = {'transform': 'rotate(' + this.angle*(i) + 'deg)',
+                            '-webkit-transform': 'rotate(' + this.angle*(i) + 'deg)',
+                            '-moz-transform': 'rotate(' + this.angle*(i) + 'deg)',
+                            '-o-transform': 'rotate(' + this.angle*(i) + 'deg)',
+                            '-ms-transform': 'rotate(' + this.angle*(i) + 'deg)',}
 
-          this.fieldStyleNth[i] = {'transform': 'rotate(' + angle + 'deg)',
-                                  '-webkit-transform': 'rotate(' + angle + 'deg)',
-                                  '-moz-transform': 'rotate(' + angle + 'deg)',
-                                  '-o-transform': 'rotate(' + angle + 'deg)',
-                                  '-ms-transform': 'rotate(' + angle + 'deg)',
+          this.fieldStyleNth[i] = {'transform': 'rotate(' + this.angle + 'deg)',
+                                  '-webkit-transform': 'rotate(' + this.angle + 'deg)',
+                                  '-moz-transform': 'rotate(' + this.angle + 'deg)',
+                                  '-o-transform': 'rotate(' + this.angle + 'deg)',
+                                  '-ms-transform': 'rotate(' + this.angle + 'deg)',
                                   'background-color': this.bgColorStyle[i],
                                   'color': this.fontColor[i]	}
 
-          this.initialDegreesStart[i] = angle*i
-          this.initialDegreesEnd[i] = this.initialDegreesStart[i] + angle;
+          this.initialDegreesStart[i] = this.angle*i
+          this.initialDegreesEnd[i] = this.initialDegreesStart[i] + this.angle;
         }
       })
   }
@@ -92,24 +92,25 @@ export class SpinnerComponent implements OnInit {
   }
 
   rotate() {
-    this.degree = 360*8;
-    this.clicks = ++this.clicks;
-    this.newDegree = this.degree * this.clicks;
-    this.extraDegree = Math.floor(Math.random() * (360)) + 1;
-    this.totalDegree = this.newDegree + this.extraDegree;
+    this.getSpinner();
+    let degreeSpinn = 360*8;
+    this.clicks = ++this.clicks; ////
+    this.newDegree = degreeSpinn * this.clicks;  ////
 
-    let numberOfSpins = this.totalDegree/360;
-    let fraction = numberOfSpins % 1
-    this.degreesRotated = fraction*360;
+    this.CalculateDegreesRotated()
+
+    this.totalDegree = this.newDegree + this.extraDegree;
     
-    this.tilting();
-    this.DeterminResult()
+    this.spining();
+
+    this.ExposingResult()
   }
 
   spining() {
     this.spiningRotate = { 'transform': 'rotate(-' + this.totalDegree + 'deg)'};
   }
 
+  /*
   tilting() {
     
     this.wheelSecs.forEach( (wheelSec) => {
@@ -136,36 +137,44 @@ export class SpinnerComponent implements OnInit {
 				}
       }, 10);
 
-      this.spining();
 
       var rectTwo = t.getBoundingClientRect();
       noY = rectTwo.top + document.body.scrollTop;
     });
-  }
+  }*/
 
 
-  DeterminResult() {
-    for( let i=0; i<this.initialDegreesEnd.length; i++) {
-      //console.log(this.initialDegreesEnd[0]);
-      if (this.degreesRotated <= this.initialDegreesEnd[0]) {
-        this.resultingField = i;
-        break
-      }
-      else if ( this.degreesRotated > this.initialDegreesEnd[0] 
-        && this.degreesRotated <= this.initialDegreesEnd[i] 
-        && this.degreesRotated > this.initialDegreesEnd[i-1]) {
-          this.resultingField = i;
-      }
-    }
-    
+  ExposingResult() {
+
     if (this.SpinnerFields[this.resultingField].isItEmail === true) {
         ///Code to result
     }
     else if (this.SpinnerFields[this.resultingField].isItEmail === false) {
         ///Code to result
     }
-
-    console.log(this.resultingField);
-    console.log(this.SpinnerFields[this.resultingField]);
   }
-}
+
+  CalculateDegreesRotated() {
+    let DegreesArray = [];
+    let index, sum = 0
+    let random = Math.random();
+    let random2 = Math.random();
+
+    for( index = 0; index < this.SpinnerFields.length; index++) {
+      sum += this.SpinnerFields[index].percentage/100;
+      DegreesArray[index] = sum;
+    }
+
+    for ( index = 0; random < DegreesArray.length && random >= DegreesArray[index]; index++);
+
+    this.extraDegree = (this.initialDegreesEnd[index] - this.angle)
+      + Math.floor(random2 * (this.initialDegreesEnd[index] - (this.initialDegreesEnd[index] - this.angle)-1));
+  
+      console.log(index);
+      console.log(this.extraDegree);
+      console.log(this.initialDegreesEnd[index] - this.angle);
+      console.log(Math.floor(random2  *  (this.initialDegreesEnd[index] - (this.initialDegreesEnd[index] - this.angle))))
+      console.log(this.initialDegreesEnd[index]);
+
+    }
+  }
