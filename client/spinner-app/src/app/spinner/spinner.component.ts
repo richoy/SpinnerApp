@@ -1,7 +1,10 @@
 import { Component, OnInit, ViewChild, QueryList, ViewChildren, ElementRef } from '@angular/core';
- 
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+
 import { SpinnerService } from '../services/spinner.service';
 import { HeaderFooterService } from '../services/header-footer.service';
+import { EmailsService } from '../services/emails.service';
 
 @Component({
   selector: 'app-spinner',
@@ -23,11 +26,10 @@ export class SpinnerComponent implements OnInit {
   state: string = 'default';
 
   //Animations
-  clicks: number = 1;
-  degree: number;
+  clicks: number = 0;
   newDegree: number;
   extraDegree: number; 
-  totalDegree: number;
+  totalDegree: number = 0;
   spiningRotate: any;
 
   @ViewChildren('wheelSec') wheelSecs: QueryList<any>;
@@ -37,15 +39,31 @@ export class SpinnerComponent implements OnInit {
   spinMovemente: any;
 
   //Results
+  angle: number;
   initialDegreesStart: any[] = [''];
   initialDegreesEnd: any[] = [''];
   degreesRotated: number = 0;
   resultingField: number = 0;
+  FinalResult: any;
+
+  sendEmailForm: FormGroup;
+  form: any;
+  formCopy: any;
+  errMess: string;
   ///
+
+  /// Modal results
+  closeResult = ''; 
+  @ViewChild('ResultEmail') ResultEmail;
+  @ViewChild('ResultText') ResultText;
 
   constructor( 
     private spinnerService: SpinnerService,
-    private headerFooterService: HeaderFooterService ) { 
+    private headerFooterService: HeaderFooterService,
+    private emailSevice: EmailsService,
+    private modalService: NgbModal,
+    private fb: FormBuilder ) { 
+      this.createForm();
     }
 
   ngOnInit(): void {
@@ -56,30 +74,29 @@ export class SpinnerComponent implements OnInit {
   getSpinner(): void {
     this.spinnerService.getSpinner()
       .subscribe( spinnerFields => {
-        //spinnerFields.image = spinnerFields.image.replace("\", "/");
         this.SpinnerFields = spinnerFields;
-        let angle = 360/this.SpinnerFields.length;
+        this.angle = 360/this.SpinnerFields.length;
         for(let i=0; i<this.SpinnerFields.length; i++) { //Substitute backslashes for slashes
           this.SpinnerFields[i].image = this.SpinnerFields[i].image.replace(/\\/g, "/");
           this.SpinnerFields[i].image = this.API_IMAGE_URL + this.SpinnerFields[i].image.slice(14);
           this.bgColorStyle[i] = this.SpinnerFields[i].bgColor; // Backgorund color
           this.fontColor[i] = this.spinnerService.invertColor(this.bgColorStyle[i]); //Font Color
-          this.holder[i] = {'transform': 'rotate(' + angle*(i) + 'deg)',
-                            '-webkit-transform': 'rotate(' + angle*(i) + 'deg)',
-                            '-moz-transform': 'rotate(' + angle*(i) + 'deg)',
-                            '-o-transform': 'rotate(' + angle*(i) + 'deg)',
-                            '-ms-transform': 'rotate(' + angle*(i) + 'deg)',}
+          this.holder[i] = {'transform': 'rotate(' + this.angle*(i) + 'deg)',
+                            '-webkit-transform': 'rotate(' + this.angle*(i) + 'deg)',
+                            '-moz-transform': 'rotate(' + this.angle*(i) + 'deg)',
+                            '-o-transform': 'rotate(' + this.angle*(i) + 'deg)',
+                            '-ms-transform': 'rotate(' + this.angle*(i) + 'deg)',}
 
-          this.fieldStyleNth[i] = {'transform': 'rotate(' + angle + 'deg)',
-                                  '-webkit-transform': 'rotate(' + angle + 'deg)',
-                                  '-moz-transform': 'rotate(' + angle + 'deg)',
-                                  '-o-transform': 'rotate(' + angle + 'deg)',
-                                  '-ms-transform': 'rotate(' + angle + 'deg)',
+          this.fieldStyleNth[i] = {'transform': 'rotate(' + this.angle + 'deg)',
+                                  '-webkit-transform': 'rotate(' + this.angle + 'deg)',
+                                  '-moz-transform': 'rotate(' + this.angle + 'deg)',
+                                  '-o-transform': 'rotate(' + this.angle + 'deg)',
+                                  '-ms-transform': 'rotate(' + this.angle + 'deg)',
                                   'background-color': this.bgColorStyle[i],
                                   'color': this.fontColor[i]	}
 
-          this.initialDegreesStart[i] = angle*i
-          this.initialDegreesEnd[i] = this.initialDegreesStart[i] + angle;
+          this.initialDegreesStart[i] = this.angle*i
+          this.initialDegreesEnd[i] = this.initialDegreesStart[i] + this.angle;
         }
       })
   }
@@ -92,80 +109,110 @@ export class SpinnerComponent implements OnInit {
   }
 
   rotate() {
-    this.degree = 360*8;
-    this.clicks = ++this.clicks;
-    this.newDegree = this.degree * this.clicks;
-    this.extraDegree = Math.floor(Math.random() * (360)) + 1;
-    this.totalDegree = this.newDegree + this.extraDegree;
+    this.getSpinner();
+    let degreeSpinn = 360*8;
+    this.clicks = ++this.clicks; ////
+    this.newDegree = degreeSpinn * this.clicks;  ////
 
-    let numberOfSpins = this.totalDegree/360;
-    let fraction = numberOfSpins % 1
-    this.degreesRotated = fraction*360;
+    this.CalculateDegreesRotated()
+
+    this.totalDegree = this.newDegree + this.extraDegree;
     
-    this.tilting();
-    this.DeterminResult()
+    this.spining();
+
+    this.ExposingResult()
+
   }
 
   spining() {
     this.spiningRotate = { 'transform': 'rotate(-' + this.totalDegree + 'deg)'};
   }
 
-  tilting() {
-    
-    this.wheelSecs.forEach( (wheelSec) => {
-      var t = wheelSec.nativeElement;
-      var noY = 0;
-      var c = 0;
-      var n = 700;
-      var interval = setInterval(() => {
-        c = c++;
-        if (c === n) { 
-          clearInterval(interval);				
-        }	
-        var rect = t.getBoundingClientRect();
-        var aoY = {
-          top: rect.top + document.body.scrollTop
-        }
-        this.Text.innerHTML = aoY;
-				if(aoY.top < 23.89){
-          this.spinMovemente = {'-webkit-animation': 'hh 0.1s',
-                                'animation': 'hh 0.1s'}
-					setTimeout(() => { 
-            this.spinMovemente = ''
-					}, 100);	
-				}
-      }, 10);
 
-      this.spining();
+  ExposingResult() {
 
-      var rectTwo = t.getBoundingClientRect();
-      noY = rectTwo.top + document.body.scrollTop;
-    });
-  }
+    console.log(this.SpinnerFields)
 
-
-  DeterminResult() {
-    for( let i=0; i<this.initialDegreesEnd.length; i++) {
-      //console.log(this.initialDegreesEnd[0]);
-      if (this.degreesRotated <= this.initialDegreesEnd[0]) {
-        this.resultingField = i;
-        break
-      }
-      else if ( this.degreesRotated > this.initialDegreesEnd[0] 
-        && this.degreesRotated <= this.initialDegreesEnd[i] 
-        && this.degreesRotated > this.initialDegreesEnd[i-1]) {
-          this.resultingField = i;
-      }
-    }
-    
     if (this.SpinnerFields[this.resultingField].isItEmail === true) {
-        ///Code to result
+      setTimeout( () => {
+        this.open(this.ResultEmail)
+      }, 6500);
+  
     }
     else if (this.SpinnerFields[this.resultingField].isItEmail === false) {
-        ///Code to result
+      setTimeout( () => {
+        this.open(this.ResultText)
+      }, 6500);  
+    }
+  }
+
+  createForm() {
+    this.sendEmailForm = this.fb.group({
+      firstName: [''],
+      lastName: [''],
+      emailAddress: [''],
+      result: ['']
+    });
+
+  }
+
+  onSubmit() {
+    this.formCopy = this.sendEmailForm.value;
+    this.formCopy.result = this.FinalResult.textPopUp;
+    console.log(this.formCopy);
+    this.emailSevice.sendEmails(this.formCopy)
+      .subscribe(emailForm => {
+        this.form = emailForm;
+        console.log(this.form);
+      }, err =>{
+        throw new Error('Error Sending the information about the spinner');
+      });
+    this.sendEmailForm.reset();
+
+  }
+
+  CalculateDegreesRotated() {
+    let DegreesArray = [];
+    let index, sum = 0
+    let random = Math.random();
+    let random2 = Math.random();
+
+    for( index = 0; index < this.SpinnerFields.length; index++) {
+      sum += this.SpinnerFields[index].percentage/100;
+      DegreesArray[index] = sum;
     }
 
-    console.log(this.resultingField);
-    console.log(this.SpinnerFields[this.resultingField]);
+    for ( index = 0; random < DegreesArray.length && random >= DegreesArray[index]; index++);
+
+    this.extraDegree = (this.initialDegreesEnd[index] - this.angle)
+      + Math.floor(random2 * (this.initialDegreesEnd[index] - (this.initialDegreesEnd[index] - this.angle)-1));
+  
+      this.resultingField = index;
+      console.log(index);
+
+      this.FinalResult = this.SpinnerFields[index]
+      console.log(this.FinalResult)
+    }
+
+
+    // Modal results
+    open(content) {
+      this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+        this.closeResult = `Closed with: ${result}`;
+      }, (reason) => {
+        this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+      });
+    }
+
+    private getDismissReason(reason: any): string {
+      if (reason === ModalDismissReasons.ESC) {
+        return 'by pressing ESC';
+      } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+        return 'by clicking on a backdrop';
+      } else {
+        return `with: ${reason}`;
+      }
+    }
+    ///////
+
   }
-}

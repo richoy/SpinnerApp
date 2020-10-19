@@ -28,4 +28,12 @@ export class EmailsService {
       .pipe(map((data:any) => data),
       catchError(this.processHTTPMsgService.handleError));
   }
+
+  sendEmails(Form:any): Observable<any> {
+    const httpOptions = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    };
+    return this.http.post<any>(this.URL_API, Form)
+      .pipe(catchError(this.processHTTPMsgService.handleError));
+  }
 }

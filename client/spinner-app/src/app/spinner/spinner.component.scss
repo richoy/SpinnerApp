@@ -81,7 +81,7 @@ div#wheel{
 	height:$Diameter/3.6764;
 	position:absolute;
 	top:$Diameter*0.45;  
-	left:$Diameter*0.445;
+	left:$Diameter*0.439;
 	margin:-34px 0 0 -34px;
 	border-radius:50%;
 	box-shadow:rgba(0,0,0,0.1) 0px 3px 0px;
@@ -205,4 +205,11 @@ opacity:0.1;
   
   
   
-  
+.modal-header, .modal-body {
+	background-color: black;
+	color: white;
+}
+
+input {
+	border-radius: 5px;
+}
