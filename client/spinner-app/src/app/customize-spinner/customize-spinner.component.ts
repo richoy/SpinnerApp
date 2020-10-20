@@ -214,6 +214,15 @@ export class CustomizeSpinnerComponent implements OnInit {
   deleteSpinnerField(idx: number) {
 		this.spinnerArray.removeAt(idx);
   }
+
+  deleteImage() {
+    this.centerImageService.deleteImageCenter()
+      .subscribe(() => {
+        
+      }, err => {
+        throw new Error('Error deleting the information of the previous spineer');
+      });
+  }
   
   // For number of field dropdown
 
