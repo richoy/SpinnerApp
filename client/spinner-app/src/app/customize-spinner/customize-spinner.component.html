@@ -84,6 +84,9 @@
 
                                     <td>
                                         <input formControlName="percentage" type="number" name="textField" [class.invalid]="spinnerfield.controls.percentage.hasError('required')  && submitPressed">
+                                        <div *ngIf="SpinnerformErrors">
+                                            <p> {{SpinnerformErrors.percentage}}</p>
+                                        </div>
                                     </td>
 
                                     <td>
@@ -115,7 +118,7 @@
                     
     
                     <button type="submit" class="btn btn-success ml-auto" 
-                    >Submit</button>
+                    >Save</button>
                     
                 </div>
             </form>
@@ -125,7 +128,7 @@
             <form [formGroup]="CenterImageForm" (ngSubmit)="onSubmitCenterImage()">
                 <input class="mr-5" formControlName="centerImage" type="file" (change)="ProcessCenterImage($event)">
                 <button class="ml-5" type="submit" class="btn btn-success ml-auto" 
-                    >Submit</button>
+                    >Save</button>
             </form>
             <button class="ml-5" class="btn btn-danger ml-auto" (click)="deleteImage()" 
             >Delete image</button>

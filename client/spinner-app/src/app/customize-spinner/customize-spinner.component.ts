@@ -89,19 +89,36 @@ export class CustomizeSpinnerComponent implements OnInit {
 
   }
 
- 
-
 	createSpFormGroup() {
-		return this.formBuilder.group({
+    let SpinnerForm = this.formBuilder.group({
       isItImage: [true, [Validators.required]],
       file: [''],
       textFieldOne:[''],
-      percentage: ['', [Validators.required, Validators.pattern(/^[1-9]\d*$/)]],
+      percentage: ['', [Validators.required, Validators.pattern(/^[1-9]\d*$/), Validators.min(0), Validators.max(100)]],
       isItEmail: [true, [Validators.required]],
       textPopUp: [''],
       emails: [''],
       color: ['', [Validators.required]],
-		})
+    });
+
+    SpinnerForm.valueChanges.subscribe( data => {
+      this.onValueChanged(SpinnerForm, data);
+    });
+    this.onValueChanged(SpinnerForm);
+
+    return SpinnerForm
+    
+  }
+  SpinnerformErrors = {
+    'percentage': '',
+  };
+  validationMessages = {
+    'percentage': {
+      'required': 'Percentage is required.',
+      'pattern': 'Value must be a number',
+      'min': 'Minumun possible value is 0%',
+      'max': 'Maximum possible value is 100%'
+    }
   }
 
   createFormFieldForCenterSpinnerImage() {
@@ -110,8 +127,29 @@ export class CustomizeSpinnerComponent implements OnInit {
     });
   }
 
-  submitCenterImage() {
+  validatingSpinnerForm() {
 
+  }
+
+  onValueChanged(SpinnerForm ,data?: any) {
+    if (!SpinnerForm) {return;}
+    const form = SpinnerForm;
+    for (const field in this.SpinnerformErrors) {
+      if (this.SpinnerformErrors.hasOwnProperty(field)) {
+        // clear previous error message (if any)
+        this.SpinnerformErrors[field] = '';
+        const control = form.get(field);
+        if (control && control.dirty && !control.valid) {
+          const messages = this.validationMessages[field];
+          for (const key in control.errors) {
+            if (control.errors.hasOwnProperty(key)) {
+              this.SpinnerformErrors[field] += messages[key] + ' ';
+            }
+          }
+        }
+      }
+    }
+    console.log(this.SpinnerformErrors);
   }
 
    //Image Upload
@@ -125,7 +163,6 @@ export class CustomizeSpinnerComponent implements OnInit {
     this.UnsuccessfullyUpload[index] = true; 
     this.SuccessfullyUpload[index] = false;
   }
-
 
   processFile(image: any, index) {
       let files = image.srcElement.files;
@@ -202,6 +239,7 @@ export class CustomizeSpinnerComponent implements OnInit {
     for (i=0; i<=this.items.length; i++) {
       this.itIsTextPopUp[i] = true;
     }
+
   }
   addControl(i) {
     this.items.push({id: i.toString()})
@@ -209,6 +247,7 @@ export class CustomizeSpinnerComponent implements OnInit {
 		if(this.spinnerArray) {
       this.spinnerArray.push(fg);
     }
+    this.validatingSpinnerForm()
   }
 
   deleteSpinnerField(idx: number) {
@@ -281,7 +320,6 @@ export class CustomizeSpinnerComponent implements OnInit {
           } 
         })
         spinner.push(field);
-
         counter++;
       });
 
@@ -306,8 +344,6 @@ export class CustomizeSpinnerComponent implements OnInit {
     } else {
       throw new Error('Error Percentage must add up 100%');
     }
-
-    
   }
 
   onSubmitCenterImage() {
