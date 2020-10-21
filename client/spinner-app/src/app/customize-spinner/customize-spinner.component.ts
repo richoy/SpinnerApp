@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, QueryList, ViewChildren, ElementRef, OnChanges } from '@angular/core';
 import { FormBuilder,FormArray, FormGroup, Validators, FormControl } from '@angular/forms';
+import { Observable, fromEvent, merge} from 'rxjs';
+import { map, debounceTime, distinctUntilChanged, filter } from 'rxjs/operators';
 import { SpinnerCustomizerControllerService } from '../services/spinner-customizer-controller.service';
 import { ImageService } from '../services/image.service';
 import { CenterImageService } from '../services/center-image.service';
@@ -45,6 +47,15 @@ export class CustomizeSpinnerComponent implements OnInit {
   //For percentage 100%
   totalPercentage: any[] = [];
   percentageSum: number;
+  isPercentageLessThanZero: boolean[] =[ false];
+  isPercentageMoreThanHundred: boolean[] = [false];
+  SumOfPercentageEqualHundred: boolean = false;
+  SumOfPercentageMoreThanHundred: boolean=false;
+  percentageValues: number[] = [];
+  @ViewChildren('percentage') percentage: QueryList<any>;
+
+
+  //CENTER IMAGE
   StringOfSpinnerCenter: String;
   SuccessSpinnerCenter: boolean;
   UnsuccessSpinnerCenter: boolean;
@@ -86,22 +97,39 @@ export class CustomizeSpinnerComponent implements OnInit {
       this.itIsTextPopUp[i] = true;
     }
     // For number of field dropdown
-
+    this.definingPercentage();
   }
 
- 
-
 	createSpFormGroup() {
-		return this.formBuilder.group({
+    let SpinnerForm = this.formBuilder.group({
       isItImage: [true, [Validators.required]],
       file: [''],
       textFieldOne:[''],
-      percentage: ['', [Validators.required, Validators.pattern(/^[1-9]\d*$/)]],
+      percentage: ['', [Validators.required, Validators.pattern(/^[0-9]\d*$/), Validators.min(0), Validators.max(100)]],
       isItEmail: [true, [Validators.required]],
       textPopUp: [''],
       emails: [''],
       color: ['', [Validators.required]],
-		})
+    });
+
+    SpinnerForm.valueChanges.subscribe( data => {
+      this.onValueChanged(SpinnerForm, data);
+    });
+    this.onValueChanged(SpinnerForm);
+
+    return SpinnerForm
+    
+  }
+  SpinnerformErrors = {
+    'percentage': '',
+  };
+  validationMessages = {
+    'percentage': {
+      'required': 'Percentage is required.',
+      'pattern': 'Value must be a number',
+      'min': 'Minumun possible value is 0%',
+      'max': 'Maximum possible value is 100%'
+    }
   }
 
   createFormFieldForCenterSpinnerImage() {
@@ -110,8 +138,95 @@ export class CustomizeSpinnerComponent implements OnInit {
     });
   }
 
-  submitCenterImage() {
+  MessageErrorChange(i) {
+    //console.log(i);
 
+    const keyPressEvent$  = fromEvent(this.percentage.toArray()[i].nativeElement, 'keypress');
+    const keyDownEvent$  = fromEvent(this.percentage.toArray()[i].nativeElement, 'keydown');
+    const keyupEvent$  = fromEvent(this.percentage.toArray()[i].nativeElement, 'keyup');
+    const inputEvent$  = fromEvent(this.percentage.toArray()[i].nativeElement, 'input');
+    const changeEvent$  = fromEvent(this.percentage.toArray()[i].nativeElement, 'change');
+    const focusEvent$  = fromEvent(this.percentage.toArray()[i].nativeElement, 'focus');
+    const focusoutEvent$  = fromEvent(this.percentage.toArray()[i].nativeElement, 'blur');
+    
+    const allEvents$ = merge(   
+      changeEvent$,
+      inputEvent$,
+      keyDownEvent$,
+      keyPressEvent$,   
+      keyupEvent$,
+      focusEvent$,
+      focusoutEvent$
+    );
+    
+    allEvents$
+      .pipe(
+        map((event: any) => {
+        let value = Number(event.target.value);
+        if (value > 100) {
+          this.isPercentageMoreThanHundred[i] = true;
+          this.percentageValues[i] = value;
+        } else if (value < 0) {
+          this.isPercentageLessThanZero[i] = true;
+          this.percentageValues[i] = value;
+        } else if (value >= 0 && value <= 100) {
+          this.isPercentageMoreThanHundred[i] = false;
+          this.isPercentageLessThanZero[i] = false;
+          this.percentageValues[i] = value;
+        }
+
+        this.checkfullpercentage()
+      }),
+      debounceTime(1)).subscribe();
+  }
+
+  checkfullpercentage(){
+    this.percentageSum = this.percentageValues.reduce(function(a, b){
+      return a + b;
+    }, 0);
+    if(this.percentageSum === 100) {
+      this.SumOfPercentageEqualHundred = true;
+      this.SumOfPercentageMoreThanHundred = false;
+    } else if(this.percentageSum <= 100 ) {
+      this.SumOfPercentageEqualHundred = false;
+      this.SumOfPercentageMoreThanHundred = true
+    } else if(this.percentageSum > 100) {
+      this.SumOfPercentageMoreThanHundred = true
+      this.SumOfPercentageEqualHundred = false;
+    }
+  }
+
+  definingPercentage() {
+    for (let i=0; i<this.items.length; i++) {
+      this.isPercentageMoreThanHundred.length = i
+      this.percentageValues.length = i
+      this.isPercentageLessThanZero.length = i;
+      this.isPercentageMoreThanHundred[i] = false;
+      this.isPercentageLessThanZero[i]=false
+      this.percentageValues[i] = 0;
+    }
+  }
+
+
+
+  onValueChanged(SpinnerForm ,data?: any) {
+    if (!SpinnerForm) {return;}
+    const form = SpinnerForm;
+    for (const field in this.SpinnerformErrors) {
+      if (this.SpinnerformErrors.hasOwnProperty(field)) {
+        // clear previous error message (if any)
+        this.SpinnerformErrors[field] = '';
+        const control = form.get(field);
+        if (control && control.dirty && !control.valid) {
+          const messages = this.validationMessages[field];
+          for (const key in control.errors) {
+            if (control.errors.hasOwnProperty(key)) {
+              this.SpinnerformErrors[field] += messages[key] + ' ';
+            }
+          }
+        }
+      }
+    }
   }
 
    //Image Upload
@@ -125,7 +240,6 @@ export class CustomizeSpinnerComponent implements OnInit {
     this.UnsuccessfullyUpload[index] = true; 
     this.SuccessfullyUpload[index] = false;
   }
-
 
   processFile(image: any, index) {
       let files = image.srcElement.files;
@@ -202,6 +316,7 @@ export class CustomizeSpinnerComponent implements OnInit {
     for (i=0; i<=this.items.length; i++) {
       this.itIsTextPopUp[i] = true;
     }
+    this.definingPercentage();
   }
   addControl(i) {
     this.items.push({id: i.toString()})
@@ -209,6 +324,7 @@ export class CustomizeSpinnerComponent implements OnInit {
 		if(this.spinnerArray) {
       this.spinnerArray.push(fg);
     }
+
   }
 
   deleteSpinnerField(idx: number) {
@@ -281,7 +397,6 @@ export class CustomizeSpinnerComponent implements OnInit {
           } 
         })
         spinner.push(field);
-
         counter++;
       });
 
@@ -289,7 +404,6 @@ export class CustomizeSpinnerComponent implements OnInit {
         return a + b;
       }, 0);
 
-      console.log(this.percentageSum)
     }
 
     if (this.percentageSum === 100) {
@@ -306,8 +420,6 @@ export class CustomizeSpinnerComponent implements OnInit {
     } else {
       throw new Error('Error Percentage must add up 100%');
     }
-
-    
   }
 
   onSubmitCenterImage() {
@@ -315,7 +427,6 @@ export class CustomizeSpinnerComponent implements OnInit {
       .subscribe(() => {
         this.centerCopy = this.CenterImageForm.value;
         this.centerCopy.centerImage = this.StringOfSpinnerCenter.replace(/\\/g, "/");
-        console.log(this.centerCopy);
         this.centerImageService.sendImageCenter(this.centerCopy)
         .subscribe(HFform => {
           this.centerform = HFform;

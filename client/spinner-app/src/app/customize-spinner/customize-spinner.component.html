@@ -35,6 +35,7 @@
             </div>
         </div>
 
+
         <div class="col-12">
             <form [formGroup]="spinnerForm" (ngSubmit)="onSubmit()">
                 <div>
@@ -42,6 +43,8 @@
                     <div class="table-responsive">
                         <table class="table table-borderless">
                             <div formArrayName="spinnerArray">
+
+
                                 <tr>
                                     <th><label for="ImageOption">Input type</label></th>
                                     <th><label for="">File / Text</label></th>
@@ -82,9 +85,20 @@
                                         <input formControlName="textFieldOne" type="text" name="textField">
                                     </td>
 
-                                    <td>
-                                        <input formControlName="percentage" type="number" name="textField" [class.invalid]="spinnerfield.controls.percentage.hasError('required')  && submitPressed">
+                                    <td class="d-flex">
+                                        <input formControlName="percentage" type="number" name="textField" 
+                                            min="0" max="100" 
+                                            [class.invalid]="spinnerfield.controls.percentage.hasError('required')  && submitPressed" 
+                                            (keyup)="MessageErrorChange(i)" (click)="MessageErrorChange(i)"
+                                            #percentage>
+                                            <div *ngIf="isPercentageLessThanZero[i]">
+                                                <p style="color:red; font-weight:bold; font-size:15px"> Min 0% </p>
+                                            </div>
+                                            <div *ngIf="isPercentageMoreThanHundred[i]">
+                                                <p style="color:red; font-weight:bold; font-size:15px"> Max 100% </p>
+                                            </div>
                                     </td>
+
 
                                     <td>
                                         <select formControlName="isItEmail" name="resultOption" required (change)="onChangeResult($event.target.value, i)">
@@ -107,6 +121,32 @@
 
                                 </tr>
 
+
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td>
+                                        <div *ngIf="percentageSum" >
+                                            <p style="color:red; font-weight:bold; font-size:15px" [innerHTML]="percentageSum"></p>
+                                        </div>
+                                        <div *ngIf="SumOfPercentageEqualHundred">
+                                            <p style="color:red; font-weight:bold; font-size:15px"> 
+                                                All percentages add up 100%
+                                            </p>
+                                        </div>
+                                        <div *ngIf="SumOfPercentageMoreThanHundred">
+                                            <p style="color:red; font-weight:bold; font-size:15px"> 
+                                                Percentages must be equal to 100%
+                                            </p>
+                                        </div>
+                                        <div *ngIf="SpinnerformErrors">
+                                            <p style="color:red; font-weight:bold;">
+                                                {{SpinnerformErrors.percentage}}
+                                            </p>
+                                        </div>
+                                    </td>
+                                </tr>
+
                             </div>
 
                         </table>
@@ -114,8 +154,8 @@
 
                     
     
-                    <button type="submit" class="btn btn-success ml-auto" 
-                    >Submit</button>
+                    <button type="submit" class="btn btn-success ml-auto mt-2" 
+                    >Save</button>
                     
                 </div>
             </form>
@@ -125,7 +165,7 @@
             <form [formGroup]="CenterImageForm" (ngSubmit)="onSubmitCenterImage()">
                 <input class="mr-5" formControlName="centerImage" type="file" (change)="ProcessCenterImage($event)">
                 <button class="ml-5" type="submit" class="btn btn-success ml-auto" 
-                    >Submit</button>
+                    >Save</button>
             </form>
             <button class="ml-5" class="btn btn-danger ml-auto" (click)="deleteImage()" 
             >Delete image</button>
