@@ -83,9 +83,16 @@
                                     </td>
 
                                     <td>
-                                        <input formControlName="percentage" type="number" name="textField" [class.invalid]="spinnerfield.controls.percentage.hasError('required')  && submitPressed">
-                                        <div *ngIf="SpinnerformErrors">
-                                            <p> {{SpinnerformErrors.percentage}}</p>
+                                        <input formControlName="percentage" type="number" name="textField" 
+                                            min="0" max="100" 
+                                            [class.invalid]="spinnerfield.controls.percentage.hasError('required')  && submitPressed" 
+                                            (keyup)="MessageErrorChange(i)"
+                                            #percentage>
+                                        <div *ngIf="isPercentageLessThanZero[i]">
+                                            <p> Value must be more than 0% </p>
+                                        </div>
+                                        <div *ngIf="isPercentageMoreThanHundred[i]">
+                                            <p> Value must be less than 100% </p>
                                         </div>
                                     </td>
 
@@ -110,6 +117,18 @@
 
                                 </tr>
 
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td>
+                                        <div *ngIf="SpinnerformErrors">
+                                            <p style="color:red; font-weight:bold;">
+                                                {{SpinnerformErrors.percentage}}
+                                            </p>
+                                        </div>
+                                    </td>
+                                </tr>
+
                             </div>
 
                         </table>
@@ -117,7 +136,7 @@
 
                     
     
-                    <button type="submit" class="btn btn-success ml-auto" 
+                    <button type="submit" class="btn btn-success ml-auto mt-2" 
                     >Save</button>
                     
                 </div>

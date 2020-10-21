@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, QueryList, ViewChildren, ElementRef, OnChanges } from '@angular/core';
 import { FormBuilder,FormArray, FormGroup, Validators, FormControl } from '@angular/forms';
+import { fromEvent} from 'rxjs';
+import { map, debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { SpinnerCustomizerControllerService } from '../services/spinner-customizer-controller.service';
 import { ImageService } from '../services/image.service';
 import { CenterImageService } from '../services/center-image.service';
@@ -45,6 +47,12 @@ export class CustomizeSpinnerComponent implements OnInit {
   //For percentage 100%
   totalPercentage: any[] = [];
   percentageSum: number;
+  isPercentageLessThanZero: boolean[] =[ false];
+  isPercentageMoreThanHundred: boolean[] = [false];
+  @ViewChildren('percentage') percentage: QueryList<any>;
+
+
+  //CENTER IMAGE
   StringOfSpinnerCenter: String;
   SuccessSpinnerCenter: boolean;
   UnsuccessSpinnerCenter: boolean;
@@ -94,7 +102,7 @@ export class CustomizeSpinnerComponent implements OnInit {
       isItImage: [true, [Validators.required]],
       file: [''],
       textFieldOne:[''],
-      percentage: ['', [Validators.required, Validators.pattern(/^[1-9]\d*$/), Validators.min(0), Validators.max(100)]],
+      percentage: ['', [Validators.required, Validators.pattern(/^[0-9]\d*$/), Validators.min(0), Validators.max(100)]],
       isItEmail: [true, [Validators.required]],
       textPopUp: [''],
       emails: [''],
@@ -127,8 +135,35 @@ export class CustomizeSpinnerComponent implements OnInit {
     });
   }
 
-  validatingSpinnerForm() {
+  MessageErrorChange(i) {
+    this.isPercentageMoreThanHundred.length = this.spinnerArray.length
+    console.log(i);
+    this.percentage.forEach( element => {
+      //console.log(element.nativeElement)
+      fromEvent(element.nativeElement, 'keyup').pipe(map((event: any) => {
+        console.log(event.target.value)
+        if (event.target.value >= 100) {
+          this.isPercentageMoreThanHundred[i] = true
+        } 
+      }),
+      debounceTime(300),
+      distinctUntilChanged()
+      ).subscribe((value: any) => {
+        console.log(value);
+      });
+    });
+    console.log(this.isPercentageMoreThanHundred)
 
+    //console.log(this.percentage._results)
+    //fromEvent(this.percentage._results[i].nativeElement, 'keyup')
+    
+
+/*
+    if(value <= 0 ) {
+      this.isPercentageLessThanZero[i] = true
+    } else if ( value >= 100) {
+      this.isPercentageMoreThanHundred[i] = true
+    }*/
   }
 
   onValueChanged(SpinnerForm ,data?: any) {
@@ -149,7 +184,6 @@ export class CustomizeSpinnerComponent implements OnInit {
         }
       }
     }
-    console.log(this.SpinnerformErrors);
   }
 
    //Image Upload
@@ -247,7 +281,7 @@ export class CustomizeSpinnerComponent implements OnInit {
 		if(this.spinnerArray) {
       this.spinnerArray.push(fg);
     }
-    this.validatingSpinnerForm()
+
   }
 
   deleteSpinnerField(idx: number) {
@@ -327,7 +361,6 @@ export class CustomizeSpinnerComponent implements OnInit {
         return a + b;
       }, 0);
 
-      console.log(this.percentageSum)
     }
 
     if (this.percentageSum === 100) {
@@ -351,7 +384,6 @@ export class CustomizeSpinnerComponent implements OnInit {
       .subscribe(() => {
         this.centerCopy = this.CenterImageForm.value;
         this.centerCopy.centerImage = this.StringOfSpinnerCenter.replace(/\\/g, "/");
-        console.log(this.centerCopy);
         this.centerImageService.sendImageCenter(this.centerCopy)
         .subscribe(HFform => {
           this.centerform = HFform;
