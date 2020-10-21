@@ -139,7 +139,7 @@ export class CustomizeSpinnerComponent implements OnInit {
   }
 
   MessageErrorChange(i) {
-    console.log(i);
+    //console.log(i);
 
     const keyPressEvent$  = fromEvent(this.percentage.toArray()[i].nativeElement, 'keypress');
     const keyDownEvent$  = fromEvent(this.percentage.toArray()[i].nativeElement, 'keydown');
@@ -174,31 +174,27 @@ export class CustomizeSpinnerComponent implements OnInit {
           this.isPercentageLessThanZero[i] = false;
           this.percentageValues[i] = value;
         }
+
+        this.checkfullpercentage()
       }),
-      debounceTime(1))
-        .subscribe((value: any) => {
-          console.log(value)
-        });
+      debounceTime(1)).subscribe();
+  }
 
-    console.log(this.percentageValues)
-
+  checkfullpercentage(){
     this.percentageSum = this.percentageValues.reduce(function(a, b){
       return a + b;
     }, 0);
-
     if(this.percentageSum === 100) {
       this.SumOfPercentageEqualHundred = true;
       this.SumOfPercentageMoreThanHundred = false;
     } else if(this.percentageSum <= 100 ) {
       this.SumOfPercentageEqualHundred = false;
-      this.SumOfPercentageMoreThanHundred = false
+      this.SumOfPercentageMoreThanHundred = true
     } else if(this.percentageSum > 100) {
       this.SumOfPercentageMoreThanHundred = true
       this.SumOfPercentageEqualHundred = false;
     }
-
   }
-
 
   definingPercentage() {
     for (let i=0; i<this.items.length; i++) {

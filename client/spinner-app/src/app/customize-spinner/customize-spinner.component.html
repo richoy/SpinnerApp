@@ -89,7 +89,7 @@
                                         <input formControlName="percentage" type="number" name="textField" 
                                             min="0" max="100" 
                                             [class.invalid]="spinnerfield.controls.percentage.hasError('required')  && submitPressed" 
-                                            (keyup)="MessageErrorChange(i)"
+                                            (keyup)="MessageErrorChange(i)" (click)="MessageErrorChange(i)"
                                             #percentage>
                                             <div *ngIf="isPercentageLessThanZero[i]">
                                                 <p style="color:red; font-weight:bold; font-size:15px"> Min 0% </p>
