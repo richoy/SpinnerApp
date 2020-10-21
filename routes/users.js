@@ -72,8 +72,9 @@ module.exports = router;
 //Reset Password
 
 router.route('/resetPassword')
-  .post(/*authenticate.verifyOrdinaryUser,*/ (req, res) => {  
-    User.findOne({_id:'5f90a49bc8d77445dcbc1ec6'}, (err, user) => {
+  .post(authenticate.verifyOrdinaryUser, authenticate.verifyAdmin, (req, res) => {  
+    let usernameVariable = req.body.username;
+    User.findOne({username:usernameVariable}, (err, user) => {
       if(err){
         res.json({success: false, message: 'Err'});
       }
