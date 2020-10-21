@@ -14,7 +14,7 @@
     
         <div class="row">
             <div class="col-12 d-flex justify-content-end mb-5">
-                <button class="btn btn-info">Export results csv/excel</button>
+                <button class="btn btn-info" (click)="exportCSV()">Export results csv/excel</button>
             </div>
             <div class="table-responsive" *ngIf="emails">
                 <table class="table table-striped">
@@ -29,11 +29,11 @@
                     </thead>
                     <tbody>
                         <tr *ngFor="let email of emails">
-                            <td>{{email.emailAddress}}</td>
-                            <td>{{email.firstName}}</td>
-                            <td>{{email.lastName}}</td>
-                            <td>{{email.updatedAt | date}}</td>
-                            <td>{{email.result}}</td>
+                            <td>{{email.EmailAddress}}</td>
+                            <td>{{email.FirstName}}</td>
+                            <td>{{email.LastName}}</td>
+                            <td>{{email.DateSpin | date}}</td>
+                            <td>{{email.Result}}</td>
                         </tr>
                     </tbody>
     

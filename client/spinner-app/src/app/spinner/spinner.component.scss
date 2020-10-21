@@ -220,6 +220,11 @@ opacity:0.1;
 .modal-header, .modal-body {
 	background-color: black;
 	color: white;
+
+	.errorMessage {
+        padding: 10px;
+        color: red;
+    }
 }
 
 input {
