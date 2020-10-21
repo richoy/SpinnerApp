@@ -57,6 +57,7 @@ export class SpinnerComponent implements OnInit {
   centerImage: any;
 
   /// Modal results
+  validForm = true;
   closeResult = ''; 
   @ViewChild('ResultEmail') ResultEmail;
   @ViewChild('ResultText') ResultText;
@@ -119,7 +120,7 @@ export class SpinnerComponent implements OnInit {
       .subscribe(centerImage => {
         this.centerImage = centerImage[0];
         this.centerImage.centerImage = this.API_IMAGE_URL + this.centerImage.centerImage.slice(14);
-        console.log(centerImage);
+        //console.log(centerImage);
       });
   }
 
@@ -146,7 +147,7 @@ export class SpinnerComponent implements OnInit {
 
   ExposingResult() {
 
-    console.log(this.SpinnerFields)
+    //console.log(this.SpinnerFields)
 
     if (this.SpinnerFields[this.resultingField].isItEmail === true) {
       setTimeout( () => {
@@ -163,26 +164,31 @@ export class SpinnerComponent implements OnInit {
 
   createForm() {
     this.sendEmailForm = this.fb.group({
-      firstName: [''],
-      lastName: [''],
-      emailAddress: [''],
+      firstName: ['', [Validators.required]],
+      lastName: ['', [Validators.required]],
+      emailAddress: ['', [Validators.required, Validators.email]],
       result: ['']
     });
 
   }
 
   onSubmit() {
-    this.formCopy = this.sendEmailForm.value;
-    this.formCopy.result = this.FinalResult.textPopUp;
-    console.log(this.formCopy);
-    this.emailSevice.sendEmails(this.formCopy)
-      .subscribe(emailForm => {
-        this.form = emailForm;
-        console.log(this.form);
-      }, err =>{
-        throw new Error('Error Sending the information about the spinner');
-      });
-    this.sendEmailForm.reset();
+    if(this.sendEmailForm.status === "VALID") {
+      this.formCopy = this.sendEmailForm.value;
+      this.formCopy.result = this.FinalResult.textPopUp;
+      
+      this.emailSevice.sendEmails(this.formCopy)
+        .subscribe(emailForm => {
+          this.form = emailForm;
+          this.modalService.dismissAll();
+          this.validForm = true;
+        }, err =>{
+          throw new Error('Error Sending the information about the spinner');
+        });
+      this.sendEmailForm.reset();
+    } else {
+      this.validForm = false;
+    }
 
   }
 
@@ -203,10 +209,10 @@ export class SpinnerComponent implements OnInit {
       + Math.floor(random2 * (this.initialDegreesEnd[index] - (this.initialDegreesEnd[index] - this.angle)-1));
   
       this.resultingField = index;
-      console.log(index);
+      //console.log(index);
 
       this.FinalResult = this.SpinnerFields[index]
-      console.log(this.FinalResult)
+      //console.log(this.FinalResult)
     }
 
 
