@@ -35,6 +35,7 @@
             </div>
         </div>
 
+
         <div class="col-12">
             <form [formGroup]="spinnerForm" (ngSubmit)="onSubmit()">
                 <div>
@@ -42,6 +43,8 @@
                     <div class="table-responsive">
                         <table class="table table-borderless">
                             <div formArrayName="spinnerArray">
+
+
                                 <tr>
                                     <th><label for="ImageOption">Input type</label></th>
                                     <th><label for="">File / Text</label></th>
@@ -118,10 +121,24 @@
 
                                 </tr>
 
+
                                 <tr>
                                     <td></td>
                                     <td></td>
                                     <td>
+                                        <div *ngIf="percentageSum" >
+                                            <p style="color:red; font-weight:bold; font-size:15px" [innerHTML]="percentageSum"></p>
+                                        </div>
+                                        <div *ngIf="SumOfPercentageEqualHundred">
+                                            <p style="color:red; font-weight:bold; font-size:15px"> 
+                                                All percentages add up 100%
+                                            </p>
+                                        </div>
+                                        <div *ngIf="SumOfPercentageMoreThanHundred">
+                                            <p style="color:red; font-weight:bold; font-size:15px"> 
+                                                Percentages must be equal to 100%
+                                            </p>
+                                        </div>
                                         <div *ngIf="SpinnerformErrors">
                                             <p style="color:red; font-weight:bold;">
                                                 {{SpinnerformErrors.percentage}}

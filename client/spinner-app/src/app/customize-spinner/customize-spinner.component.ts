@@ -1,6 +1,6 @@
 import { Component, OnInit, QueryList, ViewChildren, ElementRef, OnChanges } from '@angular/core';
 import { FormBuilder,FormArray, FormGroup, Validators, FormControl } from '@angular/forms';
-import { fromEvent} from 'rxjs';
+import { Observable, fromEvent, merge} from 'rxjs';
 import { map, debounceTime, distinctUntilChanged, filter } from 'rxjs/operators';
 import { SpinnerCustomizerControllerService } from '../services/spinner-customizer-controller.service';
 import { ImageService } from '../services/image.service';
@@ -49,7 +49,9 @@ export class CustomizeSpinnerComponent implements OnInit {
   percentageSum: number;
   isPercentageLessThanZero: boolean[] =[ false];
   isPercentageMoreThanHundred: boolean[] = [false];
-  percentageValues: number[] = [0];
+  SumOfPercentageEqualHundred: boolean = false;
+  SumOfPercentageMoreThanHundred: boolean=false;
+  percentageValues: number[] = [];
   @ViewChildren('percentage') percentage: QueryList<any>;
 
 
@@ -138,69 +140,63 @@ export class CustomizeSpinnerComponent implements OnInit {
 
   MessageErrorChange(i) {
     console.log(i);
-/*
-    console.log(this.percentage.toArray());
-    for(let i=0; i < this.percentage.toArray().length; i++) {
 
-      //console.log(this.percentage.toArray());
-    }*/
-    fromEvent(this.percentage.toArray()[i].nativeElement, 'keyup')
-      .pipe(map((event: any) => {
-        console.log(event.target.value)
-        if (event.target.value > 100) {
+    const keyPressEvent$  = fromEvent(this.percentage.toArray()[i].nativeElement, 'keypress');
+    const keyDownEvent$  = fromEvent(this.percentage.toArray()[i].nativeElement, 'keydown');
+    const keyupEvent$  = fromEvent(this.percentage.toArray()[i].nativeElement, 'keyup');
+    const inputEvent$  = fromEvent(this.percentage.toArray()[i].nativeElement, 'input');
+    const changeEvent$  = fromEvent(this.percentage.toArray()[i].nativeElement, 'change');
+    const focusEvent$  = fromEvent(this.percentage.toArray()[i].nativeElement, 'focus');
+    const focusoutEvent$  = fromEvent(this.percentage.toArray()[i].nativeElement, 'blur');
+    
+    const allEvents$ = merge(   
+      changeEvent$,
+      inputEvent$,
+      keyDownEvent$,
+      keyPressEvent$,   
+      keyupEvent$,
+      focusEvent$,
+      focusoutEvent$
+    );
+    
+    allEvents$
+      .pipe(
+        map((event: any) => {
+        let value = Number(event.target.value);
+        if (value > 100) {
           this.isPercentageMoreThanHundred[i] = true;
-          this.percentageValues[i] = event.target.value;
-        } else if (event.target.value < 0) {
+          this.percentageValues[i] = value;
+        } else if (value < 0) {
           this.isPercentageLessThanZero[i] = true;
-          this.percentageValues[i] = event.target.value;
-        } else if (event.target.value >= 0 && event.target.value <= 100) {
+          this.percentageValues[i] = value;
+        } else if (value >= 0 && value <= 100) {
           this.isPercentageMoreThanHundred[i] = false;
           this.isPercentageLessThanZero[i] = false;
-          this.percentageValues[i] = event.target.value;
+          this.percentageValues[i] = value;
         }
       }),
-      debounceTime(400),
-      distinctUntilChanged())
+      debounceTime(1))
         .subscribe((value: any) => {
           console.log(value)
         });
 
-/*
-    this.percentage.toArray().forEach( element => {
-      console.log(element.nativeElement)
-      fromEvent(element.nativeElement, 'keyup').pipe(map((event: any) => {
-        console.log(event.target.value)
-        if (event.target.value > 100) {
-          this.isPercentageMoreThanHundred[i] = true;
-        } else if (event.target.value < 0) {
-          this.isPercentageLessThanZero[i] = true;
-        } else if (event.target.value >= 0 && event.target.value <= 100) {
-          this.isPercentageMoreThanHundred[i] = false;
-          this.isPercentageLessThanZero[i] = false;
-          this.percentageValues[i] = event.target.value;
-        }
-      }),
-      debounceTime(300),
-      distinctUntilChanged()
-      ).subscribe((value: any) => {
-        console.log(value);
-      });
-    });*/
-
-    console.log(this.isPercentageMoreThanHundred)
-    console.log(this.isPercentageLessThanZero)
     console.log(this.percentageValues)
 
-    //console.log(this.percentage._results)
-    //fromEvent(this.percentage._results[i].nativeElement, 'keyup')
-    
+    this.percentageSum = this.percentageValues.reduce(function(a, b){
+      return a + b;
+    }, 0);
 
-/*
-    if(value <= 0 ) {
-      this.isPercentageLessThanZero[i] = true
-    } else if ( value >= 100) {
-      this.isPercentageMoreThanHundred[i] = true
-    }*/
+    if(this.percentageSum === 100) {
+      this.SumOfPercentageEqualHundred = true;
+      this.SumOfPercentageMoreThanHundred = false;
+    } else if(this.percentageSum <= 100 ) {
+      this.SumOfPercentageEqualHundred = false;
+      this.SumOfPercentageMoreThanHundred = false
+    } else if(this.percentageSum > 100) {
+      this.SumOfPercentageMoreThanHundred = true
+      this.SumOfPercentageEqualHundred = false;
+    }
+
   }
 
 
