@@ -82,19 +82,20 @@
                                         <input formControlName="textFieldOne" type="text" name="textField">
                                     </td>
 
-                                    <td>
+                                    <td class="d-flex">
                                         <input formControlName="percentage" type="number" name="textField" 
                                             min="0" max="100" 
                                             [class.invalid]="spinnerfield.controls.percentage.hasError('required')  && submitPressed" 
                                             (keyup)="MessageErrorChange(i)"
                                             #percentage>
-                                        <div *ngIf="isPercentageLessThanZero[i]">
-                                            <p> Value must be more than 0% </p>
-                                        </div>
-                                        <div *ngIf="isPercentageMoreThanHundred[i]">
-                                            <p> Value must be less than 100% </p>
-                                        </div>
+                                            <div *ngIf="isPercentageLessThanZero[i]">
+                                                <p style="color:red; font-weight:bold; font-size:15px"> Min 0% </p>
+                                            </div>
+                                            <div *ngIf="isPercentageMoreThanHundred[i]">
+                                                <p style="color:red; font-weight:bold; font-size:15px"> Max 100% </p>
+                                            </div>
                                     </td>
+
 
                                     <td>
                                         <select formControlName="isItEmail" name="resultOption" required (change)="onChangeResult($event.target.value, i)">

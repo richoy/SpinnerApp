@@ -1,7 +1,7 @@
 import { Component, OnInit, QueryList, ViewChildren, ElementRef, OnChanges } from '@angular/core';
 import { FormBuilder,FormArray, FormGroup, Validators, FormControl } from '@angular/forms';
 import { fromEvent} from 'rxjs';
-import { map, debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { map, debounceTime, distinctUntilChanged, filter } from 'rxjs/operators';
 import { SpinnerCustomizerControllerService } from '../services/spinner-customizer-controller.service';
 import { ImageService } from '../services/image.service';
 import { CenterImageService } from '../services/center-image.service';
@@ -49,6 +49,7 @@ export class CustomizeSpinnerComponent implements OnInit {
   percentageSum: number;
   isPercentageLessThanZero: boolean[] =[ false];
   isPercentageMoreThanHundred: boolean[] = [false];
+  percentageValues: number[] = [0];
   @ViewChildren('percentage') percentage: QueryList<any>;
 
 
@@ -94,7 +95,7 @@ export class CustomizeSpinnerComponent implements OnInit {
       this.itIsTextPopUp[i] = true;
     }
     // For number of field dropdown
-
+    this.definingPercentage();
   }
 
 	createSpFormGroup() {
@@ -136,23 +137,59 @@ export class CustomizeSpinnerComponent implements OnInit {
   }
 
   MessageErrorChange(i) {
-    this.isPercentageMoreThanHundred.length = this.spinnerArray.length
     console.log(i);
-    this.percentage.forEach( element => {
-      //console.log(element.nativeElement)
+/*
+    console.log(this.percentage.toArray());
+    for(let i=0; i < this.percentage.toArray().length; i++) {
+
+      //console.log(this.percentage.toArray());
+    }*/
+    fromEvent(this.percentage.toArray()[i].nativeElement, 'keyup')
+      .pipe(map((event: any) => {
+        console.log(event.target.value)
+        if (event.target.value > 100) {
+          this.isPercentageMoreThanHundred[i] = true;
+          this.percentageValues[i] = event.target.value;
+        } else if (event.target.value < 0) {
+          this.isPercentageLessThanZero[i] = true;
+          this.percentageValues[i] = event.target.value;
+        } else if (event.target.value >= 0 && event.target.value <= 100) {
+          this.isPercentageMoreThanHundred[i] = false;
+          this.isPercentageLessThanZero[i] = false;
+          this.percentageValues[i] = event.target.value;
+        }
+      }),
+      debounceTime(400),
+      distinctUntilChanged())
+        .subscribe((value: any) => {
+          console.log(value)
+        });
+
+/*
+    this.percentage.toArray().forEach( element => {
+      console.log(element.nativeElement)
       fromEvent(element.nativeElement, 'keyup').pipe(map((event: any) => {
         console.log(event.target.value)
-        if (event.target.value >= 100) {
-          this.isPercentageMoreThanHundred[i] = true
-        } 
+        if (event.target.value > 100) {
+          this.isPercentageMoreThanHundred[i] = true;
+        } else if (event.target.value < 0) {
+          this.isPercentageLessThanZero[i] = true;
+        } else if (event.target.value >= 0 && event.target.value <= 100) {
+          this.isPercentageMoreThanHundred[i] = false;
+          this.isPercentageLessThanZero[i] = false;
+          this.percentageValues[i] = event.target.value;
+        }
       }),
       debounceTime(300),
       distinctUntilChanged()
       ).subscribe((value: any) => {
         console.log(value);
       });
-    });
+    });*/
+
     console.log(this.isPercentageMoreThanHundred)
+    console.log(this.isPercentageLessThanZero)
+    console.log(this.percentageValues)
 
     //console.log(this.percentage._results)
     //fromEvent(this.percentage._results[i].nativeElement, 'keyup')
@@ -165,6 +202,20 @@ export class CustomizeSpinnerComponent implements OnInit {
       this.isPercentageMoreThanHundred[i] = true
     }*/
   }
+
+
+  definingPercentage() {
+    for (let i=0; i<this.items.length; i++) {
+      this.isPercentageMoreThanHundred.length = i
+      this.percentageValues.length = i
+      this.isPercentageLessThanZero.length = i;
+      this.isPercentageMoreThanHundred[i] = false;
+      this.isPercentageLessThanZero[i]=false
+      this.percentageValues[i] = 0;
+    }
+  }
+
+
 
   onValueChanged(SpinnerForm ,data?: any) {
     if (!SpinnerForm) {return;}
@@ -273,7 +324,7 @@ export class CustomizeSpinnerComponent implements OnInit {
     for (i=0; i<=this.items.length; i++) {
       this.itIsTextPopUp[i] = true;
     }
-
+    this.definingPercentage();
   }
   addControl(i) {
     this.items.push({id: i.toString()})
