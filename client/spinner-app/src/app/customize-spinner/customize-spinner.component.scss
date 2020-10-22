@@ -29,6 +29,15 @@ div.menu1 {
 
 div.row input, td input {
     width: 140px;
+    height: 32px;
+    border: 1px solid white;
+    border-radius: 5px;
+}
+
+select {
+    border: 1px groove white;
+    border-radius: 5px;
+    height: 32px;
 }
 
 div#ImageUploadBox {
@@ -40,5 +49,20 @@ div#ImageUploadBox {
             align-items: center;
         }
     }
+}
 
+.btn {
+    border: 1px groove white;
+}
+
+.btnInput {
+    width: 90px;
+}
+
+.alert {
+    width: 15px;
+}
+
+.ImageUploadAndMessage {
+    width: 130px;
 }
