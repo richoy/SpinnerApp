@@ -27,17 +27,21 @@ div.menu1 {
     border-radius: 2px;
 }
 
+$InputHeight: 32px;
+$InputButtonsBorders: 1px solid white;
+$BorderRadious: 5px;
+
 div.row input, td input {
     width: 140px;
-    height: 32px;
-    border: 1px solid white;
-    border-radius: 5px;
+    height: $InputHeight;
+    border: $InputButtonsBorders;
+    border-radius: $BorderRadious;
 }
 
 select {
-    border: 1px groove white;
-    border-radius: 5px;
-    height: 32px;
+    border: $InputButtonsBorders;
+    border-radius: $BorderRadious;
+    height: $InputHeight;
 }
 
 div#ImageUploadBox {
@@ -52,7 +56,7 @@ div#ImageUploadBox {
 }
 
 .btn {
-    border: 1px groove white;
+    border: $InputButtonsBorders;
 }
 
 .btnInput {
@@ -64,5 +68,32 @@ div#ImageUploadBox {
 }
 
 .ImageUploadAndMessage {
-    width: 130px;
+    width: 125px;
+}
+
+$PercentageContainerWidth: 130px;
+.percentageContainer {
+    width: $PercentageContainerWidth;
+    .PercentageInput {
+        width: $PercentageContainerWidth/2.5;
+    }
+    .errorPercentageMessages {
+        width: $PercentageContainerWidth;
+        height: $InputHeight;
+        background-color: red;
+        border: $InputButtonsBorders;
+        border-radius: $BorderRadious;
+        text-align: center;
+        p {
+            color:white; 
+            font-weight:bold; 
+            font-size:14px;
+            margin: 0;
+        }
+    }
+}
+PercentageInput
+
+.inputType {
+    width: 80px;
 }

@@ -56,7 +56,7 @@
                                 <tr *ngFor="let spinnerfield of spinnerArray.controls; let i = index" [formGroupName]="i">
 
                                     <td>
-                                        <select formControlName="isItImage" required (change)="onChangeImage($event.target.value, i)">
+                                        <select class="inputType" formControlName="isItImage" required (change)="onChangeImage($event.target.value, i)">
                                             <option [ngValue]="true" selected>Image</option>
                                             <option [ngValue]="false">Text</option>
                                         </select>
@@ -90,18 +90,24 @@
                                         </div>
                                     </td>
 
-                                    <td class="d-flex">
-                                        <input formControlName="percentage" type="number" name="textField" 
+                                    <td>
+                                        <div class="percentageContainer d-flex">
+                                            <input formControlName="percentage" type="number" name="textField" 
+                                            class="PercentageInput"
                                             min="0" max="100" 
                                             [class.invalid]="spinnerfield.controls.percentage.hasError('required')  && submitPressed" 
                                             (keyup)="MessageErrorChange(i)" (click)="MessageErrorChange(i)"
                                             #percentage>
-                                            <div *ngIf="isPercentageLessThanZero[i]">
-                                                <p style="color:red; font-weight:bold; font-size:15px"> Min 0% </p>
+                                            <div class="errorPercentageMessages ml-1 d-flex justify-content-center" 
+                                            *ngIf="isPercentageLessThanZero[i]">
+                                                <p> Min 0% </p>
                                             </div>
-                                            <div *ngIf="isPercentageMoreThanHundred[i]">
-                                                <p style="color:red; font-weight:bold; font-size:15px"> Max 100% </p>
+                                            <div class="errorPercentageMessages ml-1 d-flex justify-content-center" 
+                                            *ngIf="isPercentageMoreThanHundred[i]">
+                                                <p> Max 100% </p>
                                             </div>
+                                        </div>
+
                                     </td>
 
 
