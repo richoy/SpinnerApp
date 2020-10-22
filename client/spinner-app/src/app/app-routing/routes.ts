@@ -11,10 +11,10 @@ import { LoginGuard } from '../services/guards/login.guard';
 export const routes: Routes = [
     { path: 'login', component: LoginComponent },
     { path: 'spinner', component: SpinnerComponent },
-    { path: 'password-change', component: PasswordChangeComponent, canActivate: [LoginGuard] },
-    { path: 'customize-spinner', component: CustomizeSpinnerComponent, canActivate: [LoginGuard] },
-    { path: 'email-list', component: EmailListComponent, canActivate: [LoginGuard] },
-    { path: 'custom-script', component: CustomScriptComponent, canActivate: [LoginGuard]},
+    { path: 'password-change', outlet:'backendControl', component: PasswordChangeComponent, canActivate: [LoginGuard] },
+    { path: 'customize-spinner', outlet:'backendControl', component: CustomizeSpinnerComponent, canActivate: [LoginGuard] },
+    { path: 'email-list', outlet:'backendControl', component: EmailListComponent, canActivate: [LoginGuard] },
+    { path: 'custom-script', outlet:'backendControl', component: CustomScriptComponent, canActivate: [LoginGuard]},
     { path: '', redirectTo: '/login', pathMatch: 'full' },
     { path: '**', redirectTo: '/login', pathMatch:'full' }
 ];

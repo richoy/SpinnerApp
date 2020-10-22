@@ -50,7 +50,7 @@
                                     <th><label for="">File / Text</label></th>
                                     <th><label for="">Percentage</label></th>
                                     <th><label for="">Result</label></th>
-                                    <th><label for="">Text / Email</label></th>
+                                    <th><label for="">Text</label></th>
                                     <th><label for="">bg Color</label></th>
                                 </tr>
                                 <tr *ngFor="let spinnerfield of spinnerArray.controls; let i = index" [formGroupName]="i">
@@ -77,7 +77,7 @@
                                                 </button>
                                             </div>
     
-                                            <div id="FileUploadMessageBox" class="ml-2">
+                                            <div id="FileUploadMessageBox" class="ml-1">
                                                 <div *ngIf="SuccessfullyUpload[i]" class="alert alert-success d-flex justify-content-center"> <span>&#10004;</span></div>
                                                 <div *ngIf="UnsuccessfullyUpload[i]" class="alert alert-danger d-flex justify-content-center"> <span>&#x2716;</span></div>
                                             </div>
@@ -86,7 +86,7 @@
 
                                     <td *ngIf="itIsTextField[i]">
                                         <div class="ImageUploadAndMessage d-flex">
-                                            <input formControlName="textFieldOne" type="text" name="textField">
+                                            <input class="textFieldOne" formControlName="textFieldOne" type="text" name="textField">
                                         </div>
                                     </td>
 
@@ -119,7 +119,7 @@
                                     </td>
 
                                     <td>
-                                        <input formControlName="textPopUp"  type="text" name="imageFile">
+                                        <input class="textPopup" formControlName="textPopUp"  type="text" name="imageFile">
                                     </td>
             
 
@@ -136,24 +136,23 @@
                                     <td></td>
                                     <td></td>
                                     <td>
-                                        <div *ngIf="percentageSum" >
-                                            <p style="color:red; font-weight:bold; font-size:15px" [innerHTML]="percentageSum"></p>
+                                        <div class="errorPercentageSum">
+                                            <div class="d-flex" *ngIf="percentageSum" >
+                                                <p [innerHTML]="percentageSum"></p><span>%</span>
+                                            </div>
+                                            <div *ngIf="SumOfPercentageEqualHundred">
+                                                <p> 
+                                                    All percentages add up 100%
+                                                </p>
+                                            </div>
+                                            <div *ngIf="SumOfPercentageMoreThanHundred">
+                                                <p> 
+                                                    Percentages must be equal to 100%
+                                                </p>
+                                            </div>
+
                                         </div>
-                                        <div *ngIf="SumOfPercentageEqualHundred">
-                                            <p style="color:red; font-weight:bold; font-size:15px"> 
-                                                All percentages add up 100%
-                                            </p>
-                                        </div>
-                                        <div *ngIf="SumOfPercentageMoreThanHundred">
-                                            <p style="color:red; font-weight:bold; font-size:15px"> 
-                                                Percentages must be equal to 100%
-                                            </p>
-                                        </div>
-                                        <div *ngIf="SpinnerformErrors">
-                                            <p style="color:red; font-weight:bold;">
-                                                {{SpinnerformErrors.percentage}}
-                                            </p>
-                                        </div>
+                                        
                                     </td>
                                 </tr>
 
@@ -163,34 +162,60 @@
                     </div>
 
                     
-    
-                    <button type="submit" class="btn btn-success ml-auto mt-2" 
-                    >Save</button>
+                    <div class="d-flex justify-content-end mt-2">
+                        <button 
+                        type="submit" 
+                        class="btn btn-success">
+                            Save
+                        </button>
+                    </div>
                     
                 </div>
+
             </form>
 
             <h3 class="mt-3">Image for middle of spinner</h3>
 
             <form [formGroup]="CenterImageForm" (ngSubmit)="onSubmitCenterImage()">
 
-                <button type="button" class="btn btn-sm btn-success mr-5" (click)="centerimageInput.click()">
-                    <span>File Upload</span>
+                <div class="d-flex">
+                    <div class="ImageUploadAndMessage d-flex" id="ImageUploadBox">
+                        <div id="FileUploadBox">
+                            <button type="button" class="btn btn-sm btn-success" (click)="centerimageInput.click()">
+                                <span>File Upload</span>
+            
+                                <input #centerimageInput
+                                style="display:none;"
+                                formControlName="centerImage" 
+                                type="file" 
+                                (change)="ProcessCenterImage($event)">
+            
+                            </button>
+                        </div>
+    
+                        <div id="FileUploadMessageBox" class="ml-1">
+                            <div *ngIf="SuccessSpinnerCenter" class="alert alert-success d-flex justify-content-center"> <span>&#10004;</span></div>
+                            <div *ngIf="UnsuccessSpinnerCenter" class="alert alert-danger d-flex justify-content-center"> <span>&#x2716;</span></div>
+                        </div>
+                    </div>
+    
+                    <div class="ml-3">
+                        <button 
+                        type="submit" 
+                        class="btn btn-success btn-sm ml-auto ml-2">
+                            Save
+                        </button>
+                    </div>
 
-                    <input #centerimageInput
-                    style="display:none;"
-                    formControlName="centerImage" 
-                    type="file" 
-                    (change)="ProcessCenterImage($event)">
+                    <div class="ml-3">
+                        <button class="btn btn-danger btn-sm" (click)="deleteImage()" 
+                        >Delete image</button>
+                    </div>
 
-                </button>
-
-
-                <button type="submit" class="btn btn-success btn-sm ml-auto ml-2" 
-                    >Save</button>
+                </div>
+                
             </form>
-            <button class="btn btn-danger btn-sm ml-auto mt-2" (click)="deleteImage()" 
-            >Delete image</button>
+
 
         </div>
     
