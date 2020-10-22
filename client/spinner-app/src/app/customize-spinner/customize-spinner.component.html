@@ -1,13 +1,6 @@
-<div class="row bgColor">
+<div class="bgColor">
 
-    <div class="col-12 col-lg-2 navbar navbar-expand-lg p-0 bg-dark">
-        <button class="navbar-toggler pl-4" type="button" (click)="isMenuCollapsed = !isMenuCollapsed">
-            <span class="btn btn-secondary">&#9776;</span> 
-        </button>
-        <app-navbar class="collapse navbar-collapse" id="navbarSupportedContent" [ngbCollapse]="isMenuCollapsed"></app-navbar>
-    </div>
-    
-    <div class="container menu1 col-12 col-lg-10">
+    <div class="container menu1">
     
         <h2>Customize the spinner</h2>
     
@@ -50,31 +43,34 @@
                                     <th><label for="">File / Text</label></th>
                                     <th><label for="">Percentage</label></th>
                                     <th><label for="">Result</label></th>
-                                    <th><label for="">Text / Email</label></th>
+                                    <th><label for="">Text</label></th>
                                     <th><label for="">bg Color</label></th>
                                 </tr>
                                 <tr *ngFor="let spinnerfield of spinnerArray.controls; let i = index" [formGroupName]="i">
 
                                     <td>
-                                        <select formControlName="isItImage" required (change)="onChangeImage($event.target.value, i)">
+                                        <select class="inputType" formControlName="isItImage" required (change)="onChangeImage($event.target.value, i)">
                                             <option [ngValue]="true" selected>Image</option>
                                             <option [ngValue]="false">Text</option>
                                         </select>
                                     </td>
 
                                     <td *ngIf="itIsImageFile[i]">
-                                        <div id="ImageUploadBox">
+                                        <div class="ImageUploadAndMessage d-flex" id="ImageUploadBox">
+
                                             <div id="FileUploadBox">
-                                                <input #imageInput
-                                                formControlName="file"
-                                                type="file" 
-                                                accept="image/*"
-                                                name="imageFile"
-                                                (change)="processFile($event, i)">
-        
+                                                <button type="button" class="btn btn-sm btn-success btnInput" (click)="imageInput.click()">
+                                                    <span>File Upload</span>
+                                                    <input #imageInput style="display:none;"
+                                                    formControlName="file"
+                                                    type="file" 
+                                                    accept="image/*"
+                                                    name="imageFile"
+                                                    (change)="processFile($event, i)">
+                                                </button>
                                             </div>
     
-                                            <div id="FileUploadMessageBox" *ngIf="selectedFile">
+                                            <div id="FileUploadMessageBox" class="ml-1">
                                                 <div *ngIf="SuccessfullyUpload[i]" class="alert alert-success d-flex justify-content-center"> <span>&#10004;</span></div>
                                                 <div *ngIf="UnsuccessfullyUpload[i]" class="alert alert-danger d-flex justify-content-center"> <span>&#x2716;</span></div>
                                             </div>
@@ -82,21 +78,29 @@
                                     </td>
 
                                     <td *ngIf="itIsTextField[i]">
-                                        <input formControlName="textFieldOne" type="text" name="textField">
+                                        <div class="ImageUploadAndMessage d-flex">
+                                            <input class="textFieldOne" formControlName="textFieldOne" type="text" name="textField">
+                                        </div>
                                     </td>
 
-                                    <td class="d-flex">
-                                        <input formControlName="percentage" type="number" name="textField" 
+                                    <td>
+                                        <div class="percentageContainer d-flex">
+                                            <input formControlName="percentage" type="number" name="textField" 
+                                            class="PercentageInput"
                                             min="0" max="100" 
                                             [class.invalid]="spinnerfield.controls.percentage.hasError('required')  && submitPressed" 
                                             (keyup)="MessageErrorChange(i)" (click)="MessageErrorChange(i)"
                                             #percentage>
-                                            <div *ngIf="isPercentageLessThanZero[i]">
-                                                <p style="color:red; font-weight:bold; font-size:15px"> Min 0% </p>
+                                            <div class="errorPercentageMessages ml-1 d-flex justify-content-center" 
+                                            *ngIf="isPercentageLessThanZero[i]">
+                                                <p> Min 0% </p>
                                             </div>
-                                            <div *ngIf="isPercentageMoreThanHundred[i]">
-                                                <p style="color:red; font-weight:bold; font-size:15px"> Max 100% </p>
+                                            <div class="errorPercentageMessages ml-1 d-flex justify-content-center" 
+                                            *ngIf="isPercentageMoreThanHundred[i]">
+                                                <p> Max 100% </p>
                                             </div>
+                                        </div>
+
                                     </td>
 
 
@@ -107,16 +111,15 @@
                                         </select>
                                     </td>
 
-                                    <td *ngIf="itIsTextPopUp[i]">
-                                        <input formControlName="textPopUp"  type="text" name="imageFile">
+                                    <td>
+                                        <input class="textPopup" formControlName="textPopUp"  type="text" name="imageFile">
                                     </td>
-                
-                                    <td *ngIf="itIsEmailPopUp[i]">
-                                        <input formControlName="emails" type="email" name="textField">
-                                    </td>
+            
 
-                                    <td class="col-2">
-                                        <input formControlName="color" type="color" [class.invalid]="spinnerfield.controls.color.hasError('required')  && submitPressed">
+                                    <td>
+                                        <div class="colorInputContainer">
+                                            <input class="colorInput" formControlName="color" type="color" [class.invalid]="spinnerfield.controls.color.hasError('required')  && submitPressed">
+                                        </div>
                                     </td>
 
                                 </tr>
@@ -126,24 +129,23 @@
                                     <td></td>
                                     <td></td>
                                     <td>
-                                        <div *ngIf="percentageSum" >
-                                            <p style="color:red; font-weight:bold; font-size:15px" [innerHTML]="percentageSum"></p>
+                                        <div class="errorPercentageSum">
+                                            <div class="d-flex" *ngIf="percentageSum" >
+                                                <p [innerHTML]="percentageSum"></p><span>%</span>
+                                            </div>
+                                            <div *ngIf="SumOfPercentageEqualHundred">
+                                                <p> 
+                                                    All percentages add up 100%
+                                                </p>
+                                            </div>
+                                            <div *ngIf="SumOfPercentageMoreThanHundred">
+                                                <p> 
+                                                    Percentages must be equal to 100%
+                                                </p>
+                                            </div>
+
                                         </div>
-                                        <div *ngIf="SumOfPercentageEqualHundred">
-                                            <p style="color:red; font-weight:bold; font-size:15px"> 
-                                                All percentages add up 100%
-                                            </p>
-                                        </div>
-                                        <div *ngIf="SumOfPercentageMoreThanHundred">
-                                            <p style="color:red; font-weight:bold; font-size:15px"> 
-                                                Percentages must be equal to 100%
-                                            </p>
-                                        </div>
-                                        <div *ngIf="SpinnerformErrors">
-                                            <p style="color:red; font-weight:bold;">
-                                                {{SpinnerformErrors.percentage}}
-                                            </p>
-                                        </div>
+                                        
                                     </td>
                                 </tr>
 
@@ -153,22 +155,60 @@
                     </div>
 
                     
-    
-                    <button type="submit" class="btn btn-success ml-auto mt-2" 
-                    >Save</button>
+                    <div class="d-flex justify-content-end mt-2">
+                        <button 
+                        type="submit" 
+                        class="btn btn-success">
+                            Save
+                        </button>
+                    </div>
                     
                 </div>
+
             </form>
 
             <h3 class="mt-3">Image for middle of spinner</h3>
 
             <form [formGroup]="CenterImageForm" (ngSubmit)="onSubmitCenterImage()">
-                <input class="mr-5" formControlName="centerImage" type="file" (change)="ProcessCenterImage($event)">
-                <button class="ml-5" type="submit" class="btn btn-success ml-auto" 
-                    >Save</button>
+
+                <div class="d-flex">
+                    <div class="ImageUploadAndMessage d-flex" id="ImageUploadBox">
+                        <div id="FileUploadBox">
+                            <button type="button" class="btn btn-sm btn-success" (click)="centerimageInput.click()">
+                                <span>File Upload</span>
+            
+                                <input #centerimageInput
+                                style="display:none;"
+                                formControlName="centerImage" 
+                                type="file" 
+                                (change)="ProcessCenterImage($event)">
+            
+                            </button>
+                        </div>
+    
+                        <div id="FileUploadMessageBox" class="ml-1">
+                            <div *ngIf="SuccessSpinnerCenter" class="alert alert-success d-flex justify-content-center"> <span>&#10004;</span></div>
+                            <div *ngIf="UnsuccessSpinnerCenter" class="alert alert-danger d-flex justify-content-center"> <span>&#x2716;</span></div>
+                        </div>
+                    </div>
+    
+                    <div class="ml-3">
+                        <button 
+                        type="submit" 
+                        class="btn btn-success btn-sm ml-auto ml-2">
+                            Save
+                        </button>
+                    </div>
+
+                    <div class="ml-3">
+                        <button class="btn btn-danger btn-sm" (click)="deleteImage()" 
+                        >Delete image</button>
+                    </div>
+
+                </div>
+                
             </form>
-            <button class="ml-5" class="btn btn-danger ml-auto" (click)="deleteImage()" 
-            >Delete image</button>
+
 
         </div>
     

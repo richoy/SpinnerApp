@@ -1,9 +1,10 @@
 $imgSize: 150px;
 
 div.container {
-    padding-top: 20px;
+    padding-top: 40px;
+    padding-bottom: 20px;
     background-color: black;
-    height: 100vh;
+    height: 100%;
 }
 
 div.image img {
@@ -22,4 +23,17 @@ div.image img {
 
 .nav .nav-item .nav-link:hover {
     color: yellow;
+}
+
+@media only screen and (max-width: 991px) {
+    div.container {
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+}
+
+$InputButtonsBorders: 1px solid white;
+
+.btn {
+    border: $InputButtonsBorders;
 }

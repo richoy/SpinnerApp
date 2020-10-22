@@ -1,5 +1,7 @@
 .bgColor {
     background-color: rgb(92, 92, 92);
+    min-height: 100vh;
+    height: 100%;
     table {
         color: white;
         input, select {
@@ -27,18 +29,99 @@ div.menu1 {
     border-radius: 2px;
 }
 
+$InputHeight: 33px;
+$InputButtonsBorders: 1px solid white;
+$BorderRadious: 5px;
+
 div.row input, td input {
     width: 140px;
+    border: $InputButtonsBorders;
+    border-radius: $BorderRadious;
 }
 
-div#ImageUploadBox {
-    div#FileUploadMessageBox {
-        height: 15px;
-        div.alert {
-            height: 100%;
+select {
+    border: $InputButtonsBorders;
+    border-radius: $BorderRadious;
+    height: $InputHeight;
+}
+
+
+.btn {
+    border: $InputButtonsBorders;
+}
+
+.btnInput, .colorInput {
+    height: $InputHeight -2px;
+    width: 90px;
+}
+
+
+.ImageUploadAndMessage {
+    width: 130px;
+    height: $InputHeight;
+    background-color: lightgray;
+    border: $InputButtonsBorders;
+    border-radius: $BorderRadious;
+    .alert {
+        width: 30px;
+        height: 100%;
+        padding: 0;
+        margin: 0;
+        align-items: center;
+        border: 1px solid black;
+    }
+    .textFieldOne {
+        width: 130px;
+    }
+}
+
+.errorPercentageSum{
+    width: 130px;
+    height: $InputHeight+ 40px;
+    background-color: lightgray;
+    border: $InputButtonsBorders;
+    border-radius: $BorderRadious;
+    p, span {
+        color:red; 
+        font-weight:bold; 
+        font-size:15px;
+        margin: 0;
+    }
+}
+
+$PercentageContainerWidth: 130px;
+.percentageContainer {
+    width: $PercentageContainerWidth;
+    height: $InputHeight;
+    background-color: lightgray;
+    border: $InputButtonsBorders;
+    border-radius: $BorderRadious;
+    .PercentageInput {
+        width: $PercentageContainerWidth/2.5;
+        height: $InputHeight -3px;
+    }
+    .errorPercentageMessages {
+        width: $PercentageContainerWidth;
+        height: $InputHeight -3px;
+        background-color: red;
+        border: $InputButtonsBorders;
+        border-radius: $BorderRadious;
+        text-align: center;
+        p {
+            color:white; 
+            font-weight:bold; 
+            font-size:14px;
             margin: 0;
-            align-items: center;
         }
     }
+}
+.textPopup {
+    height: $InputHeight;
+}
 
+.colorInputContainer {
+    .colorInput {
+        height: $InputHeight;
+        width: 80px !important;
+    }
 }

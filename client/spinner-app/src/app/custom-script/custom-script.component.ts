@@ -12,8 +12,7 @@ import { ImageSnippet } from '../shared/ImageSnippet';
   styleUrls: ['./custom-script.component.scss']
 })
 export class CustomScriptComponent implements OnInit {
-  
-  public isMenuCollapsed = true;
+
 
   HeaderFooterForm: FormGroup;
   form: any;
