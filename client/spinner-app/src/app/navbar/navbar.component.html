@@ -1,25 +1,25 @@
-<div class="container align-items-start pl-4">
+<div class="container d-flex justify-content-lg-center">
 
   <div>
-    <div class="image img-fluid">
+    <div class="image img-fluid d-none d-lg-block">
       <img src="https://dam.ngenespanol.com/wp-content/uploads/2019/06/arbol-mas-alto-del-mundo-770x395.png" alt="Fixed Photo">
-  </div>
-  <div class="mt-3">
+    </div>
+    <div class="mt-3">
       <ul class="nav flex-column">
           <li class="nav-item">
             <a class="nav-link" routerLink="/spinner">SPINNER</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" routerLink="/customize-spinner">CUSTOMIZE SPINNER</a>
+            <a class="nav-link" routerLink="/backend-control/customize-spinner">CUSTOMIZE SPINNER</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" routerLink="/email-list">EMAIL LIST</a>
+            <a class="nav-link" routerLink="/backend-control/email-list">EMAIL LIST</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" routerLink="/custom-script">CUSTOM SCRIPIT</a>
+            <a class="nav-link" routerLink="/backend-control/custom-script">CUSTOM SCRIPIT</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" routerLink="/password-change">CHANGE PASSWORD</a>
+            <a class="nav-link" routerLink="/backend-control/password-change">CHANGE PASSWORD</a>
           </li>
           <li class="nav-item">
               <a class="nav-link" href="#">SUPPORT</a>
@@ -29,7 +29,8 @@
           </li>
             
         </ul>
-  </div>
-    <button class="btn btn-danger ml-auto" (click)="logout()">Logout</button>
+    </div>
+
+    <button class="btn btn-danger mt-4 ml-auto" (click)="logout()">Logout</button>
   </div>
 </div>

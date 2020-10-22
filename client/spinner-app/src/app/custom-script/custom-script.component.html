@@ -1,13 +1,6 @@
-<div class="row bgColor">
-    
-    <div class="col-12 col-lg-2 navbar navbar-expand-lg p-0 bg-dark">
-        <button class="navbar-toggler pl-4" type="button" (click)="isMenuCollapsed = !isMenuCollapsed">
-            <span class="btn btn-secondary">&#9776;</span> 
-        </button>
-        <app-navbar class="collapse navbar-collapse" id="navbarSupportedContent" [ngbCollapse]="isMenuCollapsed"></app-navbar>
-    </div>
+<div class="bgColor">
 
-    <div class="container col-12 col-lg-10">
+    <div class="container">
         <div class="title">
             <h2>Insert Custom Script</h2>
         </div>
@@ -37,15 +30,35 @@
     
                     <div class="mb-3">
                         <label for="favicon">Favicon:</label>
-                        <input formControlName="favicon" type="file" (change)="processFile($event)"> 
-                        <div class="col-3" id="FileUploadMessageBox" *ngIf="selectedFile">
-                            <div *ngIf="SuccessfullyUpload" class="alert alert-success d-flex justify-content-center"> <span>&#10004;</span></div>
-                            <div *ngIf="UnsuccessfullyUpload" class="alert alert-danger d-flex justify-content-center"> <span>&#x2716;</span></div>
-                        </div>   
+
+                        <div class="ImageUploadAndMessage d-flex" id="ImageUploadBox">
+                            <div id="FileUploadBox">
+                                <button type="button" class="btn btn-sm btn-success" (click)="favicon.click()">
+                                    <span>File Upload</span>
+                                    <input 
+                                    style="display:none;"
+                                    #favicon
+                                    formControlName="favicon" 
+                                    type="file" 
+                                    (change)="processFile($event)"> 
+                                </button>
+                            </div>
+
+                            <div id="FileUploadMessageBox" *ngIf="selectedFile" class="ml-1">
+                                <div *ngIf="SuccessfullyUpload" class="alert alert-success d-flex justify-content-center"> <span>&#10004;</span></div>
+                                <div *ngIf="UnsuccessfullyUpload" class="alert alert-danger d-flex justify-content-center"> <span>&#x2716;</span></div>
+                            </div>
+                        </div>
+
+
                     </div>
+
+
+
+
     
                     <div class="d-flex justify-content-end">
-                        <button class="btn btn-info">Save</button>
+                        <button class="btn btn-success">Save</button>
                     </div>
                 </form>
             </div>

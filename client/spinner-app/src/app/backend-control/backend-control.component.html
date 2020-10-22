@@ -1,0 +1,33 @@
+<div class="row">
+    <div class="col-12 col-lg-2 menuBar navbar navbar-expand-lg p-0">
+        <div class="ButtonToggler">
+            <button class="navbar-toggler pl-4" type="button" (click)="isMenuCollapsed = !isMenuCollapsed">
+                <span class="btn btn-secondary">&#9776;</span> 
+            </button>
+        </div>
+
+        <div class="appNavbar d-flex justify-content-center align-items-start">
+            <app-navbar
+            class="collapse navbar-collapse" 
+            id="navbarSupportedContent" 
+            [ngbCollapse]="isMenuCollapsed">
+            </app-navbar>
+        </div>
+
+
+    </div>
+    <div class="col-12 col-lg-10 routerOutletContent">
+        <router-outlet class="routerOutlet"></router-outlet>
+    </div>
+
+</div>
+
+
+<!--
+<div class="col-12 col-lg-2 navbar navbar-expand-lg p-0 bg-dark">
+    <button class="navbar-toggler pl-4" type="button" (click)="isMenuCollapsed = !isMenuCollapsed">
+        <span class="btn btn-secondary">&#9776;</span> 
+    </button>
+    <app-navbar class="collapse navbar-collapse" id="navbarSupportedContent" [ngbCollapse]="isMenuCollapsed"></app-navbar>
+</div>
+-->

@@ -15,6 +15,7 @@ import { CustomScriptComponent } from './custom-script/custom-script.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { SpinnerComponent } from './spinner/spinner.component';
 import { PasswordChangeComponent } from './password-change/password-change.component';
+import { BackendControlComponent } from './backend-control/backend-control.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { PasswordChangeComponent } from './password-change/password-change.compo
     CustomScriptComponent,
     NavbarComponent,
     SpinnerComponent,
-    PasswordChangeComponent
+    PasswordChangeComponent,
+    BackendControlComponent
   ],
   imports: [
     BrowserModule,
