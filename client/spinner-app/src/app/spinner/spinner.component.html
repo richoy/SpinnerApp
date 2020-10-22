@@ -4,57 +4,64 @@
 </header>
 
 
-<div class="my-5 row" *ngIf="HeaderFooter">
-    <div class="col-12 d-flex justify-content-center" id="title">
-        <h2>{{HeaderFooter.pageTitle}}</h2>
-    </div>
+<div class="sizingBox">
 
-    <div class="col-12 d-flex justify-content-center mt-3" id="description">
-        <p>{{HeaderFooter.pageDescription}}</p>
-    </div>
+  
+<div class="my-5 row" *ngIf="HeaderFooter">
+  <div class="col-12 d-flex justify-content-center" id="title">
+      <h2>{{HeaderFooter.pageTitle}}</h2>
+  </div>
+
+  <div class="col-12 d-flex justify-content-center mt-3" id="description">
+      <p>{{HeaderFooter.pageDescription}}</p>
+  </div>
 
 </div>
 
 
 <div id="wrapper">
-            
-    <div *ngIf="SpinnerFields" id="wheel">
+          
+  <div *ngIf="SpinnerFields" id="wheel">
 
-        <div id="inner-wheel" [style]="spiningRotate">
-            <div *ngFor="let field of SpinnerFields; let i = index">
-                <div #wheelSec>
-                    <div [style]="holder[i]" class="hold" *ngIf="field.isItImage">
-                        <div  class="sec" id="wheelSec" [style]="fieldStyleNth[i]">
-                            <div> <span> <img [src]="field.image" alt="">
-                                {{field.image}} </span></div>
-                        </div>
-                    </div>
+      <div id="inner-wheel" [style]="spiningRotate">
+          <div *ngFor="let field of SpinnerFields; let i = index">
+              <div #wheelSec>
+                  <div [style]="holder[i]" class="hold" *ngIf="field.isItImage">
+                      <div  class="sec" id="wheelSec" [style]="fieldStyleNth[i]">
+                          <div> <span> <img [src]="field.image" alt="">
+                              {{field.image}} </span></div>
+                      </div>
+                  </div>
 
-                    <div [style]="holder[i]" class="hold" *ngIf="!field.isItImage">
-                        <div class="sec" [style]="fieldStyleNth[i]">
-                            <div><span>{{field.textFieldOne}}</span></div>
-                        </div>
-                    </div>
-                </div>
-    
-            </div>       
-           
-
-        </div>
-        <div id="spin" (click)="rotate()" #spin [style]="spinMovemente">
-            <div id="inner-spin">
-              <div *ngIf="centerImage">
-                <img src="{{centerImage.centerImage}}">
+                  <div [style]="holder[i]" class="hold" *ngIf="!field.isItImage">
+                      <div class="sec" [style]="fieldStyleNth[i]">
+                          <div><span>{{field.textFieldOne}}</span></div>
+                      </div>
+                  </div>
               </div>
+  
+          </div>       
+         
+
+      </div>
+      <div id="spin" (click)="rotate()" #spin [style]="spinMovemente">
+          <div id="inner-spin">
+            <div *ngIf="centerImage">
+              <img src="{{centerImage.centerImage}}">
             </div>
-        </div>
-        
-        <div id="shine"></div>
-        
-    </div>
-    
-    <div id="txt" #txt></div>
+          </div>
+      </div>
+      
+      <div id="shine"></div>
+      
+  </div>
+  
+  <div id="txt" #txt></div>
 </div>
+  
+</div>
+
+
   
 
 <footer *ngIf="HeaderFooter">

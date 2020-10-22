@@ -217,10 +217,9 @@ opacity:0.1;
   
   
   
-.modal-header, .modal-body {
+.modal-header, .modal-body, .modal-footer {
 	background-color: black;
 	color: white;
-
 	.errorMessage {
         padding: 10px;
         color: red;
@@ -229,4 +228,8 @@ opacity:0.1;
 
 input {
 	border-radius: 5px;
+}
+
+.sizingBox {
+	height: 550px;
 }
