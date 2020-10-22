@@ -76,7 +76,10 @@ router.route('/resetPassword')
     let usernameVariable = req.body.username;
     User.findOne({username:usernameVariable}, (err, user) => {
       if(err){
-        res.json({success: false, message: 'Err'});
+        res.statusCode = 500;
+            res.setHeader('Content-Type', 'application/json');
+            res.json({err: err});
+            return;
       }
       else {
         if(!user) {
@@ -86,10 +89,16 @@ router.route('/resetPassword')
           user.changePassword(req.body.oldpassword, req.body.newpassword, (err) => {
             if(err){
               if(err.name === 'IncorrectPasswordError') {
-                res.json({success: false, message: 'Incorrect Password'});
+                res.statusCode = 500;
+                res.setHeader('Content-Type', 'application/json');
+                res.json({err: err, success: false, message: 'Incorrect Password'});
+                
+                return;
               }
               else {
-                res.json({success: false, message: 'Something went wrong, please try again'});
+                res.statusCode = 500;
+                res.setHeader('Content-Type', 'application/json');
+                res.json({err: err, success: false, message: 'Something went wrong, please try again'});
               }
             }
             else {
