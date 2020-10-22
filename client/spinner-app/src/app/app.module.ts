@@ -14,6 +14,7 @@ import { EmailListComponent } from './email-list/email-list.component';
 import { CustomScriptComponent } from './custom-script/custom-script.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { SpinnerComponent } from './spinner/spinner.component';
+import { PasswordChangeComponent } from './password-change/password-change.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { SpinnerComponent } from './spinner/spinner.component';
     EmailListComponent,
     CustomScriptComponent,
     NavbarComponent,
-    SpinnerComponent
+    SpinnerComponent,
+    PasswordChangeComponent
   ],
   imports: [
     BrowserModule,
