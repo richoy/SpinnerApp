@@ -59,7 +59,7 @@ div#ImageUploadBox {
     border: $InputButtonsBorders;
 }
 
-.btnInput {
+.btnInput, .colorInput {
     width: 90px;
 }
 
@@ -92,8 +92,9 @@ $PercentageContainerWidth: 130px;
         }
     }
 }
-PercentageInput
 
-.inputType {
-    width: 80px;
+.colorInputContainer {
+    .colorInput {
+        width: 80px !important;
+    }
 }

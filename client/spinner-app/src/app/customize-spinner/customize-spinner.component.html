@@ -118,16 +118,15 @@
                                         </select>
                                     </td>
 
-                                    <td *ngIf="itIsTextPopUp[i]">
+                                    <td>
                                         <input formControlName="textPopUp"  type="text" name="imageFile">
                                     </td>
-                
-                                    <td *ngIf="itIsEmailPopUp[i]">
-                                        <input formControlName="emails" type="email" name="textField">
-                                    </td>
+            
 
-                                    <td class="col-2">
-                                        <input formControlName="color" type="color" [class.invalid]="spinnerfield.controls.color.hasError('required')  && submitPressed">
+                                    <td>
+                                        <div class="colorInputContainer">
+                                            <input class="colorInput" formControlName="color" type="color" [class.invalid]="spinnerfield.controls.color.hasError('required')  && submitPressed">
+                                        </div>
                                     </td>
 
                                 </tr>
