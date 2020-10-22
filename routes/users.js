@@ -4,6 +4,8 @@ const User = require('../models/user');
 const passport = require('passport');
 const authenticate = require('../authenticate');
 
+const ChangePasswordController = require('../controllers/controllers');
+
 const router = express.Router();
 router.use(bodyParser.json());
 
@@ -66,3 +68,36 @@ router.get('/logout', (req, res) => {
   
 module.exports = router;
   
+
+//Reset Password
+
+router.route('/resetPassword')
+  .post(authenticate.verifyOrdinaryUser, authenticate.verifyAdmin, (req, res) => {  
+    let usernameVariable = req.body.username;
+    User.findOne({username:usernameVariable}, (err, user) => {
+      if(err){
+        res.json({success: false, message: 'Err'});
+      }
+      else {
+        if(!user) {
+          res.json({success: false, message: 'User not Found'});
+        }
+        else {
+          user.changePassword(req.body.oldpassword, req.body.newpassword, (err) => {
+            if(err){
+              if(err.name === 'IncorrectPasswordError') {
+                res.json({success: false, message: 'Incorrect Password'});
+              }
+              else {
+                res.json({success: false, message: 'Something went wrong, please try again'});
+              }
+            }
+            else {
+              res.json({success: true, message: 'You password has been changed'});
+            }
+          });
+        }
+      }
+    });
+
+  });

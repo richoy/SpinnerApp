@@ -53,6 +53,7 @@ app.use(cors());
 const api = require('./routes/routes');
 
 app.use(passport.initialize());
+app.use(passport.session());
 
 
 // Configure app to use route
