@@ -9,7 +9,14 @@ import { ProcessHTTPMsgService } from './process-httpmsg.service';
   providedIn: 'root'
 })
 export class CustomScriptService {
-
+  
+  TOKEN = localStorage.getItem('userToken');
+  
+  httpOptions = {
+    headers: new HttpHeaders({ 
+      'Authorization': `Bearer ${this.TOKEN}`, 
+      'Content-Type': 'application/json'})
+  };
 
 
   URL_API = "/api/v1/headerFooter";
@@ -19,15 +26,12 @@ export class CustomScriptService {
     private processHTTPMsgService: ProcessHTTPMsgService) { }
 
   sendHeaderFooter(Form:any): Observable<any> {
-    const httpOptions = {
-      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-    };
-    return this.http.post<any>(this.URL_API, Form)
+    return this.http.post<any>(this.URL_API, Form, this.httpOptions)
       .pipe(catchError(this.processHTTPMsgService.handleError));
   }; 
 
   deleteHeaderFooter() {
-    return this.http.delete(this.URL_API);
+    return this.http.delete(this.URL_API, this.httpOptions);
   }
 
 }

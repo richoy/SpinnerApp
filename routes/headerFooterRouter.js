@@ -25,7 +25,7 @@ HeaderFooterRouter.route('/')
         }, (err) => next(err))
         .catch((err) => next(err));
     })
-    .post(/*authenticate.verifyOrdinaryUser, authenticate.verifyAdmin,*/ (req, res, next) => {
+    .post(authenticate.verifyOrdinaryUser, authenticate.verifyAdmin, (req, res, next) => {
         HeaderFooter.create(req.body)
         .then((headerFooter) => {
             console.log('headerFooter Created ', headerFooter);
@@ -37,11 +37,11 @@ HeaderFooterRouter.route('/')
         }, (err) => next(err))
         .catch((err) => next(err))
     })
-    .put(/*authenticate.verifyOrdinaryUser, authenticate.verifyAdmin,*/ (req, res, next) => {
+    .put(authenticate.verifyOrdinaryUser, authenticate.verifyAdmin, (req, res, next) => {
         res.statusCode = 403;
         res.end('PUT operation not supported on /headerFooter');
     })
-    .delete(/*authenticate.verifyOrdinaryUser, authenticate.verifyAdmin,*/ (req, res, next) => {
+    .delete(authenticate.verifyOrdinaryUser, authenticate.verifyAdmin, (req, res, next) => {
         HeaderFooter.remove({})
         .then((resp) => {
             res.statusCode = 200;
@@ -62,12 +62,12 @@ HeaderFooterRouter.route('/:header-footerId')
         }, (err) => next(err))
         .catch((err) => next(err))
     })
-    .post(/*authenticate.verifyOrdinaryUser, authenticate.verifyAdmin,*/ (req, res, next) => {
+    .post(authenticate.verifyOrdinaryUser, authenticate.verifyAdmin, (req, res, next) => {
         res.statusCode = 403;
         res.end('POST operation not supported on /headerFooter/'
             + req.params.header-footer);
     })
-    .put(/*authenticate.verifyOrdinaryUser, authenticate.verifyAdmin,*/ (req, res, next) => {
+    .put(authenticate.verifyOrdinaryUser, authenticate.verifyAdmin, (req, res, next) => {
         HeaderFooter.findByIdAndUpdate(req.params.header-footerId, {
             $set: req.body
         }, { new:true })
@@ -78,7 +78,7 @@ HeaderFooterRouter.route('/:header-footerId')
         }, (err) => next(err))
         .catch((err) => next(err))
     })
-    .delete(/*authenticate.verifyOrdinaryUser, authenticate.verifyAdmin,*/ (req, res, next) => {
+    .delete(authenticate.verifyOrdinaryUser, authenticate.verifyAdmin, (req, res, next) => {
         HeaderFooter.findByIdAndRemove(req.params.header-footerId)
         .then((resp) => {
             res.statusCode = 200;

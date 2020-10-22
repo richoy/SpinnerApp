@@ -10,6 +10,14 @@ import { ProcessHTTPMsgService } from './process-httpmsg.service';
 })
 export class CenterImageService {
 
+    
+  TOKEN = localStorage.getItem('userToken');
+  
+  httpOptions = {
+    headers: new HttpHeaders(
+      { 'Authorization': `Bearer ${this.TOKEN}`})
+  };
+
   URL_API = "/api/v1/centerImage";
 
   constructor(
@@ -18,21 +26,18 @@ export class CenterImageService {
   ) { }
 
   getImageCenter(): Observable<any> {
-    return this.http.get<any>(this.URL_API)
+    return this.http.get<any>(this.URL_API, this.httpOptions)
       .pipe(map((data:any) => data),
       catchError(this.processHTTPMsgService.handleError));
   }
 
   sendImageCenter(Form:any): Observable<any> {
-    const httpOptions = {
-      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-    };
-    return this.http.post<any>(this.URL_API, Form)
+    return this.http.post<any>(this.URL_API, Form, this.httpOptions)
       .pipe(catchError(this.processHTTPMsgService.handleError));
   }; 
 
   deleteImageCenter() {
-    return this.http.delete(this.URL_API);
+    return this.http.delete(this.URL_API, this.httpOptions);
   }
 
 }

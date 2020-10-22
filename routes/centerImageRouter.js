@@ -23,7 +23,7 @@ CenterImageRouter.route('/')
         }, (err) => next(err))
         .catch((err) => next(err));
     })
-    .post(/*authenticate.verifyOrdinaryUser, authenticate.verifyAdmin,*/ (req, res, next) => {
+    .post(authenticate.verifyOrdinaryUser, authenticate.verifyAdmin, (req, res, next) => {
         CenterImage.create(req.body)
         .then((centerImage) => {
             console.log('centerImage Created ', centerImage);
@@ -35,11 +35,11 @@ CenterImageRouter.route('/')
         }, (err) => next(err))
         .catch((err) => next(err))
     })
-    .put(/*authenticate.verifyOrdinaryUser, authenticate.verifyAdmin,*/ (req, res, next) => {
+    .put(authenticate.verifyOrdinaryUser, authenticate.verifyAdmin, (req, res, next) => {
         res.statusCode = 403;
         res.end('PUT operation not supported on /centerImage');
     })
-    .delete(/*authenticate.verifyOrdinaryUser, authenticate.verifyAdmin,*/ (req, res, next) => {
+    .delete(authenticate.verifyOrdinaryUser, authenticate.verifyAdmin, (req, res, next) => {
         CenterImage.remove({})
         .then((resp) => {
             res.statusCode = 200;
@@ -60,12 +60,12 @@ CenterImageRouter.route('/:centerImageId')
         }, (err) => next(err))
         .catch((err) => next(err))
     })
-    .post(/*authenticate.verifyOrdinaryUser, authenticate.verifyAdmin,*/ (req, res, next) => {
+    .post(authenticate.verifyOrdinaryUser, authenticate.verifyAdmin, (req, res, next) => {
         res.statusCode = 403;
         res.end('POST operation not supported on /centerImage/'
             + req.params.centerImageId);
     })
-    .put(/*authenticate.verifyOrdinaryUser, authenticate.verifyAdmin,*/ (req, res, next) => {
+    .put(authenticate.verifyOrdinaryUser, authenticate.verifyAdmin, (req, res, next) => {
         CenterImage.findByIdAndUpdate(req.params.centerImageId, {
             $set: req.body
         }, { new:true })
@@ -76,7 +76,7 @@ CenterImageRouter.route('/:centerImageId')
         }, (err) => next(err))
         .catch((err) => next(err))
     })
-    .delete(/*authenticate.verifyOrdinaryUser, authenticate.verifyAdmin,*/ (req, res, next) => {
+    .delete(authenticate.verifyOrdinaryUser, authenticate.verifyAdmin, (req, res, next) => {
         CenterImage.findByIdAndRemove(req.params.centerImageId)
         .then((resp) => {
             res.statusCode = 200;
