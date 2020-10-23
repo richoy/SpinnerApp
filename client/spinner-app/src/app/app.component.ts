@@ -12,7 +12,7 @@ import { baseHref } from './shared/baseHref';
 })
 export class AppComponent implements OnInit{
 
-  API_IMAGE_URL = '/api/v1/imageUpload/';
+  API_IMAGE_URL = `${baseHref}api/v1/imageUpload/`;
   favIcon: HTMLLinkElement = document.querySelector('#favIcon');
   baseHref: HTMLLinkElement = document.querySelector('#baseHref');
   HeaderFooter: any;
@@ -33,7 +33,7 @@ export class AppComponent implements OnInit{
     this.headerFooterService.getHeaderFooter()
       .subscribe( headerFooter => {
         this.HeaderFooter = headerFooter[0];
-        this.baseHref[0].href = baseHref;
+        this.baseHref.href = baseHref;
         this.favIcon.href = this.API_IMAGE_URL + this.HeaderFooter.favicon.slice(14);
         this.Pagetitle.setTitle( this.HeaderFooter.pageTitle );
         this.metaService.addTag({ name: 'description', content: this.HeaderFooter.pageDescription }); //Description
