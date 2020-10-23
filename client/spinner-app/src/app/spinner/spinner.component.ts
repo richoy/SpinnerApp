@@ -210,10 +210,10 @@ export class SpinnerComponent implements OnInit {
       + Math.floor(random2 * (this.initialDegreesEnd[index] - (this.initialDegreesEnd[index] - this.angle)-1));
   
       this.resultingField = index;
-      //console.log(index);
+      console.log(index);
 
       this.FinalResult = this.SpinnerFields[index]
-      //console.log(this.FinalResult)
+      console.log(this.FinalResult)
     }
 
 
