@@ -60,21 +60,34 @@ div#wheel{
     border-radius:$Diameter; 
 }
 
-#wheel div.sec span{
-	margin-top: 50px;
-	position: relative;
-	z-index: 10000000;
-	display: block;
-	text-align: center;
-	font-size:30px;
-	margin-left:-120px;
-	text-shadow: rgba(255, 255, 255, 0.1) 0px -1px 0px, rgba(0, 0, 0, 0.2) 0px 1px 0px;
-	transform: rotate(-120deg);
-	-webkit-transform: rotate(-120deg);
-	-moz-transform: rotate(-120deg);
-	-ms-transform: rotate(-120deg);
-	-o-transform: rotate(-120deg);
+#wheel div.sec {
+	span.imageSpan {
+		margin-top: 50px;
+		position: absolute;
+		bottom: 50px;
+		z-index: 10000000;
+		display: block;
+		text-align: center;
+		font-size:30px;
+		margin-left:-120px;
+		text-shadow: rgba(255, 255, 255, 0.1) 0px -1px 0px, rgba(0, 0, 0, 0.2) 0px 1px 0px;
+	}
+	span.TextSpan {
+		position: absolute;
+		bottom: $Diameter/2.3;
+		right: $Diameter/1.8;
+		min-width: $Diameter/2;
+		max-width: $Diameter/2;
+		text-justify: inter-word;
+		z-index: 10000000;
+		display: block;
+		text-align: center;
+		font-size:30px;
+		text-shadow: rgba(255, 255, 255, 0.1) 0px -1px 0px, rgba(0, 0, 0, 0.2) 0px 1px 0px;
+	}
+
 }
+
 
 #spin{
 	width:$Diameter/3.6764;  
