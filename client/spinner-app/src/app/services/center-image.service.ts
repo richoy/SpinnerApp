@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 
 import { ProcessHTTPMsgService } from './process-httpmsg.service';
+import { baseHref } from '../shared/baseHref';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +19,7 @@ export class CenterImageService {
       { 'Authorization': `Bearer ${this.TOKEN}`})
   };
 
-  URL_API = "/api/v1/centerImage";
+  URL_API = `${baseHref}api/v1/centerImage`;
 
   constructor(
     private http: HttpClient,

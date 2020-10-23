@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 
 import { ProcessHTTPMsgService } from './process-httpmsg.service';
+import { baseHref } from '../shared/baseHref';
 
 
 @Injectable({
@@ -11,8 +12,8 @@ import { ProcessHTTPMsgService } from './process-httpmsg.service';
 })
 export class SpinnerService {
 
-  URL_API_SPINNER = "/api/v1/spinner";
-  URL_API_HEADER = "/api/v1/headerFooter";
+  URL_API_SPINNER = `${baseHref}api/v1/spinner`;
+  URL_API_HEADER = `${baseHref}api/v1/headerFooter`;
 
   constructor(
     private http: HttpClient,

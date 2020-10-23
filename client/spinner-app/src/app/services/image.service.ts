@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { baseHref } from '../shared/baseHref';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ImageService {
 
-  URL_API = "/api/v1/imageUpload";
+  URL_API = `${baseHref}api/v1/imageUpload`;
 
   TOKEN = localStorage.getItem('userToken');
   

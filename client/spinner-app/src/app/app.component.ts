@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 
 import { HeaderFooterService } from './services/header-footer.service';
+import { baseHref } from './shared/baseHref';
 
 
 @Component({
@@ -13,6 +14,7 @@ export class AppComponent implements OnInit{
 
   API_IMAGE_URL = '/api/v1/imageUpload/';
   favIcon: HTMLLinkElement = document.querySelector('#favIcon');
+  baseHref: HTMLLinkElement = document.querySelector('#baseHref');
   HeaderFooter: any;
 
   title = 'spinner-app';
@@ -31,6 +33,7 @@ export class AppComponent implements OnInit{
     this.headerFooterService.getHeaderFooter()
       .subscribe( headerFooter => {
         this.HeaderFooter = headerFooter[0];
+        this.baseHref[0].href = baseHref;
         this.favIcon.href = this.API_IMAGE_URL + this.HeaderFooter.favicon.slice(14);
         this.Pagetitle.setTitle( this.HeaderFooter.pageTitle );
         this.metaService.addTag({ name: 'description', content: this.HeaderFooter.pageDescription }); //Description
