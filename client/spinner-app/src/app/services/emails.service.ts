@@ -36,4 +36,8 @@ export class EmailsService {
     return this.http.post<any>(this.URL_API, Form)
       .pipe(catchError(this.processHTTPMsgService.handleError));
   }
+
+  deleteEmails(){
+    return this.http.delete(this.URL_API, this.httpOptions);
+  }
 }
