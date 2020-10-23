@@ -5,6 +5,7 @@ import { catchError } from 'rxjs/operators';
 
 import { formSpinnerControl } from '../shared/form-spinner-controller';
 import { ProcessHTTPMsgService } from './process-httpmsg.service';
+import { baseHref } from '../shared/baseHref';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,7 @@ export class SpinnerCustomizerControllerService {
     headers: new HttpHeaders({ 'Authorization': `Bearer ${this.TOKEN}` })
   };
 
-  URL_API = "/api/v1/spinner";
+  URL_API = `${baseHref}api/v1/spinner`;
 
   constructor(
     private http: HttpClient,

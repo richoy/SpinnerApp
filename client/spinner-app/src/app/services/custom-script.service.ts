@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
 import { ProcessHTTPMsgService } from './process-httpmsg.service';
+import { baseHref } from '../shared/baseHref';
 
 @Injectable({
   providedIn: 'root'
@@ -18,8 +19,7 @@ export class CustomScriptService {
       'Content-Type': 'application/json'})
   };
 
-
-  URL_API = "/api/v1/headerFooter";
+  URL_API = `${baseHref}api/v1/headerFooter`;
 
   constructor(
     private http: HttpClient,

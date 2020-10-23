@@ -4,14 +4,14 @@ import { Observable } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 
 import { ProcessHTTPMsgService } from './process-httpmsg.service';
-
+import { baseHref } from '../shared/baseHref';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HeaderFooterService {
 
-  URL_API_HEADER = "/api/v1/headerFooter";
+  URL_API_HEADER = `${baseHref}api/v1/headerFooter`;
 
   constructor(
     private http: HttpClient,

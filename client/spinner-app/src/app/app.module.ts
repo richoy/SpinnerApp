@@ -16,6 +16,8 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { SpinnerComponent } from './spinner/spinner.component';
 import { PasswordChangeComponent } from './password-change/password-change.component';
 import { BackendControlComponent } from './backend-control/backend-control.component';
+import { baseHref } from './shared/baseHref';
+
 
 @NgModule({
   declarations: [
@@ -39,7 +41,10 @@ import { BackendControlComponent } from './backend-control/backend-control.compo
     ReactiveFormsModule,
     NgbModule
   ],
-  providers: [Meta, Title],
+  providers: [
+    Meta, 
+    Title,
+    {provide: 'baseHref', useValue: baseHref}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

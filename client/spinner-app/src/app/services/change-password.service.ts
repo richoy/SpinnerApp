@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders  } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError } from 'rxjs/operators';
 import { ProcessHTTPMsgService } from './process-httpmsg.service';
+import { baseHref } from '../shared/baseHref';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,7 @@ export class ChangePasswordService {
       'Content-Type': 'application/json'})
   };
 
-  URL_API = "/users/resetPassword";
+  URL_API = `${baseHref}users/resetPassword`;
 
   constructor(
     private http: HttpClient,

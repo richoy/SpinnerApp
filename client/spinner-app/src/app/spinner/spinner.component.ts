@@ -6,6 +6,7 @@ import { SpinnerService } from '../services/spinner.service';
 import { HeaderFooterService } from '../services/header-footer.service';
 import { EmailsService } from '../services/emails.service';
 import { CenterImageService } from '../services/center-image.service';
+import { baseHref } from '../shared/baseHref';
 
 @Component({
   selector: 'app-spinner',
@@ -15,7 +16,7 @@ import { CenterImageService } from '../services/center-image.service';
 export class SpinnerComponent implements OnInit {
 
 
-  API_IMAGE_URL = '/api/v1/imageUpload/';
+  API_IMAGE_URL = `${baseHref}api/v1/imageUpload/`;
   SpinnerFields: any;
   HeaderFooter: any;
   bgColorStyle: any[] = ['']; // Backgorund color
