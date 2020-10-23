@@ -22,8 +22,11 @@ export class SpinnerComponent implements OnInit {
   bgColorStyle: any[] = ['']; // Backgorund color
   fontColor: any[] = ['']; // Font Color
 
-  fieldStyleNth: any[] = [''] //Individual field style
-  holder: any[] = ['']
+  fieldStyleNth: any[] = ['']; //Individual field style
+  holder: any[] = [''];
+  imageOrientation: any[] = [''];
+  textOrientation: any[] = [''];
+  spanOrientation: any[] = [''];
 
   state: string = 'default';
 
@@ -93,7 +96,7 @@ export class SpinnerComponent implements OnInit {
                             '-webkit-transform': 'rotate(' + this.angle*(i) + 'deg)',
                             '-moz-transform': 'rotate(' + this.angle*(i) + 'deg)',
                             '-o-transform': 'rotate(' + this.angle*(i) + 'deg)',
-                            '-ms-transform': 'rotate(' + this.angle*(i) + 'deg)',}
+                            '-ms-transform': 'rotate(' + this.angle*(i) + 'deg)'};
 
           this.fieldStyleNth[i] = {'transform': 'rotate(' + this.angle + 'deg)',
                                   '-webkit-transform': 'rotate(' + this.angle + 'deg)',
@@ -101,7 +104,27 @@ export class SpinnerComponent implements OnInit {
                                   '-o-transform': 'rotate(' + this.angle + 'deg)',
                                   '-ms-transform': 'rotate(' + this.angle + 'deg)',
                                   'background-color': this.bgColorStyle[i],
-                                  'color': this.fontColor[i]	}
+                                  'color': this.fontColor[i]	};
+          
+          this.imageOrientation[i] = { 'transform': 'rotate(' + (this.angle - this.angle*1.5 ) + 'deg)',
+                                       '-webkit-transform': 'rotate(' + (this.angle - this.angle*1.5) + 'deg)',
+                                       '-moz-transform': 'rotate(' + (this.angle - this.angle*1.5) + 'deg)',
+                                       '-o-transform': 'rotate(' + (this.angle - this.angle*1.5) + 'deg)',
+                                       '-ms-transform': 'rotate(' + (this.angle - this.angle*1.5) + 'deg)'};
+
+          this.textOrientation[i] = { 'transform': 'rotate(' + (90 - this.angle/2) + 'deg)',
+                                      '-webkit-transform': 'rotate(' + (180 + this.angle/4) + 'deg)',
+                                      '-moz-transform': 'rotate(' + (180 + this.angle/4) + 'deg)',
+                                      '-o-transform': 'rotate(' + (180 + this.angle/4) + 'deg)',
+                                      '-ms-transform': 'rotate(' + (180 + this.angle/4) + 'deg)', 
+                                      'transform-origin': 'center right'};
+
+          this.spanOrientation[i] = { 'transform': 'rotate(' + (this.angle) + 'deg)',
+                                      '-webkit-transform': 'rotate(' + (this.angle) + 'deg)',
+                                      '-moz-transform': 'rotate(' + (this.angle) + 'deg)',
+                                      '-o-transform': 'rotate(' + (this.angle) + 'deg)',
+                                      '-ms-transform': 'rotate(' + (this.angle) + 'deg)', 
+                                      'transform-origin': 'center'};
 
           this.initialDegreesStart[i] = this.angle*i
           this.initialDegreesEnd[i] = this.initialDegreesStart[i] + this.angle;
@@ -210,10 +233,10 @@ export class SpinnerComponent implements OnInit {
       + Math.floor(random2 * (this.initialDegreesEnd[index] - (this.initialDegreesEnd[index] - this.angle)-1));
   
       this.resultingField = index;
-      //console.log(index);
+      console.log(index);
 
       this.FinalResult = this.SpinnerFields[index]
-      //console.log(this.FinalResult)
+      console.log(this.FinalResult)
     }
 
 
