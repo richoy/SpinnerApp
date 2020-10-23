@@ -69,6 +69,7 @@ export class PasswordChangeComponent implements OnInit {
          }
       }, err => {
         this.PasswordChangeError = true;
+        console.log(err);
       });
     }
   }

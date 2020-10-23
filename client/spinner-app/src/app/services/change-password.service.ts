@@ -1,5 +1,7 @@
 import { HttpClient, HttpHeaders  } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { catchError } from 'rxjs/operators';
+import { ProcessHTTPMsgService } from './process-httpmsg.service';
 
 @Injectable({
   providedIn: 'root'
@@ -17,11 +19,13 @@ export class ChangePasswordService {
   URL_API = "/users/resetPassword";
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private processHTTPMsgService: ProcessHTTPMsgService
   ) { }
 
   ChangePassword(user: passwordChange){
-    return this.http.post(this.URL_API, user, this.httpOptions);
+    return this.http.post(this.URL_API, user, this.httpOptions)
+    .pipe(catchError(this.processHTTPMsgService.handleError));
   }
 
 }

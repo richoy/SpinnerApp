@@ -16,3 +16,13 @@ table {
 #navbarSupportedContent {
     height: 100%;
 }
+
+$InputButtonsBorders: 1px solid white;
+.btn {
+    border: $InputButtonsBorders;
+}
+
+.modal-header, .modal-body, .modal-footer {
+	background-color: black;
+	color: white;
+}

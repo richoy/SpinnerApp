@@ -233,3 +233,8 @@ input {
 .sizingBox {
 	height: 550px;
 }
+
+$InputButtonsBorders: 1px solid white;
+.btn {
+    border: $InputButtonsBorders;
+}
