@@ -115,7 +115,7 @@ export class CustomizeSpinnerComponent implements OnInit {
       isItEmail: [true, [Validators.required]],
       textPopUp: [''],
       emails: [''],
-      color: [''],
+      color: ['', [Validators.required]],
     });
 
     SpinnerForm.valueChanges.subscribe( data => {
@@ -393,6 +393,9 @@ export class CustomizeSpinnerComponent implements OnInit {
     
     // if a field outside the array is added, change this to this.spinnerForm.value
     if (this.spinnerForm.status === "VALID") {
+
+      if (this.percentageSum === 100) {
+        
       let counter = 0;
   
       this.spinnerArray.value.forEach(element => {
@@ -427,22 +430,19 @@ export class CustomizeSpinnerComponent implements OnInit {
         return a + b;
       }, 0);
 
-    }
-
-    if (this.percentageSum === 100) {
       this.spinnerService.deleteSpinner().subscribe(() => {
-        console.log(spinner)
-        this.spinnerService.sendSpinner(spinner).subscribe((res) => {
-          this.spinnerForm.reset();
-          this.StringOfImageUpload = []; // Resets the StringOfImageUpload array
-        }, err =>{
-          throw new Error('Error Sending the information about the spinner');
+          this.spinnerService.sendSpinner(spinner).subscribe((res) => {
+            this.spinnerForm.reset();
+            this.StringOfImageUpload = []; // Resets the StringOfImageUpload array
+          }, err =>{
+            throw new Error('Error Sending the information about the spinner');
+          });
+        }, err => {
+          throw new Error('Error deleting the information of the previous spineer');
         });
-      }, err => {
-        throw new Error('Error deleting the information of the previous spineer');
-      });
-    } else {
-      throw new Error('Error Percentage must add up 100%');
+      } else {
+        throw new Error('Error Percentage must add up 100%');
+      }
     }
   }
 
