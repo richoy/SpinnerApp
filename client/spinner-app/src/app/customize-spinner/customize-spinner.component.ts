@@ -1,4 +1,4 @@
-import { Component, OnInit, QueryList, ViewChildren, ElementRef, OnChanges } from '@angular/core';
+import { Component, OnInit, QueryList, ViewChildren, ViewChild, ElementRef, OnChanges } from '@angular/core';
 import { FormBuilder,FormArray, FormGroup, Validators, FormControl } from '@angular/forms';
 import { Observable, fromEvent, merge} from 'rxjs';
 import { map, debounceTime, distinctUntilChanged, filter } from 'rxjs/operators';
@@ -67,6 +67,7 @@ export class CustomizeSpinnerComponent implements OnInit {
 
   
   closeResult = '';
+  @ViewChild('modal') modal;
 
   constructor(
     public formBuilder:FormBuilder,// For number of field dropdown
@@ -143,8 +144,11 @@ export class CustomizeSpinnerComponent implements OnInit {
     });
   }
 
+  
+  DidModalOpen:boolean = false;
+
+
   MessageErrorChange(i) {
-    //console.log(i);
 
     const keyPressEvent$  = fromEvent(this.percentage.toArray()[i].nativeElement, 'keypress');
     const keyDownEvent$  = fromEvent(this.percentage.toArray()[i].nativeElement, 'keydown');
@@ -167,13 +171,17 @@ export class CustomizeSpinnerComponent implements OnInit {
     allEvents$
       .pipe(
         map((event: any) => {
+          if(event.target.value = '-') {
+            let value = event.target.value;
+            event.target.value.replace('-', '');
+          }
+          console.log(event.target.value);
         let value = Number(event.target.value);
         if (value > 100) {
           this.isPercentageMoreThanHundred[i] = true;
           this.percentageValues[i] = value;
         } else if (value < 0) {
           this.isPercentageLessThanZero[i] = true;
-          this.percentageValues[i] = value;
         } else if (value >= 0 && value <= 100) {
           this.isPercentageMoreThanHundred[i] = false;
           this.isPercentageLessThanZero[i] = false;
@@ -183,6 +191,8 @@ export class CustomizeSpinnerComponent implements OnInit {
         this.checkfullpercentage()
       }),
       debounceTime(1)).subscribe();
+      
+      this.DidModalOpen = false;
   }
 
   checkfullpercentage(){
@@ -198,7 +208,10 @@ export class CustomizeSpinnerComponent implements OnInit {
     } else if(this.percentageSum > 100) {
       this.SumOfPercentageMoreThanHundred = true
       this.SumOfPercentageEqualHundred = false;
-      
+      if(this.DidModalOpen === false) {
+        this.open(this.modal);
+        this.DidModalOpen = true;
+      }
     }
   }
 

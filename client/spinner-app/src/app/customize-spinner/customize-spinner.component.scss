@@ -126,3 +126,9 @@ $PercentageContainerWidth: 130px;
         width: 80px !important;
     }
 }
+
+
+.modal-header, .modal-body, .modal-footer {
+	background-color: black;
+	color: white;
+}
