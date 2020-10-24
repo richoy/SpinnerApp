@@ -171,16 +171,15 @@ export class CustomizeSpinnerComponent implements OnInit {
     allEvents$
       .pipe(
         map((event: any) => {
-          if(event.target.value = '-') {
-            let value = event.target.value;
-            event.target.value.replace('-', '');
-          }
-          console.log(event.target.value);
+
         let value = Number(event.target.value);
+        console.log(value)
         if (value > 100) {
+          event.target.value = 100;
           this.isPercentageMoreThanHundred[i] = true;
           this.percentageValues[i] = value;
         } else if (value < 0) {
+          event.target.value = 0;
           this.isPercentageLessThanZero[i] = true;
         } else if (value >= 0 && value <= 100) {
           this.isPercentageMoreThanHundred[i] = false;
