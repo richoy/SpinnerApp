@@ -85,12 +85,15 @@
 
                                     <td>
                                         <div class="percentageContainer d-flex">
+
                                             <input formControlName="percentage" type="number" name="textField" 
                                             class="PercentageInput"
+                                            id="PercentageId"
                                             min="0" max="100" 
                                             [class.invalid]="spinnerfield.controls.percentage.hasError('required')  && submitPressed" 
                                             (keyup)="MessageErrorChange(i)" (click)="MessageErrorChange(i)"
                                             #percentage>
+
                                             <div class="errorPercentageMessages ml-1 d-flex justify-content-center" 
                                             *ngIf="isPercentageLessThanZero[i]">
                                                 <p> Min 0% </p>
@@ -122,31 +125,6 @@
                                         </div>
                                     </td>
 
-                                </tr>
-
-
-                                <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td>
-                                        <div class="errorPercentageSum">
-                                            <div class="d-flex" *ngIf="percentageSum" >
-                                                <p [innerHTML]="percentageSum"></p><span>%</span>
-                                            </div>
-                                            <div *ngIf="SumOfPercentageEqualHundred">
-                                                <p> 
-                                                    All percentages add up 100%
-                                                </p>
-                                            </div>
-                                            <div *ngIf="SumOfPercentageMoreThanHundred">
-                                                <p> 
-                                                    Percentages must be equal to 100%
-                                                </p>
-                                            </div>
-
-                                        </div>
-                                        
-                                    </td>
                                 </tr>
 
                             </div>
@@ -214,3 +192,20 @@
     
     </div>
 </div>
+
+
+
+
+<ng-template #modal let-modal>
+    <div class="modal-header">
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+        <p>You have exceed the maximum value, Total percentage must be equal to 100%</p>   
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-success" (click)="modal.close('Save click')">Ok</button>
+      </div>
+  </ng-template>

@@ -10,6 +10,9 @@ To run this project locally on your computer you require to install NodeJs `http
 
 3) With the two previous steps done go to the principal folder `SpinnerApp` and type in the Command Prompt `npm run dev`. This will run both BackEnd and FrontEnd on the terminals `http://localhost:5000/` and `http://localhost:4200/` respectively.
 
+
+
+
 To deploy the FrontEnd into a `dist` folder go to the principal folder `SpinnerApp` and type in the Command Prompt `npm run client:build`. 
 
 It is important to have into account if you want to run the project in a server with certain `baseURL`:
@@ -22,7 +25,11 @@ It is important to have into account if you want to run the project in a server 
 
 4) Take into account that is the `baseURL` do not match with the `baseURL` of the dommain, your App will not run correctly.
 
-4) Then you can run the `npm run client:build` in the Command Prompt in the folder `SpinnerApp`.
+5) Then you can run the `npm run client:build` in the Command Prompt in the folder `SpinnerApp`.
+
+
+
+
 
 If you want to run the project in a server your FrontEnd will not require anything else. However, the backend service requires that the server
 has installed nodeJs. One way of install it is like this:
@@ -56,4 +63,22 @@ Where you must change the XXXXX for the port your backend service is runnig. In 
 
 9) If you want to close the app you have to go with your termina to the app folder and type `pkill node`. for resetting it type again  `node server.js` or `nohup node server.js &`.
 
-The database selected for this app was the cloud service mongoDB: `https://www.mongodb.com/`. Create an account and Sign in. Create a project and inside the atlas filed create a cluster. Click the connect button and then Connect with the mongo shell
+
+
+
+
+The database selected for this app was the cloud service mongoDB: `https://www.mongodb.com/`. 
+
+1) Create an account and Sign in and follow the steps (Choose free option). Free option gives you 500MB, however the image uploads are not store on the database but on a backend folder, so just json files will get into the database for wich 500MB is more than enogh.
+
+2) Create a cluster and type the name you want.
+
+3) Go to Database Access on the Atlas field, and click on Add new database user, Create your user and password (This user and password is just for Mongo), Leave Read and write to any database option.
+
+4) Go again to cluster option abd click connect button. In the Add a connection IP address click on Allow Access from anywere, leve fields empty and click Add IP Address.
+
+5) Then click on Choose a conection method. Choose Connect Your Application, coppy the text that is given to you.
+
+6) Then on the app folder go to config.js and paste the text on the MongoURL, including password that you chose in user.
+
+7) Create yor user with postman (explain)

@@ -1,10 +1,11 @@
-import { Component, OnInit, QueryList, ViewChildren, ElementRef, OnChanges } from '@angular/core';
+import { Component, OnInit, QueryList, ViewChildren, ViewChild, ElementRef, OnChanges } from '@angular/core';
 import { FormBuilder,FormArray, FormGroup, Validators, FormControl } from '@angular/forms';
 import { Observable, fromEvent, merge} from 'rxjs';
 import { map, debounceTime, distinctUntilChanged, filter } from 'rxjs/operators';
 import { SpinnerCustomizerControllerService } from '../services/spinner-customizer-controller.service';
 import { ImageService } from '../services/image.service';
 import { CenterImageService } from '../services/center-image.service';
+import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import { formSpinnerControl } from '../shared/form-spinner-controller';
 import { ImageSnippet } from '../shared/ImageSnippet';
 
@@ -64,11 +65,16 @@ export class CustomizeSpinnerComponent implements OnInit {
   centerCopy: any;
   centerform: any;
 
+  
+  closeResult = '';
+  @ViewChild('modal') modal;
+
   constructor(
     public formBuilder:FormBuilder,// For number of field dropdown
     private spinnerService: SpinnerCustomizerControllerService,// Form validations
     private imageService: ImageService,
-    private centerImageService: CenterImageService
+    private centerImageService: CenterImageService,
+    private modalService: NgbModal
      ) {       
     // Setting Form Array
     this.spinnerForm = this.formBuilder.group({
@@ -138,8 +144,11 @@ export class CustomizeSpinnerComponent implements OnInit {
     });
   }
 
+  
+  DidModalOpen:boolean = false;
+
+
   MessageErrorChange(i) {
-    //console.log(i);
 
     const keyPressEvent$  = fromEvent(this.percentage.toArray()[i].nativeElement, 'keypress');
     const keyDownEvent$  = fromEvent(this.percentage.toArray()[i].nativeElement, 'keydown');
@@ -162,13 +171,16 @@ export class CustomizeSpinnerComponent implements OnInit {
     allEvents$
       .pipe(
         map((event: any) => {
+
         let value = Number(event.target.value);
+        console.log(value)
         if (value > 100) {
+          event.target.value = 100;
           this.isPercentageMoreThanHundred[i] = true;
           this.percentageValues[i] = value;
         } else if (value < 0) {
+          event.target.value = 0;
           this.isPercentageLessThanZero[i] = true;
-          this.percentageValues[i] = value;
         } else if (value >= 0 && value <= 100) {
           this.isPercentageMoreThanHundred[i] = false;
           this.isPercentageLessThanZero[i] = false;
@@ -178,6 +190,8 @@ export class CustomizeSpinnerComponent implements OnInit {
         this.checkfullpercentage()
       }),
       debounceTime(1)).subscribe();
+      
+      this.DidModalOpen = false;
   }
 
   checkfullpercentage(){
@@ -193,6 +207,10 @@ export class CustomizeSpinnerComponent implements OnInit {
     } else if(this.percentageSum > 100) {
       this.SumOfPercentageMoreThanHundred = true
       this.SumOfPercentageEqualHundred = false;
+      if(this.DidModalOpen === false) {
+        this.open(this.modal);
+        this.DidModalOpen = true;
+      }
     }
   }
 
@@ -444,6 +462,24 @@ export class CustomizeSpinnerComponent implements OnInit {
       }, err => {
         throw new Error('Error deleting the information of the previous spineer');
       });
+  }
+
+  open(content) {
+    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  }
+
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return `with: ${reason}`;
+    }
   }
 
 }

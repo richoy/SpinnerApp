@@ -59,9 +59,10 @@ select {
 .ImageUploadAndMessage {
     width: 130px;
     height: $InputHeight;
-    background-color: lightgray;
-    border: $InputButtonsBorders;
-    border-radius: $BorderRadious;
+    .btn {
+        height: $InputHeight;
+        width: 115px;
+    }
     .alert {
         width: 30px;
         height: 100%;
@@ -93,15 +94,15 @@ $PercentageContainerWidth: 130px;
 .percentageContainer {
     width: $PercentageContainerWidth;
     height: $InputHeight;
-    background-color: lightgray;
-    border: $InputButtonsBorders;
-    border-radius: $BorderRadious;
     .PercentageInput {
-        width: $PercentageContainerWidth/2.5;
+        border: none;
+        width: $PercentageContainerWidth;
         height: $InputHeight -3px;
+        border: $InputButtonsBorders;
+        border-radius: $BorderRadious;
     }
     .errorPercentageMessages {
-        width: $PercentageContainerWidth;
+        min-width: $PercentageContainerWidth/1.8;
         height: $InputHeight -3px;
         background-color: red;
         border: $InputButtonsBorders;
@@ -124,4 +125,10 @@ $PercentageContainerWidth: 130px;
         height: $InputHeight;
         width: 80px !important;
     }
+}
+
+
+.modal-header, .modal-body, .modal-footer {
+	background-color: black;
+	color: white;
 }
