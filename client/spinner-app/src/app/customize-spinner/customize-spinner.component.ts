@@ -109,7 +109,7 @@ export class CustomizeSpinnerComponent implements OnInit {
       isItEmail: [true, [Validators.required]],
       textPopUp: [''],
       emails: [''],
-      color: ['', [Validators.required]],
+      color: [''],
     });
 
     SpinnerForm.valueChanges.subscribe( data => {
@@ -378,6 +378,11 @@ export class CustomizeSpinnerComponent implements OnInit {
       let counter = 0;
   
       this.spinnerArray.value.forEach(element => {
+
+        if( element.color === '') {
+          element.color = '#000000';
+        }
+
         let field = new formSpinnerControl(
           element.isItImage,
           element.image,
@@ -408,6 +413,7 @@ export class CustomizeSpinnerComponent implements OnInit {
 
     if (this.percentageSum === 100) {
       this.spinnerService.deleteSpinner().subscribe(() => {
+        console.log(spinner)
         this.spinnerService.sendSpinner(spinner).subscribe((res) => {
           this.spinnerForm.reset();
           this.StringOfImageUpload = []; // Resets the StringOfImageUpload array
