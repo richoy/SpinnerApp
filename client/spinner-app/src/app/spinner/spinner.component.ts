@@ -129,6 +129,7 @@ export class SpinnerComponent implements OnInit {
     this.headerFooterService.getHeaderFooter()
       .subscribe( headerFooter => {
         this.HeaderFooter = headerFooter[0];
+        console.log(this.HeaderFooter)
       });
   }
 

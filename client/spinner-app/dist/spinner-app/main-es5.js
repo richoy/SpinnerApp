@@ -4937,7 +4937,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       return baseHref;
     });
 
-    var baseHref = '/~devsite/'; // /~devsite/
+    var baseHref = '/'; // /~devsite/
 
     /***/
   },
@@ -5677,6 +5677,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
           this.headerFooterService.getHeaderFooter().subscribe(function (headerFooter) {
             _this16.HeaderFooter = headerFooter[0];
+            console.log(_this16.HeaderFooter);
           });
         }
       }, {

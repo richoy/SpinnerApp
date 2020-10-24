@@ -2574,7 +2574,7 @@ class ImageSnippet {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "baseHref", function() { return baseHref; });
-const baseHref = '/~devsite/'; // /~devsite/
+const baseHref = '/'; // /~devsite/
 
 
 /***/ }),
@@ -2963,6 +2963,7 @@ class SpinnerComponent {
         this.headerFooterService.getHeaderFooter()
             .subscribe(headerFooter => {
             this.HeaderFooter = headerFooter[0];
+            console.log(this.HeaderFooter);
         });
     }
     getImageCenter() {

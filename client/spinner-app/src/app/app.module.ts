@@ -17,6 +17,7 @@ import { SpinnerComponent } from './spinner/spinner.component';
 import { PasswordChangeComponent } from './password-change/password-change.component';
 import { BackendControlComponent } from './backend-control/backend-control.component';
 import { baseHref } from './shared/baseHref';
+import { AdminComponent } from './admin/admin.component';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import { baseHref } from './shared/baseHref';
     NavbarComponent,
     SpinnerComponent,
     PasswordChangeComponent,
-    BackendControlComponent
+    BackendControlComponent,
+    AdminComponent
   ],
   imports: [
     BrowserModule,
