@@ -15,7 +15,7 @@ export const routes: Routes = [
     { path: 'admin', component: AdminComponent,
         children: [
             { path: '', component: LoginComponent },
-            { path: 'backend-control', component: BackendControlComponent, canActivate: [LoginGuard],
+            { path: 'bc', component: BackendControlComponent, canActivate: [LoginGuard],
             children: [
                 { path: 'password-change', component: PasswordChangeComponent, canActivate: [LoginGuard] },
                 { path: 'customize-spinner', component: CustomizeSpinnerComponent, canActivate: [LoginGuard] },

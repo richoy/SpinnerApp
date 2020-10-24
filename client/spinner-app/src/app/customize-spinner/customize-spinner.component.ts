@@ -5,6 +5,7 @@ import { map, debounceTime, distinctUntilChanged, filter } from 'rxjs/operators'
 import { SpinnerCustomizerControllerService } from '../services/spinner-customizer-controller.service';
 import { ImageService } from '../services/image.service';
 import { CenterImageService } from '../services/center-image.service';
+import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import { formSpinnerControl } from '../shared/form-spinner-controller';
 import { ImageSnippet } from '../shared/ImageSnippet';
 
@@ -64,11 +65,15 @@ export class CustomizeSpinnerComponent implements OnInit {
   centerCopy: any;
   centerform: any;
 
+  
+  closeResult = '';
+
   constructor(
     public formBuilder:FormBuilder,// For number of field dropdown
     private spinnerService: SpinnerCustomizerControllerService,// Form validations
     private imageService: ImageService,
-    private centerImageService: CenterImageService
+    private centerImageService: CenterImageService,
+    private modalService: NgbModal
      ) {       
     // Setting Form Array
     this.spinnerForm = this.formBuilder.group({
@@ -193,6 +198,7 @@ export class CustomizeSpinnerComponent implements OnInit {
     } else if(this.percentageSum > 100) {
       this.SumOfPercentageMoreThanHundred = true
       this.SumOfPercentageEqualHundred = false;
+      
     }
   }
 
@@ -444,6 +450,24 @@ export class CustomizeSpinnerComponent implements OnInit {
       }, err => {
         throw new Error('Error deleting the information of the previous spineer');
       });
+  }
+
+  open(content) {
+    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  }
+
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return `with: ${reason}`;
+    }
   }
 
 }
