@@ -28,9 +28,11 @@
               <div #wheelSec>
                   <div [style]="holder[i]" class="hold" *ngIf="field.isItImage">
                       <div  class="sec" id="wheelSec" [style]="fieldStyleNth[i]">
-                          <div> <span class="imageSpan"> 
-                            <img class="image img-fluid" [style]="imageOrientation[i]" [src]="field.image">
-                              </span></div>
+                              <span class="imageSpan" [style]="imageOrientation[i]" > 
+                                <div class="ImageContainer">
+                                  <img class="image img-fluid" [src]="field.image">
+                                </div>
+                              </span>
                       </div>
                   </div>
 
@@ -79,7 +81,7 @@
     </div>
 
     <div *ngIf="FinalResult" class="modal-body">
-      <div *ngIf="FinalResult.isItImage">
+      <div class="d-flex justify-content-center" *ngIf="FinalResult.isItImage">
         <img class="PopUpImage image img-fluid" src="{{FinalResult.image}}">
       </div>
 
@@ -117,7 +119,7 @@
     </div>
     <div *ngIf="FinalResult" class="modal-body">
 
-      <div *ngIf="FinalResult.isItImage">
+      <div class="d-flex justify-content-center" *ngIf="FinalResult.isItImage">
         <img class="PopUpImage image img-fluid" src="{{FinalResult.image}}">
       </div>
 

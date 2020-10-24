@@ -60,22 +60,33 @@ div#wheel{
     border-radius:$Diameter; 
 }
 
+$maxWidthImage: 100px;
+
 #wheel div.sec {
 	span.imageSpan {
-		margin-top: 50px;
+		//margin-top: 50px;
 		position: absolute;
-		bottom: 50px;
+		bottom: $Diameter/2;
+		right: $Diameter/2 - $maxWidthImage/2;
 		z-index: 10000000;
 		display: block;
 		text-align: center;
 		font-size:30px;
-		margin-left:-120px;
+		//margin-left:-120px;
 		text-shadow: rgba(255, 255, 255, 0.1) 0px -1px 0px, rgba(0, 0, 0, 0.2) 0px 1px 0px;
+		max-width: $maxWidthImage;
+		min-height: $maxWidthImage*1.45;
+		.ImageContainer{
+			img {
+				max-width: 70%;
+			}
+		}
+
 	}
 	span.TextSpan {
 		position: absolute;
 		bottom: $Diameter/2.3;
-		right: $Diameter/1.8;
+		right: $Diameter/2;
 		min-width: $Diameter/2;
 		max-width: $Diameter/2;
 		text-justify: inter-word;

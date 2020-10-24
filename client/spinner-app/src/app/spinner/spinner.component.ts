@@ -26,7 +26,6 @@ export class SpinnerComponent implements OnInit {
   holder: any[] = [''];
   imageOrientation: any[] = [''];
   textOrientation: any[] = [''];
-  spanOrientation: any[] = [''];
 
   state: string = 'default';
 
@@ -110,7 +109,8 @@ export class SpinnerComponent implements OnInit {
                                        '-webkit-transform': 'rotate(' + (this.angle - this.angle*1.5) + 'deg)',
                                        '-moz-transform': 'rotate(' + (this.angle - this.angle*1.5) + 'deg)',
                                        '-o-transform': 'rotate(' + (this.angle - this.angle*1.5) + 'deg)',
-                                       '-ms-transform': 'rotate(' + (this.angle - this.angle*1.5) + 'deg)'};
+                                       '-ms-transform': 'rotate(' + (this.angle - this.angle*1.5) + 'deg)',
+                                       'transform-origin': 'bottom center'};
 
           this.textOrientation[i] = { 'transform': 'rotate(' + (90 - this.angle/2) + 'deg)',
                                       '-webkit-transform': 'rotate(' + (180 + this.angle/4) + 'deg)',
@@ -118,13 +118,6 @@ export class SpinnerComponent implements OnInit {
                                       '-o-transform': 'rotate(' + (180 + this.angle/4) + 'deg)',
                                       '-ms-transform': 'rotate(' + (180 + this.angle/4) + 'deg)', 
                                       'transform-origin': 'center right'};
-
-          this.spanOrientation[i] = { 'transform': 'rotate(' + (this.angle) + 'deg)',
-                                      '-webkit-transform': 'rotate(' + (this.angle) + 'deg)',
-                                      '-moz-transform': 'rotate(' + (this.angle) + 'deg)',
-                                      '-o-transform': 'rotate(' + (this.angle) + 'deg)',
-                                      '-ms-transform': 'rotate(' + (this.angle) + 'deg)', 
-                                      'transform-origin': 'center'};
 
           this.initialDegreesStart[i] = this.angle*i
           this.initialDegreesEnd[i] = this.initialDegreesStart[i] + this.angle;
