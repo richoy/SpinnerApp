@@ -19,7 +19,7 @@ To deploy the FrontEnd into a `dist` folder go to the principal folder `SpinnerA
 
 It is important to have into account if you want to run the project in a server with certain `baseURL`:
 
-1) If the domain has a `baseURL` you have to put that into the front end so the `index.html` and the API calls to the BackEnd work correctly. In the service site you gave me: `http://104.244.125.12/~devsite`, the `baseURL` is `~devsite`.
+1) If the domain has a `baseURL` you have to put that into the front end so the `index.html` and the API calls to the BackEnd work correctly. In the service site you gave me: `http://104.244.125.12/~devsite`, the `baseURL` is `~devsite`.(If you do not have a `baseURL` then you can skip steps 2, 3 and 4)
 
 2) In your Code Editor go to  `SpinnerApp/client/spinner-app/src/index.html` and put manually the `baseURL` in the href of the <base> tag in the <head> like this: <base href="baseURL">
 
