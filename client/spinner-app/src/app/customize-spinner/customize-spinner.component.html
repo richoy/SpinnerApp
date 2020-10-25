@@ -10,12 +10,12 @@
                 <div id="settingNumber">
                     <div>
                         <label class="mr-3" for="numberOptions">Number of fields on the spinner </label>
-                        <select matNativeControl name="numberOptions" required (change)="onChange($event.target.value)">
+                        <select matNativeControl name="numberOptions" id="numberOfFields" #numberOfFields required (change)="onChange($event.target.value)">
                             <option value="2">2</option>
                             <option value="3">3</option>
                             <option value="4">4</option>
                             <option value="5">5</option>
-                            <option value="6" selected>6</option>
+                            <option value="6">6</option>
                             <option value="7">7</option>
                             <option value="8">8</option>
                             <option value="9">9</option>
@@ -90,7 +90,8 @@
                                             class="PercentageInput"
                                             min="0" max="100" 
                                             [class.invalid]="spinnerfield.controls.percentage.hasError('required')  && submitPressed" 
-                                            (keyup)="MessageErrorChange(i)" (click)="MessageErrorChange(i)"
+                                            (keyup)="MessageErrorChange(i)" 
+                                            (click)="MessageErrorChange(i)"
                                             #percentage>
 
                                             <div class="errorPercentageMessages ml-1 d-flex justify-content-center" 

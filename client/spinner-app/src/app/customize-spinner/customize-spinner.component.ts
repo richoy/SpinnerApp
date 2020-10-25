@@ -3,6 +3,7 @@ import { FormBuilder,FormArray, FormGroup, Validators, FormControl } from '@angu
 import { Observable, fromEvent, merge} from 'rxjs';
 import { map, debounceTime, distinctUntilChanged, filter } from 'rxjs/operators';
 import { SpinnerCustomizerControllerService } from '../services/spinner-customizer-controller.service';
+import { SpinnerService } from '../services/spinner.service';
 import { ImageService } from '../services/image.service';
 import { CenterImageService } from '../services/center-image.service';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
@@ -25,6 +26,7 @@ export class CustomizeSpinnerComponent implements OnInit {
   public isMenuCollapsed = true;
 
   // For number of field dropdown
+  @ViewChild('numberOfFields') numberOfFields;
   items: any[] = [];
 
   spinnerForm: FormGroup;
@@ -75,6 +77,10 @@ export class CustomizeSpinnerComponent implements OnInit {
   sucessFormSubmition: boolean = false;
   sucessCenterImageSubmition: boolean = false;
   unsuccessSendingForm: boolean = false;
+
+  //Get spinner stored data
+  IsPreviousDataStored: boolean = false;
+  SpinnerFieldsStoreData: any;
   
   closeResult = '';
   @ViewChild('modal') modal;
@@ -84,6 +90,7 @@ export class CustomizeSpinnerComponent implements OnInit {
     private spinnerService: SpinnerCustomizerControllerService,// Form validations
     private imageService: ImageService,
     private centerImageService: CenterImageService,
+    private getDataSpinnerService: SpinnerService,
     private modalService: NgbModal
      ) {       
     // Setting Form Array
@@ -97,6 +104,7 @@ export class CustomizeSpinnerComponent implements OnInit {
    }
 
   ngOnInit(): void {
+    this.getSpinnerStoredInfo();
     // Sets default 6 boxes
     for (let i = 0; i < 6; i++) {
       this.addControl(i);
@@ -114,6 +122,23 @@ export class CustomizeSpinnerComponent implements OnInit {
     }
     // For number of field dropdown
     this.definingPercentage();
+  }
+
+  getSpinnerStoredInfo() {
+    this.getDataSpinnerService.getSpinner()
+      .subscribe( data => {
+        this.IsPreviousDataStored = true;
+        this.SpinnerFieldsStoreData = data;
+        console.log(this.SpinnerFieldsStoreData);
+        document.getElementById('numberOfFields').nodeValue = this.SpinnerFieldsStoreData.length;
+        console.log( document.getElementById('numberOfFields').nodeValue)
+        this.numberOfFields.nativeElement[this.SpinnerFieldsStoreData.length - 2].setAttribute('selected', 'selected')
+        console.log(this.numberOfFields.nativeElement[this.SpinnerFieldsStoreData.length - 2]);
+      },
+      (err) => {
+        this.IsPreviousDataStored = false;
+        throw new Error(err);
+      });
   }
 
 	createSpFormGroup() {
