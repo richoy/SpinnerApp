@@ -6,26 +6,36 @@
         </div>
     
         <div class="row">
-            <div class="col-10 mr-auto">
+            <div class="col-10 mr-auto" [hidden]="FormSuccessfullySend" [@expand]>
                 <form [formGroup]="HeaderFooterForm" (ngSubmit)="onSubmit()">
                     <div class="mb-3">
                         <label for="header">HEADER:</label>
-                        <textarea formControlName="header" class="form-control" id="header" name="header" rows="3"></textarea>    
+                        <textarea required formControlName="header" class="form-control" id="header" name="header" rows="3"></textarea>
+                        
+                        <div class="ErrorMessage" *ngIf="!formErrors.header"></div>
+                        <div class="ErrorMessage" *ngIf="formErrors.header"><p style="color: red;">{{ formErrors.header }}</p></div>
+ 
                     </div>
     
                     <div class="mb-3">
                         <label for="footer">Footer:</label>
-                        <textarea formControlName="footer" class="form-control" id="footer" name="footer" rows="3"></textarea>    
+                        <textarea required formControlName="footer" class="form-control" id="footer" name="footer" rows="3"></textarea>    
+                        <div class="ErrorMessage" *ngIf="!formErrors.footer"></div>
+                        <div class="ErrorMessage" *ngIf="formErrors.footer"><p style="color: red;">{{ formErrors.footer }}</p></div>
                     </div>
     
                     <div class="mb-3">
                         <label for="title">Page title:</label>
-                        <input formControlName="pageTitle" type="text" class="form-control" id="title" name="title">  
+                        <input required formControlName="pageTitle" type="text" class="form-control" id="title" name="title">  
+                        <div class="ErrorMessage" *ngIf="!formErrors.pageTitle"></div>
+                        <div class="ErrorMessage" *ngIf="formErrors.pageTitle"><p style="color: red;">{{ formErrors.pageTitle }}</p></div>
                     </div>
     
                     <div class="mb-3">
                         <label for="description">Page description:</label>
-                        <textarea formControlName="pageDescription" class="form-control" id="description" name="description" rows="3"></textarea>    
+                        <textarea required formControlName="pageDescription" class="form-control" id="description" name="description" rows="3"></textarea>    
+                        <div class="ErrorMessage" *ngIf="!formErrors.pageDescription"></div>
+                        <div class="ErrorMessage" *ngIf="formErrors.pageDescription"><p style="color: red;">{{ formErrors.pageDescription }}</p></div>
                     </div>
     
                     <div class="mb-3">
@@ -58,9 +68,13 @@
 
     
                     <div class="d-flex justify-content-end">
-                        <button class="btn btn-success">Save</button>
+                        <button class="btn btn-success" [disabled]="HeaderFooterForm.invalid">Save</button>
                     </div>
                 </form>
+            </div>
+
+            <div class="customScriptSuccessfullySend" [hidden]="!FormSuccessfullySend" [@expand]>
+                <h2>The custom script has been successfully saved</h2>
             </div>
         </div>
     

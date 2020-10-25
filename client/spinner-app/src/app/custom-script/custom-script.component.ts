@@ -1,15 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-
 import { CustomScriptService } from '../services/custom-script.service';
 import { ImageService } from '../services/image.service';
-
 import { ImageSnippet } from '../shared/ImageSnippet';
+import { expand } from '../animations/app.animations';
 
 @Component({
   selector: 'app-custom-script',
   templateUrl: './custom-script.component.html',
-  styleUrls: ['./custom-script.component.scss']
+  styleUrls: ['./custom-script.component.scss'],
+  animations: [
+    expand()
+  ]
 })
 export class CustomScriptComponent implements OnInit {
 
@@ -25,13 +27,31 @@ export class CustomScriptComponent implements OnInit {
   UnsuccessfullyUpload: boolean;
 
   formErrors = {
-    'Header': '',
-    'Footer': '',
-    'PageTitle': '',
-    'pageDescription': '',
-    'favicon': ''
+    'header': '',
+    'footer': '',
+    'pageTitle': '',
+    'pageDescription': ''
   };
 
+  validationMessages = {
+    'header': {
+      'required': 'Header is required.'
+    },
+    'footer': {
+      'required': 'Footer is required.'
+    },
+    'pageTitle': {
+      'required': 'Title is required.',
+    },
+    'pageDescription': {
+      'required': 'Description is required'
+    }
+  };
+
+
+  //Submition
+
+  FormSuccessfullySend: boolean = false;
 
 
   constructor( 
@@ -46,14 +66,38 @@ export class CustomScriptComponent implements OnInit {
 
   createForm() {
     this.HeaderFooterForm = this.fb.group({
-      header: [''],
-      footer: [''],
-      pageTitle: [''],
-      pageDescription: [''],
+      header: ['', [Validators.required]],
+      footer: ['', [Validators.required]],
+      pageTitle: ['', [Validators.required]],
+      pageDescription: ['', [Validators.required]],
       favicon: ['']
     });
+    this.HeaderFooterForm.valueChanges
+    .subscribe(data => this.onValueChanged(data));
 
+    this.onValueChanged(); // (re)set validation messages now
   }
+
+  onValueChanged(data?: any) {
+    if (!this.HeaderFooterForm) { return; }
+    const form = this.HeaderFooterForm;
+    for (const field in this.formErrors) {
+      if (this.formErrors.hasOwnProperty(field)) {
+        // clear previous error message (if any)
+        this.formErrors[field] = '';
+        const control = form.get(field);
+        if (control && control.dirty && !control.valid) {
+          const messages = this.validationMessages[field];
+          for ( const key in control.errors) {
+            if (control.errors.hasOwnProperty(key)) {
+              this.formErrors[field] += messages[key] + ' ';
+            }
+          }
+        }
+      }
+    }
+  }
+
 
   private onSuccess(path) {
     this.StringOfImageUpload = path;
@@ -86,14 +130,16 @@ export class CustomScriptComponent implements OnInit {
   }
 
   onSubmit() {
+    this.FormSuccessfullySend = true;
     this.customScriptService.deleteHeaderFooter().subscribe(()=> {
       this.formCopy = this.HeaderFooterForm.value;
       this.formCopy.favicon = this.StringOfImageUpload.replace(/\\/g, "/");
-      console.log(this.formCopy);
       this.customScriptService.sendHeaderFooter(this.formCopy)
         .subscribe(HFform => {
           this.form = HFform;
-          console.log(this.form);
+          setTimeout( () => {
+          this.FormSuccessfullySend = false
+          },2000);
         }, err =>{
           throw new Error('Error Sending the information about the spinner');
         });
