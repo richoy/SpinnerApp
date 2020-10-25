@@ -1,5 +1,4 @@
 <div class="bgColor">
-
     <div class="container menu1">
     
         <h2>Customize the spinner</h2>
@@ -86,12 +85,15 @@
                                     <td>
                                         <div class="percentageContainer d-flex">
 
-                                            <input formControlName="percentage" type="number" name="textField" 
+                                            <input formControlName="percentage" 
+                                            type="number" 
+                                            name="textField" 
                                             class="PercentageInput"
                                             min="0" max="100" 
                                             [class.invalid]="spinnerfield.controls.percentage.hasError('required')  && submitPressed" 
                                             (keyup)="MessageErrorChange(i)" 
                                             (click)="MessageErrorChange(i)"
+                                            autocomplete="off"
                                             #percentage>
 
                                             <div class="errorPercentageMessages ml-1 d-flex justify-content-center" 
