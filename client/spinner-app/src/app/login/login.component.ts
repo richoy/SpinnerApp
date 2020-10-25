@@ -40,7 +40,7 @@ export class LoginComponent implements OnInit {
          if(resp.success === true) {
            this.LoginError = false;
            localStorage.setItem("userToken", resp.token);
-           this.router.navigate(['admin/backend-control/customize-spinner']);
+           this.router.navigate(['admin/bc/customize-spinner']);
          }
       }, err => {
         this.LoginError = true;

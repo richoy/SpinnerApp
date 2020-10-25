@@ -129,7 +129,6 @@ export class SpinnerComponent implements OnInit {
     this.headerFooterService.getHeaderFooter()
       .subscribe( headerFooter => {
         this.HeaderFooter = headerFooter[0];
-        console.log(this.HeaderFooter)
       });
   }
 
@@ -138,7 +137,6 @@ export class SpinnerComponent implements OnInit {
       .subscribe(centerImage => {
         this.centerImage = centerImage[0];
         this.centerImage.centerImage = this.API_IMAGE_URL + this.centerImage.centerImage.slice(14);
-        //console.log(centerImage);
       });
   }
 
@@ -227,10 +225,8 @@ export class SpinnerComponent implements OnInit {
       + Math.floor(random2 * (this.initialDegreesEnd[index] - (this.initialDegreesEnd[index] - this.angle)-1));
   
       this.resultingField = index;
-      console.log(index);
 
       this.FinalResult = this.SpinnerFields[index]
-      console.log(this.FinalResult)
     }
 
 

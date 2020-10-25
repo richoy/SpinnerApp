@@ -28,9 +28,6 @@ $InputButtonsBorders: 1px solid white;
 .ImageUploadAndMessage {
     width: 130px;
     height: $InputHeight;
-    background-color: lightgray;
-    border: $InputButtonsBorders;
-    border-radius: $BorderRadious;
     .alert {
         width: 30px;
         height: 100%;
@@ -42,4 +39,14 @@ $InputButtonsBorders: 1px solid white;
     .textFieldOne {
         width: 130px;
     }
+}
+
+.customScriptSuccessfullySend {
+    min-height: 600px;
+    width: 100%;
+}
+
+.ErrorMessage {
+    min-height: 20px;
+    max-height: 20px;
 }

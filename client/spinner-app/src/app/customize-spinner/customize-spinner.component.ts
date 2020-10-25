@@ -8,11 +8,16 @@ import { CenterImageService } from '../services/center-image.service';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import { formSpinnerControl } from '../shared/form-spinner-controller';
 import { ImageSnippet } from '../shared/ImageSnippet';
+import { visibility, expand } from '../animations/app.animations'
 
 @Component({
   selector: 'app-customize-spinner',
   templateUrl: './customize-spinner.component.html',
-  styleUrls: ['./customize-spinner.component.scss']
+  styleUrls: ['./customize-spinner.component.scss'],
+  animations: [
+    visibility(),
+    expand()
+  ]
 })
 export class CustomizeSpinnerComponent implements OnInit {
 
@@ -65,6 +70,11 @@ export class CustomizeSpinnerComponent implements OnInit {
   centerCopy: any;
   centerform: any;
 
+  //Submiting
+
+  sucessFormSubmition: boolean = false;
+  sucessCenterImageSubmition: boolean = false;
+  unsuccessSendingForm: boolean = false;
   
   closeResult = '';
   @ViewChild('modal') modal;
@@ -127,14 +137,26 @@ export class CustomizeSpinnerComponent implements OnInit {
     
   }
   SpinnerformErrors = {
+    'isItImage': '',
     'percentage': '',
+    'isItEmail': '',
+    'color': '',
   };
   validationMessages = {
+    'isItImage': {
+      'required': 'image or text is required.'
+    },
     'percentage': {
       'required': 'Percentage is required.',
       'pattern': 'Value must be a number',
       'min': 'Minumun possible value is 0%',
       'max': 'Maximum possible value is 100%'
+    },
+    'isItEmail': {
+      'required': 'is it email? is required.'
+    },
+    'color': {
+      'required': 'color is required.'
     }
   }
 
@@ -173,7 +195,6 @@ export class CustomizeSpinnerComponent implements OnInit {
         map((event: any) => {
 
         let value = Number(event.target.value);
-        console.log(value)
         if (value > 100) {
           event.target.value = 100;
           this.isPercentageMoreThanHundred[i] = true;
@@ -430,8 +451,13 @@ export class CustomizeSpinnerComponent implements OnInit {
         return a + b;
       }, 0);
 
+      this.sucessFormSubmition = true;
+
       this.spinnerService.deleteSpinner().subscribe(() => {
           this.spinnerService.sendSpinner(spinner).subscribe((res) => {
+            setTimeout( () => {
+              this.sucessFormSubmition = false;
+            }, 2000);
             this.spinnerForm.reset();
             this.StringOfImageUpload = []; // Resets the StringOfImageUpload array
           }, err =>{
@@ -443,18 +469,29 @@ export class CustomizeSpinnerComponent implements OnInit {
       } else {
         throw new Error('Error Percentage must add up 100%');
       }
-    }
+    } else if (this.spinnerForm.status === "INVALID") {
+
+      this.unsuccessSendingForm = true;
+      setTimeout( () => {
+        this.unsuccessSendingForm = false;
+      }, 2000);
+    };
   }
 
+  //sucessCenterImageSubmition
+
   onSubmitCenterImage() {
+    this.sucessCenterImageSubmition = true;
     this.centerImageService.deleteImageCenter()
       .subscribe(() => {
         this.centerCopy = this.CenterImageForm.value;
         this.centerCopy.centerImage = this.StringOfSpinnerCenter.replace(/\\/g, "/");
         this.centerImageService.sendImageCenter(this.centerCopy)
         .subscribe(HFform => {
+          setTimeout( () => {
+            this.sucessCenterImageSubmition = false;
+          }, 2000);
           this.centerform = HFform;
-          console.log(this.centerform);
         }, err =>{
           throw new Error('Error Sending the information about the spinner');
         });
