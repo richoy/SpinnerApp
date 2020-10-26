@@ -106,13 +106,9 @@ export class CustomizeSpinnerComponent implements OnInit {
 
   ngOnInit(): void {
 
+    this.SpinnerFieldsStoreData = Object.create(null);
     this.getSpinnerStoredInfo();
   
-    // Sets default 6 boxes
-     for (let i = 0; i < 6; i++) {
-      this.addControl(i);
-    }
-
     // For imageUpload / Text Field
     let i = 0;
     for (i=0; i<=this.items.length; i++) {
@@ -126,31 +122,63 @@ export class CustomizeSpinnerComponent implements OnInit {
     }
     // For number of field dropdown
     this.definingPercentage();
-            // Getting Percentages
-            for (let i = 0; i< this.SpinnerFieldsStoreData.length; i++) {
-              let GetDOMPercentage = this.percentage.toArray()[i].nativeElement;
-              GetDOMPercentage.setAttribute('value', (this.SpinnerFieldsStoreData[i].percentage));
-              console.log(this.percentage.toArray()[i])
-            }
+    console.log('second',this.spinnerArray.value);
   }
 
   getSpinnerStoredInfo() {
     this.getDataSpinnerService.getSpinner()
       .subscribe( data => {
+        
 
         this.IsPreviousDataStored = true;
         this.SpinnerFieldsStoreData = data;
-
-        // Getting Number of fields
         let GetDOMNumberOfFields = this.numberOfFields.nativeElement[this.SpinnerFieldsStoreData.length - 2];
         GetDOMNumberOfFields.setAttribute('selected', 'selected');
+
+        for (let i = 0; i < this.SpinnerFieldsStoreData.length; i++) {
+          this.addControl(i);
+        }
+
+        // Getting Number of fields
+
         this.onChange(GetDOMNumberOfFields.value);
+
+        // Getting Percentages
+        for (let i = 0; i< this.SpinnerFieldsStoreData.length; i++) {
+          this.spinnerArray.controls[i].value.percentage = this.SpinnerFieldsStoreData[i].percentage;
+          this.spinnerArray.value[i].percentage = this.SpinnerFieldsStoreData[i].percentage;
+          console.log(i,this.spinnerArray.controls[i].value);
+          this.setValuesofBackendSpinner(this.SpinnerFieldsStoreData[i].percentage);
+        }
+        
+
       },
       (err) => {
+
+
         this.IsPreviousDataStored = false;
+        
+        for (let i = 0; i < 6; i++) {
+          this.addControl(i);
+        }
         throw new Error(err);
       });
   }
+
+  setValuesofBackendSpinner(percentage) {
+	  this.spinnerArray.patchValue([
+      {percentage: percentage}
+	  ]);
+  } 
+
+  loadFormFromBackEnd(data) {
+    for(let line=0; line < data.length; line++) {
+      const itemsFromArrat = this.spinnerForm.get('spinnerArray') as FormArray;
+      itemsFromArrat.push(this.spinnerArray)
+    }
+    this.spinnerForm.patchValue(data);
+  }
+
 
 	createSpFormGroup() {
     let SpinnerForm = this.formBuilder.group({
@@ -372,7 +400,10 @@ export class CustomizeSpinnerComponent implements OnInit {
 		if ( this.spinnerForm) {
       return this.spinnerForm.get('spinnerArray') as FormArray;
     }
-	}
+  }
+  
+
+
   // For number of field dropdown
   onChange(i) {
     this.items.length = 0;   // eliminates defalut setting before adding other
@@ -392,14 +423,16 @@ export class CustomizeSpinnerComponent implements OnInit {
       this.itIsTextPopUp[i] = true;
     }
     this.definingPercentage();
+    
   }
   addControl(i) {
     this.items.push({id: i.toString()})
 		let fg = this.createSpFormGroup();
 		if(this.spinnerArray) {
       this.spinnerArray.push(fg);
+
+      this.SpinnerFieldsStoreData
     }
-   console.log(this.spinnerArray)
   }
 
   deleteSpinnerField(idx: number) {
