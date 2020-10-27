@@ -22,6 +22,7 @@ import { visibility, expand } from '../animations/app.animations'
 })
 export class CustomizeSpinnerComponent implements OnInit {
 
+  DidModalOpen:boolean = false;
   //Collapse menu
   public isMenuCollapsed = true;
 
@@ -109,6 +110,7 @@ export class CustomizeSpinnerComponent implements OnInit {
     for (let i = 0; i < 6; i++) {
       this.addControl(i);
     }
+    
     this.getSpinnerStoredInfo();
     
   
@@ -135,11 +137,9 @@ export class CustomizeSpinnerComponent implements OnInit {
           delete this.SpinnerFieldsStoreData[i]['email'];
         }
 
-        console.log('SpinnerFieldsStoreData', this.SpinnerFieldsStoreData)
 
         // Getting Number of fields
         let GetDOMNumberOfFields = this.numberOfFields.nativeElement[this.SpinnerFieldsStoreData.length - 2];
-        console.log(this.numberOfFields)
         GetDOMNumberOfFields.setAttribute('selected', 'selected');
 
         for (let i = 0; i < this.SpinnerFieldsStoreData.length; i++) {
@@ -153,8 +153,6 @@ export class CustomizeSpinnerComponent implements OnInit {
           
           if (this.SpinnerFieldsStoreData[i].isItImage == true) {
             this.onSuccess(i, this.SpinnerFieldsStoreData[i].file)
-            this.SuccessfullyUpload[i] = true;
-            this.UnsuccessfullyUpload[i] = false;
           } else if (this.SpinnerFieldsStoreData[i].isItImage == false) {
             this.itIsImageFile[i] = false;
             this.itIsTextField[i] = true;
@@ -165,19 +163,6 @@ export class CustomizeSpinnerComponent implements OnInit {
           this.percentageValues[i] = this.SpinnerFieldsStoreData[i].percentage;
         }
         this.checkfullpercentage()
-/*
-        // Getting Percentages
-        for (let i = 0; i< this.SpinnerFieldsStoreData.length; i++) {
-          this.spinnerArray.controls[i].value.percentage = this.SpinnerFieldsStoreData[i].percentage;
-          this.spinnerArray.value[i].percentage = this.SpinnerFieldsStoreData[i].percentage;
-          console.log(i,this.spinnerArray.controls[i].value);
-
-        }*/
-
-
-
-        console.log('spinnerForm',this.spinnerForm)
-        console.log('spinnerArray',this.spinnerArray)
       },
       (err) => {
 
@@ -207,15 +192,6 @@ export class CustomizeSpinnerComponent implements OnInit {
   setValuesofBackendSpinner(data) {
     this.spinnerArray.patchValue(data);
   } 
-/*
-  loadFormFromBackEnd(data) {
-    for(let line=0; line < data.length; line++) {
-      let itemsFromArray = this.spinnerForm.get('spinnerArray') as FormArray;
-      itemsFromArray.push(this.spinnerArray)
-    }
-    this.spinnerForm.patchValue(data);
-  }*/
-
 
 	createSpFormGroup() {
     let SpinnerForm = this.formBuilder.group({
@@ -272,10 +248,7 @@ export class CustomizeSpinnerComponent implements OnInit {
       return this.spinnerForm.get('spinnerArray') as FormArray;
     }
   }
-  
 
-
-  DidModalOpen:boolean = false;
 
 
   MessageErrorChange(i) {
@@ -446,6 +419,12 @@ export class CustomizeSpinnerComponent implements OnInit {
   onChange(i) {
     this.items.length = 0;   // eliminates defalut setting before adding other
     this.spinnerForm.reset();
+
+    for( let index = 0; index < i; index++) {
+      this.SuccessfullyUpload[index] = false;
+      this.UnsuccessfullyUpload[index] = false;
+    }
+
     while(this.spinnerArray.length > 0) {
       this.items.pop();
       this.deleteSpinnerField(0);
@@ -468,8 +447,6 @@ export class CustomizeSpinnerComponent implements OnInit {
 		let fg = this.createSpFormGroup();
 		if(this.spinnerArray) {
       this.spinnerArray.push(fg);
-
-      this.SpinnerFieldsStoreData
     }
   }
 
@@ -550,8 +527,6 @@ export class CustomizeSpinnerComponent implements OnInit {
             field.image = file.image;
           } 
         })
-        console.log('stringImage',this.StringOfImageUpload);
-        console.log('FieldImage',field.image);
         spinner.push(field);
         counter++;
       });
