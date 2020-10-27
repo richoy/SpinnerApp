@@ -3,12 +3,13 @@ import { FormBuilder,FormArray, FormGroup, Validators, FormControl } from '@angu
 import { Observable, fromEvent, merge} from 'rxjs';
 import { map, debounceTime, distinctUntilChanged, filter } from 'rxjs/operators';
 import { SpinnerCustomizerControllerService } from '../services/spinner-customizer-controller.service';
+import { SpinnerService } from '../services/spinner.service';
 import { ImageService } from '../services/image.service';
 import { CenterImageService } from '../services/center-image.service';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import { formSpinnerControl } from '../shared/form-spinner-controller';
 import { ImageSnippet } from '../shared/ImageSnippet';
-import { visibility, expand } from '../animations/app.animations'
+import { visibility, expand } from '../animations/app.animations'           
 
 @Component({
   selector: 'app-customize-spinner',
@@ -21,10 +22,13 @@ import { visibility, expand } from '../animations/app.animations'
 })
 export class CustomizeSpinnerComponent implements OnInit {
 
+  DidModalOpen:boolean = false;
   //Collapse menu
   public isMenuCollapsed = true;
 
   // For number of field dropdown
+  @ViewChild('numberOfFields') numberOfFields;
+  
   items: any[] = [];
 
   spinnerForm: FormGroup;
@@ -75,6 +79,10 @@ export class CustomizeSpinnerComponent implements OnInit {
   sucessFormSubmition: boolean = false;
   sucessCenterImageSubmition: boolean = false;
   unsuccessSendingForm: boolean = false;
+
+  //Get spinner stored data
+  IsPreviousDataStored: boolean = false;
+  SpinnerFieldsStoreData: any;
   
   closeResult = '';
   @ViewChild('modal') modal;
@@ -84,6 +92,7 @@ export class CustomizeSpinnerComponent implements OnInit {
     private spinnerService: SpinnerCustomizerControllerService,// Form validations
     private imageService: ImageService,
     private centerImageService: CenterImageService,
+    private getDataSpinnerService: SpinnerService,
     private modalService: NgbModal
      ) {       
     // Setting Form Array
@@ -97,24 +106,92 @@ export class CustomizeSpinnerComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    // Sets default 6 boxes
+
     for (let i = 0; i < 6; i++) {
       this.addControl(i);
     }
-    // For imageUpload / Text Field
-    let i = 0;
-    for (i=0; i<=this.items.length; i++) {
-      this.itIsImageFile[i] = true;
-    }
-    // For imageUpload / Text Field
-
-    // For number of field dropdown
-    for (i=0; i<=this.items.length; i++) {
-      this.itIsTextPopUp[i] = true;
-    }
+    
+    this.getSpinnerStoredInfo();
+    
+  
     // For number of field dropdown
     this.definingPercentage();
   }
+
+  getSpinnerStoredInfo() {
+    this.getDataSpinnerService.getSpinner()
+      .subscribe( data => {
+        
+
+        this.IsPreviousDataStored = true;
+        this.SpinnerFieldsStoreData = data;
+
+        //Not used elements of the Data Array
+        for(let i=0; i<this.SpinnerFieldsStoreData.length; i++) {
+          this.SpinnerFieldsStoreData[i]['file'] = this.SpinnerFieldsStoreData[i]['image'];
+          delete this.SpinnerFieldsStoreData[i]['image'];
+          delete this.SpinnerFieldsStoreData[i]['createdAt'];
+          delete this.SpinnerFieldsStoreData[i]['updatedAt'];
+          delete this.SpinnerFieldsStoreData[i]['_id'];
+          delete this.SpinnerFieldsStoreData[i]['__v'];
+          delete this.SpinnerFieldsStoreData[i]['email'];
+        }
+
+
+        // Getting Number of fields
+        let GetDOMNumberOfFields = this.numberOfFields.nativeElement[this.SpinnerFieldsStoreData.length - 2];
+        GetDOMNumberOfFields.setAttribute('selected', 'selected');
+
+        for (let i = 0; i < this.SpinnerFieldsStoreData.length; i++) {
+          this.addControl(i);
+        }
+        this.onChange(GetDOMNumberOfFields.value);
+
+        //Setting Values
+        this.setValuesofBackendSpinner(this.SpinnerFieldsStoreData);
+        for(let i=0; i<this.SpinnerFieldsStoreData.length; i++) {
+          
+          if (this.SpinnerFieldsStoreData[i].isItImage == true) {
+            this.onSuccess(i, this.SpinnerFieldsStoreData[i].file)
+          } else if (this.SpinnerFieldsStoreData[i].isItImage == false) {
+            this.itIsImageFile[i] = false;
+            this.itIsTextField[i] = true;
+            this.SuccessfullyUpload[i] = false;
+            this.UnsuccessfullyUpload[i] = false;
+          }
+
+          this.percentageValues[i] = this.SpinnerFieldsStoreData[i].percentage;
+        }
+        this.checkfullpercentage()
+      },
+      (err) => {
+
+        this.IsPreviousDataStored = false;
+        
+        for (let i = 0; i < 6; i++) {
+          this.addControl(i);
+        }
+
+            // For imageUpload / Text Field
+        let i = 0;
+        for (i=0; i<=this.items.length; i++) {
+          this.itIsImageFile[i] = true;
+          this.itIsTextField[i] = false;
+        }
+        // For imageUpload / Text Field
+
+        // For number of field dropdown
+        for (i=0; i<=this.items.length; i++) {
+          this.itIsTextPopUp[i] = true;
+      }
+
+        throw new Error(err);
+      });
+  }
+
+  setValuesofBackendSpinner(data) {
+    this.spinnerArray.patchValue(data);
+  } 
 
 	createSpFormGroup() {
     let SpinnerForm = this.formBuilder.group({
@@ -125,7 +202,7 @@ export class CustomizeSpinnerComponent implements OnInit {
       isItEmail: [true, [Validators.required]],
       textPopUp: [''],
       emails: [''],
-      color: ['', [Validators.required]],
+      bgColor: ['', [Validators.required]],
     });
 
     SpinnerForm.valueChanges.subscribe( data => {
@@ -140,7 +217,7 @@ export class CustomizeSpinnerComponent implements OnInit {
     'isItImage': '',
     'percentage': '',
     'isItEmail': '',
-    'color': '',
+    'bgColor': '',
   };
   validationMessages = {
     'isItImage': {
@@ -155,7 +232,7 @@ export class CustomizeSpinnerComponent implements OnInit {
     'isItEmail': {
       'required': 'is it email? is required.'
     },
-    'color': {
+    'bgColor': {
       'required': 'color is required.'
     }
   }
@@ -166,8 +243,12 @@ export class CustomizeSpinnerComponent implements OnInit {
     });
   }
 
-  
-  DidModalOpen:boolean = false;
+  get spinnerArray(): FormArray {
+		if ( this.spinnerForm) {
+      return this.spinnerForm.get('spinnerArray') as FormArray;
+    }
+  }
+
 
 
   MessageErrorChange(i) {
@@ -332,15 +413,18 @@ export class CustomizeSpinnerComponent implements OnInit {
 
   /////
   
-  get spinnerArray(): FormArray {
-		if ( this.spinnerForm) {
-      return this.spinnerForm.get('spinnerArray') as FormArray;
-    }
-	}
+
+
   // For number of field dropdown
   onChange(i) {
     this.items.length = 0;   // eliminates defalut setting before adding other
     this.spinnerForm.reset();
+
+    for( let index = 0; index < i; index++) {
+      this.SuccessfullyUpload[index] = false;
+      this.UnsuccessfullyUpload[index] = false;
+    }
+
     while(this.spinnerArray.length > 0) {
       this.items.pop();
       this.deleteSpinnerField(0);
@@ -356,6 +440,7 @@ export class CustomizeSpinnerComponent implements OnInit {
       this.itIsTextPopUp[i] = true;
     }
     this.definingPercentage();
+    
   }
   addControl(i) {
     this.items.push({id: i.toString()})
@@ -363,7 +448,6 @@ export class CustomizeSpinnerComponent implements OnInit {
 		if(this.spinnerArray) {
       this.spinnerArray.push(fg);
     }
-
   }
 
   deleteSpinnerField(idx: number) {
@@ -421,8 +505,8 @@ export class CustomizeSpinnerComponent implements OnInit {
   
       this.spinnerArray.value.forEach(element => {
 
-        if( element.color === '') {
-          element.color = '#000000';
+        if( element.bgColor === '') {
+          element.bgColor = '#000000';
         }
 
         let field = new formSpinnerControl(
@@ -433,7 +517,7 @@ export class CustomizeSpinnerComponent implements OnInit {
           element.isItEmail,
           element.textPopUp,
           element.email,
-          element.color
+          element.bgColor
         )
 
         this.totalPercentage[counter] = element.percentage;
@@ -458,8 +542,8 @@ export class CustomizeSpinnerComponent implements OnInit {
             setTimeout( () => {
               this.sucessFormSubmition = false;
             }, 2000);
-            this.spinnerForm.reset();
-            this.StringOfImageUpload = []; // Resets the StringOfImageUpload array
+            //this.spinnerForm.reset();
+            //this.StringOfImageUpload = []; // Resets the StringOfImageUpload array
           }, err =>{
             throw new Error('Error Sending the information about the spinner');
           });
