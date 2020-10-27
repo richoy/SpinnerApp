@@ -106,7 +106,6 @@ export class CustomizeSpinnerComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.SpinnerFieldsStoreData = Object.create(null);
     this.getSpinnerStoredInfo();
   
     // For imageUpload / Text Field
@@ -132,6 +131,17 @@ export class CustomizeSpinnerComponent implements OnInit {
 
         this.IsPreviousDataStored = true;
         this.SpinnerFieldsStoreData = data;
+
+        //Not used elements of the Data Array
+        for(let i=0; i<this.SpinnerFieldsStoreData.length; i++) {
+          delete this.SpinnerFieldsStoreData[i]['createdAt'];
+          delete this.SpinnerFieldsStoreData[i]['updatedAt'];
+          delete this.SpinnerFieldsStoreData[i]['_id'];
+          delete this.SpinnerFieldsStoreData[i]['__v'];
+          delete this.SpinnerFieldsStoreData[i]['email'];
+        }
+
+        // Getting Number of fields
         let GetDOMNumberOfFields = this.numberOfFields.nativeElement[this.SpinnerFieldsStoreData.length - 2];
         GetDOMNumberOfFields.setAttribute('selected', 'selected');
 
@@ -139,19 +149,22 @@ export class CustomizeSpinnerComponent implements OnInit {
           this.addControl(i);
         }
 
-        // Getting Number of fields
-
         this.onChange(GetDOMNumberOfFields.value);
 
+
+/*
         // Getting Percentages
         for (let i = 0; i< this.SpinnerFieldsStoreData.length; i++) {
           this.spinnerArray.controls[i].value.percentage = this.SpinnerFieldsStoreData[i].percentage;
           this.spinnerArray.value[i].percentage = this.SpinnerFieldsStoreData[i].percentage;
           console.log(i,this.spinnerArray.controls[i].value);
-          this.setValuesofBackendSpinner(this.SpinnerFieldsStoreData[i].percentage);
-        }
-        
 
+        }*/
+
+
+        this.setValuesofBackendSpinner(this.SpinnerFieldsStoreData);
+        console.log('spinnerForm',this.spinnerForm)
+        console.log('spinnerArray',this.spinnerArray)
       },
       (err) => {
 
@@ -165,19 +178,17 @@ export class CustomizeSpinnerComponent implements OnInit {
       });
   }
 
-  setValuesofBackendSpinner(percentage) {
-	  this.spinnerArray.patchValue([
-      {percentage: percentage}
-	  ]);
+  setValuesofBackendSpinner(data) {
+    this.spinnerArray.patchValue(data);
   } 
-
+/*
   loadFormFromBackEnd(data) {
     for(let line=0; line < data.length; line++) {
-      const itemsFromArrat = this.spinnerForm.get('spinnerArray') as FormArray;
-      itemsFromArrat.push(this.spinnerArray)
+      let itemsFromArray = this.spinnerForm.get('spinnerArray') as FormArray;
+      itemsFromArray.push(this.spinnerArray)
     }
     this.spinnerForm.patchValue(data);
-  }
+  }*/
 
 
 	createSpFormGroup() {
@@ -189,7 +200,7 @@ export class CustomizeSpinnerComponent implements OnInit {
       isItEmail: [true, [Validators.required]],
       textPopUp: [''],
       emails: [''],
-      color: ['', [Validators.required]],
+      bgColor: ['', [Validators.required]],
     });
 
     SpinnerForm.valueChanges.subscribe( data => {
@@ -204,7 +215,7 @@ export class CustomizeSpinnerComponent implements OnInit {
     'isItImage': '',
     'percentage': '',
     'isItEmail': '',
-    'color': '',
+    'bgColor': '',
   };
   validationMessages = {
     'isItImage': {
@@ -219,7 +230,7 @@ export class CustomizeSpinnerComponent implements OnInit {
     'isItEmail': {
       'required': 'is it email? is required.'
     },
-    'color': {
+    'bgColor': {
       'required': 'color is required.'
     }
   }
@@ -230,7 +241,14 @@ export class CustomizeSpinnerComponent implements OnInit {
     });
   }
 
+  get spinnerArray(): FormArray {
+		if ( this.spinnerForm) {
+      return this.spinnerForm.get('spinnerArray') as FormArray;
+    }
+  }
   
+
+
   DidModalOpen:boolean = false;
 
 
@@ -396,12 +414,6 @@ export class CustomizeSpinnerComponent implements OnInit {
 
   /////
   
-  get spinnerArray(): FormArray {
-		if ( this.spinnerForm) {
-      return this.spinnerForm.get('spinnerArray') as FormArray;
-    }
-  }
-  
 
 
   // For number of field dropdown
@@ -490,8 +502,8 @@ export class CustomizeSpinnerComponent implements OnInit {
   
       this.spinnerArray.value.forEach(element => {
 
-        if( element.color === '') {
-          element.color = '#000000';
+        if( element.bgColor === '') {
+          element.bgColor = '#000000';
         }
 
         let field = new formSpinnerControl(
@@ -502,7 +514,7 @@ export class CustomizeSpinnerComponent implements OnInit {
           element.isItEmail,
           element.textPopUp,
           element.email,
-          element.color
+          element.bgColor
         )
 
         this.totalPercentage[counter] = element.percentage;
