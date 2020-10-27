@@ -61,11 +61,10 @@
                                                 <button type="button" class="btn btn-sm btn-success btnInput" (click)="imageInput.click()">
                                                     <span>File Upload</span>
                                                     <input #imageInput style="display:none;"
-                                                    formControlName="file"
                                                     type="file" 
                                                     accept="image/*"
                                                     name="imageFile"
-                                                    (change)="processFile($event, i)">
+                                                    (change)="processFile($event, i)">   <!--formControlName="file"-->
                                                 </button>
                                             </div>
     
