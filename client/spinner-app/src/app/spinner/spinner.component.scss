@@ -1,6 +1,6 @@
-$Diameter: 350px;
+$Diameter: 800px;
 $WheelBorder: $Diameter/35;
-$maxWidthImage: 100px;
+$maxWidthImage: $Diameter/3.5;
 $SpinDiameter: $Diameter/3.6764;
 $InnerSpinDiameter: $Diameter/4.62;
 
@@ -18,14 +18,14 @@ div#wheel{
 	position:relative;
 	overflow:hidden;
 	border:$WheelBorder solid #fff;
-	box-shadow:rgba(0,0,0,0.2) 0px 0px 10px, rgba(0,0,0,0.05) 0px 3px 0px;
+	box-shadow:rgba(0,0,0,0.2) 0px 0px $Diameter*2/35, rgba(0,0,0,0.05) 0px $Diameter/80 0px;
 	transform: rotate(0deg);
 }
 
 #wheel:before{
 	content:'';
 	position:absolute;
-	border:4px solid rgba(0,0,0,0.1);
+	border: $Diameter/40 solid rgba(0,0,0,0.1);
 	width:$Diameter*0.968;
 	height:$Diameter*0.968;
 	border-radius:50%;
@@ -63,20 +63,18 @@ div#wheel{
     border-radius:$Diameter; 
 }
 
-
+$spanSize: $Diameter/2 - $WheelBorder - $SpinDiameter/2;
 
 #wheel div.sec {
 	span.imageSpan {
-		//margin-top: 50px;
 		position: absolute;
 		bottom: $Diameter/2;
 		right: $Diameter/2 - $maxWidthImage/2;
 		z-index: 10000000;
 		display: block;
 		text-align: center;
-		font-size:30px;
-		//margin-left:-120px;
-		text-shadow: rgba(255, 255, 255, 0.1) 0px -1px 0px, rgba(0, 0, 0, 0.2) 0px 1px 0px;
+		font-size: $Diameter/10;
+		text-shadow: rgba(255, 255, 255, 0.1) 0px -($Diameter/100) 0px, rgba(0, 0, 0, 0.2) 0px -($Diameter/100) 0px;
 		max-width: $maxWidthImage;
 		min-height: $maxWidthImage*1.45;
 		.ImageContainer{
@@ -88,16 +86,18 @@ div#wheel{
 	}
 	span.TextSpan {
 		position: absolute;
-		bottom: $Diameter/2.3;
-		right: $Diameter/2;
-		min-width: $Diameter/2;
-		max-width: $Diameter/2;
+		bottom:  $Diameter/2 + $SpinDiameter/2 - $WheelBorder*2;
+		right: $Diameter/2 + $SpinDiameter/2 - $WheelBorder*2;
+		min-width: $spanSize;
+		max-width: $spanSize;
+		min-height: 100px;
+		max-height: 100px;
 		text-justify: inter-word;
 		z-index: 10000000;
 		display: block;
 		text-align: center;
-		font-size:30px;
-		text-shadow: rgba(255, 255, 255, 0.1) 0px -1px 0px, rgba(0, 0, 0, 0.2) 0px 1px 0px;
+		font-size:$Diameter/10;
+		text-shadow: rgba(255, 255, 255, 0.1) 0px -($Diameter/140) 0px, rgba(0, 0, 0, 0.2) 0px -($Diameter/110) 0px;
 	}
 
 }
@@ -110,7 +110,7 @@ div#wheel{
 	left: $Diameter/2 - $SpinDiameter/2 - $WheelBorder;
 	margin:0;
 	border-radius:50%;
-	box-shadow:rgba(0,0,0,0.1) 0px 3px 0px;
+	box-shadow:rgba(0,0,0,0.1) 0px $SpinDiameter/100 0px;
 	z-index:1000;
 	background:#fff;
 	cursor:pointer;
@@ -126,7 +126,7 @@ div#wheel{
 	text-align:center;
 	line-height:$SpinDiameter;
 	color:#CCC;
-	text-shadow: 0 2px 0 #fff, 0 -2px 0 rgba(0,0,0,0.3) ;
+	text-shadow: 0 $SpinDiameter/100 0 #fff, 0 -$SpinDiameter/100 0 rgba(0,0,0,0.3) ;
 	position: relative;
 	z-index: 100000;
 	width:$SpinDiameter;
@@ -151,13 +151,13 @@ div#wheel{
 	width:$InnerSpinDiameter;  //54px
 	height:$InnerSpinDiameter;//54px
 	position:absolute;
-	top: $Diameter/9.5;   //50%
-	left:$Diameter/9.5;   //50%
-	margin:-27px 0 0 -27px;
+	top: $SpinDiameter/2 - $InnerSpinDiameter/2;   //50%
+	left: $SpinDiameter/2 - $InnerSpinDiameter/2;      //50%
+	margin:0;
 	border-radius:50%;
 	background:red;
 	z-index:999;
-	box-shadow:rgba(255,255,255,1) 0px -2px 0px inset, rgba(255,255,255,1) 0px 2px 0px inset,  rgba(0,0,0,0.4) 0px 0px 5px ;
+	box-shadow:rgba(255,255,255,1) 0px -$SpinDiameter/100 0px inset, rgba(255,255,255,1) 0px $SpinDiameter/100 0px inset,  rgba(0,0,0,0.4) 0px 0px $SpinDiameter/80 ;
 	
 	background: rgb(255,255,255); /* Old browsers */
 	background: -moz-radial-gradient(center, ellipse cover,  rgba(255,255,255,1) 0%, rgba(234,234,234,1) 100%); /* FF3.6+ */
@@ -170,43 +170,40 @@ div#wheel{
 	
 	overflow:hidden;
 	img {
-		width: $Diameter/3.6764;
-		height: $Diameter/3.6764;
+		width: $InnerSpinDiameter;
+		height: $InnerSpinDiameter;
 		border-radius: 100%;
 		position: absolute;
-		top: -9px;
-		left: -9px;
+		top: 0;
+		left: 0;
 	}
 
 }
 
 #spin:active #inner-spin{
-	box-shadow:rgba(0,0,0,0.4) 0px 0px 5px inset;
+	box-shadow:rgba(0,0,0,0.4) 0px 0px $SpinDiameter/70 inset;
 }
 
 #spin:active:after{
-	font-size:15px;	
+	font-size:$SpinDiameter/23.33;	
 }
 
-
+/*
 #shine{
-	width:250px;
-	height:250px;
+	width: $Diameter;
+	height:$Diameter;
 	position:absolute;
 	top:0;
 	left:0;
-	background: -moz-radial-gradient(center, ellipse cover,  rgba(255,255,255,1) 0%, rgba(255,255,255,0.99) 1%, rgba(255,255,255,0.91) 9%, rgba(255,255,255,0) 100%); /* FF3.6+ */
-background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,rgba(255,255,255,1)), color-stop(1%,rgba(255,255,255,0.99)), color-stop(9%,rgba(255,255,255,0.91)), color-stop(100%,rgba(255,255,255,0))); /* Chrome,Safari4+ */
-background: -webkit-radial-gradient(center, ellipse cover,  rgba(255,255,255,1) 0%,rgba(255,255,255,0.99) 1%,rgba(255,255,255,0.91) 9%,rgba(255,255,255,0) 100%); /* Chrome10+,Safari5.1+ */
-background: -o-radial-gradient(center, ellipse cover,  rgba(255,255,255,1) 0%,rgba(255,255,255,0.99) 1%,rgba(255,255,255,0.91) 9%,rgba(255,255,255,0) 100%); /* Opera 12+ */
-background: -ms-radial-gradient(center, ellipse cover,  rgba(255,255,255,1) 0%,rgba(255,255,255,0.99) 1%,rgba(255,255,255,0.91) 9%,rgba(255,255,255,0) 100%); /* IE10+ */
-background: radial-gradient(ellipse at center,  rgba(255,255,255,1) 0%,rgba(255,255,255,0.99) 1%,rgba(255,255,255,0.91) 9%,rgba(255,255,255,0) 100%); /* W3C */
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#00ffffff',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
-
-
-opacity:0.1;
-	
-}
+	background: -moz-radial-gradient(center, ellipse cover,  rgba(255,255,255,1) 0%, rgba(255,255,255,0.99) 1%, rgba(255,255,255,0.91) 9%, rgba(255,255,255,0) 100%); 
+	background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,rgba(255,255,255,1)), color-stop(1%,rgba(255,255,255,0.99)), color-stop(9%,rgba(255,255,255,0.91)), color-stop(100%,rgba(255,255,255,0)));
+	background: -webkit-radial-gradient(center, ellipse cover,  rgba(255,255,255,1) 0%,rgba(255,255,255,0.99) 1%,rgba(255,255,255,0.91) 9%,rgba(255,255,255,0) 100%); 
+	background: -o-radial-gradient(center, ellipse cover,  rgba(255,255,255,1) 0%,rgba(255,255,255,0.99) 1%,rgba(255,255,255,0.91) 9%,rgba(255,255,255,0) 100%); 
+	background: -ms-radial-gradient(center, ellipse cover,  rgba(255,255,255,1) 0%,rgba(255,255,255,0.99) 1%,rgba(255,255,255,0.91) 9%,rgba(255,255,255,0) 100%); 
+	background: radial-gradient(ellipse at center,  rgba(255,255,255,1) 0%,rgba(255,255,255,0.99) 1%,rgba(255,255,255,0.91) 9%,rgba(255,255,255,0) 100%); 
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#00ffffff',GradientType=1 ); /* IE6-9 fallback on horizontal gradient 
+	opacity:0.1;
+}*/
 
 
 

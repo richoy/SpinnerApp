@@ -23,7 +23,7 @@
           
   <div *ngIf="SpinnerFields" id="wheel">
 
-      <div id="inner-wheel" [style]="spiningRotate">
+    <div id="inner-wheel" [style]="spiningRotate">
           <div *ngFor="let field of SpinnerFields; let i = index">
               <div #wheelSec>
                   <div [style]="holder[i]" class="hold" *ngIf="field.isItImage">
@@ -38,7 +38,7 @@
 
                   <div [style]="holder[i]" class="hold" *ngIf="!field.isItImage">
                       <div class="sec" [style]="fieldStyleNth[i]">
-                        <span [style]="textOrientation[i]" class="TextSpan d-flex justify-content-center">
+                        <span [style]="textOrientation[i]" class="TextSpan">
                           {{field.textFieldOne}}
                         </span>
                       </div>
@@ -48,14 +48,14 @@
           </div>       
          
 
-      </div>
-      <div id="spin" (click)="rotate()" #spin [style]="spinMovemente">
-          <div id="inner-spin">
-            <div *ngIf="centerImage">
-              <img src="{{centerImage.centerImage}}">
-            </div>
+    </div>
+    <div id="spin" (click)="rotate()" #spin [style]="spinMovemente">
+        <div id="inner-spin">
+          <div *ngIf="centerImage">
+            <img src="{{centerImage.centerImage}}">
           </div>
-      </div>
+        </div>
+    </div>
       
       <div id="shine"></div>
       

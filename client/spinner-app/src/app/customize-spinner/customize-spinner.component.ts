@@ -423,6 +423,7 @@ export class CustomizeSpinnerComponent implements OnInit {
     for( let index = 0; index < i; index++) {
       this.SuccessfullyUpload[index] = false;
       this.UnsuccessfullyUpload[index] = false;
+      this.itIsTextField[index] = false;
     }
 
     while(this.spinnerArray.length > 0) {
