@@ -1,11 +1,14 @@
 $Diameter: 350px;
+$WheelBorder: $Diameter/35;
+$maxWidthImage: 100px;
+$SpinDiameter: $Diameter/3.6764;
+$InnerSpinDiameter: $Diameter/4.62;
 
 #wrapper{ 
 	margin: 40px auto 0;	
-	width:$Diameter*1.064; 
+	width:100%; 
 	position:relative;
 }
-
 
 
 div#wheel{
@@ -14,7 +17,7 @@ div#wheel{
 	border-radius:50%;	
 	position:relative;
 	overflow:hidden;
-	border:8px solid #fff;
+	border:$WheelBorder solid #fff;
 	box-shadow:rgba(0,0,0,0.2) 0px 0px 10px, rgba(0,0,0,0.05) 0px 3px 0px;
 	transform: rotate(0deg);
 }
@@ -44,8 +47,8 @@ div#wheel{
     width: $Diameter;
     height: $Diameter;
     clip:rect(0px,$Diameter,$Diameter,$Diameter/2);
-    left: -7px;
-    top: -9px;
+    left: -$WheelBorder;
+    top: -$WheelBorder;
 }
 
 #wheel div.sec{
@@ -53,14 +56,14 @@ div#wheel{
 	width: $Diameter;
 	height: $Diameter;
 	transform-origin: center;
-	//left:$Diameter/4;
-	//top:$Diameter/4;	
+	left:0;
+	top:0;	
     opacity:1;
     clip:rect(0px,$Diameter/2,$Diameter,0px);
     border-radius:$Diameter; 
 }
 
-$maxWidthImage: 100px;
+
 
 #wheel div.sec {
 	span.imageSpan {
@@ -99,36 +102,35 @@ $maxWidthImage: 100px;
 
 }
 
-
 #spin{
-	width:$Diameter/3.6764;  
-	height:$Diameter/3.6764;
+	width: $SpinDiameter;  
+	height: $SpinDiameter;
 	position:absolute;
-	top:$Diameter*0.45;  
-	left:$Diameter*0.439;
-	margin:-34px 0 0 -34px;
+	top: $Diameter/2 - $SpinDiameter/2 - $WheelBorder;  
+	left: $Diameter/2 - $SpinDiameter/2 - $WheelBorder;
+	margin:0;
 	border-radius:50%;
 	box-shadow:rgba(0,0,0,0.1) 0px 3px 0px;
 	z-index:1000;
 	background:#fff;
 	cursor:pointer;
-  -webkit-user-select: none; 
-  -moz-user-select: none;    
-  -ms-user-select: none;     
-  -o-user-select: none;
-  user-select: none;   
+  	-webkit-user-select: none; 
+  	-moz-user-select: none;    
+  	-ms-user-select: none;     
+  	-o-user-select: none;
+  	user-select: none;   
 }
 
 #spin:after{
 	content:'';	
 	text-align:center;
-	line-height:$Diameter/3.6764;
+	line-height:$SpinDiameter;
 	color:#CCC;
 	text-shadow: 0 2px 0 #fff, 0 -2px 0 rgba(0,0,0,0.3) ;
 	position: relative;
 	z-index: 100000;
-	width:$Diameter/3.6764;
-	height:$Diameter/3.6764;
+	width:$SpinDiameter;
+	height:$SpinDiameter;
 	display:block;
 }
 
@@ -138,17 +140,16 @@ $maxWidthImage: 100px;
 	width: 0;
 	height: 0;
 	border-style: solid;
-	border-width: 0 20px 28px 20px;
+	border-width: 0 $Diameter*2.2/35 $Diameter*2.2/25 $Diameter*2.2/35;
 	border-color: transparent transparent #ffffff transparent;
-	top:-$Diameter/17.5;  //-20px
-	left:$Diameter/12.5;   //28px
+	top: -$Diameter*2.2/25 + ($SpinDiameter - $InnerSpinDiameter)/2;  //-20px
+	left: $SpinDiameter/2 - $Diameter*2.2/35;   //28px
 }
 
 
 #inner-spin{
-	
-	width:$Diameter/4.62;  //54px
-	height:$Diameter/4.62;//54px
+	width:$InnerSpinDiameter;  //54px
+	height:$InnerSpinDiameter;//54px
 	position:absolute;
 	top: $Diameter/9.5;   //50%
 	left:$Diameter/9.5;   //50%
