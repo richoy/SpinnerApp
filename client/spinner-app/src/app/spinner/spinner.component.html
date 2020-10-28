@@ -1,7 +1,7 @@
-
+<!--
 <header *ngIf="HeaderFooter">
     <div [innerHTML]="HeaderFooter.header"></div>
-</header>
+</header>-->
 
 
 <div class="sizingBox">
@@ -19,11 +19,11 @@
 </div>
 
 
-<div id="wrapper">
+<div id="wrapper" class="d-flex justify-content-center">
           
   <div *ngIf="SpinnerFields" id="wheel">
 
-      <div id="inner-wheel" [style]="spiningRotate">
+    <div id="inner-wheel" [style]="spiningRotate">
           <div *ngFor="let field of SpinnerFields; let i = index">
               <div #wheelSec>
                   <div [style]="holder[i]" class="hold" *ngIf="field.isItImage">
@@ -38,9 +38,11 @@
 
                   <div [style]="holder[i]" class="hold" *ngIf="!field.isItImage">
                       <div class="sec" [style]="fieldStyleNth[i]">
-                        <span [style]="textOrientation[i]" class="TextSpan d-flex justify-content-center">
-                          {{field.textFieldOne}}
-                        </span>
+                        <div class="SpanContainer" [style]="textOrientation[i]">
+                          <span class="TextSpan">
+                            {{field.textFieldOne}}
+                          </span>
+                        </div>
                       </div>
                   </div>
               </div>
@@ -48,14 +50,14 @@
           </div>       
          
 
-      </div>
-      <div id="spin" (click)="rotate()" #spin [style]="spinMovemente">
-          <div id="inner-spin">
-            <div *ngIf="centerImage">
-              <img src="{{centerImage.centerImage}}">
-            </div>
+    </div>
+    <div id="spin" (click)="rotate()" #spin [style]="spinMovemente">
+        <div id="inner-spin">
+          <div *ngIf="centerImage">
+            <img src="{{centerImage.centerImage}}">
           </div>
-      </div>
+        </div>
+    </div>
       
       <div id="shine"></div>
       
@@ -68,10 +70,10 @@
 
 
   
-
+<!--
 <footer *ngIf="HeaderFooter">
     <div [innerHTML]="HeaderFooter.footer"></div>
-</footer>
+</footer>-->
 
 <ng-template #ResultEmail let-modal>
     <div class="modal-header">
