@@ -140,9 +140,16 @@ export class SpinnerComponent implements OnInit {
       });
   }
 
+  firedOnce: boolean = false;
+
   rotate() {
+
+    if(this.firedOnce) {
+      return;
+    }
+    this.firedOnce = true;
     this.getSpinner();
-    let degreeSpinn = 360*8;
+    let degreeSpinn = 360*11;
     this.clicks = ++this.clicks; ////
     this.newDegree = degreeSpinn * this.clicks;  ////
 
@@ -237,6 +244,7 @@ export class SpinnerComponent implements OnInit {
       }, (reason) => {
         this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
       });
+      this.firedOnce = false;
     }
 
     private getDismissReason(reason: any): string {
