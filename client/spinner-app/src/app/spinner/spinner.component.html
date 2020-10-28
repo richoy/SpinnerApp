@@ -38,9 +38,11 @@
 
                   <div [style]="holder[i]" class="hold" *ngIf="!field.isItImage">
                       <div class="sec" [style]="fieldStyleNth[i]">
-                        <span [style]="textOrientation[i]" class="TextSpan">
-                          {{field.textFieldOne}}
-                        </span>
+                        <div class="SpanContainer" [style]="textOrientation[i]">
+                          <span class="TextSpan">
+                            {{field.textFieldOne}}
+                          </span>
+                        </div>
                       </div>
                   </div>
               </div>
