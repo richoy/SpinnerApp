@@ -51,7 +51,7 @@
          
 
     </div>
-    <div id="spin" (click)="rotate()" type="button" [disabled]="disableRotateButton" #spin [style]="spinMovemente">
+    <div id="spin" (click)="rotate()" type="button" #spin [style]="spinMovemente">
         <div id="inner-spin">
           <div *ngIf="centerImage">
             <img src="{{centerImage.centerImage}}">

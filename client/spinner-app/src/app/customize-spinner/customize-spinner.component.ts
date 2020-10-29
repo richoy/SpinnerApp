@@ -62,6 +62,7 @@ export class CustomizeSpinnerComponent implements OnInit {
   SumOfPercentageEqualHundred: boolean = false;
   SumOfPercentageMoreThanHundred: boolean=false;
   percentageValues: number[] = [];
+  valueToReach100: number;
   @ViewChildren('percentage') percentage: QueryList<any>;
 
 
@@ -86,6 +87,7 @@ export class CustomizeSpinnerComponent implements OnInit {
   
   closeResult = '';
   @ViewChild('modal') modal;
+  @ViewChild('modalPercentageLessThan100') modalPercentageLessThan100;
 
   constructor(
     public formBuilder:FormBuilder,// For number of field dropdown
@@ -502,9 +504,9 @@ export class CustomizeSpinnerComponent implements OnInit {
 
       if (this.percentageSum === 100) {
         
-      let counter = 0;
+        let counter = 0;
   
-      this.spinnerArray.value.forEach(element => {
+        this.spinnerArray.value.forEach(element => {
 
         if( element.bgColor === '') {
           element.bgColor = '#000000';
@@ -530,29 +532,36 @@ export class CustomizeSpinnerComponent implements OnInit {
         })
         spinner.push(field);
         counter++;
-      });
-
-      this.percentageSum = this.totalPercentage.reduce(function(a, b){
-        return a + b;
-      }, 0);
-
-      this.sucessFormSubmition = true;
-
-      this.spinnerService.deleteSpinner().subscribe(() => {
-          this.spinnerService.sendSpinner(spinner).subscribe((res) => {
-            setTimeout( () => {
-              this.sucessFormSubmition = false;
-            }, 2000);
-            //this.spinnerForm.reset();
-            //this.StringOfImageUpload = []; // Resets the StringOfImageUpload array
-          }, err =>{
-            throw new Error('Error Sending the information about the spinner');
-          });
-        }, err => {
-          throw new Error('Error deleting the information of the previous spineer');
         });
-      } else {
-        throw new Error('Error Percentage must add up 100%');
+
+        this.percentageSum = this.totalPercentage.reduce(function(a, b){
+          return a + b;
+        }, 0);
+
+        this.sucessFormSubmition = true;
+
+        this.spinnerService.deleteSpinner().subscribe(() => {
+            this.spinnerService.sendSpinner(spinner).subscribe((res) => {
+              setTimeout( () => {
+                this.sucessFormSubmition = false;
+              }, 2000);
+              //this.spinnerForm.reset();
+              //this.StringOfImageUpload = []; // Resets the StringOfImageUpload array
+            }, err =>{
+              throw new Error('Error Sending the information about the spinner');
+            });
+          }, err => {
+            throw new Error('Error deleting the information of the previous spineer');
+        });
+
+      } else if (this.percentageSum < 100) {
+
+        this.open(this.modalPercentageLessThan100);
+        this.valueToReach100 = 100 - this.percentageSum;
+        throw new Error(`Error Percentage must add up 100%,
+          You have only reached ${this.percentageSum}. You 
+          still neeed ${this.valueToReach100} to go!!`);
+
       }
     } else if (this.spinnerForm.status === "INVALID") {
 
