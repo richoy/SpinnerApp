@@ -63,6 +63,7 @@ export class CustomizeSpinnerComponent implements OnInit {
   SumOfPercentageMoreThanHundred: boolean=false;
   percentageValues: number[] = [];
   valueToReach100: number;
+  valueOver100: number;
   @ViewChildren('percentage') percentage: QueryList<any>;
 
 
@@ -86,8 +87,8 @@ export class CustomizeSpinnerComponent implements OnInit {
   SpinnerFieldsStoreData: any;
   
   closeResult = '';
-  @ViewChild('modal') modal;
   @ViewChild('modalPercentageLessThan100') modalPercentageLessThan100;
+  @ViewChild('modalPercentageMoreThan100') modalPercentageMoreThan100;
 
   constructor(
     public formBuilder:FormBuilder,// For number of field dropdown
@@ -312,7 +313,6 @@ export class CustomizeSpinnerComponent implements OnInit {
       this.SumOfPercentageMoreThanHundred = true
       this.SumOfPercentageEqualHundred = false;
       if(this.DidModalOpen === false) {
-        this.open(this.modal);
         this.DidModalOpen = true;
       }
     }
@@ -559,10 +559,18 @@ export class CustomizeSpinnerComponent implements OnInit {
         this.open(this.modalPercentageLessThan100);
         this.valueToReach100 = 100 - this.percentageSum;
         throw new Error(`Error Percentage must add up 100%,
-          You have only reached ${this.percentageSum}. You 
-          still neeed ${this.valueToReach100} to go!!`);
+          You have only reached ${this.percentageSum}%. You 
+          still neeed ${this.valueToReach100}% to go!!`);
 
+      } else if (this.percentageSum > 100) {
+        this.valueOver100 = this.percentageSum - 100;
+        this.open(this.modalPercentageMoreThan100);
+        throw new Error(`Error Percentage must add up 100%,
+          You have ${this.percentageSum}%. 
+          You have exceeded by ${this.valueOver100}%!!`);
       }
+
+
     } else if (this.spinnerForm.status === "INVALID") {
 
       this.unsuccessSendingForm = true;
