@@ -308,7 +308,7 @@ export class CustomizeSpinnerComponent implements OnInit {
       this.SumOfPercentageMoreThanHundred = false;
     } else if(this.percentageSum <= 100 ) {
       this.SumOfPercentageEqualHundred = false;
-      this.SumOfPercentageMoreThanHundred = true
+      this.SumOfPercentageMoreThanHundred = false
     } else if(this.percentageSum > 100) {
       this.SumOfPercentageMoreThanHundred = true
       this.SumOfPercentageEqualHundred = false;
@@ -421,6 +421,7 @@ export class CustomizeSpinnerComponent implements OnInit {
   onChange(i) {
     this.items.length = 0;   // eliminates defalut setting before adding other
     this.spinnerForm.reset();
+    this.percentageSum = 0;
 
     for( let index = 0; index < i; index++) {
       this.SuccessfullyUpload[index] = false;
