@@ -131,11 +131,21 @@
                                 <tr>
                                     <td></td>
                                     <td></td>
-                                    <td  colspan="3">
-                                        <div [hidden]="!unsuccessSendingForm" [@expand]>
-                                            <h5 style="color: red; font-size: 25px;">All percentages & colors are required</h5>
+                                    <td>
+                                        <div class="totalPercentageSum d-flex justify-content-center bg-warning" *ngIf="percentageSum && !SumOfPercentageMoreThanHundred && !SumOfPercentageEqualHundred" [@expand]>
+                                            <p>{{percentageSum}}%</p>
                                         </div>
+
+                                        <div class="totalPercentageSum d-flex justify-content-center bg-danger" *ngIf="percentageSum && SumOfPercentageMoreThanHundred" [@expand]>
+                                            <p>{{percentageSum}}%</p>
+                                        </div>
+
+                                        <div class="totalPercentageSum d-flex justify-content-center bg-success" *ngIf="percentageSum && SumOfPercentageEqualHundred" [@expand]>
+                                            <p>{{percentageSum}}%</p>
+                                        </div>
+
                                     </td>
+                                    <td colspan="2"></td>
                                     <td>
 
                                         <button type="submit" class="btn btn-success" [disabled]="spinnerForm.invalid">
