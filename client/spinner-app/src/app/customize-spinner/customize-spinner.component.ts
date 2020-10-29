@@ -83,8 +83,8 @@ export class CustomizeSpinnerComponent implements OnInit {
   unsuccessSendingForm: boolean = false;
 
   //Get spinner stored data
-  IsPreviousDataStored: boolean = false;
   SpinnerFieldsStoreData: any;
+  CenterImageFieldStoreData: any;
   
   closeResult = '';
   @ViewChild('modalPercentageLessThan100') modalPercentageLessThan100;
@@ -125,8 +125,6 @@ export class CustomizeSpinnerComponent implements OnInit {
     this.getDataSpinnerService.getSpinner()
       .subscribe( data => {
         
-
-        this.IsPreviousDataStored = true;
         this.SpinnerFieldsStoreData = data;
 
         //Not used elements of the Data Array
@@ -140,7 +138,6 @@ export class CustomizeSpinnerComponent implements OnInit {
           delete this.SpinnerFieldsStoreData[i]['email'];
         }
 
-
         // Getting Number of fields
         let GetDOMNumberOfFields = this.numberOfFields.nativeElement[this.SpinnerFieldsStoreData.length - 2];
         GetDOMNumberOfFields.setAttribute('selected', 'selected');
@@ -151,11 +148,11 @@ export class CustomizeSpinnerComponent implements OnInit {
         this.onChange(GetDOMNumberOfFields.value);
 
         //Setting Values
-        this.setValuesofBackendSpinner(this.SpinnerFieldsStoreData);
+        this.setValuesofBackendSpinner(this.SpinnerFieldsStoreData, this.spinnerArray);
         for(let i=0; i<this.SpinnerFieldsStoreData.length; i++) {
           
           if (this.SpinnerFieldsStoreData[i].isItImage == true) {
-            this.onSuccess(i, this.SpinnerFieldsStoreData[i].file)
+            this.onSuccess(i, this.SpinnerFieldsStoreData[i].file);
           } else if (this.SpinnerFieldsStoreData[i].isItImage == false) {
             this.itIsImageFile[i] = false;
             this.itIsTextField[i] = true;
@@ -168,8 +165,6 @@ export class CustomizeSpinnerComponent implements OnInit {
         this.checkfullpercentage()
       },
       (err) => {
-
-        this.IsPreviousDataStored = false;
         
         for (let i = 0; i < 6; i++) {
           this.addControl(i);
@@ -186,15 +181,40 @@ export class CustomizeSpinnerComponent implements OnInit {
         // For number of field dropdown
         for (i=0; i<=this.items.length; i++) {
           this.itIsTextPopUp[i] = true;
-      }
-
+        }
         throw new Error(err);
-      });
+    });
+
+    this.centerImageService.getImageCenter()
+      .subscribe( data => {
+
+        this.CenterImageFieldStoreData = data;
+        delete this.CenterImageFieldStoreData[0]['createdAt'];
+        delete this.CenterImageFieldStoreData[0]['updatedAt'];
+        delete this.CenterImageFieldStoreData[0]['_id'];
+        delete this.CenterImageFieldStoreData[0]['__v'];
+
+        this.setValuesofBackendSpinner(this.CenterImageFieldStoreData[0], this.CenterImageForm);
+
+        if (this.CenterImageForm.value.centerImage != '') {
+          this.onSuccessCenter(this.CenterImageFieldStoreData[0].centerImage);
+        } else if(this.CenterImageForm.value.centerImage == '') {
+          this.SuccessSpinnerCenter = false;
+          this.UnsuccessSpinnerCenter = false;
+        }
+      },(err) => {
+        this.SuccessSpinnerCenter = false;
+        this.UnsuccessSpinnerCenter = false;
+        throw new Error(err);
+
+    });
   }
 
-  setValuesofBackendSpinner(data) {
-    this.spinnerArray.patchValue(data);
+  setValuesofBackendSpinner(data, form) {
+    form.patchValue(data);
   } 
+
+
 
 	createSpFormGroup() {
     let SpinnerForm = this.formBuilder.group({
@@ -251,8 +271,6 @@ export class CustomizeSpinnerComponent implements OnInit {
       return this.spinnerForm.get('spinnerArray') as FormArray;
     }
   }
-
-
 
   MessageErrorChange(i) {
 
@@ -328,8 +346,6 @@ export class CustomizeSpinnerComponent implements OnInit {
       this.percentageValues[i] = 0;
     }
   }
-
-
 
   onValueChanged(SpinnerForm ,data?: any) {
     if (!SpinnerForm) {return;}
@@ -459,6 +475,7 @@ export class CustomizeSpinnerComponent implements OnInit {
   }
 
   deleteImage() {
+    this.setValuesofBackendSpinner({'centerImage': ''}, this.CenterImageForm);
     this.centerImageService.deleteImageCenter()
       .subscribe(() => {
         

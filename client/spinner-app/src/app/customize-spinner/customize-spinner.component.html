@@ -148,7 +148,7 @@
                                     <td colspan="2"></td>
                                     <td>
 
-                                        <button type="submit" class="btn btn-success" [disabled]="spinnerForm.invalid">
+                                        <button type="submit" class="btn btn-success">
                                             Save
                                         </button>
                                     </td>
@@ -187,7 +187,6 @@
             
                                 <input #centerimageInput
                                 style="display:none;"
-                                formControlName="centerImage" 
                                 type="file" 
                                 (change)="ProcessCenterImage($event)">
             
@@ -212,7 +211,7 @@
 
                     <div class="ml-3">
                         <button class="btn btn-danger btn-sm" (click)="deleteImage()" 
-                        >Delete image</button>
+                        >Default button image</button>
                     </div>
 
                 </div>
