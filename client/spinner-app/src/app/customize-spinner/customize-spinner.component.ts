@@ -10,6 +10,7 @@ import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import { formSpinnerControl } from '../shared/form-spinner-controller';
 import { ImageSnippet } from '../shared/ImageSnippet';
 import { visibility, expand } from '../animations/app.animations'           
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-customize-spinner',
@@ -84,7 +85,8 @@ export class CustomizeSpinnerComponent implements OnInit {
 
   //Get spinner stored data
   SpinnerFieldsStoreData: any;
-  
+  CenterImageFieldStoreData: any;
+
   closeResult = '';
   @ViewChild('modalPercentageLessThan100') modalPercentageLessThan100;
   @ViewChild('modalPercentageMoreThan100') modalPercentageMoreThan100;
@@ -160,7 +162,7 @@ export class CustomizeSpinnerComponent implements OnInit {
         this.onChange(GetDOMNumberOfFields.value);
 
         //Setting Values
-        this.setValuesofBackendSpinner(this.SpinnerFieldsStoreData);
+        this.setValuesofBackendSpinner(this.spinnerArray, this.SpinnerFieldsStoreData);
         for(let i=0; i<this.SpinnerFieldsStoreData.length; i++) {
           
           if (this.SpinnerFieldsStoreData[i].isItImage == true) {
@@ -180,10 +182,35 @@ export class CustomizeSpinnerComponent implements OnInit {
       
         throw new Error(err);
       });
-  }
+  
+    this.centerImageService.getImageCenter()
+      .subscribe( data => {
 
-  setValuesofBackendSpinner(data) {
-    this.spinnerArray.patchValue(data);
+        this.CenterImageFieldStoreData = data;
+        delete this.CenterImageFieldStoreData[0]['createdAt'];
+        delete this.CenterImageFieldStoreData[0]['updatedAt'];
+        delete this.CenterImageFieldStoreData[0]['_id'];
+        delete this.CenterImageFieldStoreData[0]['__v'];
+        console.log(this.CenterImageFieldStoreData[0]);
+        console.log(this.CenterImageForm);
+        this.setValuesofBackendSpinner(this.CenterImageForm, this.CenterImageFieldStoreData[0]);
+        console.log(this.CenterImageForm);
+        if (this.CenterImageForm.value.centerImage != '') {
+          this.onSuccessCenter(this.CenterImageFieldStoreData[0].centerImage);
+        } else if(this.CenterImageForm.value.centerImage == '') {
+          this.SuccessSpinnerCenter = false;
+          this.UnsuccessSpinnerCenter = false;
+        }
+      },(err) => {
+        this.SuccessSpinnerCenter = false;
+        this.UnsuccessSpinnerCenter = false;
+        throw new Error(err);
+      });
+    
+    }
+
+  setValuesofBackendSpinner(form, data) {
+    form.patchValue(data);
   } 
 
 	createSpFormGroup() {
@@ -385,6 +412,8 @@ export class CustomizeSpinnerComponent implements OnInit {
     this.SuccessSpinnerCenter = false;
   }
 
+  centerImageButtonAppears: boolean = false;
+
   ProcessCenterImage(image: any) {
     let files = image.srcElement.files;
     let file: File = files[0];
@@ -394,6 +423,7 @@ export class CustomizeSpinnerComponent implements OnInit {
       this.imageService.uploadImage(this.selectedCenterFile.file)
         .subscribe((res) => {
           this.onSuccessCenter(res.path);
+          this.centerImageButtonAppears = true;
         },
         (err) => {
           this.onErrorCenter()
@@ -449,9 +479,17 @@ export class CustomizeSpinnerComponent implements OnInit {
   }
 
   deleteImage() {
+
     this.centerImageService.deleteImageCenter()
       .subscribe(() => {
-        
+        this.setValuesofBackendSpinner(this.CenterImageForm, {'centerImage': ''});
+        this.UnsuccessSpinnerCenter = false;
+        this.sucessCenterImageSubmition = true;
+        this.SuccessSpinnerCenter = false;
+        this.CenterImageForm.reset();
+        setTimeout( () => {
+          this.sucessCenterImageSubmition = false;
+        }, 2000);
       }, err => {
         throw new Error('Error deleting the information of the previous spineer');
       });
@@ -573,25 +611,33 @@ export class CustomizeSpinnerComponent implements OnInit {
 
   //sucessCenterImageSubmition
 
+  errorWhileSavingCenterImage: boolean = false;
+
   onSubmitCenterImage() {
-    this.sucessCenterImageSubmition = true;
     this.centerImageService.deleteImageCenter()
       .subscribe(() => {
         this.centerCopy = this.CenterImageForm.value;
         this.centerCopy.centerImage = this.StringOfSpinnerCenter.replace(/\\/g, "/");
         this.centerImageService.sendImageCenter(this.centerCopy)
         .subscribe(HFform => {
+          this.centerImageButtonAppears = false;
+          this.sucessCenterImageSubmition = true;
           setTimeout( () => {
             this.sucessCenterImageSubmition = false;
           }, 2000);
           this.centerform = HFform;
         }, err =>{
+          this.errorWhileSavingCenterImage = true;
+          setTimeout( () => {
+            this.errorWhileSavingCenterImage = false;
+          }, 2000);
+
           throw new Error('Error Sending the information about the spinner');
         });
       this.CenterImageForm.reset();
       }, err => {
         throw new Error('Error deleting the information of the previous spineer');
-      });
+    });
   }
 
   open(content) {

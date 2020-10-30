@@ -175,49 +175,60 @@
                 <h2>The spinner fields data has been successfully saved</h2>
             </div>
 
-            <h3 class="mt-3">Image for middle of spinner</h3>
+            <h3 class="mt-3">Image for center of spinner</h3>
 
-            <form [formGroup]="CenterImageForm" (ngSubmit)="onSubmitCenterImage()" [hidden]="sucessCenterImageSubmition" [@expand]>
 
-                <div class="d-flex">
-                    <div class="ImageUploadAndMessage d-flex mr-3" id="ImageUploadBox" >
-                        <div id="FileUploadBox">
-                            <button type="button" class="btn btn-sm btn-success" (click)="centerimageInput.click()">
-                                <span>File Upload</span>
+            <div class="d-flex" >
+                <form [formGroup]="CenterImageForm" (ngSubmit)="onSubmitCenterImage()"[hidden]="sucessCenterImageSubmition">
+
+                    <div class="d-flex">
+                        <div class="ImageUploadAndMessage d-flex mr-3" id="ImageUploadBox" >
+                            <div id="FileUploadBox">
+                                <button type="button" class="btn btn-sm btn-success" (click)="centerimageInput.click()">
+                                    <span>File Upload</span>
+                
+                                    <input #centerimageInput
+                                    style="display:none;"
+                                    type="file" 
+                                    (change)="ProcessCenterImage($event)">
+                
+                                </button>
+                            </div>
+        
+                            <div id="FileUploadMessageBox" class="ml-1">
+                                <div *ngIf="SuccessSpinnerCenter" class="alert alert-success d-flex justify-content-center"> <span>&#10004;</span></div>
+                                <div *ngIf="UnsuccessSpinnerCenter" class="alert alert-danger d-flex justify-content-center"> <span>&#x2716;</span></div>
+                            </div>
+                        </div>
+    
             
-                                <input #centerimageInput
-                                style="display:none;"
-                                formControlName="centerImage" 
-                                type="file" 
-                                (change)="ProcessCenterImage($event)">
-            
+        
+                        <div class="ml-3">
+
+                            <div class="invisible-button">
+
+                            </div>
+
+                            <button 
+                            type="submit" 
+                            class="btn btn-success btn-sm ml-auto ml-2"
+                            [hidden]="!centerImageButtonAppears">
+                                Save
                             </button>
                         </div>
     
-                        <div id="FileUploadMessageBox" class="ml-1">
-                            <div *ngIf="SuccessSpinnerCenter" class="alert alert-success d-flex justify-content-center"> <span>&#10004;</span></div>
-                            <div *ngIf="UnsuccessSpinnerCenter" class="alert alert-danger d-flex justify-content-center"> <span>&#x2716;</span></div>
-                        </div>
                     </div>
+                    
+                </form>
 
-        
-    
-                    <div class="ml-3">
-                        <button 
-                        type="submit" 
-                        class="btn btn-success btn-sm ml-auto ml-2">
-                            Save
-                        </button>
-                    </div>
-
-                    <div class="ml-3">
-                        <button class="btn btn-danger btn-sm" (click)="deleteImage()" 
-                        >Delete image</button>
-                    </div>
-
+                <div class="ml-3" [hidden]="sucessCenterImageSubmition">
+                    <button class="btn btn-warning text-white btn-sm" (click)="deleteImage()" 
+                    >Default image!</button>
                 </div>
-                
-            </form>
+
+            </div>
+
+
             <div class="successImageSend" [hidden]="!sucessCenterImageSubmition" [@expand]>
                 <h4>The spinner center image has been successfully saved</h4>
             </div>
