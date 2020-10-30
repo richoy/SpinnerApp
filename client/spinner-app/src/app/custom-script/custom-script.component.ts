@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CustomScriptService } from '../services/custom-script.service';
 import { ImageService } from '../services/image.service';
+import { HeaderFooterService } from '../services/header-footer.service';
 import { ImageSnippet } from '../shared/ImageSnippet';
 import { expand } from '../animations/app.animations';
 
@@ -23,8 +24,8 @@ export class CustomScriptComponent implements OnInit {
 
   selectedFile: ImageSnippet;
   StringOfImageUpload: string;
-  SuccessfullyUpload: boolean;
-  UnsuccessfullyUpload: boolean;
+  SuccessfullyUpload: boolean = false;
+  UnsuccessfullyUpload: boolean = false;
 
   formErrors = {
     'header': '',
@@ -52,24 +53,57 @@ export class CustomScriptComponent implements OnInit {
   //Submition
 
   FormSuccessfullySend: boolean = false;
-
+  HeaderAndFooterData: any;
 
   constructor( 
     private customScriptService: CustomScriptService,
     private imageService: ImageService,
+    private headerandFooterService: HeaderFooterService,
     private fb: FormBuilder) {
       this.createForm();
      }
 
   ngOnInit(): void {
+    this.getPreviousData();
   }
+  
+  getPreviousData() {
+    this.headerandFooterService.getHeaderFooter()
+      .subscribe(data => {
+        this.HeaderAndFooterData = data;
+        delete this.HeaderAndFooterData[0]['createdAt'];
+        delete this.HeaderAndFooterData[0]['updatedAt'];
+        delete this.HeaderAndFooterData[0]['_id'];
+        delete this.HeaderAndFooterData[0]['__v'];
+
+        this.setValuesofBackendHeaderAndFooter(this.HeaderFooterForm, this.HeaderAndFooterData[0]);
+
+        if ( this.HeaderFooterForm.value.favicon != '' ) {
+          this.onSuccess(this.HeaderAndFooterData[0].favicon);
+        } else if (this.HeaderFooterForm.value.favicon == '') {
+          this.SuccessfullyUpload = false;
+          this.UnsuccessfullyUpload = false;
+        }
+
+        console.log(this.SuccessfullyUpload);
+        console.log(this.UnsuccessfullyUpload);
+      },(err) => {
+        this.SuccessfullyUpload = false;
+        this.UnsuccessfullyUpload = false;
+        throw new Error(err);
+      });
+  }
+
+  setValuesofBackendHeaderAndFooter(form, data) {
+    form.patchValue(data);
+  } 
 
   createForm() {
     this.HeaderFooterForm = this.fb.group({
-      header: ['', [Validators.required]],
-      footer: ['', [Validators.required]],
-      pageTitle: ['', [Validators.required]],
-      pageDescription: ['', [Validators.required]],
+      header: [''],
+      footer: [''],
+      pageTitle: [''],
+      pageDescription: [''],
       favicon: ['']
     });
     this.HeaderFooterForm.valueChanges
@@ -77,6 +111,7 @@ export class CustomScriptComponent implements OnInit {
 
     this.onValueChanged(); // (re)set validation messages now
   }
+
 
   onValueChanged(data?: any) {
     if (!this.HeaderFooterForm) { return; }
@@ -143,7 +178,6 @@ export class CustomScriptComponent implements OnInit {
         }, err =>{
           throw new Error('Error Sending the information about the spinner');
         });
-      this.HeaderFooterForm.reset();
     }, err => {
       throw new Error('Error deleting the information of the previous spineer');
     });

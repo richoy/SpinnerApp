@@ -12,30 +12,22 @@
                         <label for="header">HEADER:</label>
                         <textarea required formControlName="header" class="form-control" id="header" name="header" rows="3"></textarea>
                         
-                        <div class="ErrorMessage" *ngIf="!formErrors.header"></div>
-                        <div class="ErrorMessage" *ngIf="formErrors.header"><p style="color: red;">{{ formErrors.header }}</p></div>
  
                     </div>
     
                     <div class="mb-3">
                         <label for="footer">Footer:</label>
                         <textarea required formControlName="footer" class="form-control" id="footer" name="footer" rows="3"></textarea>    
-                        <div class="ErrorMessage" *ngIf="!formErrors.footer"></div>
-                        <div class="ErrorMessage" *ngIf="formErrors.footer"><p style="color: red;">{{ formErrors.footer }}</p></div>
                     </div>
     
                     <div class="mb-3">
                         <label for="title">Page title:</label>
                         <input required formControlName="pageTitle" type="text" class="form-control" id="title" name="title">  
-                        <div class="ErrorMessage" *ngIf="!formErrors.pageTitle"></div>
-                        <div class="ErrorMessage" *ngIf="formErrors.pageTitle"><p style="color: red;">{{ formErrors.pageTitle }}</p></div>
                     </div>
     
                     <div class="mb-3">
                         <label for="description">Page description:</label>
                         <textarea required formControlName="pageDescription" class="form-control" id="description" name="description" rows="3"></textarea>    
-                        <div class="ErrorMessage" *ngIf="!formErrors.pageDescription"></div>
-                        <div class="ErrorMessage" *ngIf="formErrors.pageDescription"><p style="color: red;">{{ formErrors.pageDescription }}</p></div>
                     </div>
     
                     <div class="mb-3">
@@ -48,13 +40,12 @@
                                     <input 
                                     style="display:none;"
                                     #favicon
-                                    formControlName="favicon" 
                                     type="file" 
                                     (change)="processFile($event)"> 
                                 </button>
                             </div>
 
-                            <div id="FileUploadMessageBox" *ngIf="selectedFile" class="ml-1">
+                            <div id="FileUploadMessageBox" class="ml-1">
                                 <div *ngIf="SuccessfullyUpload" class="alert alert-success d-flex justify-content-center"> <span>&#10004;</span></div>
                                 <div *ngIf="UnsuccessfullyUpload" class="alert alert-danger d-flex justify-content-center"> <span>&#x2716;</span></div>
                             </div>
@@ -68,7 +59,7 @@
 
     
                     <div class="d-flex justify-content-end">
-                        <button class="btn btn-success" [disabled]="HeaderFooterForm.invalid">Save</button>
+                        <button class="btn btn-success">Save</button>
                     </div>
                 </form>
             </div>

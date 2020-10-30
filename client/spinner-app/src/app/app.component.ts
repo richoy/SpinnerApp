@@ -37,6 +37,7 @@ export class AppComponent implements OnInit{
         this.favIcon.href = this.API_IMAGE_URL + this.HeaderFooter.favicon.slice(14);
         this.Pagetitle.setTitle( this.HeaderFooter.pageTitle );
         this.metaService.addTag({ name: 'description', content: this.HeaderFooter.pageDescription }); //Description
+        //this.headScript.appendChild(this.HeaderFooter.header);
       });
   }
 

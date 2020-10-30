@@ -83,7 +83,6 @@ export class CustomizeSpinnerComponent implements OnInit {
   unsuccessSendingForm: boolean = false;
 
   //Get spinner stored data
-  IsPreviousDataStored: boolean = false;
   SpinnerFieldsStoreData: any;
   
   closeResult = '';
@@ -125,8 +124,6 @@ export class CustomizeSpinnerComponent implements OnInit {
     this.getDataSpinnerService.getSpinner()
       .subscribe( data => {
         
-
-        this.IsPreviousDataStored = true;
         this.SpinnerFieldsStoreData = data;
 
         //Not used elements of the Data Array
@@ -139,7 +136,6 @@ export class CustomizeSpinnerComponent implements OnInit {
           delete this.SpinnerFieldsStoreData[i]['__v'];
           delete this.SpinnerFieldsStoreData[i]['email'];
         }
-
 
         // Getting Number of fields
         let GetDOMNumberOfFields = this.numberOfFields.nativeElement[this.SpinnerFieldsStoreData.length - 2];
@@ -168,8 +164,6 @@ export class CustomizeSpinnerComponent implements OnInit {
         this.checkfullpercentage()
       },
       (err) => {
-
-        this.IsPreviousDataStored = false;
         
         for (let i = 0; i < 6; i++) {
           this.addControl(i);
