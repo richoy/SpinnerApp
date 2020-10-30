@@ -57,6 +57,10 @@ select {
     box-shadow: $boxShadow;
 }
 
+.invisible-button {
+    min-width: 50px;
+}
+
 .btnInput, .colorInput {
     height: $InputHeight -2px;
     width: 90px;
