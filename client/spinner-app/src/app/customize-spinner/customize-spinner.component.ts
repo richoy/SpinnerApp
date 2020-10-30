@@ -112,6 +112,19 @@ export class CustomizeSpinnerComponent implements OnInit {
     for (let i = 0; i < 6; i++) {
       this.addControl(i);
     }
+
+        // For imageUpload / Text Field
+    let i = 0;
+    for (i=0; i<=this.items.length; i++) {
+      this.itIsImageFile[i] = true;
+      this.itIsTextField[i] = false;
+    }
+    // For imageUpload / Text Field
+
+    // For number of field dropdown
+    for (i=0; i<=this.items.length; i++) {
+      this.itIsTextPopUp[i] = true;
+  }
     
     this.getSpinnerStoredInfo();
     
@@ -164,24 +177,7 @@ export class CustomizeSpinnerComponent implements OnInit {
         this.checkfullpercentage()
       },
       (err) => {
-        
-        for (let i = 0; i < 6; i++) {
-          this.addControl(i);
-        }
-
-            // For imageUpload / Text Field
-        let i = 0;
-        for (i=0; i<=this.items.length; i++) {
-          this.itIsImageFile[i] = true;
-          this.itIsTextField[i] = false;
-        }
-        // For imageUpload / Text Field
-
-        // For number of field dropdown
-        for (i=0; i<=this.items.length; i++) {
-          this.itIsTextPopUp[i] = true;
-      }
-
+      
         throw new Error(err);
       });
   }
@@ -199,7 +195,7 @@ export class CustomizeSpinnerComponent implements OnInit {
       isItEmail: [true, [Validators.required]],
       textPopUp: [''],
       emails: [''],
-      bgColor: ['', [Validators.required]],
+      bgColor: [''],
     });
 
     SpinnerForm.valueChanges.subscribe( data => {
