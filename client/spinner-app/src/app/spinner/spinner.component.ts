@@ -1,7 +1,7 @@
-import { Component, OnInit, ViewChild, QueryList, ViewChildren, ElementRef } from '@angular/core';
+import { Renderer2, Inject, Component, OnInit, ViewChild, QueryList, ViewChildren, ElementRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
-
+import { NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import { DOCUMENT } from '@angular/common';
 import { SpinnerService } from '../services/spinner.service';
 import { HeaderFooterService } from '../services/header-footer.service';
 import { EmailsService } from '../services/emails.service';
@@ -15,6 +15,7 @@ import { baseHref } from '../shared/baseHref';
 })
 export class SpinnerComponent implements OnInit {
 
+  //headScript: HTMLLinkElement = document.querySelector('#head');
 
   API_IMAGE_URL = `${baseHref}api/v1/imageUpload/`;
   SpinnerFields: any;
@@ -71,7 +72,9 @@ export class SpinnerComponent implements OnInit {
     private emailSevice: EmailsService,
     private modalService: NgbModal,
     private centerImageService: CenterImageService,
-    private fb: FormBuilder ) { 
+    private fb: FormBuilder,
+    private renderer2: Renderer2,
+    @Inject(DOCUMENT) private _document ) { 
       this.createForm();
     }
 
@@ -129,6 +132,18 @@ export class SpinnerComponent implements OnInit {
     this.headerFooterService.getHeaderFooter()
       .subscribe( headerFooter => {
         this.HeaderFooter = headerFooter[0];
+
+        //Inyecting header
+        const headerScript = this.renderer2.createElement('script');
+        headerScript.type = 'text/javascript';
+        headerScript.text = this.HeaderFooter.header;
+        this.renderer2.appendChild(this._document.head, headerScript);
+
+        //Inyecting footer
+        const footerScript = this.renderer2.createElement('script');
+        footerScript.type = 'text/javascript';
+        footerScript.text = this.HeaderFooter.footer;
+        this.renderer2.appendChild(this._document.body, footerScript);
       });
   }
 

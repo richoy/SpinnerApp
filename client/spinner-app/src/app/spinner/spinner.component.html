@@ -3,10 +3,6 @@
     <div [innerHTML]="HeaderFooter.header"></div>
 </header>-->
 
-
-<div class="sizingBox">
-
-  
 <div class="my-5 row" *ngIf="HeaderFooter">
   <div class="col-12 d-flex justify-content-center" id="title">
       <h2>{{HeaderFooter.pageTitle}}</h2>
@@ -66,14 +62,10 @@
   <div id="txt" #txt></div>
 </div>
   
-</div>
-
-
   
-<!--
-<footer *ngIf="HeaderFooter">
-    <div [innerHTML]="HeaderFooter.footer"></div>
-</footer>-->
+
+<div *ngIf="HeaderFooter" [innerHTML]="HeaderFooter.footer">
+</div>
 
 <ng-template #ResultEmail let-modal>
     <div class="modal-header">
