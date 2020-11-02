@@ -9,8 +9,7 @@ import { CenterImageService } from '../services/center-image.service';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import { formSpinnerControl } from '../shared/form-spinner-controller';
 import { ImageSnippet } from '../shared/ImageSnippet';
-import { visibility, expand } from '../animations/app.animations'           
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import { visibility, expand } from '../animations/app.animations'      
 
 @Component({
   selector: 'app-customize-spinner',
@@ -159,7 +158,7 @@ export class CustomizeSpinnerComponent implements OnInit {
         for (let i = 0; i < this.SpinnerFieldsStoreData.length; i++) {
           this.addControl(i);
         }
-        this.onChange(GetDOMNumberOfFields.value);
+        this.onLoad(GetDOMNumberOfFields.value);
 
         //Setting Values
         this.setValuesofBackendSpinner(this.spinnerArray, this.SpinnerFieldsStoreData);
@@ -191,10 +190,7 @@ export class CustomizeSpinnerComponent implements OnInit {
         delete this.CenterImageFieldStoreData[0]['updatedAt'];
         delete this.CenterImageFieldStoreData[0]['_id'];
         delete this.CenterImageFieldStoreData[0]['__v'];
-        console.log(this.CenterImageFieldStoreData[0]);
-        console.log(this.CenterImageForm);
         this.setValuesofBackendSpinner(this.CenterImageForm, this.CenterImageFieldStoreData[0]);
-        console.log(this.CenterImageForm);
         if (this.CenterImageForm.value.centerImage != '') {
           this.onSuccessCenter(this.CenterImageFieldStoreData[0].centerImage);
         } else if(this.CenterImageForm.value.centerImage == '') {
@@ -443,6 +439,82 @@ export class CustomizeSpinnerComponent implements OnInit {
     this.spinnerForm.reset();
     this.percentageSum = 0;
 
+    this.getDataSpinnerService.getSpinner()
+      .subscribe( data => {
+        
+        this.SpinnerFieldsStoreData = data;
+        for(let i=0; i<this.SpinnerFieldsStoreData.length; i++) {
+          this.SpinnerFieldsStoreData[i]['file'] = this.SpinnerFieldsStoreData[i]['image'];
+          delete this.SpinnerFieldsStoreData[i]['image'];
+          delete this.SpinnerFieldsStoreData[i]['createdAt'];
+          delete this.SpinnerFieldsStoreData[i]['updatedAt'];
+          delete this.SpinnerFieldsStoreData[i]['_id'];
+          delete this.SpinnerFieldsStoreData[i]['__v'];
+          delete this.SpinnerFieldsStoreData[i]['email'];
+        }
+        this.setValuesofBackendSpinner(this.spinnerArray, this.SpinnerFieldsStoreData);
+        for(let i=0; i<this.SpinnerFieldsStoreData.length; i++) {
+          
+          if (this.SpinnerFieldsStoreData[i].isItImage == true) {
+            this.onSuccess(i, this.SpinnerFieldsStoreData[i].file)
+          } else if (this.SpinnerFieldsStoreData[i].isItImage == false) {
+            this.itIsImageFile[i] = false;
+            this.itIsTextField[i] = true;
+            this.SuccessfullyUpload[i] = false;
+            this.UnsuccessfullyUpload[i] = false;
+          }
+
+          this.percentageValues[i] = this.SpinnerFieldsStoreData[i].percentage;
+        }
+        this.checkfullpercentage()
+      },(err) => {
+        this.SuccessSpinnerCenter = false;
+        this.UnsuccessSpinnerCenter = false;
+        throw new Error(err);
+      });
+
+      for( let index = 0; index <= i; index++) {
+        this.percentageValues[i] = this.percentageValues[i]
+      }
+
+      if(this.percentageValues.length > i) {
+        for(let index = 0; index <= i; index++) {
+          this.percentageValues.pop();
+        }
+      }
+      console.log('oercentageVale',this.percentageValues)
+
+      this.checkfullpercentage();
+
+    for( let index = 0; index < i; index++) {
+      this.SuccessfullyUpload[index] = false;
+      this.UnsuccessfullyUpload[index] = false;
+      this.itIsTextField[index] = false;
+    }
+
+    while(this.spinnerArray.length > 0) {
+      this.items.pop();
+      this.deleteSpinnerField(0);
+
+    }
+    while(i > 0) {
+      this.addControl(i);
+      i--;
+    }
+    for (i=0; i<=this.items.length; i++) {
+      this.itIsImageFile[i] = true;
+    }
+    for (i=0; i<=this.items.length; i++) {
+      this.itIsTextPopUp[i] = true;
+    }
+    this.definingPercentage();
+    
+  }
+
+  onLoad(i) {
+    this.items.length = 0;   // eliminates defalut setting before adding other
+    this.spinnerForm.reset();
+    this.percentageSum = 0;
     for( let index = 0; index < i; index++) {
       this.SuccessfullyUpload[index] = false;
       this.UnsuccessfullyUpload[index] = false;
@@ -464,8 +536,8 @@ export class CustomizeSpinnerComponent implements OnInit {
       this.itIsTextPopUp[i] = true;
     }
     this.definingPercentage();
-    
   }
+
   addControl(i) {
     this.items.push({id: i.toString()})
 		let fg = this.createSpFormGroup();
@@ -475,7 +547,7 @@ export class CustomizeSpinnerComponent implements OnInit {
   }
 
   deleteSpinnerField(idx: number) {
-		this.spinnerArray.removeAt(idx);
+    this.spinnerArray.removeAt(idx);
   }
 
   deleteImage() {
