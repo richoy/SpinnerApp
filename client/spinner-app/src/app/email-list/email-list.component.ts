@@ -29,6 +29,7 @@ export class EmailListComponent implements OnInit {
     this.emailService.getEmails()
       .subscribe( emails => {
         emails.forEach(email => {
+
           const EMAIL = new EmailResult(email.emailAddress,
                                         email.firstName,
                                         email.lastName,
@@ -36,9 +37,41 @@ export class EmailListComponent implements OnInit {
                                         email.createdAt,
                                         email.result);
           this.emails.push(EMAIL)
+
         });
+
+        // Order chronologically
+        let GetSortOrder = (prop) => {
+          return (a, b) => {
+            if (a[prop] > b[prop]) {
+              return -1;
+            } else if ( a[prop] < b[prop]) {
+              return 1;
+            }
+            return 0;
+          }
+        };
+
+        this.emails.sort(GetSortOrder('DateSpin'));
+        console.log('sort', this.emails)
+        
+        // Eliminate the repetead, leave the newest
+        
+        let reducer = (accumulator, currentValue) => {
+          if (!accumulator.find(obj => obj.EmailAddress === currentValue.EmailAddress)) {
+            accumulator.push(currentValue);
+          }
+          return accumulator;
+        };
+
+        this.emails = this.emails.reduce(reducer, []);
+        
+
+        console.log(this.emails)
       })
   }
+
+
 
   exportCSV(){
     this.csvService.downloadFile(this.emails);
