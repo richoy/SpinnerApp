@@ -398,7 +398,7 @@ class BackendControlComponent {
     }
 }
 BackendControlComponent.ɵfac = function BackendControlComponent_Factory(t) { return new (t || BackendControlComponent)(); };
-BackendControlComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: BackendControlComponent, selectors: [["app-backend-control"]], decls: 10, vars: 1, consts: [[1, "row"], [1, "col-12", "col-lg-2", "menuBar", "navbar", "navbar-expand-lg", "p-0"], [1, "ButtonToggler"], ["type", "button", 1, "navbar-toggler", "pl-4", 3, "click"], [1, "btn", "btn-secondary"], [1, "appNavbar", "d-flex", "justify-content-center", "align-items-start"], ["id", "navbarSupportedContent", 1, "collapse", "navbar-collapse", 3, "ngbCollapse"], [1, "col-12", "col-lg-10", "routerOutletContent"], [1, "routerOutlet"]], template: function BackendControlComponent_Template(rf, ctx) { if (rf & 1) {
+BackendControlComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: BackendControlComponent, selectors: [["app-backend-control"]], decls: 10, vars: 1, consts: [[1, "row"], [1, "col-12", "col-lg-2", "menuBar", "navbar", "navbar-expand-lg", "p-0"], [1, "ButtonToggler"], ["type", "button", 1, "navbar-toggler", "pl-4", 3, "click"], [1, "btn", "btn-secondary"], [1, "appNavbar", "d-flex", "justify-content-center", "align-items-start"], ["id", "navbarSupportedContent", 1, "collapse", "navbar-collapse", 3, "ngbCollapse", "click"], [1, "col-12", "col-lg-10", "routerOutletContent"], [1, "routerOutlet"]], template: function BackendControlComponent_Template(rf, ctx) { if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 0);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "div", 1);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "div", 2);
@@ -410,7 +410,9 @@ BackendControlComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵ
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](6, "div", 5);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](7, "app-navbar", 6);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](7, "app-navbar", 6);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function BackendControlComponent_Template_app_navbar_click_7_listener() { return ctx.isMenuCollapsed = true; });
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](8, "div", 7);
