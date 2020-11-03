@@ -1430,7 +1430,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     function CustomizeSpinnerComponent_tr_59_td_7_div_9_Template(rf, ctx) {
       if (rf & 1) {
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 67);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 68);
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "span");
 
@@ -1444,7 +1444,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     function CustomizeSpinnerComponent_tr_59_td_7_div_10_Template(rf, ctx) {
       if (rf & 1) {
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 68);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 69);
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "span");
 
@@ -1462,11 +1462,11 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "td");
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "div", 63);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "div", 64);
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "div", 35);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "div", 36);
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](3, "button", 64);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](3, "button", 65);
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function CustomizeSpinnerComponent_tr_59_td_7_Template_button_click_3_listener() {
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r23);
@@ -1482,7 +1482,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](6, "input", 65, 66);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](6, "input", 66, 67);
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("change", function CustomizeSpinnerComponent_tr_59_td_7_Template_input_change_6_listener($event) {
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r23);
@@ -1500,11 +1500,11 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](8, "div", 39);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](8, "div", 40);
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](9, CustomizeSpinnerComponent_tr_59_td_7_div_9_Template, 3, 0, "div", 40);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](9, CustomizeSpinnerComponent_tr_59_td_7_div_9_Template, 3, 0, "div", 41);
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](10, CustomizeSpinnerComponent_tr_59_td_7_div_10_Template, 3, 0, "div", 41);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](10, CustomizeSpinnerComponent_tr_59_td_7_div_10_Template, 3, 0, "div", 42);
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
@@ -1532,9 +1532,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "td");
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "div", 69);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "div", 70);
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](2, "input", 70);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](2, "input", 71);
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
@@ -1544,7 +1544,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     function CustomizeSpinnerComponent_tr_59_div_13_Template(rf, ctx) {
       if (rf & 1) {
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 71);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 72);
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "p");
 
@@ -1558,7 +1558,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     function CustomizeSpinnerComponent_tr_59_div_14_Template(rf, ctx) {
       if (rf & 1) {
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 71);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 72);
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "p");
 
@@ -1574,11 +1574,11 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       if (rf & 1) {
         var _r28 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "tr", 50);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "tr", 51);
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "td");
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "select", 51);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "select", 52);
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("change", function CustomizeSpinnerComponent_tr_59_Template_select_change_2_listener($event) {
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r28);
@@ -1590,13 +1590,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           return ctx_r27.onChangeImage($event.target.value, i_r13);
         });
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](3, "option", 52);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](3, "option", 53);
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](4, "Image");
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](5, "option", 53);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](5, "option", 54);
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](6, "Text");
 
@@ -1606,15 +1606,15 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](7, CustomizeSpinnerComponent_tr_59_td_7_Template, 11, 2, "td", 54);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](7, CustomizeSpinnerComponent_tr_59_td_7_Template, 11, 2, "td", 55);
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](8, CustomizeSpinnerComponent_tr_59_td_8_Template, 3, 0, "td", 54);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](8, CustomizeSpinnerComponent_tr_59_td_8_Template, 3, 0, "td", 55);
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](9, "td");
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](10, "div", 55);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](10, "div", 56);
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](11, "input", 56, 57);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](11, "input", 57, 58);
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("keyup", function CustomizeSpinnerComponent_tr_59_Template_input_keyup_11_listener() {
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r28);
@@ -1636,9 +1636,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](13, CustomizeSpinnerComponent_tr_59_div_13_Template, 3, 0, "div", 58);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](13, CustomizeSpinnerComponent_tr_59_div_13_Template, 3, 0, "div", 59);
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](14, CustomizeSpinnerComponent_tr_59_div_14_Template, 3, 0, "div", 58);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](14, CustomizeSpinnerComponent_tr_59_div_14_Template, 3, 0, "div", 59);
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
@@ -1646,7 +1646,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](15, "td");
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](16, "select", 59);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](16, "select", 60);
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("change", function CustomizeSpinnerComponent_tr_59_Template_select_change_16_listener($event) {
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r28);
@@ -1658,13 +1658,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           return ctx_r31.onChangeResult($event.target.value, i_r13);
         });
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](17, "option", 52);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](17, "option", 53);
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](18, "Text Popup");
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](19, "option", 53);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](19, "option", 54);
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](20, "Email Popup");
 
@@ -1676,15 +1676,15 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](21, "td");
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](22, "input", 60);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](22, "input", 61);
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](23, "td");
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](24, "div", 61);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](24, "div", 62);
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](25, "input", 62);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](25, "input", 63);
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
@@ -1745,7 +1745,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     function CustomizeSpinnerComponent_div_64_Template(rf, ctx) {
       if (rf & 1) {
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 72);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 73);
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "p");
 
@@ -1769,7 +1769,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     function CustomizeSpinnerComponent_div_65_Template(rf, ctx) {
       if (rf & 1) {
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 73);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 74);
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "p");
 
@@ -1793,7 +1793,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     function CustomizeSpinnerComponent_div_66_Template(rf, ctx) {
       if (rf & 1) {
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 74);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 75);
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "p");
 
@@ -1815,9 +1815,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }
     }
 
-    function CustomizeSpinnerComponent_div_88_Template(rf, ctx) {
+    function CustomizeSpinnerComponent_div_91_Template(rf, ctx) {
       if (rf & 1) {
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 67);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 68);
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "span");
 
@@ -1829,9 +1829,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }
     }
 
-    function CustomizeSpinnerComponent_div_89_Template(rf, ctx) {
+    function CustomizeSpinnerComponent_div_92_Template(rf, ctx) {
       if (rf & 1) {
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 68);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 69);
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "span");
 
@@ -1843,18 +1843,18 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }
     }
 
-    function CustomizeSpinnerComponent_ng_template_100_Template(rf, ctx) {
+    function CustomizeSpinnerComponent_ng_template_103_Template(rf, ctx) {
       if (rf & 1) {
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 75);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 76);
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "button", 76);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "button", 77);
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function CustomizeSpinnerComponent_ng_template_100_Template_button_click_1_listener() {
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function CustomizeSpinnerComponent_ng_template_103_Template_button_click_1_listener() {
           var modal_r32 = ctx.$implicit;
           return modal_r32.dismiss("Cross click");
         });
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "span", 77);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "span", 78);
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](3, "\xD7");
 
@@ -1864,7 +1864,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](4, "div", 78);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](4, "div", 79);
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](5, "h4");
 
@@ -1886,7 +1886,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](11, "You need ");
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](12, "span", 79);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](12, "span", 80);
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](13, "b");
 
@@ -1898,7 +1898,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](15, " to reach ");
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](16, "span", 80);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](16, "span", 81);
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](17, "b");
 
@@ -1914,11 +1914,11 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](20, "div", 81);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](20, "div", 82);
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](21, "button", 82);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](21, "button", 83);
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function CustomizeSpinnerComponent_ng_template_100_Template_button_click_21_listener() {
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function CustomizeSpinnerComponent_ng_template_103_Template_button_click_21_listener() {
           var modal_r32 = ctx.$implicit;
           return modal_r32.close("Save click");
         });
@@ -1939,18 +1939,18 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }
     }
 
-    function CustomizeSpinnerComponent_ng_template_102_Template(rf, ctx) {
+    function CustomizeSpinnerComponent_ng_template_105_Template(rf, ctx) {
       if (rf & 1) {
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 75);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 76);
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "button", 76);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "button", 77);
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function CustomizeSpinnerComponent_ng_template_102_Template_button_click_1_listener() {
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function CustomizeSpinnerComponent_ng_template_105_Template_button_click_1_listener() {
           var modal_r35 = ctx.$implicit;
           return modal_r35.dismiss("Cross click");
         });
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "span", 77);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "span", 78);
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](3, "\xD7");
 
@@ -1960,7 +1960,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](4, "div", 78);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](4, "div", 79);
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](5, "h4");
 
@@ -1982,7 +1982,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](11, "Your current percentage is ");
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](12, "span", 79);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](12, "span", 80);
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](13, "b");
 
@@ -1998,7 +1998,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](16, "You have exceed the maximum value by ");
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](17, "span", 83);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](17, "span", 84);
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](18, "b");
 
@@ -2010,7 +2010,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](20, ", Total percentage must be equal to ");
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](21, "span", 80);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](21, "span", 81);
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](22, "b");
 
@@ -2024,11 +2024,11 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](24, "div", 81);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](24, "div", 82);
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](25, "button", 82);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](25, "button", 83);
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function CustomizeSpinnerComponent_ng_template_102_Template_button_click_25_listener() {
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function CustomizeSpinnerComponent_ng_template_105_Template_button_click_25_listener() {
           var modal_r35 = ctx.$implicit;
           return modal_r35.close("Save click");
         });
@@ -2176,7 +2176,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               _this6.addControl(_i2);
             }
 
-            _this6.onChange(GetDOMNumberOfFields.value); //Setting Values
+            _this6.onLoad(GetDOMNumberOfFields.value); //Setting Values
 
 
             _this6.setValuesofBackendSpinner(_this6.spinnerArray, _this6.SpinnerFieldsStoreData);
@@ -2204,12 +2204,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             delete _this6.CenterImageFieldStoreData[0]['updatedAt'];
             delete _this6.CenterImageFieldStoreData[0]['_id'];
             delete _this6.CenterImageFieldStoreData[0]['__v'];
-            console.log(_this6.CenterImageFieldStoreData[0]);
-            console.log(_this6.CenterImageForm);
 
             _this6.setValuesofBackendSpinner(_this6.CenterImageForm, _this6.CenterImageFieldStoreData[0]);
-
-            console.log(_this6.CenterImageForm);
 
             if (_this6.CenterImageForm.value.centerImage != '') {
               _this6.onSuccessCenter(_this6.CenterImageFieldStoreData[0].centerImage);
@@ -2427,6 +2423,86 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "onChange",
         value: function onChange(i) {
+          var _this11 = this;
+
+          this.items.length = 0; // eliminates defalut setting before adding other
+
+          this.spinnerForm.reset();
+          this.percentageSum = 0;
+          this.getDataSpinnerService.getSpinner().subscribe(function (data) {
+            _this11.SpinnerFieldsStoreData = data;
+
+            for (var index = 0; index < _this11.SpinnerFieldsStoreData.length; index++) {
+              _this11.SpinnerFieldsStoreData[index]['file'] = _this11.SpinnerFieldsStoreData[index]['image'];
+              delete _this11.SpinnerFieldsStoreData[index]['image'];
+              delete _this11.SpinnerFieldsStoreData[index]['createdAt'];
+              delete _this11.SpinnerFieldsStoreData[index]['updatedAt'];
+              delete _this11.SpinnerFieldsStoreData[index]['_id'];
+              delete _this11.SpinnerFieldsStoreData[index]['__v'];
+              delete _this11.SpinnerFieldsStoreData[index]['email'];
+            }
+
+            _this11.setValuesofBackendSpinner(_this11.spinnerArray, _this11.SpinnerFieldsStoreData);
+
+            for (var _index = 0; _index < _this11.SpinnerFieldsStoreData.length; _index++) {
+              if (_this11.SpinnerFieldsStoreData[_index].isItImage == true) {
+                _this11.onSuccess(_index, _this11.SpinnerFieldsStoreData[_index].file);
+              } else if (_this11.SpinnerFieldsStoreData[_index].isItImage == false) {
+                _this11.itIsImageFile[_index] = false;
+                _this11.itIsTextField[_index] = true;
+                _this11.SuccessfullyUpload[_index] = false;
+                _this11.UnsuccessfullyUpload[_index] = false;
+              }
+            }
+
+            if (_this11.SpinnerFieldsStoreData.length <= i - 1) {
+              for (var _index2 = 0; _index2 < _this11.SpinnerFieldsStoreData.length; _index2++) {
+                _this11.percentageValues[_index2] = _this11.SpinnerFieldsStoreData[_index2].percentage;
+              }
+            } else if (_this11.SpinnerFieldsStoreData.length > i - 1) {
+              for (var _index3 = 0; _index3 < i - 1; _index3++) {
+                _this11.percentageValues[_index3] = _this11.SpinnerFieldsStoreData[_index3].percentage;
+              }
+            }
+
+            console.log('percentageVale', _this11.percentageValues);
+
+            _this11.checkfullpercentage();
+          }, function (err) {
+            _this11.SuccessSpinnerCenter = false;
+            _this11.UnsuccessSpinnerCenter = false;
+            throw new Error(err);
+          });
+
+          for (var index = 0; index < i; index++) {
+            this.SuccessfullyUpload[index] = false;
+            this.UnsuccessfullyUpload[index] = false;
+            this.itIsTextField[index] = false;
+          }
+
+          while (this.spinnerArray.length > 0) {
+            this.items.pop();
+            this.deleteSpinnerField(0);
+          }
+
+          while (i > 0) {
+            this.addControl(i);
+            i--;
+          }
+
+          for (i = 0; i <= this.items.length; i++) {
+            this.itIsImageFile[i] = true;
+          }
+
+          for (i = 0; i <= this.items.length; i++) {
+            this.itIsTextPopUp[i] = true;
+          }
+
+          this.definingPercentage();
+        }
+      }, {
+        key: "onLoad",
+        value: function onLoad(i) {
           this.items.length = 0; // eliminates defalut setting before adding other
 
           this.spinnerForm.reset();
@@ -2478,21 +2554,21 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "deleteImage",
         value: function deleteImage() {
-          var _this11 = this;
+          var _this12 = this;
 
           this.centerImageService.deleteImageCenter().subscribe(function () {
-            _this11.setValuesofBackendSpinner(_this11.CenterImageForm, {
+            _this12.setValuesofBackendSpinner(_this12.CenterImageForm, {
               'centerImage': ''
             });
 
-            _this11.UnsuccessSpinnerCenter = false;
-            _this11.sucessCenterImageSubmition = true;
-            _this11.SuccessSpinnerCenter = false;
+            _this12.UnsuccessSpinnerCenter = false;
+            _this12.sucessCenterImageSubmition = true;
+            _this12.SuccessSpinnerCenter = false;
 
-            _this11.CenterImageForm.reset();
+            _this12.CenterImageForm.reset();
 
             setTimeout(function () {
-              _this11.sucessCenterImageSubmition = false;
+              _this12.sucessCenterImageSubmition = false;
             }, 2000);
           }, function (err) {
             throw new Error('Error deleting the information of the previous spineer');
@@ -2528,7 +2604,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "onSubmit",
         value: function onSubmit() {
-          var _this12 = this;
+          var _this13 = this;
 
           var spinner = [];
           this.submitPressed = true; // if a field outside the array is added, change this to this.spinnerForm.value
@@ -2542,9 +2618,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
                 }
 
                 var field = new _shared_form_spinner_controller__WEBPACK_IMPORTED_MODULE_5__["formSpinnerControl"](element.isItImage, element.image, element.textFieldOne, element.percentage, element.isItEmail, element.textPopUp, element.email, element.bgColor);
-                _this12.totalPercentage[counter] = element.percentage;
+                _this13.totalPercentage[counter] = element.percentage;
 
-                _this12.StringOfImageUpload.forEach(function (file) {
+                _this13.StringOfImageUpload.forEach(function (file) {
                   if (file.index == counter) {
                     field.image = file.image;
                   }
@@ -2558,9 +2634,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               }, 0);
               this.sucessFormSubmition = true;
               this.spinnerService.deleteSpinner().subscribe(function () {
-                _this12.spinnerService.sendSpinner(spinner).subscribe(function (res) {
+                _this13.spinnerService.sendSpinner(spinner).subscribe(function (res) {
                   setTimeout(function () {
-                    _this12.sucessFormSubmition = false;
+                    _this13.sucessFormSubmition = false;
                   }, 2000); //this.spinnerForm.reset();
                   //this.StringOfImageUpload = []; // Resets the StringOfImageUpload array
                 }, function (err) {
@@ -2581,7 +2657,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           } else if (this.spinnerForm.status === "INVALID") {
             this.unsuccessSendingForm = true;
             setTimeout(function () {
-              _this12.unsuccessSendingForm = false;
+              _this13.unsuccessSendingForm = false;
             }, 2000);
           }
 
@@ -2590,28 +2666,28 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "onSubmitCenterImage",
         value: function onSubmitCenterImage() {
-          var _this13 = this;
+          var _this14 = this;
 
           this.centerImageService.deleteImageCenter().subscribe(function () {
-            _this13.centerCopy = _this13.CenterImageForm.value;
-            _this13.centerCopy.centerImage = _this13.StringOfSpinnerCenter.replace(/\\/g, "/");
+            _this14.centerCopy = _this14.CenterImageForm.value;
+            _this14.centerCopy.centerImage = _this14.StringOfSpinnerCenter.replace(/\\/g, "/");
 
-            _this13.centerImageService.sendImageCenter(_this13.centerCopy).subscribe(function (HFform) {
-              _this13.centerImageButtonAppears = false;
-              _this13.sucessCenterImageSubmition = true;
+            _this14.centerImageService.sendImageCenter(_this14.centerCopy).subscribe(function (HFform) {
+              _this14.centerImageButtonAppears = false;
+              _this14.sucessCenterImageSubmition = true;
               setTimeout(function () {
-                _this13.sucessCenterImageSubmition = false;
+                _this14.sucessCenterImageSubmition = false;
               }, 2000);
-              _this13.centerform = HFform;
+              _this14.centerform = HFform;
             }, function (err) {
-              _this13.errorWhileSavingCenterImage = true;
+              _this14.errorWhileSavingCenterImage = true;
               setTimeout(function () {
-                _this13.errorWhileSavingCenterImage = false;
+                _this14.errorWhileSavingCenterImage = false;
               }, 2000);
               throw new Error('Error Sending the information about the spinner');
             });
 
-            _this13.CenterImageForm.reset();
+            _this14.CenterImageForm.reset();
           }, function (err) {
             throw new Error('Error deleting the information of the previous spineer');
           });
@@ -2619,14 +2695,14 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "open",
         value: function open(content) {
-          var _this14 = this;
+          var _this15 = this;
 
           this.modalService.open(content, {
             ariaLabelledBy: 'modal-basic-title'
           }).result.then(function (result) {
-            _this14.closeResult = "Closed with: ".concat(result);
+            _this15.closeResult = "Closed with: ".concat(result);
           }, function (reason) {
-            _this14.closeResult = "Dismissed ".concat(_this14.getDismissReason(reason));
+            _this15.closeResult = "Dismissed ".concat(_this15.getDismissReason(reason));
           });
         }
       }, {
@@ -2679,9 +2755,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵqueryRefresh"](_t = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵloadQuery"]()) && (ctx.percentage = _t);
         }
       },
-      decls: 104,
-      vars: 17,
-      consts: [[1, "bgColor"], [1, "container", "menu1"], [1, "row", "my-5"], [1, "col-12"], ["id", "settingNumber"], ["for", "numberOptions", 1, "mr-3"], ["matNativeControl", "", "name", "numberOptions", "id", "numberOfFields", "required", "", 3, "change"], ["numberOfFields", ""], ["value", "2"], ["value", "3"], ["value", "4"], ["value", "5"], ["value", "6", "selected", ""], ["value", "7"], ["value", "8"], ["value", "9"], ["value", "10"], ["value", "11"], ["value", "12"], [3, "formGroup", "hidden", "ngSubmit"], [1, "table", "table-responsive-lg", "table-borderless"], ["formArrayName", "spinnerArray"], ["for", "ImageOption"], ["for", ""], [3, "formGroupName", 4, "ngFor", "ngForOf"], ["class", "totalPercentageSum d-flex justify-content-center bg-warning", 4, "ngIf"], ["class", "totalPercentageSum d-flex justify-content-center bg-danger", 4, "ngIf"], ["class", "totalPercentageSum d-flex justify-content-center bg-success", 4, "ngIf"], ["colspan", "2"], ["type", "submit", 1, "btn", "btn-success"], [1, "d-flex", "justify-content-end", "mt-2"], [1, "successFormSend", 3, "hidden"], [1, "mt-3"], [1, "d-flex"], ["id", "ImageUploadBox", 1, "ImageUploadAndMessage", "d-flex", "mr-3"], ["id", "FileUploadBox"], ["type", "button", 1, "btn", "btn-sm", "btn-success", 3, "click"], ["type", "file", 2, "display", "none", 3, "change"], ["centerimageInput", ""], ["id", "FileUploadMessageBox", 1, "ml-1"], ["class", "alert alert-success d-flex justify-content-center", 4, "ngIf"], ["class", "alert alert-danger d-flex justify-content-center", 4, "ngIf"], [1, "ml-3"], [1, "invisible-button"], ["type", "submit", 1, "btn", "btn-success", "btn-sm", "ml-auto", "ml-2", 3, "hidden"], [1, "ml-3", 3, "hidden"], [1, "btn", "btn-warning", "text-white", "btn-sm", 3, "click"], [1, "successImageSend", 3, "hidden"], ["modalPercentageLessThan100", ""], ["modalPercentageMoreThan100", ""], [3, "formGroupName"], ["formControlName", "isItImage", "required", "", 1, "inputType", 3, "change"], ["selected", "", 3, "ngValue"], [3, "ngValue"], [4, "ngIf"], [1, "percentageContainer", "d-flex"], ["formControlName", "percentage", "type", "number", "name", "textField", "min", "0", "max", "100", "autocomplete", "off", 1, "PercentageInput", 3, "keyup", "click"], ["percentage", ""], ["class", "errorPercentageMessages ml-1 d-flex justify-content-center", 4, "ngIf"], ["formControlName", "isItEmail", "name", "resultOption", "required", "", 3, "change"], ["formControlName", "textPopUp", "type", "text", "name", "imageFile", 1, "textPopup"], [1, "colorInputContainer"], ["formControlName", "bgColor", "type", "color", 1, "colorInput"], ["id", "ImageUploadBox", 1, "ImageUploadAndMessage", "d-flex"], ["type", "button", 1, "btn", "btn-sm", "btn-success", "btnInput", 3, "click"], ["type", "file", "accept", "image/*", "name", "imageFile", 2, "display", "none", 3, "change"], ["imageInput", ""], [1, "alert", "alert-success", "d-flex", "justify-content-center"], [1, "alert", "alert-danger", "d-flex", "justify-content-center"], [1, "ImageUploadAndMessage", "d-flex"], ["formControlName", "textFieldOne", "type", "text", "name", "textField", 1, "textFieldOne"], [1, "errorPercentageMessages", "ml-1", "d-flex", "justify-content-center"], [1, "totalPercentageSum", "d-flex", "justify-content-center", "bg-warning"], [1, "totalPercentageSum", "d-flex", "justify-content-center", "bg-danger"], [1, "totalPercentageSum", "d-flex", "justify-content-center", "bg-success"], [1, "modal-header"], ["type", "button", "aria-label", "Close", 1, "close", 3, "click"], ["aria-hidden", "true"], [1, "modal-body"], [1, "text-warning"], [1, "text-success"], [1, "modal-footer"], ["type", "button", 1, "btn", "btn-success", 3, "click"], [1, "text-danger"]],
+      decls: 107,
+      vars: 19,
+      consts: [[1, "bgColor"], [1, "container", "menu1"], [1, "row", "my-5"], [1, "col-12"], ["id", "settingNumber"], ["for", "numberOptions", 1, "mr-3"], ["matNativeControl", "", "name", "numberOptions", "id", "numberOfFields", "required", "", 3, "change"], ["numberOfFields", ""], ["value", "2"], ["value", "3"], ["value", "4"], ["value", "5"], ["value", "6", "selected", ""], ["value", "7"], ["value", "8"], ["value", "9"], ["value", "10"], ["value", "11"], ["value", "12"], [3, "formGroup", "hidden", "ngSubmit"], [1, "table", "table-responsive-lg", "table-borderless"], ["formArrayName", "spinnerArray"], ["for", "ImageOption"], ["for", ""], [3, "formGroupName", 4, "ngFor", "ngForOf"], ["class", "totalPercentageSum d-flex justify-content-center bg-warning", 4, "ngIf"], ["class", "totalPercentageSum d-flex justify-content-center bg-danger", 4, "ngIf"], ["class", "totalPercentageSum d-flex justify-content-center bg-success", 4, "ngIf"], ["colspan", "2"], ["type", "submit", 1, "btn", "btn-success"], [1, "d-flex", "justify-content-end", "mt-2"], [1, "successFormSend", 3, "hidden"], [2, "color", "red"], [1, "mt-3"], [1, "d-flex"], ["id", "ImageUploadBox", 1, "ImageUploadAndMessage", "d-flex", "mr-3"], ["id", "FileUploadBox"], ["type", "button", 1, "btn", "btn-sm", "btn-success", 3, "click"], ["type", "file", 2, "display", "none", 3, "change"], ["centerimageInput", ""], ["id", "FileUploadMessageBox", 1, "ml-1"], ["class", "alert alert-success d-flex justify-content-center", 4, "ngIf"], ["class", "alert alert-danger d-flex justify-content-center", 4, "ngIf"], [1, "ml-3"], [1, "invisible-button"], ["type", "submit", 1, "btn", "btn-success", "btn-sm", "ml-auto", "ml-2", 3, "hidden"], [1, "ml-3", 3, "hidden"], [1, "btn", "btn-warning", "text-white", "btn-sm", 3, "click"], [1, "successImageSend", 3, "hidden"], ["modalPercentageLessThan100", ""], ["modalPercentageMoreThan100", ""], [3, "formGroupName"], ["formControlName", "isItImage", "required", "", 1, "inputType", 3, "change"], ["selected", "", 3, "ngValue"], [3, "ngValue"], [4, "ngIf"], [1, "percentageContainer", "d-flex"], ["formControlName", "percentage", "type", "number", "name", "textField", "min", "0", "max", "100", "autocomplete", "off", 1, "PercentageInput", 3, "keyup", "click"], ["percentage", ""], ["class", "errorPercentageMessages ml-1 d-flex justify-content-center", 4, "ngIf"], ["formControlName", "isItEmail", "name", "resultOption", "required", "", 3, "change"], ["formControlName", "textPopUp", "type", "text", "name", "imageFile", 1, "textPopup"], [1, "colorInputContainer"], ["formControlName", "bgColor", "type", "color", 1, "colorInput"], ["id", "ImageUploadBox", 1, "ImageUploadAndMessage", "d-flex"], ["type", "button", 1, "btn", "btn-sm", "btn-success", "btnInput", 3, "click"], ["type", "file", "accept", "image/*", "name", "imageFile", 2, "display", "none", 3, "change"], ["imageInput", ""], [1, "alert", "alert-success", "d-flex", "justify-content-center"], [1, "alert", "alert-danger", "d-flex", "justify-content-center"], [1, "ImageUploadAndMessage", "d-flex"], ["formControlName", "textFieldOne", "type", "text", "name", "textField", 1, "textFieldOne"], [1, "errorPercentageMessages", "ml-1", "d-flex", "justify-content-center"], [1, "totalPercentageSum", "d-flex", "justify-content-center", "bg-warning"], [1, "totalPercentageSum", "d-flex", "justify-content-center", "bg-danger"], [1, "totalPercentageSum", "d-flex", "justify-content-center", "bg-success"], [1, "modal-header"], ["type", "button", "aria-label", "Close", 1, "close", 3, "click"], ["aria-hidden", "true"], [1, "modal-body"], [1, "text-warning"], [1, "text-success"], [1, "modal-footer"], ["type", "button", 1, "btn", "btn-success", 3, "click"], [1, "text-danger"]],
       template: function CustomizeSpinnerComponent_Template(rf, ctx) {
         if (rf & 1) {
           var _r38 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
@@ -2926,45 +3002,55 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](75, "h3", 32);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](75, "div", 31);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](76, "Image for center of spinner");
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](76, "h2", 32);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](77, "The spinner has not been saved, all percentages fields must have a value");
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](77, "div", 33);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](78, "form", 19);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](78, "h3", 33);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("ngSubmit", function CustomizeSpinnerComponent_Template_form_ngSubmit_78_listener() {
-            return ctx.onSubmitCenterImage();
-          });
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](79, "Image for center of spinner");
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](79, "div", 33);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](80, "div", 34);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](81, "div", 35);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](81, "form", 19);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](82, "button", 36);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("ngSubmit", function CustomizeSpinnerComponent_Template_form_ngSubmit_81_listener() {
+            return ctx.onSubmitCenterImage();
+          });
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function CustomizeSpinnerComponent_Template_button_click_82_listener() {
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](82, "div", 34);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](83, "div", 35);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](84, "div", 36);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](85, "button", 37);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function CustomizeSpinnerComponent_Template_button_click_85_listener() {
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r38);
 
-            var _r5 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵreference"](86);
+            var _r5 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵreference"](89);
 
             return _r5.click();
           });
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](83, "span");
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](86, "span");
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](84, "File Upload");
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](87, "File Upload");
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](85, "input", 37, 38);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](88, "input", 38, 39);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("change", function CustomizeSpinnerComponent_Template_input_change_85_listener($event) {
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("change", function CustomizeSpinnerComponent_Template_input_change_88_listener($event) {
             return ctx.ProcessCenterImage($event);
           });
 
@@ -2974,41 +3060,41 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](87, "div", 39);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](90, "div", 40);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](88, CustomizeSpinnerComponent_div_88_Template, 3, 0, "div", 40);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](91, CustomizeSpinnerComponent_div_91_Template, 3, 0, "div", 41);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](89, CustomizeSpinnerComponent_div_89_Template, 3, 0, "div", 41);
-
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](90, "div", 42);
-
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](91, "div", 43);
-
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](92, "button", 44);
-
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](93, " Save ");
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](92, CustomizeSpinnerComponent_div_92_Template, 3, 0, "div", 42);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](93, "div", 43);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](94, "div", 44);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](95, "button", 45);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](96, " Save ");
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](94, "div", 45);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](95, "button", 46);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](97, "div", 46);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function CustomizeSpinnerComponent_Template_button_click_95_listener() {
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](98, "button", 47);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function CustomizeSpinnerComponent_Template_button_click_98_listener() {
             return ctx.deleteImage();
           });
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](96, "Default image!");
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](99, "Default image!");
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
@@ -3016,13 +3102,11 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](97, "div", 47);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](100, "div", 48);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](98, "h4");
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](101, "h4");
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](99, "The spinner center image has been successfully saved");
-
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](102, "The spinner center image has been successfully saved");
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
@@ -3032,15 +3116,17 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](100, CustomizeSpinnerComponent_ng_template_100_Template, 23, 1, "ng-template", null, 48, _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplateRefExtractor"]);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](102, CustomizeSpinnerComponent_ng_template_102_Template, 27, 2, "ng-template", null, 49, _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplateRefExtractor"]);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](103, CustomizeSpinnerComponent_ng_template_103_Template, 23, 1, "ng-template", null, 49, _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplateRefExtractor"]);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](105, CustomizeSpinnerComponent_ng_template_105_Template, 27, 2, "ng-template", null, 50, _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplateRefExtractor"]);
         }
 
         if (rf & 2) {
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](35);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("formGroup", ctx.spinnerForm)("hidden", ctx.sucessFormSubmition)("@expand", undefined);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("formGroup", ctx.spinnerForm)("hidden", ctx.sucessFormSubmition || ctx.unsuccessSendingForm)("@expand", undefined);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](24);
 
@@ -3061,6 +3147,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](6);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("hidden", !ctx.sucessFormSubmition)("@expand", undefined);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](3);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("hidden", !ctx.unsuccessSendingForm)("@expand", undefined);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](6);
 
@@ -3427,14 +3517,43 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "getEmails",
         value: function getEmails() {
-          var _this15 = this;
+          var _this16 = this;
 
           this.emailService.getEmails().subscribe(function (emails) {
             emails.forEach(function (email) {
               var EMAIL = new EmailResult(email.emailAddress, email.firstName, email.lastName, email.updatedAt, email.createdAt, email.result);
 
-              _this15.emails.push(EMAIL);
-            });
+              _this16.emails.push(EMAIL);
+            }); // Order chronologically
+
+            var GetSortOrder = function GetSortOrder(prop) {
+              return function (a, b) {
+                if (a[prop] > b[prop]) {
+                  return -1;
+                } else if (a[prop] < b[prop]) {
+                  return 1;
+                }
+
+                return 0;
+              };
+            };
+
+            _this16.emails.sort(GetSortOrder('DateSpin'));
+
+            console.log('sort', _this16.emails); // Eliminate the repetead, leave the newest
+
+            var reducer = function reducer(accumulator, currentValue) {
+              if (!accumulator.find(function (obj) {
+                return obj.EmailAddress === currentValue.EmailAddress;
+              })) {
+                accumulator.push(currentValue);
+              }
+
+              return accumulator;
+            };
+
+            _this16.emails = _this16.emails.reduce(reducer, []);
+            console.log(_this16.emails);
           });
         }
       }, {
@@ -3454,14 +3573,14 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "open",
         value: function open(content) {
-          var _this16 = this;
+          var _this17 = this;
 
           this.modalService.open(content, {
             ariaLabelledBy: 'modal-basic-title'
           }).result.then(function (result) {
-            _this16.closeResult = "Closed with: ".concat(result);
+            _this17.closeResult = "Closed with: ".concat(result);
           }, function (reason) {
-            _this16.closeResult = "Dismissed ".concat(_this16.getDismissReason(reason));
+            _this17.closeResult = "Dismissed ".concat(_this17.getDismissReason(reason));
           });
         }
       }, {
@@ -3690,19 +3809,19 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "onSubmit",
         value: function onSubmit() {
-          var _this17 = this;
+          var _this18 = this;
 
           if (this.LoginForm.status === "VALID") {
             var user = new _services_login_service__WEBPACK_IMPORTED_MODULE_2__["userLogin"](this.LoginForm.controls.username.value, this.LoginForm.controls.password.value);
             this.loginservice.Login(user).subscribe(function (resp) {
               if (resp.success === true) {
-                _this17.LoginError = false;
+                _this18.LoginError = false;
                 localStorage.setItem("userToken", resp.token);
 
-                _this17.router.navigate(['admin/bc/customize-spinner']);
+                _this18.router.navigate(['admin/bc/customize-spinner']);
               }
             }, function (err) {
-              _this17.LoginError = true;
+              _this18.LoginError = true;
             });
           }
         }
@@ -4187,14 +4306,14 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "open",
         value: function open(content) {
-          var _this18 = this;
+          var _this19 = this;
 
           this.modalService.open(content, {
             ariaLabelledBy: 'modal-basic-title'
           }).result.then(function (result) {
-            _this18.closeResult = "Closed with: ".concat(result);
+            _this19.closeResult = "Closed with: ".concat(result);
           }, function (reason) {
-            _this18.closeResult = "Dismissed ".concat(_this18.getDismissReason(reason));
+            _this19.closeResult = "Dismissed ".concat(_this19.getDismissReason(reason));
           });
         }
       }, {
@@ -4211,18 +4330,18 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "onSubmit",
         value: function onSubmit() {
-          var _this19 = this;
+          var _this20 = this;
 
           if (this.PasswordChangeForm.status === "VALID") {
             var user = new _services_change_password_service__WEBPACK_IMPORTED_MODULE_3__["passwordChange"](this.PasswordChangeForm.controls.username.value, this.PasswordChangeForm.controls.oldpassword.value, this.PasswordChangeForm.controls.newpassword.value);
             this.changePasswordservice.ChangePassword(user).subscribe(function (resp) {
               if (resp.success === true) {
-                _this19.PasswordChangeError = false;
+                _this20.PasswordChangeError = false;
 
-                _this19.open(_this19.modal);
+                _this20.open(_this20.modal);
               }
             }, function (err) {
-              _this19.PasswordChangeError = true;
+              _this20.PasswordChangeError = true;
             });
           }
         }
@@ -4704,8 +4823,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           for (var i = 0; i < array.length; i++) {
             var line = i + 1 + '';
 
-            for (var _index in headerList) {
-              var head = headerList[_index];
+            for (var _index4 in headerList) {
+              var head = headerList[_index4];
               line += ',' + array[i][head];
             }
 
@@ -6365,89 +6484,89 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "getSpinner",
         value: function getSpinner() {
-          var _this20 = this;
+          var _this21 = this;
 
           this.spinnerService.getSpinner().subscribe(function (spinnerFields) {
-            _this20.SpinnerFields = spinnerFields;
-            _this20.angle = 360 / _this20.SpinnerFields.length;
+            _this21.SpinnerFields = spinnerFields;
+            _this21.angle = 360 / _this21.SpinnerFields.length;
 
-            for (var i = 0; i < _this20.SpinnerFields.length; i++) {
+            for (var i = 0; i < _this21.SpinnerFields.length; i++) {
               //Substitute backslashes for slashes
-              _this20.SpinnerFields[i].image = _this20.SpinnerFields[i].image.replace(/\\/g, "/");
-              _this20.SpinnerFields[i].image = _this20.API_IMAGE_URL + _this20.SpinnerFields[i].image.slice(14);
-              _this20.bgColorStyle[i] = _this20.SpinnerFields[i].bgColor; // Backgorund color
+              _this21.SpinnerFields[i].image = _this21.SpinnerFields[i].image.replace(/\\/g, "/");
+              _this21.SpinnerFields[i].image = _this21.API_IMAGE_URL + _this21.SpinnerFields[i].image.slice(14);
+              _this21.bgColorStyle[i] = _this21.SpinnerFields[i].bgColor; // Backgorund color
 
-              _this20.fontColor[i] = _this20.spinnerService.invertColor(_this20.bgColorStyle[i]); //Font Color
+              _this21.fontColor[i] = _this21.spinnerService.invertColor(_this21.bgColorStyle[i]); //Font Color
 
-              _this20.holder[i] = {
-                'transform': 'rotate(' + _this20.angle * i + 'deg)',
-                '-webkit-transform': 'rotate(' + _this20.angle * i + 'deg)',
-                '-moz-transform': 'rotate(' + _this20.angle * i + 'deg)',
-                '-o-transform': 'rotate(' + _this20.angle * i + 'deg)',
-                '-ms-transform': 'rotate(' + _this20.angle * i + 'deg)'
+              _this21.holder[i] = {
+                'transform': 'rotate(' + _this21.angle * i + 'deg)',
+                '-webkit-transform': 'rotate(' + _this21.angle * i + 'deg)',
+                '-moz-transform': 'rotate(' + _this21.angle * i + 'deg)',
+                '-o-transform': 'rotate(' + _this21.angle * i + 'deg)',
+                '-ms-transform': 'rotate(' + _this21.angle * i + 'deg)'
               };
-              _this20.fieldStyleNth[i] = {
-                'transform': 'rotate(' + _this20.angle + 'deg)',
-                '-webkit-transform': 'rotate(' + _this20.angle + 'deg)',
-                '-moz-transform': 'rotate(' + _this20.angle + 'deg)',
-                '-o-transform': 'rotate(' + _this20.angle + 'deg)',
-                '-ms-transform': 'rotate(' + _this20.angle + 'deg)',
-                'background-color': _this20.bgColorStyle[i],
-                'color': _this20.fontColor[i]
+              _this21.fieldStyleNth[i] = {
+                'transform': 'rotate(' + _this21.angle + 'deg)',
+                '-webkit-transform': 'rotate(' + _this21.angle + 'deg)',
+                '-moz-transform': 'rotate(' + _this21.angle + 'deg)',
+                '-o-transform': 'rotate(' + _this21.angle + 'deg)',
+                '-ms-transform': 'rotate(' + _this21.angle + 'deg)',
+                'background-color': _this21.bgColorStyle[i],
+                'color': _this21.fontColor[i]
               };
-              _this20.imageOrientation[i] = {
-                'transform': 'rotate(' + (_this20.angle - _this20.angle * 1.5) + 'deg)',
-                '-webkit-transform': 'rotate(' + (_this20.angle - _this20.angle * 1.5) + 'deg)',
-                '-moz-transform': 'rotate(' + (_this20.angle - _this20.angle * 1.5) + 'deg)',
-                '-o-transform': 'rotate(' + (_this20.angle - _this20.angle * 1.5) + 'deg)',
-                '-ms-transform': 'rotate(' + (_this20.angle - _this20.angle * 1.5) + 'deg)',
+              _this21.imageOrientation[i] = {
+                'transform': 'rotate(' + (_this21.angle - _this21.angle * 1.5) + 'deg)',
+                '-webkit-transform': 'rotate(' + (_this21.angle - _this21.angle * 1.5) + 'deg)',
+                '-moz-transform': 'rotate(' + (_this21.angle - _this21.angle * 1.5) + 'deg)',
+                '-o-transform': 'rotate(' + (_this21.angle - _this21.angle * 1.5) + 'deg)',
+                '-ms-transform': 'rotate(' + (_this21.angle - _this21.angle * 1.5) + 'deg)',
                 'transform-origin': 'bottom center'
               };
-              _this20.textOrientation[i] = {
-                'transform': 'rotate(' + (90 - _this20.angle / 2) + 'deg)',
-                '-webkit-transform': 'rotate(' + (180 + _this20.angle / 4) + 'deg)',
-                '-moz-transform': 'rotate(' + (180 + _this20.angle / 4) + 'deg)',
-                '-o-transform': 'rotate(' + (180 + _this20.angle / 4) + 'deg)',
-                '-ms-transform': 'rotate(' + (180 + _this20.angle / 4) + 'deg)',
+              _this21.textOrientation[i] = {
+                'transform': 'rotate(' + (90 - _this21.angle / 2) + 'deg)',
+                '-webkit-transform': 'rotate(' + (180 + _this21.angle / 4) + 'deg)',
+                '-moz-transform': 'rotate(' + (180 + _this21.angle / 4) + 'deg)',
+                '-o-transform': 'rotate(' + (180 + _this21.angle / 4) + 'deg)',
+                '-ms-transform': 'rotate(' + (180 + _this21.angle / 4) + 'deg)',
                 'transform-origin': 'center right'
               };
-              _this20.initialDegreesStart[i] = _this20.angle * i;
-              _this20.initialDegreesEnd[i] = _this20.initialDegreesStart[i] + _this20.angle;
+              _this21.initialDegreesStart[i] = _this21.angle * i;
+              _this21.initialDegreesEnd[i] = _this21.initialDegreesStart[i] + _this21.angle;
             }
           });
         }
       }, {
         key: "getHeaderFooter",
         value: function getHeaderFooter() {
-          var _this21 = this;
+          var _this22 = this;
 
           this.headerFooterService.getHeaderFooter().subscribe(function (headerFooter) {
-            _this21.HeaderFooter = headerFooter[0]; //Inyecting header
+            _this22.HeaderFooter = headerFooter[0]; //Inyecting header
 
-            var headerScript = _this21.renderer2.createElement('script');
+            var headerScript = _this22.renderer2.createElement('script');
 
             headerScript.type = 'text/javascript';
-            headerScript.text = _this21.HeaderFooter.header;
+            headerScript.text = _this22.HeaderFooter.header;
 
-            _this21.renderer2.appendChild(_this21._document.head, headerScript); //Inyecting footer
+            _this22.renderer2.appendChild(_this22._document.head, headerScript); //Inyecting footer
 
 
-            var footerScript = _this21.renderer2.createElement('script');
+            var footerScript = _this22.renderer2.createElement('script');
 
             footerScript.type = 'text/javascript';
-            footerScript.text = _this21.HeaderFooter.footer;
+            footerScript.text = _this22.HeaderFooter.footer;
 
-            _this21.renderer2.appendChild(_this21._document.body, footerScript);
+            _this22.renderer2.appendChild(_this22._document.body, footerScript);
           });
         }
       }, {
         key: "getImageCenter",
         value: function getImageCenter() {
-          var _this22 = this;
+          var _this23 = this;
 
           this.centerImageService.getImageCenter().subscribe(function (centerImage) {
-            _this22.centerImage = centerImage[0];
-            _this22.centerImage.centerImage = _this22.API_IMAGE_URL + _this22.centerImage.centerImage.slice(14);
+            _this23.centerImage = centerImage[0];
+            _this23.centerImage.centerImage = _this23.API_IMAGE_URL + _this23.centerImage.centerImage.slice(14);
           });
         }
       }, {
@@ -6479,16 +6598,16 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "ExposingResult",
         value: function ExposingResult() {
-          var _this23 = this;
+          var _this24 = this;
 
           //console.log(this.SpinnerFields)
           if (this.SpinnerFields[this.resultingField].isItEmail === true) {
             setTimeout(function () {
-              _this23.open(_this23.ResultEmail);
+              _this24.open(_this24.ResultEmail);
             }, 6500);
           } else if (this.SpinnerFields[this.resultingField].isItEmail === false) {
             setTimeout(function () {
-              _this23.open(_this23.ResultText);
+              _this24.open(_this24.ResultText);
             }, 6500);
           }
         }
@@ -6505,17 +6624,17 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "onSubmit",
         value: function onSubmit() {
-          var _this24 = this;
+          var _this25 = this;
 
           if (this.sendEmailForm.status === "VALID") {
             this.formCopy = this.sendEmailForm.value;
             this.formCopy.result = this.FinalResult.textPopUp;
             this.emailSevice.sendEmails(this.formCopy).subscribe(function (emailForm) {
-              _this24.form = emailForm;
+              _this25.form = emailForm;
 
-              _this24.modalService.dismissAll();
+              _this25.modalService.dismissAll();
 
-              _this24.validForm = true;
+              _this25.validForm = true;
             }, function (err) {
               throw new Error('Error Sending the information about the spinner');
             });
@@ -6550,14 +6669,14 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "open",
         value: function open(content) {
-          var _this25 = this;
+          var _this26 = this;
 
           this.modalService.open(content, {
             ariaLabelledBy: 'modal-basic-title'
           }).result.then(function (result) {
-            _this25.closeResult = "Closed with: ".concat(result);
+            _this26.closeResult = "Closed with: ".concat(result);
           }, function (reason) {
-            _this25.closeResult = "Dismissed ".concat(_this25.getDismissReason(reason));
+            _this26.closeResult = "Dismissed ".concat(_this26.getDismissReason(reason));
           });
           this.firedOnce = false;
         }
