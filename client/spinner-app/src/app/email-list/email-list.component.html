@@ -9,8 +9,8 @@
             <div class="col-12 d-flex justify-content-end mb-5">
                 <button class="btn btn-info" (click)="exportCSV()">Export results csv/excel</button>
             </div>
-            <div *ngIf="emails">
-                <table class="table table-responsive-lg table-striped">
+            <div class="table-responsive-lg" *ngIf="emails">
+                <table class="table table-striped">
                     <thead>
                         <tr>
                             <th>Email Address</th>
