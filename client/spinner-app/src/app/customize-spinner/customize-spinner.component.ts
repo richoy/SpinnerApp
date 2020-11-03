@@ -443,29 +443,38 @@ export class CustomizeSpinnerComponent implements OnInit {
       .subscribe( data => {
         
         this.SpinnerFieldsStoreData = data;
-        for(let i=0; i<this.SpinnerFieldsStoreData.length; i++) {
-          this.SpinnerFieldsStoreData[i]['file'] = this.SpinnerFieldsStoreData[i]['image'];
-          delete this.SpinnerFieldsStoreData[i]['image'];
-          delete this.SpinnerFieldsStoreData[i]['createdAt'];
-          delete this.SpinnerFieldsStoreData[i]['updatedAt'];
-          delete this.SpinnerFieldsStoreData[i]['_id'];
-          delete this.SpinnerFieldsStoreData[i]['__v'];
-          delete this.SpinnerFieldsStoreData[i]['email'];
+        for(let index=0; index<this.SpinnerFieldsStoreData.length; index++) {
+          this.SpinnerFieldsStoreData[index]['file'] = this.SpinnerFieldsStoreData[index]['image'];
+          delete this.SpinnerFieldsStoreData[index]['image'];
+          delete this.SpinnerFieldsStoreData[index]['createdAt'];
+          delete this.SpinnerFieldsStoreData[index]['updatedAt'];
+          delete this.SpinnerFieldsStoreData[index]['_id'];
+          delete this.SpinnerFieldsStoreData[index]['__v'];
+          delete this.SpinnerFieldsStoreData[index]['email'];
         }
         this.setValuesofBackendSpinner(this.spinnerArray, this.SpinnerFieldsStoreData);
-        for(let i=0; i<this.SpinnerFieldsStoreData.length; i++) {
-          
-          if (this.SpinnerFieldsStoreData[i].isItImage == true) {
-            this.onSuccess(i, this.SpinnerFieldsStoreData[i].file)
-          } else if (this.SpinnerFieldsStoreData[i].isItImage == false) {
-            this.itIsImageFile[i] = false;
-            this.itIsTextField[i] = true;
-            this.SuccessfullyUpload[i] = false;
-            this.UnsuccessfullyUpload[i] = false;
-          }
 
-          this.percentageValues[i] = this.SpinnerFieldsStoreData[i].percentage;
+        for(let index=0; index < this.SpinnerFieldsStoreData.length; index++) {
+          if (this.SpinnerFieldsStoreData[index].isItImage == true) {
+            this.onSuccess(index, this.SpinnerFieldsStoreData[index].file)
+          } else if (this.SpinnerFieldsStoreData[index].isItImage == false) {
+            this.itIsImageFile[index] = false;
+            this.itIsTextField[index] = true;
+            this.SuccessfullyUpload[index] = false;
+            this.UnsuccessfullyUpload[index] = false;
+          }
         }
+
+        if ( this.SpinnerFieldsStoreData.length <= (i-1) ){
+          for(let index=0; index < this.SpinnerFieldsStoreData.length; index++) {
+            this.percentageValues[index] = this.SpinnerFieldsStoreData[index].percentage;
+          }
+        } else if (this.SpinnerFieldsStoreData.length > (i-1)) {
+          for(let index=0; index < i - 1; index++) {
+            this.percentageValues[index] = this.SpinnerFieldsStoreData[index].percentage;
+          }
+        }
+        console.log('percentageVale',this.percentageValues)
         this.checkfullpercentage()
       },(err) => {
         this.SuccessSpinnerCenter = false;
@@ -473,18 +482,6 @@ export class CustomizeSpinnerComponent implements OnInit {
         throw new Error(err);
       });
 
-      for( let index = 0; index <= i; index++) {
-        this.percentageValues[i] = this.percentageValues[i]
-      }
-
-      if(this.percentageValues.length > i) {
-        for(let index = 0; index <= i; index++) {
-          this.percentageValues.pop();
-        }
-      }
-      console.log('oercentageVale',this.percentageValues)
-
-      this.checkfullpercentage();
 
     for( let index = 0; index < i; index++) {
       this.SuccessfullyUpload[index] = false;
