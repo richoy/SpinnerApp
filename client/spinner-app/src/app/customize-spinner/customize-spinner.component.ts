@@ -367,8 +367,11 @@ export class CustomizeSpinnerComponent implements OnInit {
    //Image Upload
   private onSuccess(index, path) {
     this.StringOfImageUpload.push(new UploadFile(index, path));
-    this.SuccessfullyUpload[index] = true;
+    this.SuccessfullyUpload[index] = false;
     this.UnsuccessfullyUpload[index] = false; 
+    setTimeout( () => {
+      this.SuccessfullyUpload[index] = true;
+    }, 400);
   }
 
   private onError(index) {
@@ -399,8 +402,11 @@ export class CustomizeSpinnerComponent implements OnInit {
 
   private onSuccessCenter(path) {
     this.StringOfSpinnerCenter = path;
-    this.SuccessSpinnerCenter = true;
+    this.SuccessSpinnerCenter = false;
     this.UnsuccessSpinnerCenter = false; 
+    setTimeout(() => {
+      this.SuccessSpinnerCenter = true;
+    }, 400);
   }
 
   private onErrorCenter() {

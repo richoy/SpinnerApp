@@ -136,8 +136,11 @@ export class CustomScriptComponent implements OnInit {
 
   private onSuccess(path) {
     this.StringOfImageUpload = path;
-    this.SuccessfullyUpload = true;
     this.UnsuccessfullyUpload = false; 
+    this.SuccessfullyUpload = false;
+    setTimeout(() => {
+      this.SuccessfullyUpload = true;
+    }, 400);
   }
 
   private onError() {

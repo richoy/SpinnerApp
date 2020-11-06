@@ -1043,9 +1043,14 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "onSuccess",
         value: function onSuccess(path) {
+          var _this4 = this;
+
           this.StringOfImageUpload = path;
-          this.SuccessfullyUpload = true;
           this.UnsuccessfullyUpload = false;
+          this.SuccessfullyUpload = false;
+          setTimeout(function () {
+            _this4.SuccessfullyUpload = true;
+          }, 400);
         }
       }, {
         key: "onError",
@@ -1056,18 +1061,18 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "processFile",
         value: function processFile(image) {
-          var _this4 = this;
+          var _this5 = this;
 
           var files = image.srcElement.files;
           var file = files[0];
           var reader = new FileReader();
           reader.addEventListener('load', function (event) {
-            _this4.selectedFile = new _shared_ImageSnippet__WEBPACK_IMPORTED_MODULE_1__["ImageSnippet"](event.target.result, file);
+            _this5.selectedFile = new _shared_ImageSnippet__WEBPACK_IMPORTED_MODULE_1__["ImageSnippet"](event.target.result, file);
 
-            _this4.imageService.uploadImage(_this4.selectedFile.file).subscribe(function (res) {
-              _this4.onSuccess(res.path);
+            _this5.imageService.uploadImage(_this5.selectedFile.file).subscribe(function (res) {
+              _this5.onSuccess(res.path);
             }, function (err) {
-              _this4.onError();
+              _this5.onError();
 
               throw new Error(err);
             });
@@ -1077,17 +1082,17 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "onSubmit",
         value: function onSubmit() {
-          var _this5 = this;
+          var _this6 = this;
 
           this.FormSuccessfullySend = true;
           this.customScriptService.deleteHeaderFooter().subscribe(function () {
-            _this5.formCopy = _this5.HeaderFooterForm.value;
-            _this5.formCopy.favicon = _this5.StringOfImageUpload.replace(/\\/g, "/");
+            _this6.formCopy = _this6.HeaderFooterForm.value;
+            _this6.formCopy.favicon = _this6.StringOfImageUpload.replace(/\\/g, "/");
 
-            _this5.customScriptService.sendHeaderFooter(_this5.formCopy).subscribe(function (HFform) {
-              _this5.form = HFform;
+            _this6.customScriptService.sendHeaderFooter(_this6.formCopy).subscribe(function (HFform) {
+              _this6.form = HFform;
               setTimeout(function () {
-                _this5.FormSuccessfullySend = false;
+                _this6.FormSuccessfullySend = false;
               }, 2000);
             }, function (err) {
               throw new Error('Error Sending the information about the spinner');
@@ -2159,69 +2164,69 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "getSpinnerStoredInfo",
         value: function getSpinnerStoredInfo() {
-          var _this6 = this;
+          var _this7 = this;
 
           this.getDataSpinnerService.getSpinner().subscribe(function (data) {
-            _this6.SpinnerFieldsStoreData = data; //Not used elements of the Data Array
+            _this7.SpinnerFieldsStoreData = data; //Not used elements of the Data Array
 
-            for (var i = 0; i < _this6.SpinnerFieldsStoreData.length; i++) {
-              _this6.SpinnerFieldsStoreData[i]['file'] = _this6.SpinnerFieldsStoreData[i]['image'];
-              delete _this6.SpinnerFieldsStoreData[i]['image'];
-              delete _this6.SpinnerFieldsStoreData[i]['createdAt'];
-              delete _this6.SpinnerFieldsStoreData[i]['updatedAt'];
-              delete _this6.SpinnerFieldsStoreData[i]['_id'];
-              delete _this6.SpinnerFieldsStoreData[i]['__v'];
-              delete _this6.SpinnerFieldsStoreData[i]['email'];
+            for (var i = 0; i < _this7.SpinnerFieldsStoreData.length; i++) {
+              _this7.SpinnerFieldsStoreData[i]['file'] = _this7.SpinnerFieldsStoreData[i]['image'];
+              delete _this7.SpinnerFieldsStoreData[i]['image'];
+              delete _this7.SpinnerFieldsStoreData[i]['createdAt'];
+              delete _this7.SpinnerFieldsStoreData[i]['updatedAt'];
+              delete _this7.SpinnerFieldsStoreData[i]['_id'];
+              delete _this7.SpinnerFieldsStoreData[i]['__v'];
+              delete _this7.SpinnerFieldsStoreData[i]['email'];
             } // Getting Number of fields
 
 
-            var GetDOMNumberOfFields = _this6.numberOfFields.nativeElement[_this6.SpinnerFieldsStoreData.length - 2];
+            var GetDOMNumberOfFields = _this7.numberOfFields.nativeElement[_this7.SpinnerFieldsStoreData.length - 2];
             GetDOMNumberOfFields.setAttribute('selected', 'selected');
 
-            for (var _i2 = 0; _i2 < _this6.SpinnerFieldsStoreData.length; _i2++) {
-              _this6.addControl(_i2);
+            for (var _i2 = 0; _i2 < _this7.SpinnerFieldsStoreData.length; _i2++) {
+              _this7.addControl(_i2);
             }
 
-            _this6.onLoad(GetDOMNumberOfFields.value); //Setting Values
+            _this7.onLoad(GetDOMNumberOfFields.value); //Setting Values
 
 
-            _this6.setValuesofBackendSpinner(_this6.spinnerArray, _this6.SpinnerFieldsStoreData);
+            _this7.setValuesofBackendSpinner(_this7.spinnerArray, _this7.SpinnerFieldsStoreData);
 
-            for (var _i3 = 0; _i3 < _this6.SpinnerFieldsStoreData.length; _i3++) {
-              if (_this6.SpinnerFieldsStoreData[_i3].isItImage == true) {
-                _this6.onSuccess(_i3, _this6.SpinnerFieldsStoreData[_i3].file);
-              } else if (_this6.SpinnerFieldsStoreData[_i3].isItImage == false) {
-                _this6.itIsImageFile[_i3] = false;
-                _this6.itIsTextField[_i3] = true;
-                _this6.SuccessfullyUpload[_i3] = false;
-                _this6.UnsuccessfullyUpload[_i3] = false;
+            for (var _i3 = 0; _i3 < _this7.SpinnerFieldsStoreData.length; _i3++) {
+              if (_this7.SpinnerFieldsStoreData[_i3].isItImage == true) {
+                _this7.onSuccess(_i3, _this7.SpinnerFieldsStoreData[_i3].file);
+              } else if (_this7.SpinnerFieldsStoreData[_i3].isItImage == false) {
+                _this7.itIsImageFile[_i3] = false;
+                _this7.itIsTextField[_i3] = true;
+                _this7.SuccessfullyUpload[_i3] = false;
+                _this7.UnsuccessfullyUpload[_i3] = false;
               }
 
-              _this6.percentageValues[_i3] = _this6.SpinnerFieldsStoreData[_i3].percentage;
+              _this7.percentageValues[_i3] = _this7.SpinnerFieldsStoreData[_i3].percentage;
             }
 
-            _this6.checkfullpercentage();
+            _this7.checkfullpercentage();
           }, function (err) {
             throw new Error(err);
           });
           this.centerImageService.getImageCenter().subscribe(function (data) {
-            _this6.CenterImageFieldStoreData = data;
-            delete _this6.CenterImageFieldStoreData[0]['createdAt'];
-            delete _this6.CenterImageFieldStoreData[0]['updatedAt'];
-            delete _this6.CenterImageFieldStoreData[0]['_id'];
-            delete _this6.CenterImageFieldStoreData[0]['__v'];
+            _this7.CenterImageFieldStoreData = data;
+            delete _this7.CenterImageFieldStoreData[0]['createdAt'];
+            delete _this7.CenterImageFieldStoreData[0]['updatedAt'];
+            delete _this7.CenterImageFieldStoreData[0]['_id'];
+            delete _this7.CenterImageFieldStoreData[0]['__v'];
 
-            _this6.setValuesofBackendSpinner(_this6.CenterImageForm, _this6.CenterImageFieldStoreData[0]);
+            _this7.setValuesofBackendSpinner(_this7.CenterImageForm, _this7.CenterImageFieldStoreData[0]);
 
-            if (_this6.CenterImageForm.value.centerImage != '') {
-              _this6.onSuccessCenter(_this6.CenterImageFieldStoreData[0].centerImage);
-            } else if (_this6.CenterImageForm.value.centerImage == '') {
-              _this6.SuccessSpinnerCenter = false;
-              _this6.UnsuccessSpinnerCenter = false;
+            if (_this7.CenterImageForm.value.centerImage != '') {
+              _this7.onSuccessCenter(_this7.CenterImageFieldStoreData[0].centerImage);
+            } else if (_this7.CenterImageForm.value.centerImage == '') {
+              _this7.SuccessSpinnerCenter = false;
+              _this7.UnsuccessSpinnerCenter = false;
             }
           }, function (err) {
-            _this6.SuccessSpinnerCenter = false;
-            _this6.UnsuccessSpinnerCenter = false;
+            _this7.SuccessSpinnerCenter = false;
+            _this7.UnsuccessSpinnerCenter = false;
             throw new Error(err);
           });
         }
@@ -2233,7 +2238,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "createSpFormGroup",
         value: function createSpFormGroup() {
-          var _this7 = this;
+          var _this8 = this;
 
           var SpinnerForm = this.formBuilder.group({
             isItImage: [true, [_angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required]],
@@ -2246,7 +2251,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             bgColor: ['']
           });
           SpinnerForm.valueChanges.subscribe(function (data) {
-            _this7.onValueChanged(SpinnerForm, data);
+            _this8.onValueChanged(SpinnerForm, data);
           });
           this.onValueChanged(SpinnerForm);
           return SpinnerForm;
@@ -2261,7 +2266,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "MessageErrorChange",
         value: function MessageErrorChange(i) {
-          var _this8 = this;
+          var _this9 = this;
 
           var keyPressEvent$ = Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["fromEvent"])(this.percentage.toArray()[i].nativeElement, 'keypress');
           var keyDownEvent$ = Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["fromEvent"])(this.percentage.toArray()[i].nativeElement, 'keydown');
@@ -2276,18 +2281,18 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
             if (value > 100) {
               event.target.value = 100;
-              _this8.isPercentageMoreThanHundred[i] = true;
-              _this8.percentageValues[i] = value;
+              _this9.isPercentageMoreThanHundred[i] = true;
+              _this9.percentageValues[i] = value;
             } else if (value < 0) {
               event.target.value = 0;
-              _this8.isPercentageLessThanZero[i] = true;
+              _this9.isPercentageLessThanZero[i] = true;
             } else if (value >= 0 && value <= 100) {
-              _this8.isPercentageMoreThanHundred[i] = false;
-              _this8.isPercentageLessThanZero[i] = false;
-              _this8.percentageValues[i] = value;
+              _this9.isPercentageMoreThanHundred[i] = false;
+              _this9.isPercentageLessThanZero[i] = false;
+              _this9.percentageValues[i] = value;
             }
 
-            _this8.checkfullpercentage();
+            _this9.checkfullpercentage();
           }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["debounceTime"])(1)).subscribe();
           this.DidModalOpen = false;
         }
@@ -2356,9 +2361,14 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "onSuccess",
         value: function onSuccess(index, path) {
+          var _this10 = this;
+
           this.StringOfImageUpload.push(new UploadFile(index, path));
-          this.SuccessfullyUpload[index] = true;
+          this.SuccessfullyUpload[index] = false;
           this.UnsuccessfullyUpload[index] = false;
+          setTimeout(function () {
+            _this10.SuccessfullyUpload[index] = true;
+          }, 400);
         }
       }, {
         key: "onError",
@@ -2369,18 +2379,18 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "processFile",
         value: function processFile(image, index) {
-          var _this9 = this;
+          var _this11 = this;
 
           var files = image.srcElement.files;
           var file = files[0];
           var reader = new FileReader();
           reader.addEventListener('load', function (event) {
-            _this9.selectedFile = new _shared_ImageSnippet__WEBPACK_IMPORTED_MODULE_6__["ImageSnippet"](event.target.result, file);
+            _this11.selectedFile = new _shared_ImageSnippet__WEBPACK_IMPORTED_MODULE_6__["ImageSnippet"](event.target.result, file);
 
-            _this9.imageService.uploadImage(_this9.selectedFile.file).subscribe(function (res) {
-              _this9.onSuccess(index, res.path);
+            _this11.imageService.uploadImage(_this11.selectedFile.file).subscribe(function (res) {
+              _this11.onSuccess(index, res.path);
             }, function (err) {
-              _this9.onError(index);
+              _this11.onError(index);
 
               throw new Error(err);
             });
@@ -2391,9 +2401,14 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "onSuccessCenter",
         value: function onSuccessCenter(path) {
+          var _this12 = this;
+
           this.StringOfSpinnerCenter = path;
-          this.SuccessSpinnerCenter = true;
+          this.SuccessSpinnerCenter = false;
           this.UnsuccessSpinnerCenter = false;
+          setTimeout(function () {
+            _this12.SuccessSpinnerCenter = true;
+          }, 400);
         }
       }, {
         key: "onErrorCenter",
@@ -2404,20 +2419,20 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "ProcessCenterImage",
         value: function ProcessCenterImage(image) {
-          var _this10 = this;
+          var _this13 = this;
 
           var files = image.srcElement.files;
           var file = files[0];
           var reader = new FileReader();
           reader.addEventListener('load', function (event) {
-            _this10.selectedCenterFile = new _shared_ImageSnippet__WEBPACK_IMPORTED_MODULE_6__["ImageSnippet"](event.target.result, file);
+            _this13.selectedCenterFile = new _shared_ImageSnippet__WEBPACK_IMPORTED_MODULE_6__["ImageSnippet"](event.target.result, file);
 
-            _this10.imageService.uploadImage(_this10.selectedCenterFile.file).subscribe(function (res) {
-              _this10.onSuccessCenter(res.path);
+            _this13.imageService.uploadImage(_this13.selectedCenterFile.file).subscribe(function (res) {
+              _this13.onSuccessCenter(res.path);
 
-              _this10.centerImageButtonAppears = true;
+              _this13.centerImageButtonAppears = true;
             }, function (err) {
-              _this10.onErrorCenter();
+              _this13.onErrorCenter();
 
               throw new Error(err);
             });
@@ -2429,54 +2444,54 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "onChange",
         value: function onChange(i) {
-          var _this11 = this;
+          var _this14 = this;
 
           this.items.length = 0; // eliminates defalut setting before adding other
 
           this.spinnerForm.reset();
           this.percentageSum = 0;
           this.getDataSpinnerService.getSpinner().subscribe(function (data) {
-            _this11.SpinnerFieldsStoreData = data;
+            _this14.SpinnerFieldsStoreData = data;
 
-            for (var index = 0; index < _this11.SpinnerFieldsStoreData.length; index++) {
-              _this11.SpinnerFieldsStoreData[index]['file'] = _this11.SpinnerFieldsStoreData[index]['image'];
-              delete _this11.SpinnerFieldsStoreData[index]['image'];
-              delete _this11.SpinnerFieldsStoreData[index]['createdAt'];
-              delete _this11.SpinnerFieldsStoreData[index]['updatedAt'];
-              delete _this11.SpinnerFieldsStoreData[index]['_id'];
-              delete _this11.SpinnerFieldsStoreData[index]['__v'];
-              delete _this11.SpinnerFieldsStoreData[index]['email'];
+            for (var index = 0; index < _this14.SpinnerFieldsStoreData.length; index++) {
+              _this14.SpinnerFieldsStoreData[index]['file'] = _this14.SpinnerFieldsStoreData[index]['image'];
+              delete _this14.SpinnerFieldsStoreData[index]['image'];
+              delete _this14.SpinnerFieldsStoreData[index]['createdAt'];
+              delete _this14.SpinnerFieldsStoreData[index]['updatedAt'];
+              delete _this14.SpinnerFieldsStoreData[index]['_id'];
+              delete _this14.SpinnerFieldsStoreData[index]['__v'];
+              delete _this14.SpinnerFieldsStoreData[index]['email'];
             }
 
-            _this11.setValuesofBackendSpinner(_this11.spinnerArray, _this11.SpinnerFieldsStoreData);
+            _this14.setValuesofBackendSpinner(_this14.spinnerArray, _this14.SpinnerFieldsStoreData);
 
-            for (var _index = 0; _index < _this11.SpinnerFieldsStoreData.length; _index++) {
-              if (_this11.SpinnerFieldsStoreData[_index].isItImage == true) {
-                _this11.onSuccess(_index, _this11.SpinnerFieldsStoreData[_index].file);
-              } else if (_this11.SpinnerFieldsStoreData[_index].isItImage == false) {
-                _this11.itIsImageFile[_index] = false;
-                _this11.itIsTextField[_index] = true;
-                _this11.SuccessfullyUpload[_index] = false;
-                _this11.UnsuccessfullyUpload[_index] = false;
+            for (var _index = 0; _index < _this14.SpinnerFieldsStoreData.length; _index++) {
+              if (_this14.SpinnerFieldsStoreData[_index].isItImage == true) {
+                _this14.onSuccess(_index, _this14.SpinnerFieldsStoreData[_index].file);
+              } else if (_this14.SpinnerFieldsStoreData[_index].isItImage == false) {
+                _this14.itIsImageFile[_index] = false;
+                _this14.itIsTextField[_index] = true;
+                _this14.SuccessfullyUpload[_index] = false;
+                _this14.UnsuccessfullyUpload[_index] = false;
               }
             }
 
-            if (_this11.SpinnerFieldsStoreData.length <= i - 1) {
-              for (var _index2 = 0; _index2 < _this11.SpinnerFieldsStoreData.length; _index2++) {
-                _this11.percentageValues[_index2] = _this11.SpinnerFieldsStoreData[_index2].percentage;
+            if (_this14.SpinnerFieldsStoreData.length <= i - 1) {
+              for (var _index2 = 0; _index2 < _this14.SpinnerFieldsStoreData.length; _index2++) {
+                _this14.percentageValues[_index2] = _this14.SpinnerFieldsStoreData[_index2].percentage;
               }
-            } else if (_this11.SpinnerFieldsStoreData.length > i - 1) {
+            } else if (_this14.SpinnerFieldsStoreData.length > i - 1) {
               for (var _index3 = 0; _index3 < i - 1; _index3++) {
-                _this11.percentageValues[_index3] = _this11.SpinnerFieldsStoreData[_index3].percentage;
+                _this14.percentageValues[_index3] = _this14.SpinnerFieldsStoreData[_index3].percentage;
               }
             }
 
-            console.log('percentageVale', _this11.percentageValues);
+            console.log('percentageVale', _this14.percentageValues);
 
-            _this11.checkfullpercentage();
+            _this14.checkfullpercentage();
           }, function (err) {
-            _this11.SuccessSpinnerCenter = false;
-            _this11.UnsuccessSpinnerCenter = false;
+            _this14.SuccessSpinnerCenter = false;
+            _this14.UnsuccessSpinnerCenter = false;
             throw new Error(err);
           });
 
@@ -2560,21 +2575,21 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "deleteImage",
         value: function deleteImage() {
-          var _this12 = this;
+          var _this15 = this;
 
           this.centerImageService.deleteImageCenter().subscribe(function () {
-            _this12.setValuesofBackendSpinner(_this12.CenterImageForm, {
+            _this15.setValuesofBackendSpinner(_this15.CenterImageForm, {
               'centerImage': ''
             });
 
-            _this12.UnsuccessSpinnerCenter = false;
-            _this12.sucessCenterImageSubmition = true;
-            _this12.SuccessSpinnerCenter = false;
+            _this15.UnsuccessSpinnerCenter = false;
+            _this15.sucessCenterImageSubmition = true;
+            _this15.SuccessSpinnerCenter = false;
 
-            _this12.CenterImageForm.reset();
+            _this15.CenterImageForm.reset();
 
             setTimeout(function () {
-              _this12.sucessCenterImageSubmition = false;
+              _this15.sucessCenterImageSubmition = false;
             }, 2000);
           }, function (err) {
             throw new Error('Error deleting the information of the previous spineer');
@@ -2610,7 +2625,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "onSubmit",
         value: function onSubmit() {
-          var _this13 = this;
+          var _this16 = this;
 
           var spinner = [];
           this.submitPressed = true; // if a field outside the array is added, change this to this.spinnerForm.value
@@ -2624,9 +2639,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
                 }
 
                 var field = new _shared_form_spinner_controller__WEBPACK_IMPORTED_MODULE_5__["formSpinnerControl"](element.isItImage, element.image, element.textFieldOne, element.percentage, element.isItEmail, element.textPopUp, element.email, element.bgColor);
-                _this13.totalPercentage[counter] = element.percentage;
+                _this16.totalPercentage[counter] = element.percentage;
 
-                _this13.StringOfImageUpload.forEach(function (file) {
+                _this16.StringOfImageUpload.forEach(function (file) {
                   if (file.index == counter) {
                     field.image = file.image;
                   }
@@ -2640,9 +2655,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               }, 0);
               this.sucessFormSubmition = true;
               this.spinnerService.deleteSpinner().subscribe(function () {
-                _this13.spinnerService.sendSpinner(spinner).subscribe(function (res) {
+                _this16.spinnerService.sendSpinner(spinner).subscribe(function (res) {
                   setTimeout(function () {
-                    _this13.sucessFormSubmition = false;
+                    _this16.sucessFormSubmition = false;
                   }, 2000); //this.spinnerForm.reset();
                   //this.StringOfImageUpload = []; // Resets the StringOfImageUpload array
                 }, function (err) {
@@ -2663,7 +2678,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           } else if (this.spinnerForm.status === "INVALID") {
             this.unsuccessSendingForm = true;
             setTimeout(function () {
-              _this13.unsuccessSendingForm = false;
+              _this16.unsuccessSendingForm = false;
             }, 2000);
           }
 
@@ -2672,28 +2687,28 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "onSubmitCenterImage",
         value: function onSubmitCenterImage() {
-          var _this14 = this;
+          var _this17 = this;
 
           this.centerImageService.deleteImageCenter().subscribe(function () {
-            _this14.centerCopy = _this14.CenterImageForm.value;
-            _this14.centerCopy.centerImage = _this14.StringOfSpinnerCenter.replace(/\\/g, "/");
+            _this17.centerCopy = _this17.CenterImageForm.value;
+            _this17.centerCopy.centerImage = _this17.StringOfSpinnerCenter.replace(/\\/g, "/");
 
-            _this14.centerImageService.sendImageCenter(_this14.centerCopy).subscribe(function (HFform) {
-              _this14.centerImageButtonAppears = false;
-              _this14.sucessCenterImageSubmition = true;
+            _this17.centerImageService.sendImageCenter(_this17.centerCopy).subscribe(function (HFform) {
+              _this17.centerImageButtonAppears = false;
+              _this17.sucessCenterImageSubmition = true;
               setTimeout(function () {
-                _this14.sucessCenterImageSubmition = false;
+                _this17.sucessCenterImageSubmition = false;
               }, 2000);
-              _this14.centerform = HFform;
+              _this17.centerform = HFform;
             }, function (err) {
-              _this14.errorWhileSavingCenterImage = true;
+              _this17.errorWhileSavingCenterImage = true;
               setTimeout(function () {
-                _this14.errorWhileSavingCenterImage = false;
+                _this17.errorWhileSavingCenterImage = false;
               }, 2000);
               throw new Error('Error Sending the information about the spinner');
             });
 
-            _this14.CenterImageForm.reset();
+            _this17.CenterImageForm.reset();
           }, function (err) {
             throw new Error('Error deleting the information of the previous spineer');
           });
@@ -2701,14 +2716,14 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "open",
         value: function open(content) {
-          var _this15 = this;
+          var _this18 = this;
 
           this.modalService.open(content, {
             ariaLabelledBy: 'modal-basic-title'
           }).result.then(function (result) {
-            _this15.closeResult = "Closed with: ".concat(result);
+            _this18.closeResult = "Closed with: ".concat(result);
           }, function (reason) {
-            _this15.closeResult = "Dismissed ".concat(_this15.getDismissReason(reason));
+            _this18.closeResult = "Dismissed ".concat(_this18.getDismissReason(reason));
           });
         }
       }, {
@@ -3366,9 +3381,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     function EmailListComponent_div_9_Template(rf, ctx) {
       if (rf & 1) {
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 10);
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "table", 10);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "table", 11);
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "thead");
 
@@ -3410,7 +3425,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](14, "tbody");
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](15, EmailListComponent_div_9_tr_15_Template, 12, 7, "tr", 11);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](15, EmailListComponent_div_9_tr_15_Template, 12, 7, "tr", 12);
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
@@ -3432,16 +3447,16 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       if (rf & 1) {
         var _r8 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 12);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 13);
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "button", 13);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "button", 14);
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function EmailListComponent_ng_template_13_Template_button_click_1_listener() {
           var modal_r5 = ctx.$implicit;
           return modal_r5.dismiss("Cross click");
         });
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "span", 14);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "span", 15);
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](3, "\xD7");
 
@@ -3451,7 +3466,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](4, "div", 15);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](4, "div", 16);
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](5, "h2");
 
@@ -3459,9 +3474,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](7, "div", 16);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](7, "div", 17);
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](8, "button", 17);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](8, "button", 18);
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function EmailListComponent_ng_template_13_Template_button_click_8_listener() {
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r8);
@@ -3475,7 +3490,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](10, "button", 18);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](10, "button", 19);
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function EmailListComponent_ng_template_13_Template_button_click_10_listener() {
           var modal_r5 = ctx.$implicit;
@@ -3488,7 +3503,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](12, "button", 19);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](12, "button", 20);
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function EmailListComponent_ng_template_13_Template_button_click_12_listener() {
           var modal_r5 = ctx.$implicit;
@@ -3523,13 +3538,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "getEmails",
         value: function getEmails() {
-          var _this16 = this;
+          var _this19 = this;
 
           this.emailService.getEmails().subscribe(function (emails) {
             emails.forEach(function (email) {
               var EMAIL = new EmailResult(email.emailAddress, email.firstName, email.lastName, email.updatedAt, email.createdAt, email.result);
 
-              _this16.emails.push(EMAIL);
+              _this19.emails.push(EMAIL);
             }); // Order chronologically
 
             var GetSortOrder = function GetSortOrder(prop) {
@@ -3544,9 +3559,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               };
             };
 
-            _this16.emails.sort(GetSortOrder('DateSpin'));
+            _this19.emails.sort(GetSortOrder('DateSpin'));
 
-            console.log('sort', _this16.emails); // Eliminate the repetead, leave the newest
+            console.log('sort', _this19.emails); // Eliminate the repetead, leave the newest
 
             var reducer = function reducer(accumulator, currentValue) {
               if (!accumulator.find(function (obj) {
@@ -3558,8 +3573,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               return accumulator;
             };
 
-            _this16.emails = _this16.emails.reduce(reducer, []);
-            console.log(_this16.emails);
+            _this19.emails = _this19.emails.reduce(reducer, []);
+            console.log(_this19.emails);
           });
         }
       }, {
@@ -3579,14 +3594,14 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "open",
         value: function open(content) {
-          var _this17 = this;
+          var _this20 = this;
 
           this.modalService.open(content, {
             ariaLabelledBy: 'modal-basic-title'
           }).result.then(function (result) {
-            _this17.closeResult = "Closed with: ".concat(result);
+            _this20.closeResult = "Closed with: ".concat(result);
           }, function (reason) {
-            _this17.closeResult = "Dismissed ".concat(_this17.getDismissReason(reason));
+            _this20.closeResult = "Dismissed ".concat(_this20.getDismissReason(reason));
           });
         }
       }, {
@@ -3614,7 +3629,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       selectors: [["app-email-list"]],
       decls: 15,
       vars: 1,
-      consts: [[1, "bgColor"], [1, "container", "col-12", "col-lg-10"], ["id", "title"], [1, "row"], [1, "col-12", "d-flex", "justify-content-end", "mb-5"], [1, "btn", "btn-info", 3, "click"], [4, "ngIf"], [1, "col-12", "d-flex", "justify-content-end", "mt-5"], [1, "btn", "btn-danger", 3, "click"], ["content", ""], [1, "table", "table-responsive-lg", "table-striped"], [4, "ngFor", "ngForOf"], [1, "modal-header"], ["type", "button", "aria-label", "Close", 1, "close", 3, "click"], ["aria-hidden", "true"], [1, "modal-body"], [1, "mb-4"], ["type", "button", 1, "btn", "btn-danger", "mr-5", 3, "click"], ["type", "button", 1, "btn", "btn-info", 3, "click"], [1, "btn", "btn-secondary", 3, "click"]],
+      consts: [[1, "bgColor"], [1, "container", "col-12", "col-lg-10"], ["id", "title"], [1, "row"], [1, "col-12", "d-flex", "justify-content-end", "mb-5"], [1, "btn", "btn-info", 3, "click"], ["class", "table-responsive-lg", 4, "ngIf"], [1, "col-12", "d-flex", "justify-content-end", "mt-5"], [1, "btn", "btn-danger", 3, "click"], ["content", ""], [1, "table-responsive-lg"], [1, "table", "table-striped"], [4, "ngFor", "ngForOf"], [1, "modal-header"], ["type", "button", "aria-label", "Close", 1, "close", 3, "click"], ["aria-hidden", "true"], [1, "modal-body"], [1, "mb-4"], ["type", "button", 1, "btn", "btn-danger", "mr-5", 3, "click"], ["type", "button", 1, "btn", "btn-info", 3, "click"], [1, "btn", "btn-secondary", 3, "click"]],
       template: function EmailListComponent_Template(rf, ctx) {
         if (rf & 1) {
           var _r11 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
@@ -3815,19 +3830,19 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "onSubmit",
         value: function onSubmit() {
-          var _this18 = this;
+          var _this21 = this;
 
           if (this.LoginForm.status === "VALID") {
             var user = new _services_login_service__WEBPACK_IMPORTED_MODULE_2__["userLogin"](this.LoginForm.controls.username.value, this.LoginForm.controls.password.value);
             this.loginservice.Login(user).subscribe(function (resp) {
               if (resp.success === true) {
-                _this18.LoginError = false;
+                _this21.LoginError = false;
                 localStorage.setItem("userToken", resp.token);
 
-                _this18.router.navigate(['admin/bc/customize-spinner']);
+                _this21.router.navigate(['admin/bc/customize-spinner']);
               }
             }, function (err) {
-              _this18.LoginError = true;
+              _this21.LoginError = true;
             });
           }
         }
@@ -4312,14 +4327,14 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "open",
         value: function open(content) {
-          var _this19 = this;
+          var _this22 = this;
 
           this.modalService.open(content, {
             ariaLabelledBy: 'modal-basic-title'
           }).result.then(function (result) {
-            _this19.closeResult = "Closed with: ".concat(result);
+            _this22.closeResult = "Closed with: ".concat(result);
           }, function (reason) {
-            _this19.closeResult = "Dismissed ".concat(_this19.getDismissReason(reason));
+            _this22.closeResult = "Dismissed ".concat(_this22.getDismissReason(reason));
           });
         }
       }, {
@@ -4336,18 +4351,18 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "onSubmit",
         value: function onSubmit() {
-          var _this20 = this;
+          var _this23 = this;
 
           if (this.PasswordChangeForm.status === "VALID") {
             var user = new _services_change_password_service__WEBPACK_IMPORTED_MODULE_3__["passwordChange"](this.PasswordChangeForm.controls.username.value, this.PasswordChangeForm.controls.oldpassword.value, this.PasswordChangeForm.controls.newpassword.value);
             this.changePasswordservice.ChangePassword(user).subscribe(function (resp) {
               if (resp.success === true) {
-                _this20.PasswordChangeError = false;
+                _this23.PasswordChangeError = false;
 
-                _this20.open(_this20.modal);
+                _this23.open(_this23.modal);
               }
             }, function (err) {
-              _this20.PasswordChangeError = true;
+              _this23.PasswordChangeError = true;
             });
           }
         }
@@ -6490,89 +6505,89 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "getSpinner",
         value: function getSpinner() {
-          var _this21 = this;
+          var _this24 = this;
 
           this.spinnerService.getSpinner().subscribe(function (spinnerFields) {
-            _this21.SpinnerFields = spinnerFields;
-            _this21.angle = 360 / _this21.SpinnerFields.length;
+            _this24.SpinnerFields = spinnerFields;
+            _this24.angle = 360 / _this24.SpinnerFields.length;
 
-            for (var i = 0; i < _this21.SpinnerFields.length; i++) {
+            for (var i = 0; i < _this24.SpinnerFields.length; i++) {
               //Substitute backslashes for slashes
-              _this21.SpinnerFields[i].image = _this21.SpinnerFields[i].image.replace(/\\/g, "/");
-              _this21.SpinnerFields[i].image = _this21.API_IMAGE_URL + _this21.SpinnerFields[i].image.slice(14);
-              _this21.bgColorStyle[i] = _this21.SpinnerFields[i].bgColor; // Backgorund color
+              _this24.SpinnerFields[i].image = _this24.SpinnerFields[i].image.replace(/\\/g, "/");
+              _this24.SpinnerFields[i].image = _this24.API_IMAGE_URL + _this24.SpinnerFields[i].image.slice(14);
+              _this24.bgColorStyle[i] = _this24.SpinnerFields[i].bgColor; // Backgorund color
 
-              _this21.fontColor[i] = _this21.spinnerService.invertColor(_this21.bgColorStyle[i]); //Font Color
+              _this24.fontColor[i] = _this24.spinnerService.invertColor(_this24.bgColorStyle[i]); //Font Color
 
-              _this21.holder[i] = {
-                'transform': 'rotate(' + _this21.angle * i + 'deg)',
-                '-webkit-transform': 'rotate(' + _this21.angle * i + 'deg)',
-                '-moz-transform': 'rotate(' + _this21.angle * i + 'deg)',
-                '-o-transform': 'rotate(' + _this21.angle * i + 'deg)',
-                '-ms-transform': 'rotate(' + _this21.angle * i + 'deg)'
+              _this24.holder[i] = {
+                'transform': 'rotate(' + _this24.angle * i + 'deg)',
+                '-webkit-transform': 'rotate(' + _this24.angle * i + 'deg)',
+                '-moz-transform': 'rotate(' + _this24.angle * i + 'deg)',
+                '-o-transform': 'rotate(' + _this24.angle * i + 'deg)',
+                '-ms-transform': 'rotate(' + _this24.angle * i + 'deg)'
               };
-              _this21.fieldStyleNth[i] = {
-                'transform': 'rotate(' + _this21.angle + 'deg)',
-                '-webkit-transform': 'rotate(' + _this21.angle + 'deg)',
-                '-moz-transform': 'rotate(' + _this21.angle + 'deg)',
-                '-o-transform': 'rotate(' + _this21.angle + 'deg)',
-                '-ms-transform': 'rotate(' + _this21.angle + 'deg)',
-                'background-color': _this21.bgColorStyle[i],
-                'color': _this21.fontColor[i]
+              _this24.fieldStyleNth[i] = {
+                'transform': 'rotate(' + _this24.angle + 'deg)',
+                '-webkit-transform': 'rotate(' + _this24.angle + 'deg)',
+                '-moz-transform': 'rotate(' + _this24.angle + 'deg)',
+                '-o-transform': 'rotate(' + _this24.angle + 'deg)',
+                '-ms-transform': 'rotate(' + _this24.angle + 'deg)',
+                'background-color': _this24.bgColorStyle[i],
+                'color': _this24.fontColor[i]
               };
-              _this21.imageOrientation[i] = {
-                'transform': 'rotate(' + (_this21.angle - _this21.angle * 1.5) + 'deg)',
-                '-webkit-transform': 'rotate(' + (_this21.angle - _this21.angle * 1.5) + 'deg)',
-                '-moz-transform': 'rotate(' + (_this21.angle - _this21.angle * 1.5) + 'deg)',
-                '-o-transform': 'rotate(' + (_this21.angle - _this21.angle * 1.5) + 'deg)',
-                '-ms-transform': 'rotate(' + (_this21.angle - _this21.angle * 1.5) + 'deg)',
+              _this24.imageOrientation[i] = {
+                'transform': 'rotate(' + (_this24.angle - _this24.angle * 1.5) + 'deg)',
+                '-webkit-transform': 'rotate(' + (_this24.angle - _this24.angle * 1.5) + 'deg)',
+                '-moz-transform': 'rotate(' + (_this24.angle - _this24.angle * 1.5) + 'deg)',
+                '-o-transform': 'rotate(' + (_this24.angle - _this24.angle * 1.5) + 'deg)',
+                '-ms-transform': 'rotate(' + (_this24.angle - _this24.angle * 1.5) + 'deg)',
                 'transform-origin': 'bottom center'
               };
-              _this21.textOrientation[i] = {
-                'transform': 'rotate(' + (90 - _this21.angle / 2) + 'deg)',
-                '-webkit-transform': 'rotate(' + (180 + _this21.angle / 4) + 'deg)',
-                '-moz-transform': 'rotate(' + (180 + _this21.angle / 4) + 'deg)',
-                '-o-transform': 'rotate(' + (180 + _this21.angle / 4) + 'deg)',
-                '-ms-transform': 'rotate(' + (180 + _this21.angle / 4) + 'deg)',
+              _this24.textOrientation[i] = {
+                'transform': 'rotate(' + (90 - _this24.angle / 2) + 'deg)',
+                '-webkit-transform': 'rotate(' + (180 + _this24.angle / 4) + 'deg)',
+                '-moz-transform': 'rotate(' + (180 + _this24.angle / 4) + 'deg)',
+                '-o-transform': 'rotate(' + (180 + _this24.angle / 4) + 'deg)',
+                '-ms-transform': 'rotate(' + (180 + _this24.angle / 4) + 'deg)',
                 'transform-origin': 'center right'
               };
-              _this21.initialDegreesStart[i] = _this21.angle * i;
-              _this21.initialDegreesEnd[i] = _this21.initialDegreesStart[i] + _this21.angle;
+              _this24.initialDegreesStart[i] = _this24.angle * i;
+              _this24.initialDegreesEnd[i] = _this24.initialDegreesStart[i] + _this24.angle;
             }
           });
         }
       }, {
         key: "getHeaderFooter",
         value: function getHeaderFooter() {
-          var _this22 = this;
+          var _this25 = this;
 
           this.headerFooterService.getHeaderFooter().subscribe(function (headerFooter) {
-            _this22.HeaderFooter = headerFooter[0]; //Inyecting header
+            _this25.HeaderFooter = headerFooter[0]; //Inyecting header
 
-            var headerScript = _this22.renderer2.createElement('script');
+            var headerScript = _this25.renderer2.createElement('script');
 
             headerScript.type = 'text/javascript';
-            headerScript.text = _this22.HeaderFooter.header;
+            headerScript.text = _this25.HeaderFooter.header;
 
-            _this22.renderer2.appendChild(_this22._document.head, headerScript); //Inyecting footer
+            _this25.renderer2.appendChild(_this25._document.head, headerScript); //Inyecting footer
 
 
-            var footerScript = _this22.renderer2.createElement('script');
+            var footerScript = _this25.renderer2.createElement('script');
 
             footerScript.type = 'text/javascript';
-            footerScript.text = _this22.HeaderFooter.footer;
+            footerScript.text = _this25.HeaderFooter.footer;
 
-            _this22.renderer2.appendChild(_this22._document.body, footerScript);
+            _this25.renderer2.appendChild(_this25._document.body, footerScript);
           });
         }
       }, {
         key: "getImageCenter",
         value: function getImageCenter() {
-          var _this23 = this;
+          var _this26 = this;
 
           this.centerImageService.getImageCenter().subscribe(function (centerImage) {
-            _this23.centerImage = centerImage[0];
-            _this23.centerImage.centerImage = _this23.API_IMAGE_URL + _this23.centerImage.centerImage.slice(14);
+            _this26.centerImage = centerImage[0];
+            _this26.centerImage.centerImage = _this26.API_IMAGE_URL + _this26.centerImage.centerImage.slice(14);
           });
         }
       }, {
@@ -6604,16 +6619,16 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "ExposingResult",
         value: function ExposingResult() {
-          var _this24 = this;
+          var _this27 = this;
 
           //console.log(this.SpinnerFields)
           if (this.SpinnerFields[this.resultingField].isItEmail === true) {
             setTimeout(function () {
-              _this24.open(_this24.ResultEmail);
+              _this27.open(_this27.ResultEmail);
             }, 6500);
           } else if (this.SpinnerFields[this.resultingField].isItEmail === false) {
             setTimeout(function () {
-              _this24.open(_this24.ResultText);
+              _this27.open(_this27.ResultText);
             }, 6500);
           }
         }
@@ -6630,17 +6645,17 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "onSubmit",
         value: function onSubmit() {
-          var _this25 = this;
+          var _this28 = this;
 
           if (this.sendEmailForm.status === "VALID") {
             this.formCopy = this.sendEmailForm.value;
             this.formCopy.result = this.FinalResult.textPopUp;
             this.emailSevice.sendEmails(this.formCopy).subscribe(function (emailForm) {
-              _this25.form = emailForm;
+              _this28.form = emailForm;
 
-              _this25.modalService.dismissAll();
+              _this28.modalService.dismissAll();
 
-              _this25.validForm = true;
+              _this28.validForm = true;
             }, function (err) {
               throw new Error('Error Sending the information about the spinner');
             });
@@ -6675,14 +6690,14 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "open",
         value: function open(content) {
-          var _this26 = this;
+          var _this29 = this;
 
           this.modalService.open(content, {
             ariaLabelledBy: 'modal-basic-title'
           }).result.then(function (result) {
-            _this26.closeResult = "Closed with: ".concat(result);
+            _this29.closeResult = "Closed with: ".concat(result);
           }, function (reason) {
-            _this26.closeResult = "Dismissed ".concat(_this26.getDismissReason(reason));
+            _this29.closeResult = "Dismissed ".concat(_this29.getDismissReason(reason));
           });
           this.firedOnce = false;
         }
