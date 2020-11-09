@@ -18,12 +18,12 @@ var passport = require('passport');
 var config = require('./config');
 
 // Routes
-var usersRouter = require('./routes/users');
-var SpinnerRouter = require('./routes/spinnerRouter');
-var ResultsRouter = require('./routes/resultRouter');
+var usersRouter = require('./controllers_MYSQL/user.control');
+var SpinnerRouter = require('./controllers_MYSQL/spinner.control');
+var ResultsRouter = require('./controllers_MYSQL/results.control');
 var uploadRouter = require('./routes/uploadRouter');
-var headerFooterRouter = require('./routes/headerFooterRouter');
-var centerImageRouter = require('./routes/centerImageRouter');
+var headerFooterRouter = require('./controllers_MYSQL/headerFooter.control');
+var centerImageRouter = require('./controllers_MYSQL/centerImage.control');
 
 // Mongoose Database
 const mongoose = require('mongoose');
@@ -58,6 +58,7 @@ app.use(passport.session());
 
 // Configure app to use route
 app.use('/api/v1/', api);    
+app.use('/', require('./controllers_MYSQL/user.control'));
 
 app.use('/users', usersRouter);
 
@@ -69,6 +70,7 @@ app.use('/api/v1/centerImage', centerImageRouter);
 
 
 // This middleware informs the express application to serve our compiled React files
+/*
 if (process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'staging') {
 
     const cloudUrl = config.mongoCloudUrl;
@@ -92,7 +94,7 @@ if (process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'staging')
     console.log('Conected correctly to server');
     }, (err) => {console.log(err);});
 
-};
+};*/
 
 // Catch any bad requests
 app.get('*', (req, res) => {

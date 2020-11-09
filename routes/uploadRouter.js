@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const authenticate = require('../authenticate');
+const authorize = require('../_middleware/authorize');
 const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
@@ -31,21 +32,21 @@ const uploadRouter = express.Router();
 uploadRouter.use(bodyParser.json());
 
 uploadRouter.route('/')
-.get(authenticate.verifyOrdinaryUser, authenticate.verifyAdmin, (req, res, next) => {
+.get(authorize(), (req, res, next) => {
     res.statusCode = 403;
     res.end('GET operation not supported on /imageUpload');
 })
-.post(authenticate.verifyOrdinaryUser, authenticate.verifyAdmin,
+.post(authorize(),
     upload.single('imageFile'), (req, res) => {
         res.statusCode = 200;
         res.setHeader('Content-Type', 'application/json');
         res.json(req.file);
 })
-.put(authenticate.verifyOrdinaryUser, authenticate.verifyAdmin, (req, res, next) => {
+.put(authorize(), (req, res, next) => {
     res.statusCode = 403;
     res.end('PUT operation not supported on /imageUpload');
 })
-.delete(authenticate.verifyOrdinaryUser, authenticate.verifyAdmin, (req, res, next) => {
+.delete(authorize(), (req, res, next) => {
     res.statusCode = 403;
     res.end('DELETE operation not supported on /imageUpload');
 });

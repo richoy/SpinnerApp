@@ -36,12 +36,11 @@ export class LoginComponent implements OnInit {
       const user = new userLogin(this.LoginForm.controls.username.value, 
                                 this.LoginForm.controls.password.value)
       
-      this.loginservice.Login(user).subscribe((resp: any) => {
-         if(resp.success === true) {
-           this.LoginError = false;
-           localStorage.setItem("userToken", resp.token);
-           this.router.navigate(['admin/bc/customize-spinner']);
-         }
+      this.loginservice.Login(user).subscribe((res: any) => {
+        console.log(res);
+        this.LoginError = false;
+        localStorage.setItem("userToken", res.token);
+        this.router.navigate(['admin/bc/customize-spinner']);
       }, err => {
         this.LoginError = true;
         
