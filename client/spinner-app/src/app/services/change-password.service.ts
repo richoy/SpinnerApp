@@ -18,28 +18,30 @@ export class ChangePasswordService {
   };
 
   URL_API = `${baseHref}users/resetPassword`;
+  GET_CURRENT_URL_API = `${baseHref}users/current`;
 
   constructor(
     private http: HttpClient,
     private processHTTPMsgService: ProcessHTTPMsgService
   ) { }
 
-  ChangePassword(user: passwordChange){
-    return this.http.post(this.URL_API, user, this.httpOptions)
+  ChangePassword(user: passwordChange, id: any){
+    return this.http.put(`${this.URL_API}/${id}`, user, this.httpOptions)
     .pipe(catchError(this.processHTTPMsgService.handleError));
+  }
+
+  getCurrent(){
+    return this.http.get(this.GET_CURRENT_URL_API, this.httpOptions)
+      .pipe(catchError(this.processHTTPMsgService.handleError));
   }
 
 }
 
 export class passwordChange{
 
-  username: string;
-  oldpassword: string;
-  newpassword: string;
+  password: string;
 
-  constructor(user, oldPass, newPass){
-    this.username = user;
-    this.oldpassword = oldPass;
-    this.newpassword = newPass;
+  constructor(password){
+    this.password = password;
   }
 }

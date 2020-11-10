@@ -8,10 +8,10 @@ const userService = require('../services/user.service');
 // routes
 router.post('/login', authenticateSchema, authenticate);
 router.post('/register', registerSchema, register);
-router.get('/', registerInitalUser);
+router.get('/initialUser', registerInitalUser);
 router.get('/current', authorize(), getCurrent);
 router.get('/:id', authorize(), getById);
-router.put('/:id', authorize(), updateSchema, update);
+router.put('/resetPassword/:id', authorize(), updateSchema, update);
 router.delete('/:id', authorize(), _delete);
 router.get('/logout', logout);
 

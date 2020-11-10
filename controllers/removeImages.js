@@ -2,10 +2,10 @@ const directory = './public/images/';
 const path = require('path');
 const fs = require('fs');
 
-const Spinners = require('../models/spinner');
-const CenterImage = require('../models/centerImage');
+const Spinners = require('../models/spinner.model');
+const CenterImage = require('../models/centerImage.model');
 
-const HeaderFooter = require('../models/headerFooter');
+const HeaderFooter = require('../models/headerFooter.model');
 /**
  * Method to remove the images that are not being used.
 */

@@ -15,12 +15,15 @@ export class PasswordChangeComponent implements OnInit {
   PasswordChangeError: boolean;
   closeResult = '';
   @ViewChild('modal') modal;
+  @ViewChild('ConfirmationModal') ConfirmationModal;
+
+  currentUser: any;
 
   constructor(
     private fb: FormBuilder,
     private changePasswordservice: ChangePasswordService,
     private router: Router,
-    private modalService: NgbModal
+    private modalService: NgbModal,
   ) {
     this.createForm();
    }
@@ -31,9 +34,7 @@ export class PasswordChangeComponent implements OnInit {
 
   createForm() {
     this.PasswordChangeForm = this.fb.group({
-      username: ['', Validators.required],
-      oldpassword: ['', Validators.required],
-      newpassword: ['', Validators.required]
+      password: ['', Validators.required]
     });
   }
 
@@ -57,20 +58,26 @@ export class PasswordChangeComponent implements OnInit {
 
   onSubmit(){
     if(this.PasswordChangeForm.status === "VALID"){
-      const user = new passwordChange(
-        this.PasswordChangeForm.controls.username.value, 
-        this.PasswordChangeForm.controls.oldpassword.value,
-        this.PasswordChangeForm.controls.newpassword.value);
-      
-      this.changePasswordservice.ChangePassword(user).subscribe((resp: any) => {
-         if(resp.success === true) {
-           this.PasswordChangeError = false;
-           this.open(this.modal)
-         }
-      }, err => {
-        this.PasswordChangeError = true;
-      });
+        this.getCurrent();
     }
+  }
+
+  getCurrent() {
+    this.changePasswordservice.getCurrent()
+      .subscribe(res => {
+        this.currentUser = res;
+
+        const user = new passwordChange(
+          this.PasswordChangeForm.controls.password.value);
+                
+        this.changePasswordservice.ChangePassword(user, this.currentUser.id).subscribe((resp: any) => {
+          this.PasswordChangeError = false;
+          this.open(this.modal)
+
+        }, err => {
+          this.PasswordChangeError = true;
+        });
+      });
   }
 
 }

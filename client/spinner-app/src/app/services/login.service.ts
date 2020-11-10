@@ -8,6 +8,7 @@ import { baseHref } from '../shared/baseHref';
 export class LoginService {
 
   URL_API = `${baseHref}users/login`;
+  initialAdmin = `${baseHref}api/v1/initialStatus/initialUser`;
 
   constructor(
     private http: HttpClient
@@ -15,6 +16,10 @@ export class LoginService {
 
   Login(user: userLogin){
     return this.http.post(this.URL_API, user);
+  }
+
+  InitialUser(){
+    return this.http.get(this.initialAdmin);
   }
 }
 

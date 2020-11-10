@@ -21,6 +21,7 @@ export class LoginComponent implements OnInit {
      }
 
   ngOnInit(): void {
+    this.initialStatus();
     this.LoginError = false;
   }
 
@@ -37,7 +38,6 @@ export class LoginComponent implements OnInit {
                                 this.LoginForm.controls.password.value)
       
       this.loginservice.Login(user).subscribe((res: any) => {
-        console.log(res);
         this.LoginError = false;
         localStorage.setItem("userToken", res.token);
         this.router.navigate(['admin/bc/customize-spinner']);
@@ -46,5 +46,11 @@ export class LoginComponent implements OnInit {
         
       })
     }
+  }
+
+  initialStatus(){
+    this.loginservice.InitialUser()
+      .subscribe(res => {
+      });
   }
 }
