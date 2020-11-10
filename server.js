@@ -70,16 +70,21 @@ app.use('/api/v1/centerImage', centerImageRouter);
 
 
 // This middleware informs the express application to serve our compiled React files
+app.use(express.static(path.join(__dirname, 'client/spinner-app/dist/spinner-app')));
 
+app.get('*', function (req, res) {
+    res.sendFile(path.join(__dirname, 'client/spinner-app/dist/spinner-app', 'index.html'));
+});
+/*
 if (process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'staging') {
-    /*
+    
     const cloudUrl = config.mongoCloudUrl;
     const connect = mongoose.connect(cloudUrl);
-
+    
     connect.then((db) => {
         console.log('Conected correctly to server');
       }, (err) => {console.log(err);});
-    */
+
 
     app.use(express.static(path.join(__dirname, 'client/spinner-app/dist/spinner-app')));
 
@@ -87,15 +92,15 @@ if (process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'staging')
         res.sendFile(path.join(__dirname, 'client/spinner-app/dist/spinner-app', 'index.html'));
     });
 } else {
-    /*
+    
     const url = config.mongoUrl;
     const connect = mongoose.connect(url);
 
     connect.then((db) => {
     console.log('Conected correctly to server');
     }, (err) => {console.log(err);});
-*/
-};
+
+};*/
 
 // Catch any bad requests
 app.get('*', (req, res) => {

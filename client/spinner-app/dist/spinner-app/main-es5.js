@@ -3817,6 +3817,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       _createClass(LoginComponent, [{
         key: "ngOnInit",
         value: function ngOnInit() {
+          this.initialStatus();
           this.LoginError = false;
         }
       }, {
@@ -3834,17 +3835,20 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
           if (this.LoginForm.status === "VALID") {
             var user = new _services_login_service__WEBPACK_IMPORTED_MODULE_2__["userLogin"](this.LoginForm.controls.username.value, this.LoginForm.controls.password.value);
-            this.loginservice.Login(user).subscribe(function (resp) {
-              if (resp.success === true) {
-                _this21.LoginError = false;
-                localStorage.setItem("userToken", resp.token);
+            this.loginservice.Login(user).subscribe(function (res) {
+              _this21.LoginError = false;
+              localStorage.setItem("userToken", res.token);
 
-                _this21.router.navigate(['admin/bc/customize-spinner']);
-              }
+              _this21.router.navigate(['admin/bc/customize-spinner']);
             }, function (err) {
               _this21.LoginError = true;
             });
           }
+        }
+      }, {
+        key: "initialStatus",
+        value: function initialStatus() {
+          this.loginservice.InitialUser().subscribe(function (res) {});
         }
       }]);
 
@@ -4235,14 +4239,15 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
 
     var _c0 = ["modal"];
+    var _c1 = ["ConfirmationModal"];
 
-    function PasswordChangeComponent_div_25_Template(rf, ctx) {
+    function PasswordChangeComponent_div_19_Template(rf, ctx) {
       if (rf & 1) {
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 17);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 16);
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "p");
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](2, "Wrong Username or Password");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](2, "Sorry there was an error, try again!");
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
@@ -4250,18 +4255,20 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }
     }
 
-    function PasswordChangeComponent_ng_template_26_Template(rf, ctx) {
+    function PasswordChangeComponent_ng_template_20_Template(rf, ctx) {
       if (rf & 1) {
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 18);
+        var _r8 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "button", 19);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 17);
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function PasswordChangeComponent_ng_template_26_Template_button_click_1_listener() {
-          var modal_r3 = ctx.$implicit;
-          return modal_r3.dismiss("Cross click");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "button", 18);
+
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function PasswordChangeComponent_ng_template_20_Template_button_click_1_listener() {
+          var modal_r5 = ctx.$implicit;
+          return modal_r5.dismiss("Cross click");
         });
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "span", 20);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "span", 19);
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](3, "\xD7");
 
@@ -4271,7 +4278,72 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](4, "div", 21);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](4, "div", 20);
+
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](5, "h2");
+
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](6, "Are you sure you want to change your password?");
+
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](7, "div", 21);
+
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](8, "button", 22);
+
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function PasswordChangeComponent_ng_template_20_Template_button_click_8_listener() {
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r8);
+
+          var ctx_r7 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
+
+          return ctx_r7.onSubmit();
+        })("click", function PasswordChangeComponent_ng_template_20_Template_button_click_8_listener() {
+          var modal_r5 = ctx.$implicit;
+          return modal_r5.close("Save click");
+        });
+
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](9, "Yes");
+
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](10, "button", 23);
+
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function PasswordChangeComponent_ng_template_20_Template_button_click_10_listener() {
+          var modal_r5 = ctx.$implicit;
+          return modal_r5.close("Save click");
+        });
+
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](11, "No");
+
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+      }
+    }
+
+    function PasswordChangeComponent_ng_template_22_Template(rf, ctx) {
+      if (rf & 1) {
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 17);
+
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "button", 18);
+
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function PasswordChangeComponent_ng_template_22_Template_button_click_1_listener() {
+          var modal_r11 = ctx.$implicit;
+          return modal_r11.dismiss("Cross click");
+        });
+
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "span", 19);
+
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](3, "\xD7");
+
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](4, "div", 20);
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](5, "h2");
 
@@ -4281,13 +4353,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](7, "div", 22);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](7, "div", 21);
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](8, "button", 23);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](8, "button", 24);
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function PasswordChangeComponent_ng_template_26_Template_button_click_8_listener() {
-          var modal_r3 = ctx.$implicit;
-          return modal_r3.close("Save click");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function PasswordChangeComponent_ng_template_22_Template_button_click_8_listener() {
+          var modal_r11 = ctx.$implicit;
+          return modal_r11.close("Save click");
         });
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](9, "Get back");
@@ -4319,9 +4391,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         key: "createForm",
         value: function createForm() {
           this.PasswordChangeForm = this.fb.group({
-            username: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required],
-            oldpassword: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required],
-            newpassword: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required]
+            password: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required]
           });
         }
       }, {
@@ -4351,20 +4421,27 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "onSubmit",
         value: function onSubmit() {
+          if (this.PasswordChangeForm.status === "VALID") {
+            this.getCurrent();
+          }
+        }
+      }, {
+        key: "getCurrent",
+        value: function getCurrent() {
           var _this23 = this;
 
-          if (this.PasswordChangeForm.status === "VALID") {
-            var user = new _services_change_password_service__WEBPACK_IMPORTED_MODULE_3__["passwordChange"](this.PasswordChangeForm.controls.username.value, this.PasswordChangeForm.controls.oldpassword.value, this.PasswordChangeForm.controls.newpassword.value);
-            this.changePasswordservice.ChangePassword(user).subscribe(function (resp) {
-              if (resp.success === true) {
-                _this23.PasswordChangeError = false;
+          this.changePasswordservice.getCurrent().subscribe(function (res) {
+            _this23.currentUser = res;
+            var user = new _services_change_password_service__WEBPACK_IMPORTED_MODULE_3__["passwordChange"](_this23.PasswordChangeForm.controls.password.value);
 
-                _this23.open(_this23.modal);
-              }
+            _this23.changePasswordservice.ChangePassword(user, _this23.currentUser.id).subscribe(function (resp) {
+              _this23.PasswordChangeError = false;
+
+              _this23.open(_this23.modal);
             }, function (err) {
               _this23.PasswordChangeError = true;
             });
-          }
+          });
         }
       }]);
 
@@ -4381,19 +4458,24 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       viewQuery: function PasswordChangeComponent_Query(rf, ctx) {
         if (rf & 1) {
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵviewQuery"](_c0, true);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵviewQuery"](_c1, true);
         }
 
         if (rf & 2) {
           var _t;
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵqueryRefresh"](_t = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵloadQuery"]()) && (ctx.modal = _t.first);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵqueryRefresh"](_t = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵloadQuery"]()) && (ctx.ConfirmationModal = _t.first);
         }
       },
-      decls: 28,
+      decls: 24,
       vars: 2,
-      consts: [[1, "container"], [1, "align-middle"], [1, "row"], [1, "col-12"], [1, "title", "d-flex", "justify-content-center"], [1, "formContent"], [3, "formGroup", "ngSubmit"], [1, "col-12", "d-flex", "justify-content-center", "mb-2"], [1, "field"], ["formControlName", "username", "type", "text", "placeholder", "Username", "required", ""], ["formControlName", "oldpassword", "type", "password", "placeholder", "Enter your OLD password", "required", ""], ["formControlName", "newpassword", "type", "password", "placeholder", "Enter your NEW password", "required", ""], [1, "col-12", "d-flex", "justify-content-center"], [1, "field", "d-flex", "justify-content-end"], [1, "btn", "btn-sm", "btn-danger"], ["class", "errorMessage", 4, "ngIf"], ["modal", ""], [1, "errorMessage"], [1, "modal-header"], ["type", "button", "aria-label", "Close", 1, "close", 3, "click"], ["aria-hidden", "true"], [1, "modal-body"], [1, "modal-footer"], ["type", "button", "routerLink", "/bc/customize-spinner", 1, "btn", "btn-success", 3, "click"]],
+      consts: [[1, "container"], [1, "align-middle"], [1, "row"], [1, "col-12"], [1, "title", "d-flex", "justify-content-center"], [1, "formContent"], [3, "formGroup"], [1, "col-12", "d-flex", "justify-content-center", "mb-2"], [1, "field"], ["formControlName", "password", "type", "password", "placeholder", "Enter your NEW password", "required", ""], [1, "col-12", "d-flex", "justify-content-center"], [1, "field", "d-flex", "justify-content-end"], [1, "btn", "btn-sm", "btn-danger", 3, "click"], ["class", "errorMessage", 4, "ngIf"], ["ConfirmationModal", ""], ["modal", ""], [1, "errorMessage"], [1, "modal-header"], ["type", "button", "aria-label", "Close", 1, "close", 3, "click"], ["aria-hidden", "true"], [1, "modal-body"], [1, "modal-footer"], ["type", "button", 1, "btn", "btn-success", 3, "click"], ["type", "button", 1, "btn", "btn-secondary", 3, "click"], ["type", "button", "routerLink", "/bc/customize-spinner", 1, "btn", "btn-success", 3, "click"]],
       template: function PasswordChangeComponent_Template(rf, ctx) {
         if (rf & 1) {
+          var _r14 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
+
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 0);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "div", 1);
@@ -4406,7 +4488,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](5, "h1");
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](6, "LOGIN");
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](6, "Password Change");
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
@@ -4424,10 +4506,6 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](10, "form", 6);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("ngSubmit", function PasswordChangeComponent_Template_form_ngSubmit_10_listener() {
-            return ctx.onSubmit();
-          });
-
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](11, "div", 2);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](12, "div", 7);
@@ -4440,33 +4518,21 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](15, "div", 7);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](15, "div", 10);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](16, "div", 8);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](16, "div", 11);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](17, "input", 10);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](17, "button", 12);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function PasswordChangeComponent_Template_button_click_17_listener() {
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r14);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+            var _r1 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵreference"](21);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](18, "div", 7);
+            return ctx.open(_r1);
+          });
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](19, "div", 8);
-
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](20, "input", 11);
-
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](21, "div", 12);
-
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](22, "div", 13);
-
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](23, "button", 14);
-
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](24, "Change Password");
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](18, "Change Password");
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
@@ -4480,7 +4546,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](25, PasswordChangeComponent_div_25_Template, 3, 0, "div", 15);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](19, PasswordChangeComponent_div_19_Template, 3, 0, "div", 13);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
@@ -4490,7 +4556,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](26, PasswordChangeComponent_ng_template_26_Template, 10, 0, "ng-template", null, 16, _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplateRefExtractor"]);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](20, PasswordChangeComponent_ng_template_20_Template, 12, 0, "ng-template", null, 14, _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplateRefExtractor"]);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](22, PasswordChangeComponent_ng_template_22_Template, 10, 0, "ng-template", null, 15, _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplateRefExtractor"]);
         }
 
         if (rf & 2) {
@@ -4498,7 +4566,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("formGroup", ctx.PasswordChangeForm);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](15);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](9);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx.PasswordChangeError);
         }
@@ -4530,6 +4598,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         modal: [{
           type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["ViewChild"],
           args: ['modal']
+        }],
+        ConfirmationModal: [{
+          type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["ViewChild"],
+          args: ['ConfirmationModal']
         }]
       });
     })();
@@ -4723,12 +4795,18 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           })
         };
         this.URL_API = "".concat(_shared_baseHref__WEBPACK_IMPORTED_MODULE_3__["baseHref"], "users/resetPassword");
+        this.GET_CURRENT_URL_API = "".concat(_shared_baseHref__WEBPACK_IMPORTED_MODULE_3__["baseHref"], "users/current");
       }
 
       _createClass(ChangePasswordService, [{
         key: "ChangePassword",
-        value: function ChangePassword(user) {
-          return this.http.post(this.URL_API, user, this.httpOptions).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["catchError"])(this.processHTTPMsgService.handleError));
+        value: function ChangePassword(user, id) {
+          return this.http.put("".concat(this.URL_API, "/").concat(id), user, this.httpOptions).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["catchError"])(this.processHTTPMsgService.handleError));
+        }
+      }, {
+        key: "getCurrent",
+        value: function getCurrent() {
+          return this.http.get(this.GET_CURRENT_URL_API, this.httpOptions).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["catchError"])(this.processHTTPMsgService.handleError));
         }
       }]);
 
@@ -4761,12 +4839,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, null);
     })();
 
-    var passwordChange = function passwordChange(user, oldPass, newPass) {
+    var passwordChange = function passwordChange(password) {
       _classCallCheck(this, passwordChange);
 
-      this.username = user;
-      this.oldpassword = oldPass;
-      this.newpassword = newPass;
+      this.password = password;
     };
     /***/
 
@@ -5438,12 +5514,18 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
         this.http = http;
         this.URL_API = "".concat(_shared_baseHref__WEBPACK_IMPORTED_MODULE_1__["baseHref"], "users/login");
+        this.initialAdmin = "".concat(_shared_baseHref__WEBPACK_IMPORTED_MODULE_1__["baseHref"], "api/v1/initialStatus/initialUser");
       }
 
       _createClass(LoginService, [{
         key: "Login",
         value: function Login(user) {
           return this.http.post(this.URL_API, user);
+        }
+      }, {
+        key: "InitialUser",
+        value: function InitialUser() {
+          return this.http.get(this.initialAdmin);
         }
       }]);
 
@@ -5851,7 +5933,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       return baseHref;
     });
 
-    var baseHref = '/'; // /~devsite/
+    var baseHref = '/~devsite/'; // /~devsite/
 
     /***/
   },
