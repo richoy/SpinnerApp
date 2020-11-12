@@ -164,8 +164,9 @@ export class CustomizeSpinnerComponent implements OnInit {
         //Setting Values
         this.setValuesofBackendSpinner(this.spinnerArray, this.SpinnerFieldsStoreData);
         for(let i=0; i<this.SpinnerFieldsStoreData.length; i++) {
+
           
-          if (this.SpinnerFieldsStoreData[i].isItImage === true && this.SpinnerFieldsStoreData[i].image !== null) {
+          if (this.SpinnerFieldsStoreData[i].isItImage === true && this.SpinnerFieldsStoreData[i].file !== null) {
             this.onSuccess(i, this.SpinnerFieldsStoreData[i].file)
           } else if (this.SpinnerFieldsStoreData[i].isItImage == false) {
             this.itIsImageFile[i] = false;

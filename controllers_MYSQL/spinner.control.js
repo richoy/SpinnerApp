@@ -37,7 +37,7 @@ function registerSchema(req, res, next) {
     const objecSchema = Joi.object({
             isItImage: Joi.boolean().required(),
             textFieldOne: Joi.string().allow(''),
-            image: Joi.string().allow(''),
+            image: Joi.string().allow('', null),
             percentage: Joi.number().required(),
             isItEmail: Joi.boolean().required(),
             textPopUp: Joi.string().allow(''),
