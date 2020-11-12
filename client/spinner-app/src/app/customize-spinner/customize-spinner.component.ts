@@ -89,6 +89,7 @@ export class CustomizeSpinnerComponent implements OnInit {
   closeResult = '';
   @ViewChild('modalPercentageLessThan100') modalPercentageLessThan100;
   @ViewChild('modalPercentageMoreThan100') modalPercentageMoreThan100;
+  @ViewChild('modalNotAllValuesIntroduced') modalNotAllValuesIntroduced;
 
   constructor(
     public formBuilder:FormBuilder,// For number of field dropdown
@@ -164,7 +165,7 @@ export class CustomizeSpinnerComponent implements OnInit {
         this.setValuesofBackendSpinner(this.spinnerArray, this.SpinnerFieldsStoreData);
         for(let i=0; i<this.SpinnerFieldsStoreData.length; i++) {
           
-          if (this.SpinnerFieldsStoreData[i].isItImage == true) {
+          if (this.SpinnerFieldsStoreData[i].isItImage === true && this.SpinnerFieldsStoreData[i].image !== null) {
             this.onSuccess(i, this.SpinnerFieldsStoreData[i].file)
           } else if (this.SpinnerFieldsStoreData[i].isItImage == false) {
             this.itIsImageFile[i] = false;
@@ -172,7 +173,7 @@ export class CustomizeSpinnerComponent implements OnInit {
             this.SuccessfullyUpload[i] = false;
             this.UnsuccessfullyUpload[i] = false;
           }
-
+          console.log(this.SuccessfullyUpload);
           this.percentageValues[i] = this.SpinnerFieldsStoreData[i].percentage;
         }
         this.checkfullpercentage()
@@ -676,11 +677,7 @@ export class CustomizeSpinnerComponent implements OnInit {
 
 
     } else if (this.spinnerForm.status === "INVALID") {
-
-      this.unsuccessSendingForm = true;
-      setTimeout( () => {
-        this.unsuccessSendingForm = false;
-      }, 2000);
+      this.open(this.modalNotAllValuesIntroduced);
     };
   }
 

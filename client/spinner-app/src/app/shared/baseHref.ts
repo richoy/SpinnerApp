@@ -1,1 +1,1 @@
-export const baseHref = '/~devsite/';   // /~devsite/
+export const baseHref = '/';   // /~devsite/

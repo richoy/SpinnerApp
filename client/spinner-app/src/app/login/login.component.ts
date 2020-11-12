@@ -12,6 +12,7 @@ export class LoginComponent implements OnInit {
 
   LoginForm: FormGroup;
   LoginError: boolean;
+  userLogedIn: any;
 
   constructor( 
     private fb: FormBuilder,
@@ -37,9 +38,10 @@ export class LoginComponent implements OnInit {
       const user = new userLogin(this.LoginForm.controls.username.value, 
                                 this.LoginForm.controls.password.value)
       
-      this.loginservice.Login(user).subscribe((res: any) => {
+      this.loginservice.Login(user).subscribe(userData => {
+        this.userLogedIn = userData;
         this.LoginError = false;
-        localStorage.setItem("userToken", res.token);
+        localStorage.setItem("userToken", this.userLogedIn.token);
         this.router.navigate(['admin/bc/customize-spinner']);
       }, err => {
         this.LoginError = true;

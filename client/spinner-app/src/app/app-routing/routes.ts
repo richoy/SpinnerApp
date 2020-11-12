@@ -25,5 +25,5 @@ export const routes: Routes = [
         ] },
     { path: '', redirectTo: '/spinner', pathMatch: 'full' },
     { path: '**', redirectTo: '/spinner', pathMatch:'full' },
-    { path: 'admin', redirectTo: 'admin/login', pathMatch:'full' }
+    { path: 'admin', redirectTo: 'admin/', pathMatch:'full' }
 ];
