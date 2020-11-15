@@ -166,7 +166,7 @@ export class CustomizeSpinnerComponent implements OnInit {
         for(let i=0; i<this.SpinnerFieldsStoreData.length; i++) {
 
           
-          if (this.SpinnerFieldsStoreData[i].isItImage === true && this.SpinnerFieldsStoreData[i].file !== null) {
+          if (this.SpinnerFieldsStoreData[i].isItImage === true && this.SpinnerFieldsStoreData[i].file !== '' && this.SpinnerFieldsStoreData[i].file !== null) {
             this.onSuccess(i, this.SpinnerFieldsStoreData[i].file)
           } else if (this.SpinnerFieldsStoreData[i].isItImage == false) {
             this.itIsImageFile[i] = false;
@@ -174,7 +174,6 @@ export class CustomizeSpinnerComponent implements OnInit {
             this.SuccessfullyUpload[i] = false;
             this.UnsuccessfullyUpload[i] = false;
           }
-          console.log(this.SuccessfullyUpload);
           this.percentageValues[i] = this.SpinnerFieldsStoreData[i].percentage;
         }
         this.checkfullpercentage()
@@ -482,7 +481,6 @@ export class CustomizeSpinnerComponent implements OnInit {
             this.percentageValues[index] = this.SpinnerFieldsStoreData[index].percentage;
           }
         }
-        console.log('percentageVale',this.percentageValues)
         this.checkfullpercentage()
       },(err) => {
         this.SuccessSpinnerCenter = false;
@@ -617,6 +615,8 @@ export class CustomizeSpinnerComponent implements OnInit {
         if( element.bgColor === '') {
           element.bgColor = '#000000';
         }
+        element.image = '';
+        element.email = '';
 
         let field = new formSpinnerControl(
           element.isItImage,
@@ -629,6 +629,7 @@ export class CustomizeSpinnerComponent implements OnInit {
           element.bgColor
         )
 
+
         this.totalPercentage[counter] = element.percentage;
 
         this.StringOfImageUpload.forEach((file)=>{
@@ -636,6 +637,7 @@ export class CustomizeSpinnerComponent implements OnInit {
             field.image = file.image;
           } 
         })
+
         spinner.push(field);
         counter++;
         });
