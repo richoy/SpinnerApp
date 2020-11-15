@@ -2268,7 +2268,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             _this7.setValuesofBackendSpinner(_this7.spinnerArray, _this7.SpinnerFieldsStoreData);
 
             for (var _i3 = 0; _i3 < _this7.SpinnerFieldsStoreData.length; _i3++) {
-              if (_this7.SpinnerFieldsStoreData[_i3].isItImage == true) {
+              if (_this7.SpinnerFieldsStoreData[_i3].isItImage === true && _this7.SpinnerFieldsStoreData[_i3].file !== '' && _this7.SpinnerFieldsStoreData[_i3].file !== null) {
                 _this7.onSuccess(_i3, _this7.SpinnerFieldsStoreData[_i3].file);
               } else if (_this7.SpinnerFieldsStoreData[_i3].isItImage == false) {
                 _this7.itIsImageFile[_i3] = false;
@@ -2561,8 +2561,6 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               }
             }
 
-            console.log('percentageVale', _this14.percentageValues);
-
             _this14.checkfullpercentage();
           }, function (err) {
             _this14.SuccessSpinnerCenter = false;
@@ -2713,6 +2711,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
                   element.bgColor = '#000000';
                 }
 
+                element.image = '';
+                element.email = '';
                 var field = new _shared_form_spinner_controller__WEBPACK_IMPORTED_MODULE_5__["formSpinnerControl"](element.isItImage, element.image, element.textFieldOne, element.percentage, element.isItEmail, element.textPopUp, element.email, element.bgColor);
                 _this16.totalPercentage[counter] = element.percentage;
 
@@ -3930,9 +3930,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "initialStatus",
         value: function initialStatus() {
-          this.loginservice.InitialUser().subscribe(function (res) {
-            console.log(res);
-          });
+          this.loginservice.InitialUser().subscribe(function (res) {});
         }
       }]);
 
@@ -6679,8 +6677,11 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
             for (var i = 0; i < _this24.SpinnerFields.length; i++) {
               //Substitute backslashes for slashes
-              _this24.SpinnerFields[i].image = _this24.SpinnerFields[i].image.replace(/\\/g, "/");
-              _this24.SpinnerFields[i].image = _this24.API_IMAGE_URL + _this24.SpinnerFields[i].image.slice(14);
+              if (_this24.SpinnerFields[i].image !== null) {
+                _this24.SpinnerFields[i].image = _this24.SpinnerFields[i].image.replace(/\\/g, "/");
+                _this24.SpinnerFields[i].image = _this24.API_IMAGE_URL + _this24.SpinnerFields[i].image.slice(14);
+              }
+
               _this24.bgColorStyle[i] = _this24.SpinnerFields[i].bgColor; // Backgorund color
 
               _this24.fontColor[i] = _this24.spinnerService.invertColor(_this24.bgColorStyle[i]); //Font Color

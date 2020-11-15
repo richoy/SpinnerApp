@@ -90,9 +90,11 @@ export class SpinnerComponent implements OnInit {
         this.SpinnerFields = spinnerFields;
         this.angle = 360/this.SpinnerFields.length;
         for(let i=0; i<this.SpinnerFields.length; i++) { //Substitute backslashes for slashes
-          if (this.SpinnerFields[i].image !== null) {
+          if (this.SpinnerFields[i].image !== null && this.SpinnerFields[i].image !== '') {
             this.SpinnerFields[i].image = this.SpinnerFields[i].image.replace(/\\/g, "/");
             this.SpinnerFields[i].image = this.API_IMAGE_URL + this.SpinnerFields[i].image.slice(14);
+          } else if (this.SpinnerFields[i].image == '') {
+            this.SpinnerFields[i].image = null;
           }
           this.bgColorStyle[i] = this.SpinnerFields[i].bgColor; // Backgorund color
           this.fontColor[i] = this.spinnerService.invertColor(this.bgColorStyle[i]); //Font Color

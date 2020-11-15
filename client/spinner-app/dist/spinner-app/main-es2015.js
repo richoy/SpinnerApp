@@ -1197,7 +1197,7 @@ class CustomizeSpinnerComponent {
             //Setting Values
             this.setValuesofBackendSpinner(this.spinnerArray, this.SpinnerFieldsStoreData);
             for (let i = 0; i < this.SpinnerFieldsStoreData.length; i++) {
-                if (this.SpinnerFieldsStoreData[i].isItImage == true) {
+                if (this.SpinnerFieldsStoreData[i].isItImage === true && this.SpinnerFieldsStoreData[i].file !== '' && this.SpinnerFieldsStoreData[i].file !== null) {
                     this.onSuccess(i, this.SpinnerFieldsStoreData[i].file);
                 }
                 else if (this.SpinnerFieldsStoreData[i].isItImage == false) {
@@ -1443,7 +1443,6 @@ class CustomizeSpinnerComponent {
                     this.percentageValues[index] = this.SpinnerFieldsStoreData[index].percentage;
                 }
             }
-            console.log('percentageVale', this.percentageValues);
             this.checkfullpercentage();
         }, (err) => {
             this.SuccessSpinnerCenter = false;
@@ -1557,6 +1556,8 @@ class CustomizeSpinnerComponent {
                     if (element.bgColor === '') {
                         element.bgColor = '#000000';
                     }
+                    element.image = '';
+                    element.email = '';
                     let field = new _shared_form_spinner_controller__WEBPACK_IMPORTED_MODULE_5__["formSpinnerControl"](element.isItImage, element.image, element.textFieldOne, element.percentage, element.isItEmail, element.textPopUp, element.email, element.bgColor);
                     this.totalPercentage[counter] = element.percentage;
                     this.StringOfImageUpload.forEach((file) => {
@@ -2215,7 +2216,6 @@ class LoginComponent {
     initialStatus() {
         this.loginservice.InitialUser()
             .subscribe(res => {
-            console.log(res);
         });
     }
 }
@@ -3587,8 +3587,10 @@ class SpinnerComponent {
             this.SpinnerFields = spinnerFields;
             this.angle = 360 / this.SpinnerFields.length;
             for (let i = 0; i < this.SpinnerFields.length; i++) { //Substitute backslashes for slashes
-                this.SpinnerFields[i].image = this.SpinnerFields[i].image.replace(/\\/g, "/");
-                this.SpinnerFields[i].image = this.API_IMAGE_URL + this.SpinnerFields[i].image.slice(14);
+                if (this.SpinnerFields[i].image !== null) {
+                    this.SpinnerFields[i].image = this.SpinnerFields[i].image.replace(/\\/g, "/");
+                    this.SpinnerFields[i].image = this.API_IMAGE_URL + this.SpinnerFields[i].image.slice(14);
+                }
                 this.bgColorStyle[i] = this.SpinnerFields[i].bgColor; // Backgorund color
                 this.fontColor[i] = this.spinnerService.invertColor(this.bgColorStyle[i]); //Font Color
                 this.holder[i] = { 'transform': 'rotate(' + this.angle * (i) + 'deg)',
