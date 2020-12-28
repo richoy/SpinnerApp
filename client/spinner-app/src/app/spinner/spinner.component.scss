@@ -6,6 +6,10 @@ $InnerSpinDiameter: $Diameter/4.62;
 $spanWidth: $Diameter/2 - $WheelBorder*2;
 $spanHight: $Diameter/8;
 
+div#SpinnerContainer{
+	overflow-x: hidden;
+}
+
 
 #wrapper{ 
 	margin: 40px auto 0;	

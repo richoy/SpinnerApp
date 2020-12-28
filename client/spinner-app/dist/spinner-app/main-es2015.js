@@ -1423,7 +1423,7 @@ class CustomizeSpinnerComponent {
             }
             this.setValuesofBackendSpinner(this.spinnerArray, this.SpinnerFieldsStoreData);
             for (let index = 0; index < this.SpinnerFieldsStoreData.length; index++) {
-                if (this.SpinnerFieldsStoreData[index].isItImage == true) {
+                if (this.SpinnerFieldsStoreData[index].isItImage === true && this.SpinnerFieldsStoreData[index].file !== '' && this.SpinnerFieldsStoreData[index].file !== null) {
                     this.onSuccess(index, this.SpinnerFieldsStoreData[index].file);
                 }
                 else if (this.SpinnerFieldsStoreData[index].isItImage == false) {
@@ -3246,7 +3246,7 @@ class ImageSnippet {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "baseHref", function() { return baseHref; });
-const baseHref = '/~devsite/'; // /~devsite/
+const baseHref = '/'; // /~devsite/
 
 
 /***/ }),
@@ -3587,9 +3587,12 @@ class SpinnerComponent {
             this.SpinnerFields = spinnerFields;
             this.angle = 360 / this.SpinnerFields.length;
             for (let i = 0; i < this.SpinnerFields.length; i++) { //Substitute backslashes for slashes
-                if (this.SpinnerFields[i].image !== null) {
+                if (this.SpinnerFields[i].image !== null && this.SpinnerFields[i].image !== '') {
                     this.SpinnerFields[i].image = this.SpinnerFields[i].image.replace(/\\/g, "/");
                     this.SpinnerFields[i].image = this.API_IMAGE_URL + this.SpinnerFields[i].image.slice(14);
+                }
+                else if (this.SpinnerFields[i].image == '') {
+                    this.SpinnerFields[i].image = null;
                 }
                 this.bgColorStyle[i] = this.SpinnerFields[i].bgColor; // Backgorund color
                 this.fontColor[i] = this.spinnerService.invertColor(this.bgColorStyle[i]); //Font Color

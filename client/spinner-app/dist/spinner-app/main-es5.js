@@ -2541,7 +2541,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             _this14.setValuesofBackendSpinner(_this14.spinnerArray, _this14.SpinnerFieldsStoreData);
 
             for (var _index = 0; _index < _this14.SpinnerFieldsStoreData.length; _index++) {
-              if (_this14.SpinnerFieldsStoreData[_index].isItImage == true) {
+              if (_this14.SpinnerFieldsStoreData[_index].isItImage === true && _this14.SpinnerFieldsStoreData[_index].file !== '' && _this14.SpinnerFieldsStoreData[_index].file !== null) {
                 _this14.onSuccess(_index, _this14.SpinnerFieldsStoreData[_index].file);
               } else if (_this14.SpinnerFieldsStoreData[_index].isItImage == false) {
                 _this14.itIsImageFile[_index] = false;
@@ -6015,7 +6015,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       return baseHref;
     });
 
-    var baseHref = '/~devsite/'; // /~devsite/
+    var baseHref = '/'; // /~devsite/
 
     /***/
   },
@@ -6677,9 +6677,11 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
             for (var i = 0; i < _this24.SpinnerFields.length; i++) {
               //Substitute backslashes for slashes
-              if (_this24.SpinnerFields[i].image !== null) {
+              if (_this24.SpinnerFields[i].image !== null && _this24.SpinnerFields[i].image !== '') {
                 _this24.SpinnerFields[i].image = _this24.SpinnerFields[i].image.replace(/\\/g, "/");
                 _this24.SpinnerFields[i].image = _this24.API_IMAGE_URL + _this24.SpinnerFields[i].image.slice(14);
+              } else if (_this24.SpinnerFields[i].image == '') {
+                _this24.SpinnerFields[i].image = null;
               }
 
               _this24.bgColorStyle[i] = _this24.SpinnerFields[i].bgColor; // Backgorund color
